@@ -60,4 +60,5 @@ public class Formulario extends JFrame{
         this.add(form);
         this.setVisible(true);
     }
+    
 }

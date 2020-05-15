@@ -5,6 +5,12 @@
  */
 package rentacar;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JLabel;
+import static rentacar.RentaCar.obtenerConexion;
+
 /**
  * La clase Usuario se utiliza para crear usuarios en
  * la aplicación.
@@ -127,4 +133,60 @@ public class Usuario {
         this.codUsuario = codUsuario;
     }
     
+    public static int obtenerRolId(String rol){
+        int rolId = 0;
+        if (rol.equals("Cliente")){
+            rolId = 1;
+        }
+        return rolId;   
+    }
+    
+    public static void insertRegistro(String nif,String nombre,String apellido1,
+        String apellido2,String telefono,String email, String rol, String user, String pw, JLabel resultado){
+            int rolId = obtenerRolId(rol);
+            PreparedStatement pst = null;
+            try (Connection con = obtenerConexion()) {
+                System.out.println("Conectado correctamente a la BBDD");//TODO eliminar
+                if (nif.isEmpty() || nombre.isEmpty() || apellido1.isEmpty() || apellido2.isEmpty()
+                    || telefono.isEmpty() || email.isEmpty() || rol.isEmpty() || user.isEmpty() || pw.isEmpty()){
+                    resultado.setText("Faltan datos por cumplimentar.");
+                    
+                }else{                
+                    //sql insert statement para tabla clientes
+                    String queryClientes = " insert into clientes (nif,nombre,apellido1,apellido2,telefono,email)"
+                      + " values (?, ?, ?, ?, ?, ?)";
+                    pst = con.prepareStatement(queryClientes);
+                    pst.setString(1, nif);
+                    pst.setString(2, nombre);
+                    pst.setString(3, apellido1);
+                    pst.setString(4, apellido2);
+                    pst.setInt(5, Integer.parseInt(telefono));
+                    pst.setString(6,email);
+                    pst.executeUpdate();
+                    
+                    //sql insert statement para tabla usuarios
+                    String queryUsuarios = " insert into usuarios (usuario,password,clientenif,rolid)"
+                      + " values (?, crypt(?, gen_salt('bf')), ?, ?)";
+                    pst = con.prepareStatement(queryUsuarios);
+                    pst.setString(1, user);
+                    pst.setString(2, pw);
+                    pst.setString(3, nif);
+                    pst.setInt(4, rolId);
+                    pst.executeUpdate();
+                    
+                    resultado.setText("Usuario creado correctamente"); //añado a la label el valor
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getSQLState());
+                System.out.println(ex.getMessage());
+                System.out.println("No se ha podido conectar a la base de datos");
+            } finally{
+                if (pst != null) try {
+                    pst.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getSQLState());
+                    System.out.println(ex.getMessage());
+                }
+            }
+        } 
 }

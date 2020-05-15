@@ -22,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import static rentacar.RentaCar.obtenerConexion;
+import static rentacar.Usuario.insertRegistro;
+import static rentacar.Usuario.obtenerRolId;
 
 /**
  *
@@ -32,7 +34,7 @@ import static rentacar.RentaCar.obtenerConexion;
  * Esta clase la utilizaremos para pintar capas sobre las ventanas.
  */
 public class Lamina extends JPanel{
-    
+    private JTextField nif = new JTextField(15);
     private JTextField nombre = new JTextField(15);
     private JTextField apellido1 = new JTextField(15);
     private JTextField apellido2 = new JTextField(15);
@@ -45,6 +47,14 @@ public class Lamina extends JPanel{
 
     public Lamina() {
         super();
+    }
+
+    public JTextField getNif() {
+        return nif;
+    }
+
+    public void setNif(JTextField nif) {
+        this.nif = nif;
     }
 
     public JTextField getNombre() {
@@ -136,14 +146,17 @@ public class Lamina extends JPanel{
      */
     public void laminaRegistro(){
         JLabel mensaje = new JLabel("Por favor, rellena todos los campos.",JLabel.CENTER);
+        JLabel nif = new JLabel("Introduce tu NIF",JLabel.RIGHT);
         JLabel nombre = new JLabel("Introduce tu nombre",JLabel.RIGHT);
         JLabel apellido1 = new JLabel("Primer apellido",JLabel.RIGHT);
         JLabel apellido2 = new JLabel("Segundo apellido",JLabel.RIGHT);
         JLabel telefono = new JLabel("Teléfono",JLabel.RIGHT);
         JLabel email = new JLabel("E-mail",JLabel.RIGHT);
         JLabel rol = new JLabel("Rol",JLabel.RIGHT);
-        JLabel codUsuario = new JLabel("Indica tu código de usuario",JLabel.RIGHT);
+        JLabel codUsuario = new JLabel("Indica un código de usuario",JLabel.RIGHT);
         JLabel password = new JLabel("Indica una contraseña",JLabel.RIGHT);
+        
+        
                 
         //Capa principal
         this.setLayout(new BorderLayout());
@@ -153,7 +166,9 @@ public class Lamina extends JPanel{
         //segunda capa
         JPanel capa2 = new JPanel();
         capa2.setBorder(new EmptyBorder(10, 0, 10, 110));
-        capa2.setLayout(new GridLayout(8,2));
+        capa2.setLayout(new GridLayout(9,2));
+        capa2.add(nif);
+        capa2.add(this.getNif());
         capa2.add(nombre);
         capa2.add(this.getNombre());
         capa2.add(apellido1);
@@ -177,39 +192,46 @@ public class Lamina extends JPanel{
         capa3.setLayout(new FlowLayout());
         JButton crearUser = new JButton ("Enviar");
         crearUser.setPreferredSize(new Dimension(100, 40));
-        recogerDatos mievento = new recogerDatos();
-        crearUser.addActionListener(mievento);
+        recogerDatos eventoBoton = new recogerDatos("crearUser");
+        crearUser.addActionListener(eventoBoton);
         capa3.add(crearUser,BorderLayout.SOUTH);
         this.setResultado(new JLabel("",JLabel.CENTER));
         capa3.add(this.getResultado());
         this.add(capa3,BorderLayout.SOUTH);
+        
     }
     
+    /**
+     * Clase interna que ejecuta los diferentes eventos.
+     */
     private class recogerDatos implements ActionListener{
-
+        private String emisor;
         //multiples oyente https://www.youtube.com/watch?v=smJg5QjlBpU&t=3s
+
+        /**
+         * El constructor recibe por parámetro el nombre del evento que ejecuta la acción
+         * @param nombreBoton nombreBoton correspone al nombre del evento desencadenante
+         */
+        public recogerDatos(String nombreBoton) {
+            this.setEmisor(nombreBoton);
+        }
+
+        public String getEmisor() {
+            return emisor;
+        }
+
+        public void setEmisor(String emisor) {
+            this.emisor = emisor;
+        }
         
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                Connection con = obtenerConexion();
-                System.out.println("Conectado correctamente a la BBDD");//TODO eliminar
-                PreparedStatement pst = con.prepareStatement("insert into usuarios values ("+ nombre
-                        + "," + apellido1 + "," + apellido2 + "," + telefono + "," + email + "," +  rol + ")");
-                
-                //aqui hariamos el insert en la bbdd
-                if (nombre.getText().trim().isEmpty() || nombre.getText().trim() == null){
-                    resultado.setText("Faltan datos por cumplimentar.");
-                }else{
-                    resultado.setText("Usuario creado correctamente"); //añado a la label el valor
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getSQLState());
-                System.out.println(ex.getMessage());
-                System.out.println("No se ha podido conectar a la base de datos");
+            if (this.getEmisor().equals("crearUser")){
+                insertRegistro(nif.getText().trim(),nombre.getText().trim(),
+                apellido1.getText().trim(),apellido2.getText().trim(),telefono.getText().trim(),email.getText().trim(),
+                rol.getText().trim(),codUsuario.getText().trim(),password.getText().trim(), resultado);
             }
         }
-    
-    }
+    }  
 }
