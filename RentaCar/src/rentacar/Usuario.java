@@ -5,6 +5,7 @@
  */
 package rentacar;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -149,9 +150,12 @@ public class Usuario {
                 System.out.println("Conectado correctamente a la BBDD");//TODO eliminar
                 if (nif.isEmpty() || nombre.isEmpty() || apellido1.isEmpty() || apellido2.isEmpty()
                     || telefono.isEmpty() || email.isEmpty() || rol.isEmpty() || user.isEmpty() || pw.isEmpty()){
+                    resultado.setForeground(Color.RED);
                     resultado.setText("Faltan datos por cumplimentar.");
                     
                 }else{                
+                    
+                    //TODO TRANSACCION
                     //sql insert statement para tabla clientes
                     String queryClientes = " insert into clientes (nif,nombre,apellido1,apellido2,telefono,email)"
                       + " values (?, ?, ?, ?, ?, ?)";
@@ -173,13 +177,18 @@ public class Usuario {
                     pst.setString(3, nif);
                     pst.setInt(4, rolId);
                     pst.executeUpdate();
-                    
+                    resultado.setForeground(Color.GREEN);
                     resultado.setText("Usuario creado correctamente"); //añado a la label el valor
                 }
             } catch (SQLException ex) {
-                System.out.println(ex.getSQLState());
-                System.out.println(ex.getMessage());
-                System.out.println("No se ha podido conectar a la base de datos");
+                resultado.setForeground(Color.RED);
+                if (ex.getSQLState().equals("23505")){
+                    resultado.setText("Ya existe un usuario con estos datos.");
+                }else{
+                    System.out.println(ex.getSQLState());
+                    System.out.println(ex.getMessage());
+                    resultado.setText("No se ha podido conectar a la base de datos");
+                }
             } finally{
                 if (pst != null) try {
                     pst.close();

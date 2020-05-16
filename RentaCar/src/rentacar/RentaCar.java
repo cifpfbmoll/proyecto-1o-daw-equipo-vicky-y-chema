@@ -27,7 +27,7 @@ public class RentaCar {
         
         Formulario form = new Formulario();
         form.formularioRegistro();
-        form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        form.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
     }
     

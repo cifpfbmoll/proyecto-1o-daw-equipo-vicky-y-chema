@@ -11,19 +11,13 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import static rentacar.RentaCar.obtenerConexion;
 import static rentacar.Usuario.insertRegistro;
-import static rentacar.Usuario.obtenerRolId;
 
 /**
  *
@@ -42,7 +36,7 @@ public class Lamina extends JPanel{
     private JTextField email = new JTextField(15);
     private JTextField rol = new JTextField("Cliente",15);
     private JTextField codUsuario = new JTextField(15);
-    private JTextField password = new JTextField(15);
+    private JPasswordField password = new JPasswordField(15);
     private JLabel resultado;
 
     public Lamina() {
@@ -130,7 +124,7 @@ public class Lamina extends JPanel{
         return password;
     }
 
-    public void setPassword(JTextField password) {
+    public void setPassword(JPasswordField password) {
         this.password = password;
     }
 
@@ -155,9 +149,7 @@ public class Lamina extends JPanel{
         JLabel rol = new JLabel("Rol",JLabel.RIGHT);
         JLabel codUsuario = new JLabel("Indica un código de usuario",JLabel.RIGHT);
         JLabel password = new JLabel("Indica una contraseña",JLabel.RIGHT);
-        
-        
-                
+
         //Capa principal
         this.setLayout(new BorderLayout());
         this.setBorder(new EmptyBorder(20, 0, 10, 0));
