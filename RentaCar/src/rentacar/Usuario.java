@@ -139,14 +139,16 @@ public class Usuario {
         if (rol.equals("Cliente")){
             rolId = 1;
         }
-        return rolId;   
+        return rolId;
     }
     
     public static void insertRegistro(String nif,String nombre,String apellido1,
         String apellido2,String telefono,String email, String rol, String user, String pw, JLabel resultado){
             int rolId = obtenerRolId(rol);
             PreparedStatement pst = null;
-            try (Connection con = obtenerConexion()) {
+            Connection con = null;
+            try {
+                con = obtenerConexion();
                 System.out.println("Conectado correctamente a la BBDD");//TODO eliminar
                 if (nif.isEmpty() || nombre.isEmpty() || apellido1.isEmpty() || apellido2.isEmpty()
                     || telefono.isEmpty() || email.isEmpty() || rol.isEmpty() || user.isEmpty() || pw.isEmpty()){
@@ -154,8 +156,7 @@ public class Usuario {
                     resultado.setText("Faltan datos por cumplimentar.");
                     
                 }else{                
-                    
-                    //TODO TRANSACCION
+                    con.setAutoCommit(false);
                     //sql insert statement para tabla clientes
                     String queryClientes = " insert into clientes (nif,nombre,apellido1,apellido2,telefono,email)"
                       + " values (?, ?, ?, ?, ?, ?)";
@@ -179,17 +180,32 @@ public class Usuario {
                     pst.executeUpdate();
                     resultado.setForeground(Color.GREEN);
                     resultado.setText("Usuario creado correctamente"); //añado a la label el valor
+                    
+                    con.commit();
                 }
             } catch (SQLException ex) {
-                resultado.setForeground(Color.RED);
-                if (ex.getSQLState().equals("23505")){
-                    resultado.setText("Ya existe un usuario con estos datos.");
-                }else{
+                try {
+                    con.rollback();
+                    resultado.setForeground(Color.RED);
+                    if (ex.getSQLState().equals("23505")){
+                        resultado.setText("Ya existe un usuario con estos datos.");
+                    }else{
+                        System.out.println(ex.getSQLState());
+                        System.out.println(ex.getMessage());
+                        resultado.setText("No se ha podido conectar a la base de datos");
+                    }
+                } catch (SQLException ex1) {
+                    System.out.println("Se ha producido en un error inesperado.");
+                }
+                
+            } finally{
+                if (con != null) try{
+                    con.close();
+                    con.setAutoCommit(true);
+                }catch (SQLException ex) {
                     System.out.println(ex.getSQLState());
                     System.out.println(ex.getMessage());
-                    resultado.setText("No se ha podido conectar a la base de datos");
                 }
-            } finally{
                 if (pst != null) try {
                     pst.close();
                 } catch (SQLException ex) {

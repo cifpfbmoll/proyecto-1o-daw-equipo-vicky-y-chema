@@ -28,6 +28,7 @@ import static rentacar.Usuario.insertRegistro;
  * Esta clase la utilizaremos para pintar capas sobre las ventanas.
  */
 public class Lamina extends JPanel{
+    //eliminar y meter como variables del metodo
     private JTextField nif = new JTextField(15);
     private JTextField nombre = new JTextField(15);
     private JTextField apellido1 = new JTextField(15);
@@ -136,7 +137,6 @@ public class Lamina extends JPanel{
      * @see javax.swing.JPanel
      * @see javax.swing.JLabel
      * @see javax.swing.JButton
-     * 
      */
     public void laminaRegistro(){
         JLabel mensaje = new JLabel("Por favor, rellena todos los campos.",JLabel.CENTER);
