@@ -16,15 +16,13 @@ public class ComboBox {
     public ComboBox() {
         sen = new TODOSentencias();
     }
-
+    /**
+     * Rellenar ComboBox, falta de testeo
+     * @param tabla
+     * @param campo
+     * @return 
+     */
     public Object[] combox(String tabla, String campo) {
         return sen.rellenarComboBox(tabla, campo, "select " + campo + " from " + tabla + ";");
     }
-
-    public Object[][] ingresa_cod(String campo, String id_campo, String tabla, String col) {
-        String[] columnas = {id_campo};
-        Object[][] result = sen.tablas(columnas, tabla, "select * from " + tabla + " where " + col + "='" + campo + "';");
-        return result;
-    }
-
 }

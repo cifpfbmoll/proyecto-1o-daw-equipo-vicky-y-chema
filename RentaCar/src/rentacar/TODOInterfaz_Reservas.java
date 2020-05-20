@@ -15,12 +15,15 @@ import javax.swing.JOptionPane;
 public class TODOInterfaz_Reservas extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Interfaz_contratos
+     * Creates new form Interfaz_Reservas
      */
     TODOControl_Reservas con = new TODOControl_Reservas();
 
     public TODOInterfaz_Reservas() {
         initComponents();
+        /**
+         * 
+         */
         Date hoy = new Date();
         jTextField_fecha.setText(hoy.getDate() + "/" + (hoy.getMonth() + 1) + "/" + (hoy.getYear() + 1900));
     }
@@ -57,7 +60,7 @@ public class TODOInterfaz_Reservas extends javax.swing.JInternalFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton_Limpiar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         jTextField_fecha = new javax.swing.JTextField();
@@ -208,10 +211,10 @@ public class TODOInterfaz_Reservas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Limpiar.setText("Limpiar");
+        jButton_Limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton_LimpiarActionPerformed(evt);
             }
         });
 
@@ -239,8 +242,8 @@ public class TODOInterfaz_Reservas extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel21))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                                .addComponent(jButton3)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addComponent(jButton_Limpiar)))
                         .addGap(35, 35, 35)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
@@ -270,7 +273,7 @@ public class TODOInterfaz_Reservas extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -305,24 +308,16 @@ public class TODOInterfaz_Reservas extends javax.swing.JInternalFrame {
     public void limpiar() {
         jTextField1_direccioncliente.setText("");
         jTextField_apellidocliente.setText("");
-        jTextField_apellidovendedor.setText("");
         jTextField_ciudadcliente.setText("");
-        jTextField_colorauto.setText("");
-        jTextField_ciudadvendedor.setText("");
         jTextField_docvendedor.setText("");
-        jTextField_idvendedor.setText("");
-        jTextField_marcaauto.setText("");
-        jTextField_modeloauto.setText("");
         jTextField_nombrecliente.setText("");
-        jTextField_nombrevendedor.setText("");
         jTextField_placaauto.setText("");
-        jTextField_tipoauto.setText("");
         jTextField_valorauto.setText("");
         jTextFielddoccliente.setText("");
     }
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
         limpiar();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton_LimpiarActionPerformed
 
     private void jTextFielddocclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFielddocclienteActionPerformed
 
@@ -394,8 +389,8 @@ public class TODOInterfaz_Reservas extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton_Limpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;

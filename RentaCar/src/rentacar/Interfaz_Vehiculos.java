@@ -60,6 +60,9 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
         jButton_Salir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 204));
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jLabel_Marca.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_Marca.setText("Marca");

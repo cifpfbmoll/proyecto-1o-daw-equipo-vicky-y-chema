@@ -13,15 +13,15 @@ import java.sql.SQLException;
  * @version 1.0
  * @since 2020-19-05
  */
+
 public class Conexion_BBDD {
 
     // URL de conexión a la RaspberryPi
     private final String URL = "jdbc:postgresql://81.203.19.183:5432/rentacar";
     Connection con = null;
-
+    
     public Conexion_BBDD() {
         try {
-            // Driver de la BBDD
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(URL, "Admin", "Admin123");
             if (con != null) {

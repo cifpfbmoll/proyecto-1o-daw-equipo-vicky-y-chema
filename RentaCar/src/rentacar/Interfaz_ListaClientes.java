@@ -27,7 +27,7 @@ public final class Interfaz_ListaClientes extends javax.swing.JInternalFrame {
         Control_Clientes ctr;
         ctr = new Control_Clientes("", "", "", "", "", "", Integer.parseInt(""), "", "");
         String[] columnas = {"NIF", "nombre", "apellido1", "apellido2", "telefono", "email"};
-        tabla = ctr.consultaClientes();
+        tabla = ctr.consultarClientes();
         DefaultTableModel datos = new DefaultTableModel(tabla, columnas);
         jTable1.setModel(datos);
     }
@@ -101,7 +101,7 @@ public final class Interfaz_ListaClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

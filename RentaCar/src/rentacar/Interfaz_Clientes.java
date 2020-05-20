@@ -36,60 +36,41 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
 
         jLabel_clienteNIF = new javax.swing.JLabel();
         jTextField_clienteNIF = new javax.swing.JTextField();
-        jLabel2_nombre = new javax.swing.JLabel();
+        jLabel_nombre = new javax.swing.JLabel();
         jTextField_nombre = new javax.swing.JTextField();
-        jLabel4_apellido1 = new javax.swing.JLabel();
-        jLabel3_telefono = new javax.swing.JLabel();
-        jTextField_telefono = new javax.swing.JTextField();
-        jLabel6_email = new javax.swing.JLabel();
-        jTextField_email = new javax.swing.JTextField();
+        jLabel_apellido1 = new javax.swing.JLabel();
         jTextField_apellido1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabel_apellido2 = new javax.swing.JLabel();
         jTextField_apellido2 = new javax.swing.JTextField();
-        jLabel10_apellido2 = new javax.swing.JLabel();
-        jLabel7_password = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel_telefono = new javax.swing.JLabel();
+        jTextField_telefono = new javax.swing.JTextField();
+        jLabel_email = new javax.swing.JLabel();
+        jTextField_email = new javax.swing.JTextField();
+        jButton_Enviar = new javax.swing.JButton();
+        jButton_Salir = new javax.swing.JButton();
+        jLabel_password = new javax.swing.JLabel();
+        jPasswordField = new javax.swing.JPasswordField();
+        jLabel_codUser = new javax.swing.JLabel();
+        jTextField_codUser = new javax.swing.JTextField();
+        jButton_Limpiar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 204));
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Registro de Clientes");
 
         jLabel_clienteNIF.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_clienteNIF.setText("Doc. NIF");
 
-        jLabel2_nombre.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2_nombre.setText("Nombre");
+        jLabel_nombre.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_nombre.setText("Nombre");
 
-        jLabel4_apellido1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4_apellido1.setText("Primer Apellido");
+        jLabel_apellido1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_apellido1.setText("1º Apellido");
 
-        jLabel3_telefono.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3_telefono.setText("Teléfono");
-
-        jTextField_telefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_telefonoActionPerformed(evt);
-            }
-        });
-
-        jLabel6_email.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6_email.setText("E-mail");
-
-        jButton1.setText("Enviar Formulario");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jLabel_apellido2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_apellido2.setText("2º Apellido");
 
         jTextField_apellido2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,15 +78,54 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel10_apellido2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10_apellido2.setText("Segundo Apellido");
+        jLabel_telefono.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_telefono.setText("Teléfono");
 
-        jLabel7_password.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7_password.setText("Introduzca una Contraseña");
-
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                jTextField_telefonoActionPerformed(evt);
+            }
+        });
+
+        jLabel_email.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_email.setText("E-mail");
+
+        jButton_Enviar.setText("Enviar Formulario");
+        jButton_Enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EnviarActionPerformed(evt);
+            }
+        });
+
+        jButton_Salir.setText("Salir");
+        jButton_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_SalirActionPerformed(evt);
+            }
+        });
+
+        jLabel_password.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_password.setText("Contraseña");
+
+        jPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel_codUser.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_codUser.setText("Código Cliente");
+
+        jTextField_codUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_codUserActionPerformed(evt);
+            }
+        });
+
+        jButton_Limpiar.setText("Limpiar");
+        jButton_Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LimpiarActionPerformed(evt);
             }
         });
 
@@ -113,88 +133,94 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_clienteNIF)
-                            .addComponent(jLabel2_nombre)
-                            .addComponent(jLabel3_telefono))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                            .addComponent(jTextField_telefono)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField_clienteNIF, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4_apellido1)
-                        .addGap(29, 29, 29)
-                        .addComponent(jTextField_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6_email)
-                            .addGap(34, 34, 34)
-                            .addComponent(jTextField_email))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel10_apellido2)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(58, 58, 58)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton_Enviar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_Limpiar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7_password)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel_apellido1)
+                                .addGap(45, 45, 45)
+                                .addComponent(jTextField_apellido1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_clienteNIF)
+                                    .addComponent(jLabel_telefono)
+                                    .addComponent(jLabel_codUser))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextField_telefono)
+                                            .addComponent(jTextField_codUser)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                        .addComponent(jTextField_clienteNIF, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(180, 180, 180))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_nombre)
+                                    .addComponent(jLabel_apellido2))
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_password)
+                                    .addComponent(jLabel_email))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField_email)
+                                    .addComponent(jPasswordField))))))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel_apellido1)
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_telefono)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_nombre)
                             .addComponent(jTextField_clienteNIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel_clienteNIF))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2_nombre))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3_telefono)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4_apellido1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10_apellido2))
+                            .addComponent(jLabel_apellido2)
+                            .addComponent(jTextField_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6_email))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                            .addComponent(jLabel_email))))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7_password)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(jLabel_codUser)
+                    .addComponent(jTextField_codUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_password)
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton_Salir)
+                    .addComponent(jButton_Enviar)
+                    .addComponent(jButton_Limpiar))
                 .addContainerGap())
         );
 
@@ -211,11 +237,11 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         jTextField_email.setText("");
 
     }
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton_SalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
         // Recojo datos del botón de enviar formulario
         String nif, nom, ape1, ape2, tel, mail, pass, codUser;
 
@@ -226,19 +252,19 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         ape2 = jTextField_apellido2.getText();
         tel = jTextField_telefono.getText();
         mail = jTextField_email.getText();
+        codUser = jTextField_codUser.getText();
 
         // Stringify un char extraído del passwordfield
-        String passText = new String(jPasswordField1.getPassword());
+        String passText = new String(jPasswordField.getPassword());
         pass = passText;
 
-        // TODO --> Datos fijados manualmente
+        // Rol fijado manualmente
         int rol = 1;
-        codUser = "123"; // TODO: añadir en un textfield
 
         // Control de clientes y mensajes informativos
         Control_Clientes control = new Control_Clientes(nif, nom, ape1, ape2, tel, mail, rol, pass, codUser);
-        if (!nif.equals("") && !nom.equals("") && !ape1.equals("") && !ape2.equals("") && !tel.equals("") && !mail.equals("")
-                && !pass.equals("")) {
+        if (!nif.isEmpty() && !nom.isEmpty() && !ape1.isEmpty() && !ape2.isEmpty() && !tel.isEmpty() && !mail.isEmpty()
+                && !pass.isEmpty() && codUser.isEmpty()) {
             if (control.registrarDatosCliente("clientes") && control.registrarDatosUsuario("usuarios")) {
                 JOptionPane.showMessageDialog(null, "Cliente registrado con éxito.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 limpiar();
@@ -249,9 +275,7 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Hay campos obligatorios");
         }
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton_EnviarActionPerformed
 
     private void jTextField_apellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_apellido2ActionPerformed
         // TODO add your handling code here:
@@ -261,24 +285,35 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_telefonoActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_jPasswordFieldActionPerformed
+
+    private void jTextField_codUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_codUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_codUserActionPerformed
+
+    private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jButton_LimpiarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel10_apellido2;
-    private javax.swing.JLabel jLabel2_nombre;
-    private javax.swing.JLabel jLabel3_telefono;
-    private javax.swing.JLabel jLabel4_apellido1;
-    private javax.swing.JLabel jLabel6_email;
-    private javax.swing.JLabel jLabel7_password;
+    private javax.swing.JButton jButton_Enviar;
+    private javax.swing.JButton jButton_Limpiar;
+    private javax.swing.JButton jButton_Salir;
+    private javax.swing.JLabel jLabel_apellido1;
+    private javax.swing.JLabel jLabel_apellido2;
     private javax.swing.JLabel jLabel_clienteNIF;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel jLabel_codUser;
+    private javax.swing.JLabel jLabel_email;
+    private javax.swing.JLabel jLabel_nombre;
+    private javax.swing.JLabel jLabel_password;
+    private javax.swing.JLabel jLabel_telefono;
+    private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextField_apellido1;
     private javax.swing.JTextField jTextField_apellido2;
     private javax.swing.JTextField jTextField_clienteNIF;
+    private javax.swing.JTextField jTextField_codUser;
     private javax.swing.JTextField jTextField_email;
     private javax.swing.JTextField jTextField_nombre;
     private javax.swing.JTextField jTextField_telefono;

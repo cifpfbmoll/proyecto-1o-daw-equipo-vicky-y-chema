@@ -16,7 +16,15 @@ public class Control_Vehiculo extends Vehiculo {
     public Control_Vehiculo() {
         sent = new TODOSentencias();
     }
-
+    /**
+     * Método para añadir vehículo dentro de la BBDD
+     * @param matricula
+     * @param marca
+     * @param modelo
+     * @param clase
+     * @param precioDia
+     * @return 
+     */
     public boolean registrarVehiculo(String matricula, String marca, String modelo, char clase, Double precioDia) {
         
         // Conversiones antes de insertar en BBDD

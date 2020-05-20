@@ -17,8 +17,11 @@ public class Control_Clientes extends Usuario {
         super(nif, nombre, ape1, ape2, tel, mail, rol, pass, codUsuario);
         
     }
-
-    public Object[][] consultaClientes() {
+    /**
+     * Método para consultar clientes en la BBDD
+     * @return 
+     */
+    public Object[][] consultarClientes() {
         
         String[] columnas = {"NIF", "nombre", "apellido1", "apellido2", "telefono", "email"};
         Object[][] datos = sql.tablas(columnas, "clientes", "select NIF,nombre,apellido1,apellido2,telefono,email from clientes;");

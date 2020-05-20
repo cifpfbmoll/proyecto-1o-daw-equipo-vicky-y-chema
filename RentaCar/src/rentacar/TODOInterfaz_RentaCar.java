@@ -4,6 +4,8 @@
  */
 package RentaCar;
 
+import java.awt.Toolkit;
+
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -17,7 +19,8 @@ public class TODOInterfaz_RentaCar extends javax.swing.JFrame {
      */
     public TODOInterfaz_RentaCar() {
         initComponents();
-        
+        //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("rentacar_logo_400.jpg")));
+
     }
 
     /**
@@ -44,11 +47,13 @@ public class TODOInterfaz_RentaCar extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 255));
         jDesktopPane1.setForeground(new java.awt.Color(0, 0, 0));
         jDesktopPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
+        jDesktopPane1.setName(""); // NOI18N
 
         jButton1.setText("Login?");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -155,9 +160,9 @@ public class TODOInterfaz_RentaCar extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Login login = new Login();
-        jDesktopPane1.add(login);
-        login.setVisible(rootPaneCheckingEnabled);
+        Interfaz_Clientes cli = new Interfaz_Clientes();
+        jDesktopPane1.add(cli);
+        cli.setVisible(rootPaneCheckingEnabled);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
