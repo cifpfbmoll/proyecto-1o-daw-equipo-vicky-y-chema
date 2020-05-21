@@ -149,6 +149,10 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jDesktopPane1.add(jLabel1);
         jLabel1.setBounds(300, 90, 320, 50);
 
+<<<<<<< HEAD
+=======
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Chema\\Documents\\NetBeansProjects\\Github\\proyecto-1o-daw-equipo-vicky-y-chema\\RentaCar\\rentacar_logo_400.jpg")); // NOI18N
+>>>>>>> 6dc1703876386209f7524f37ae33a806d8a21f82
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
