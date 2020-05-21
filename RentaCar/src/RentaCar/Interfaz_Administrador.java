@@ -149,7 +149,12 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jDesktopPane1.add(jLabel1);
         jLabel1.setBounds(300, 90, 320, 50);
 
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Chema\\Desktop\\rentacar_logo_400.jpg")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Chema\\Documents\\NetBeansProjects\\Github\\proyecto-1o-daw-equipo-vicky-y-chema\\RentaCar\\rentacar_logo_400.jpg")); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jDesktopPane1.add(jButton2);
         jButton2.setBounds(260, 0, 400, 90);
 
@@ -240,6 +245,10 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             System.out.println("error en la BBDD");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
