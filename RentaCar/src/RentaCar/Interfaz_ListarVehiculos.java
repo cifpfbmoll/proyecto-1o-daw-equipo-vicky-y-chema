@@ -5,19 +5,48 @@
  */
 package RentaCar;
 
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 /**
  *
- * @author victoriapenas
+ * @author victoriapenas & josemariahernandez
+ * @version 1.0
  */
 public class Interfaz_ListarVehiculos extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Interfaz_ListarVehiculos2
+     * Creates new form Interfaz_ListarVehiculos
      */
     public Interfaz_ListarVehiculos() {
         initComponents();
     }
 
+    public JLabel getTotalVehiculos() {
+        return totalVehiculos;
+    }
+
+    public void setTotalVehiculos(JLabel totalVehiculos) {
+        this.totalVehiculos = totalVehiculos;
+    }
+
+    public JTextArea getVehiculosEncontrados() {
+        return vehiculosEncontrados;
+    }
+
+    public void setVehiculosEncontrados(JTextArea vehiculosEncontrados) {
+        this.vehiculosEncontrados = vehiculosEncontrados;
+    }
+
+    public JScrollPane getVentanaVehiculos() {
+        return ventanaVehiculos;
+    }
+
+    public void setVentanaVehiculos(JScrollPane ventanaVehiculos) {
+        this.ventanaVehiculos = ventanaVehiculos;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,38 +56,60 @@ public class Interfaz_ListarVehiculos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ventanaVehiculos = new javax.swing.JScrollPane();
+        vehiculosEncontrados = new javax.swing.JTextArea();
+        totalVehiculos = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(51, 51, 51));
         setClosable(true);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        vehiculosEncontrados.setColumns(20);
+        vehiculosEncontrados.setRows(5);
+        ventanaVehiculos.setViewportView(vehiculosEncontrados);
+
+        totalVehiculos.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        totalVehiculos.setForeground(new java.awt.Color(0, 0, 0));
+        totalVehiculos.setText("vechiculos encontrados");
+        totalVehiculos.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                totalVehiculosComponentMoved(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ventanaVehiculos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(totalVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addComponent(ventanaVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(totalVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void totalVehiculosComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_totalVehiculosComponentMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalVehiculosComponentMoved
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel totalVehiculos;
+    private javax.swing.JTextArea vehiculosEncontrados;
+    private javax.swing.JScrollPane ventanaVehiculos;
     // End of variables declaration//GEN-END:variables
 }

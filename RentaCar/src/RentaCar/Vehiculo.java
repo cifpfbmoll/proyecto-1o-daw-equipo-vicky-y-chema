@@ -5,6 +5,10 @@
  */
 package RentaCar;
 
+import static RentaCar.Consultas_BBDD.obtenerConexion;
+import static RentaCar.Consultas_BBDD.selectVehiculos;
+import java.awt.Color;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -107,32 +111,31 @@ public class Vehiculo {
         this.disponible = disponible;
     }
     
-    public static void listarVehiculos() throws SQLException{
-        Conexion_BBDD con = new Conexion_BBDD();
-        try (PreparedStatement ps = con.conectado().prepareStatement(selectVehiculos());ResultSet rs = ps.executeQuery()){
-            while (rs.next ()) {
-            System.out.println("MATRICULA: " + rs.getString(1) + " - MARCA: " + rs.getString(2) + " - MODELO: " + 
-            rs.getString(3) + " - CATEGORIA: " + rs.getString(4) + " - PRECIO/DIA: " + rs.getInt(5));
-            }
-        } finally{
-            if (con != null) con.conectado().close (); //cierra el objeto Connection
-        }
-
-        /*Connection con = obtenerConexion();        
+    /**
+     * Este metodo se encarga de listar los vehiculos existentes en el sistema
+     * @param ventana ventana es el internalFrame donde se listarán los vehiculos
+     * @throws SQLException 
+     */
+    public static void listarVehiculos(Interfaz_ListarVehiculos ventana) throws SQLException{
+        int count = 0;
+        Connection con = obtenerConexion();        
         try (PreparedStatement ps = con.prepareStatement(selectVehiculos()); ResultSet rs = ps.executeQuery()){
             while (rs.next ()) {
-                System.out.println("MATRICULA: " + rs.getString(1) + " - MARCA: " + rs.getString(2) + " - MODELO: " + 
-                rs.getString(3) + " - CATEGORIA: " + rs.getString(4) + " - PRECIO/DIA: " + rs.getInt(5));
+                ventana.getVehiculosEncontrados().append("MATRICULA: " + rs.getString(1) + " - MARCA: " + rs.getString(2) + 
+                " - MODELO: " + rs.getString(3) + " - CATEGORIA: " + rs.getString(4) + " - PRECIO: " + rs.getInt(5)
+                + " €/DIA.");
+                ventana.getVehiculosEncontrados().append("\n");
+                count++;
             }
+            if (count > 0){
+                ventana.getTotalVehiculos().setText("Se han econtrado " + count + " vehiculos.");
+            }else{
+                ventana.getTotalVehiculos().setText("No se han encontrado vehiculos");
+                ventana.getTotalVehiculos().setForeground(Color.RED);
+            }
+            
         } finally{
             if (con != null) con.close ();
-        }*/
-        
-        
-    }
-    
-    public static String selectVehiculos(){
-        return "select * from vehiculos";
-    }
-    
+        }
+    }   
 }

@@ -243,7 +243,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jDesktopPane1.add(listarVehi);
         listarVehi.setVisible(rootPaneCheckingEnabled);
         try {
-            listarVehiculos();
+            listarVehiculos(listarVehi);
         } catch (SQLException ex) {
             System.out.println("error en la BBDD");
         }
