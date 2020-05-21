@@ -123,7 +123,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         });
         jDesktopPane1.add(jButton1);
-        jButton1.setBounds(680, 60, 190, 50);
+        jButton1.setBounds(80, 170, 190, 50);
 
         jButton3.setText("Registrar Vehículos");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +132,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         });
         jDesktopPane1.add(jButton3);
-        jButton3.setBounds(680, 120, 190, 50);
+        jButton3.setBounds(340, 240, 190, 50);
 
         jButton4.setText("Listar vehiculos");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +141,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         });
         jDesktopPane1.add(jButton4);
-        jButton4.setBounds(680, 180, 190, 60);
+        jButton4.setBounds(630, 320, 190, 60);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 22)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 55));

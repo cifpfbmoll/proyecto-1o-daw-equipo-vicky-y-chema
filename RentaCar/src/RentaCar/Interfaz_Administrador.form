@@ -194,7 +194,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="680" y="60" width="190" height="50"/>
+              <AbsoluteConstraints x="80" y="170" width="190" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -207,7 +207,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="680" y="120" width="190" height="50"/>
+              <AbsoluteConstraints x="340" y="240" width="190" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -220,7 +220,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="680" y="180" width="190" height="60"/>
+              <AbsoluteConstraints x="630" y="320" width="190" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -241,14 +241,11 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
-<<<<<<< HEAD
-=======
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/image/rentacar_logo_400.jpg"/>
             </Property>
           </Properties>
->>>>>>> 6dc1703876386209f7524f37ae33a806d8a21f82
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
           </Events>
