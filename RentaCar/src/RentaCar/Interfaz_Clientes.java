@@ -4,12 +4,6 @@
  */
 package RentaCar;
 
-import java.awt.Color;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
 /**
  * @author victoriapenas & josemariahernandez
  * @version 1.0
@@ -21,7 +15,7 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
      * Creates new form Interfaz_Clientes
      */
     /**
-     * 
+     *
      */
     public Interfaz_Clientes() {
         initComponents();
@@ -50,7 +44,6 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         jLabel_email = new javax.swing.JLabel();
         jTextField_email = new javax.swing.JTextField();
         jButton_Enviar = new javax.swing.JButton();
-        jButton_Salir = new javax.swing.JButton();
         jLabel_password = new javax.swing.JLabel();
         jPasswordField = new javax.swing.JPasswordField();
         jLabel_codUser = new javax.swing.JLabel();
@@ -101,13 +94,6 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton_Salir.setText("Salir");
-        jButton_Salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_SalirActionPerformed(evt);
-            }
-        });
-
         jLabel_password.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel_password.setText("Contraseña");
 
@@ -144,12 +130,10 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel_resultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(141, 141, 141)
                         .addComponent(jButton_Enviar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton_Limpiar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton_Limpiar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -223,7 +207,6 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_Salir)
                             .addComponent(jButton_Enviar)
                             .addComponent(jButton_Limpiar)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -247,25 +230,16 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         jPasswordField.setText("");
         jLabel_resultado.setText(" ");
     }
-    /**
-     * TODO!!!! -----> CHEMA, Añadido el closable en la ventana, ¿eliminamos este método y boton correspondiente????
-     * Esto sirve para ocultar la ventana sin necesidad
-     * de cerrar el programa entero.
-     * @param evt 
-     */
-    private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton_SalirActionPerformed
 
     private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
-        
+
         // Recojo datos del botón de enviar formulario
         String nif, nom, ape1, ape2, tel, mail, pass, codUser;
-        
+
         // Stringify un char extraído del passwordfield
         String passText = new String(jPasswordField.getPassword());
         pass = passText;
-        
+
         // Datos recogidos del formulario
         nif = jTextField_clienteNIF.getText();
         nom = jTextField_nombre.getText();
@@ -274,14 +248,14 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         tel = jTextField_telefono.getText();
         mail = jTextField_email.getText();
         codUser = jTextField_codUser.getText();
-        
+
         // Rol fijado manualmente
         int rol = 1;
 
-        Usuario nuevoCliente = new Usuario(nif, nom, ape1, ape2, tel, mail, rol,pass,codUser);
+        Usuario nuevoCliente = new Usuario(nif, nom, ape1, ape2, tel, mail, rol, pass, codUser);
 
         nuevoCliente.insertRegistro(jLabel_resultado);
-        
+
     }//GEN-LAST:event_jButton_EnviarActionPerformed
 
     private void jTextField_apellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_apellido2ActionPerformed
@@ -307,7 +281,6 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Enviar;
     private javax.swing.JButton jButton_Limpiar;
-    private javax.swing.JButton jButton_Salir;
     private javax.swing.JLabel jLabel_apellido1;
     private javax.swing.JLabel jLabel_apellido2;
     private javax.swing.JLabel jLabel_clienteNIF;
