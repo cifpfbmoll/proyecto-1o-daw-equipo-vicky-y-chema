@@ -218,22 +218,19 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        Interfaz_ListaClientes lis = new Interfaz_ListaClientes();
-        jDesktopPane1.add(lis);
-        lis.setVisible(rootPaneCheckingEnabled);        // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         Interfaz_Vehiculos aut = new Interfaz_Vehiculos();
         jDesktopPane1.add(aut);
         aut.setVisible(rootPaneCheckingEnabled);
-        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Interfaz_Vehiculos aut = new Interfaz_Vehiculos();
         jDesktopPane1.add(aut);
-        aut.setVisible(rootPaneCheckingEnabled);        // TODO add your handling code here:
+        aut.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
