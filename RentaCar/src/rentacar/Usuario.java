@@ -27,7 +27,9 @@ public class Usuario {
     public Usuario() {
     }
 
-    // Constructor con parámetros
+    /**
+     * Constructor con parámetros
+     */ 
     public Usuario(String clienteNIF, String nombre, String apellido1,
             String apellido2, String telefono, String email, int rol,
             String password, String codUsuario) {
@@ -43,7 +45,7 @@ public class Usuario {
         sql = new TODOSentencias();
     }
 
-    /* Contructor copia. El NIF y el codUsuario no puede estar duplicado.
+    /** Contructor copia. El NIF y el codUsuario no puede estar duplicado.
      * Por lo tanto, no se copia.
      */
     public Usuario(Usuario user, String NIF, String codUser) {

@@ -39,4 +39,10 @@ public class Conexion_BBDD {
     public Connection conectado() {
         return con;
     }
+    
+    public static Connection obtenerConexion() throws SQLException {
+        String url = "jdbc:mysql://127.0.0.1:3306/daw";
+        return DriverManager.getConnection (url, "root", "");
+    }
+    
 }
