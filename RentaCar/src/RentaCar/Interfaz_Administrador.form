@@ -243,7 +243,7 @@
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Chema\Documents\NetBeansProjects\Github\proyecto-1o-daw-equipo-vicky-y-chema\RentaCar\rentacar_logo_400.jpg"/>
+              <Image iconType="3" name="/image/rentacar_logo_400.jpg"/>
             </Property>
           </Properties>
           <Events>
