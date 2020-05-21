@@ -5,10 +5,8 @@
 package RentaCar;
 
 import static RentaCar.Vehiculo.listarVehiculos;
-import java.awt.Toolkit;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 /**
@@ -16,12 +14,12 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since 2020-18-05
  */
-public class TODOInterfaz_RentaCar extends javax.swing.JFrame {
+public class Interfaz_Administrador extends javax.swing.JFrame {
 
     /**
      * Creates new form Interfaz_consesionario
      */
-    public TODOInterfaz_RentaCar() {
+    public Interfaz_Administrador() {
         initComponents();
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("rentacar_logo_400.jpg")));
 
@@ -259,14 +257,22 @@ public class TODOInterfaz_RentaCar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TODOInterfaz_RentaCar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz_Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TODOInterfaz_RentaCar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz_Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TODOInterfaz_RentaCar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz_Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TODOInterfaz_RentaCar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz_Administrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -279,7 +285,7 @@ public class TODOInterfaz_RentaCar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TODOInterfaz_RentaCar().setVisible(true);
+                new Interfaz_Administrador().setVisible(true);
             }
         });
     }

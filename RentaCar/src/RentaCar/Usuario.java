@@ -12,7 +12,6 @@ package RentaCar;
 public class Usuario {
 
     // Atributos
-    public TODOSentencias sql;
     private String clienteNIF;
     private String nombre;
     private String apellido1;
@@ -42,7 +41,6 @@ public class Usuario {
         this.setRol(rol);
         this.setPassword(password);
         this.setCodUsuario(codUsuario);
-        sql = new TODOSentencias();
     }
 
     /** Contructor copia. El NIF y el codUsuario no puede estar duplicado.
@@ -58,22 +56,6 @@ public class Usuario {
         this.setRol(user.getRol());
         this.setPassword(user.getPassword());
         this.setCodUsuario(codUser);
-    }
-
-    public boolean registrarDatosCliente(String tabla) {
-
-        String datos[] = {this.getClienteNIF(), this.getNombre(), this.getApellido1(), this.getApellido2(), this.getTelefono(), this.getEmail()};
-        return sql.insertSQL(datos, "insert into " + tabla
-                + "(NIF,nombre,apellido1,apellido2,telefono,email) values(?,?,?,?,?,?)");
-
-    }
-    // TODO --> Falta comprobar
-    public boolean registrarDatosUsuario(String tabla) {
-
-        String datos[] = {String.valueOf(this.getRol()), this.getPassword(), this.getCodUsuario()};
-        return sql.insertSQL(datos, "insert into " + tabla + "(usuario,password,clientenif,rolid)"
-                + " values(?, crypt(?, gen_salt('bf')), ?, ?)");
-
     }
 
     // Getters Y setters
@@ -155,13 +137,5 @@ public class Usuario {
             rolId = 1;
         }
         return rolId;
-    }
-
-    public TODOSentencias getSql() {
-        return sql;
-    }
-
-    public void setSql(TODOSentencias sql) {
-        this.sql = sql;
     }
 }

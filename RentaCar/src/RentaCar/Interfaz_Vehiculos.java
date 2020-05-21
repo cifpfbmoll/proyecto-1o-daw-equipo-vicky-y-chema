@@ -4,8 +4,6 @@
  */
 package RentaCar;
 
-import javax.swing.JOptionPane;
-
 /**
  * @author victoriapenas & josemariahernandez
  * @version 1.0
@@ -16,22 +14,8 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
     /**
      * Creates new form Interfaz_Vehiculos
      */
-    ComboBox cb = new ComboBox();
-
     public Interfaz_Vehiculos() {
         initComponents();
-        Object[] marca = cb.combox("VEHICULOS", "marca");
-        jComboBox_Marca.removeAllItems();
-        for (Object marca1 : marca) {
-        jComboBox_Marca.addItem(marca1);
-        }
-        
-        Object[] clase = cb.combox("VEHICULOS", "clase");
-        jComboBox_Clase.removeAllItems();
-        for (Object clase1 : clase) {
-        jComboBox_Clase.addItem(clase1);
-        }
-
     }
 
     /**
@@ -221,18 +205,6 @@ public void limpiar() {
         // Conversión del getText a double
         double precio = Double.parseDouble(jTextField_Precio.getText());
 
-        Control_Vehiculo au = new Control_Vehiculo();
-        if (!mat.equals("") && !mod.equals("") && !mar.equals("") && !strClase.equals("")) {
-            if (au.registrarVehiculo(mat, mod, mar, cClase, precio)) {
-                JOptionPane.showMessageDialog(null, "El vehículo se registró con éxito.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                limpiar();
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al registrar el vehículo.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Hay campos obligatorios.");
-        }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton_GuardarActionPerformed
 
     private void jComboBox_MarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_MarcaActionPerformed
