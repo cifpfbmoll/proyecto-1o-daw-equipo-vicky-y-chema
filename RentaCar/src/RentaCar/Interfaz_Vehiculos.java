@@ -183,18 +183,6 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
         // Conversión del getText a double
         double precio = Double.parseDouble(jTextField_Precio.getText());
 
-        Control_Vehiculo au = new Control_Vehiculo();
-        if (!mat.equals("") && !mod.equals("") && !mar.equals("") && !strClase.equals("")) {
-            if (au.registrarVehiculo(mat, mod, mar, cClase, precio)) {
-                JOptionPane.showMessageDialog(null, "El vehículo se registró con éxito.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                limpiar();
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al registrar el vehículo.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Hay campos obligatorios.");
-        }
     }//GEN-LAST:event_jButton_EnviarActionPerformed
 
     private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
