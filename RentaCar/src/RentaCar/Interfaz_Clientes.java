@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package RentaCar;
+package rentacar;
 
 import javax.swing.JOptionPane;
 
@@ -21,6 +21,7 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
      */
     public Interfaz_Clientes() {
         initComponents();
+        limpiar();
         limpiar();
     }
 
@@ -55,7 +56,6 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(0, 153, 204));
         setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Registro de Clientes");
 
@@ -236,6 +236,11 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         jTextField_email.setText("");
 
     }
+    /**
+     * Esto sirve para ocultar la ventana sin necesidad
+     * de cerrar el programa entero.
+     * @param evt 
+     */
     private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton_SalirActionPerformed

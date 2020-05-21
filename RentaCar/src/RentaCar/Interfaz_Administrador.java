@@ -44,6 +44,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -122,7 +123,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         });
         jDesktopPane1.add(jButton1);
-        jButton1.setBounds(110, 310, 190, 50);
+        jButton1.setBounds(680, 60, 190, 50);
 
         jButton3.setText("Registrar Vehículos");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +132,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         });
         jDesktopPane1.add(jButton3);
-        jButton3.setBounds(600, 310, 180, 50);
+        jButton3.setBounds(680, 120, 190, 50);
 
         jButton4.setText("Listar vehiculos");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -140,13 +141,17 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         });
         jDesktopPane1.add(jButton4);
-        jButton4.setBounds(360, 410, 180, 50);
+        jButton4.setBounds(680, 180, 190, 60);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 22)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 55));
         jLabel1.setText("ENTORNO ADMINISTRADOR");
         jDesktopPane1.add(jLabel1);
-        jLabel1.setBounds(300, 40, 320, 50);
+        jLabel1.setBounds(300, 90, 320, 50);
+
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Chema\\Desktop\\rentacar_logo_400.jpg")); // NOI18N
+        jDesktopPane1.add(jButton2);
+        jButton2.setBounds(260, 0, 400, 90);
 
         jMenu1.setText("Clientes");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -188,16 +193,15 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 956, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 956, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(972, 693));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -291,6 +295,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;

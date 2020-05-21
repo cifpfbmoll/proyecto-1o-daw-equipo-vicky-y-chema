@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package RentaCar;
+package rentacar;
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -14,8 +14,15 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
     /**
      * Creates new form Interfaz_Vehiculos
      */
+
     public Interfaz_Vehiculos() {
         initComponents();
+        
+        jComboBox_Marca.addItem("Audi");
+        jComboBox_Marca.addItem("Nissan");
+        jComboBox_Marca.addItem("Fiat");
+        
+
     }
 
     /**
@@ -27,76 +34,53 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel_Matricula = new javax.swing.JLabel();
+        jTextField_Matricula = new javax.swing.JTextField();
         jLabel_Marca = new javax.swing.JLabel();
-        jComboBox_Marca = new javax.swing.JComboBox();
+        jComboBox_Marca = new javax.swing.JComboBox<>();
         jLabel_Modelo = new javax.swing.JLabel();
         jTextField_Modelo = new javax.swing.JTextField();
         jLabel_Clase = new javax.swing.JLabel();
-        jComboBox_Clase = new javax.swing.JComboBox();
-        jLabel_Matricula = new javax.swing.JLabel();
-        jLabel_Puertas = new javax.swing.JLabel();
-        jSpinner_Puertas = new javax.swing.JSpinner();
-        jTextField_Matricula = new javax.swing.JTextField();
+        jComboBox_Clase = new javax.swing.JComboBox<>();
         jLabel_Precio = new javax.swing.JLabel();
         jTextField_Precio = new javax.swing.JTextField();
-        jCheckBox_Disponible = new javax.swing.JCheckBox();
-        jButton_Guardar = new javax.swing.JButton();
+        jButton_Enviar = new javax.swing.JButton();
+        jButton_Limpiar = new javax.swing.JButton();
         jButton_Salir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 204));
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Registro Vehículos");
 
-        jLabel_Marca.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel_Matricula.setText("Matrícula");
+
         jLabel_Marca.setText("Marca");
 
-        jComboBox_Marca.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jComboBox_Marca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_Marca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_MarcaActionPerformed(evt);
             }
         });
 
-        jLabel_Modelo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_Modelo.setText("Modelo");
 
-        jTextField_Modelo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-
-        jLabel_Clase.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_Clase.setText("Clase");
 
-        jComboBox_Clase.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jComboBox_Clase.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_Clase.addActionListener(new java.awt.event.ActionListener() {
+        jLabel_Precio.setText("Precio");
+
+        jButton_Enviar.setText("Enviar Formulario");
+        jButton_Enviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_ClaseActionPerformed(evt);
+                jButton_EnviarActionPerformed(evt);
             }
         });
 
-        jLabel_Matricula.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel_Matricula.setText("Matrícula");
-
-        jLabel_Puertas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel_Puertas.setText("Nº Puertas");
-
-        jSpinner_Puertas.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-
-        jTextField_Matricula.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-
-        jLabel_Precio.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel_Precio.setText("Precio");
-
-        jTextField_Precio.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-
-        jCheckBox_Disponible.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jCheckBox_Disponible.setText("  Disponible");
-
-        jButton_Guardar.setText("Guardar");
-        jButton_Guardar.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Limpiar.setText("Limpiar");
+        jButton_Limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_GuardarActionPerformed(evt);
+                jButton_LimpiarActionPerformed(evt);
             }
         });
 
@@ -111,86 +95,80 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(407, Short.MAX_VALUE)
+                .addComponent(jButton_Enviar)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Limpiar)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel_Clase, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox_Marca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField_Precio, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox_Clase, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField_Modelo, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_Matricula, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel_Puertas, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox_Disponible, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton_Salir))
-                    .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner_Puertas, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51))
+                        .addComponent(jTextField_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_Clase, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBox_Clase, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBox_Marca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Marca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Matricula)
-                    .addComponent(jTextField_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Modelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_Puertas)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jSpinner_Puertas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox_Clase)
-                        .addComponent(jLabel_Clase, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_Clase, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_Clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Salir)
-                    .addComponent(jCheckBox_Disponible, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                    .addComponent(jButton_Enviar)
+                    .addComponent(jButton_Limpiar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-public void limpiar() {
-        jTextField_Matricula.setText("");
-        jComboBox_Marca.removeAllItems();
-        jComboBox_Clase.removeAllItems();
-        jTextField_Modelo.setText("");
-    }
-    private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_SalirActionPerformed
 
-    private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
+    private void jComboBox_MarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_MarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_MarcaActionPerformed
+
+    private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
+        // Recojo datos del botón de enviar formulario
         String mat, mar, mod, strClase;
 
         mat = jTextField_Matricula.getText();
@@ -205,29 +183,45 @@ public void limpiar() {
         // Conversión del getText a double
         double precio = Double.parseDouble(jTextField_Precio.getText());
 
-    }//GEN-LAST:event_jButton_GuardarActionPerformed
+        Control_Vehiculo au = new Control_Vehiculo();
+        if (!mat.equals("") && !mod.equals("") && !mar.equals("") && !strClase.equals("")) {
+            if (au.registrarVehiculo(mat, mod, mar, cClase, precio)) {
+                JOptionPane.showMessageDialog(null, "El vehículo se registró con éxito.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
 
-    private void jComboBox_MarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_MarcaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_MarcaActionPerformed
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al registrar el vehículo.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Hay campos obligatorios.");
+        }
+    }//GEN-LAST:event_jButton_EnviarActionPerformed
 
-    private void jComboBox_ClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_ClaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_ClaseActionPerformed
+    private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jButton_LimpiarActionPerformed
 
+    private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton_SalirActionPerformed
+public void limpiar() {
+        jTextField_Matricula.setText("");
+        jComboBox_Marca.removeAllItems();
+        jComboBox_Clase.removeAllItems();
+        jTextField_Modelo.setText("");
+        jTextField_Precio.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_Guardar;
+    private javax.swing.JButton jButton_Enviar;
+    private javax.swing.JButton jButton_Limpiar;
     private javax.swing.JButton jButton_Salir;
-    private javax.swing.JCheckBox jCheckBox_Disponible;
-    private javax.swing.JComboBox jComboBox_Clase;
-    private javax.swing.JComboBox jComboBox_Marca;
+    private javax.swing.JComboBox<String> jComboBox_Clase;
+    private javax.swing.JComboBox<String> jComboBox_Marca;
     private javax.swing.JLabel jLabel_Clase;
     private javax.swing.JLabel jLabel_Marca;
     private javax.swing.JLabel jLabel_Matricula;
     private javax.swing.JLabel jLabel_Modelo;
     private javax.swing.JLabel jLabel_Precio;
-    private javax.swing.JLabel jLabel_Puertas;
-    private javax.swing.JSpinner jSpinner_Puertas;
     private javax.swing.JTextField jTextField_Matricula;
     private javax.swing.JTextField jTextField_Modelo;
     private javax.swing.JTextField jTextField_Precio;
