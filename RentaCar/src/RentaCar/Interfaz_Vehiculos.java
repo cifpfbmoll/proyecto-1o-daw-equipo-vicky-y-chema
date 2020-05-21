@@ -57,7 +57,6 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
         jPanel_Botonera = new javax.swing.JPanel();
         jButton_Enviar = new javax.swing.JButton();
         jButton_Limpiar = new javax.swing.JButton();
-        jButton_Salir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 204));
         setClosable(true);
@@ -270,32 +269,22 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton_Salir.setText("Salir");
-        jButton_Salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_SalirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel_BotoneraLayout = new javax.swing.GroupLayout(jPanel_Botonera);
         jPanel_Botonera.setLayout(jPanel_BotoneraLayout);
         jPanel_BotoneraLayout.setHorizontalGroup(
             jPanel_BotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_BotoneraLayout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
+                .addContainerGap(208, Short.MAX_VALUE)
                 .addComponent(jButton_Enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13))
+                .addContainerGap())
         );
         jPanel_BotoneraLayout.setVerticalGroup(
             jPanel_BotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_BotoneraLayout.createSequentialGroup()
                 .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel_BotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_Salir)
                     .addComponent(jButton_Limpiar)
                     .addComponent(jButton_Enviar))
                 .addContainerGap())
@@ -354,10 +343,6 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jComboBox_SelectorActionPerformed
 
-    private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton_SalirActionPerformed
-
     /**
      * Limpia los datos de la ventana Interfaz_Vehículos
      */
@@ -390,7 +375,6 @@ public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Enviar;
     private javax.swing.JButton jButton_Limpiar;
-    private javax.swing.JButton jButton_Salir;
     private javax.swing.JCheckBox jCheckBox_Disponible;
     private javax.swing.JCheckBox jCheckBox_wc;
     private javax.swing.JComboBox<String> jComboBox_Clase;
