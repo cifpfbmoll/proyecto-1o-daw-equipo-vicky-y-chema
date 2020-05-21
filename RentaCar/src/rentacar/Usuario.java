@@ -1,26 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package rentacar;
 
-import java.awt.Color;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import javax.swing.JLabel;
-import static rentacar.RentaCar.obtenerConexion;
-
 /**
- * La clase Usuario se utiliza para crear usuarios en
- * la aplicación.
- * @author victoriapenas
+ * @author victoriapenas & josemariahernandez
  * @version 1.0
+ * @since 2020-19-05
  */
 public class Usuario {
-    
-    //atributos
+
+    // Atributos
+    public TODOSentencias sql;
     private String clienteNIF;
     private String nombre;
     private String apellido1;
@@ -30,13 +22,15 @@ public class Usuario {
     private int rol;
     private String password;
     private String codUsuario;
-    
-    //contructor vacío
+
+    // Contructor vacío
     public Usuario() {
     }
-    
-    //constructor con parámetros
-    public Usuario(String clienteNIF, String nombre, String apellido1, String apellido2, String telefono, String email, int rol, String password, String codUsuario) {
+
+    // Constructor con parámetros
+    public Usuario(String clienteNIF, String nombre, String apellido1,
+            String apellido2, String telefono, String email, int rol,
+            String password, String codUsuario) {
         this.setClienteNIF(clienteNIF);
         this.setNombre(nombre);
         this.setApellido1(apellido1);
@@ -46,10 +40,13 @@ public class Usuario {
         this.setRol(rol);
         this.setPassword(password);
         this.setCodUsuario(codUsuario);
+        sql = new TODOSentencias();
     }
-    
-    // contructor copia. El NIF y el codUsuario no puede estar duplicado. Por lo tanto, no se copia.
-    public Usuario(Usuario user, String NIF, String codUser){
+
+    /* Contructor copia. El NIF y el codUsuario no puede estar duplicado.
+     * Por lo tanto, no se copia.
+     */
+    public Usuario(Usuario user, String NIF, String codUser) {
         this.setClienteNIF(NIF);
         this.setNombre(user.getNombre());
         this.setApellido1(user.getApellido1());
@@ -60,8 +57,24 @@ public class Usuario {
         this.setPassword(user.getPassword());
         this.setCodUsuario(codUser);
     }
-    
-    //getters i setters
+
+    public boolean registrarDatosCliente(String tabla) {
+
+        String datos[] = {this.getClienteNIF(), this.getNombre(), this.getApellido1(), this.getApellido2(), this.getTelefono(), this.getEmail()};
+        return sql.insertSQL(datos, "insert into " + tabla
+                + "(NIF,nombre,apellido1,apellido2,telefono,email) values(?,?,?,?,?,?)");
+
+    }
+    // TODO --> Falta comprobar
+    public boolean registrarDatosUsuario(String tabla) {
+
+        String datos[] = {String.valueOf(this.getRol()), this.getPassword(), this.getCodUsuario()};
+        return sql.insertSQL(datos, "insert into " + tabla + "(usuario,password,clientenif,rolid)"
+                + " values(?, crypt(?, gen_salt('bf')), ?, ?)");
+
+    }
+
+    // Getters Y setters
     public String getClienteNIF() {
         return clienteNIF;
     }
@@ -133,85 +146,20 @@ public class Usuario {
     public void setCodUsuario(String codUsuario) {
         this.codUsuario = codUsuario;
     }
-    
-    public static int obtenerRolId(String rol){
+
+    public static int obtenerRolId(String rol) {
         int rolId = 0;
-        if (rol.equals("Cliente")){
+        if (rol.equals("Cliente")) {
             rolId = 1;
         }
         return rolId;
     }
-    
-    public static void insertRegistro(String nif,String nombre,String apellido1,
-        String apellido2,String telefono,String email, String rol, String user, String pw, JLabel resultado){
-            int rolId = obtenerRolId(rol);
-            PreparedStatement pst = null;
-            Connection con = null;
-            try {
-                con = obtenerConexion();
-                System.out.println("Conectado correctamente a la BBDD");//TODO eliminar
-                if (nif.isEmpty() || nombre.isEmpty() || apellido1.isEmpty() || apellido2.isEmpty()
-                    || telefono.isEmpty() || email.isEmpty() || rol.isEmpty() || user.isEmpty() || pw.isEmpty()){
-                    resultado.setForeground(Color.RED);
-                    resultado.setText("Faltan datos por cumplimentar.");
-                    
-                }else{                
-                    con.setAutoCommit(false);
-                    //sql insert statement para tabla clientes
-                    String queryClientes = " insert into clientes (nif,nombre,apellido1,apellido2,telefono,email)"
-                      + " values (?, ?, ?, ?, ?, ?)";
-                    pst = con.prepareStatement(queryClientes);
-                    pst.setString(1, nif);
-                    pst.setString(2, nombre);
-                    pst.setString(3, apellido1);
-                    pst.setString(4, apellido2);
-                    pst.setInt(5, Integer.parseInt(telefono));
-                    pst.setString(6,email);
-                    pst.executeUpdate();
-                    
-                    //sql insert statement para tabla usuarios
-                    String queryUsuarios = " insert into usuarios (usuario,password,clientenif,rolid)"
-                      + " values (?, crypt(?, gen_salt('bf')), ?, ?)";
-                    pst = con.prepareStatement(queryUsuarios);
-                    pst.setString(1, user);
-                    pst.setString(2, pw);
-                    pst.setString(3, nif);
-                    pst.setInt(4, rolId);
-                    pst.executeUpdate();
-                    resultado.setForeground(Color.GREEN);
-                    resultado.setText("Usuario creado correctamente"); //añado a la label el valor
-                    
-                    con.commit();
-                }
-            } catch (SQLException ex) {
-                try {
-                    con.rollback();
-                    resultado.setForeground(Color.RED);
-                    if (ex.getSQLState().equals("23505")){
-                        resultado.setText("Ya existe un usuario con estos datos.");
-                    }else{
-                        System.out.println(ex.getSQLState());
-                        System.out.println(ex.getMessage());
-                        resultado.setText("No se ha podido conectar a la base de datos");
-                    }
-                } catch (SQLException ex1) {
-                    System.out.println("Se ha producido en un error inesperado.");
-                }
-                
-            } finally{
-                if (con != null) try{
-                    con.close();
-                    con.setAutoCommit(true);
-                }catch (SQLException ex) {
-                    System.out.println(ex.getSQLState());
-                    System.out.println(ex.getMessage());
-                }
-                if (pst != null) try {
-                    pst.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex.getSQLState());
-                    System.out.println(ex.getMessage());
-                }
-            }
-        } 
+
+    public TODOSentencias getSql() {
+        return sql;
+    }
+
+    public void setSql(TODOSentencias sql) {
+        this.sql = sql;
+    }
 }

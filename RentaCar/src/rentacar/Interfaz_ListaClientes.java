@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package RentaCar;
+package rentacar;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -21,9 +21,11 @@ public final class Interfaz_ListaClientes extends javax.swing.JInternalFrame {
     public Interfaz_ListaClientes() {
         initComponents();
         mostrar_tabla();
+        
     }
 
     public void mostrar_tabla() {
+        
         Control_Clientes ctr;
         ctr = new Control_Clientes("", "", "", "", "", "", Integer.parseInt(""), "", "");
         String[] columnas = {"NIF", "nombre", "apellido1", "apellido2", "telefono", "email"};
