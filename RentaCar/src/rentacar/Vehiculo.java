@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rentacar;
+package RentaCar;
+
+import java.sql.Connection;//este atributo no me conevence
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -101,6 +106,34 @@ public class Vehiculo {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+    
+    public static void listarVehiculos() throws SQLException{
+        Conexion_BBDD con = new Conexion_BBDD();
+        try (PreparedStatement ps = con.conectado().prepareStatement(selectVehiculos());ResultSet rs = ps.executeQuery()){
+            while (rs.next ()) {
+            System.out.println("MATRICULA: " + rs.getString(1) + " - MARCA: " + rs.getString(2) + " - MODELO: " + 
+            rs.getString(3) + " - CATEGORIA: " + rs.getString(4) + " - PRECIO/DIA: " + rs.getInt(5));
+            }
+        } finally{
+            if (con != null) con.conectado().close (); //cierra el objeto Connection
+        }
+
+        /*Connection con = obtenerConexion();        
+        try (PreparedStatement ps = con.prepareStatement(selectVehiculos()); ResultSet rs = ps.executeQuery()){
+            while (rs.next ()) {
+                System.out.println("MATRICULA: " + rs.getString(1) + " - MARCA: " + rs.getString(2) + " - MODELO: " + 
+                rs.getString(3) + " - CATEGORIA: " + rs.getString(4) + " - PRECIO/DIA: " + rs.getInt(5));
+            }
+        } finally{
+            if (con != null) con.close ();
+        }*/
+        
+        
+    }
+    
+    public static String selectVehiculos(){
+        return "select * from vehiculos";
     }
     
 }
