@@ -32,6 +32,7 @@ public class Interfaz_ListarVehiculos extends javax.swing.JInternalFrame {
     }
 
     public JTextArea getVehiculosEncontrados() {
+        this.vehiculosEncontrados.setEditable(false);
         return vehiculosEncontrados;
     }
 

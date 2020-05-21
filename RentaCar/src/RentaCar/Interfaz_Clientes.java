@@ -4,6 +4,10 @@
  */
 package RentaCar;
 
+import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +25,6 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
      */
     public Interfaz_Clientes() {
         initComponents();
-        limpiar();
         limpiar();
     }
 
@@ -53,8 +56,10 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         jLabel_codUser = new javax.swing.JLabel();
         jTextField_codUser = new javax.swing.JTextField();
         jButton_Limpiar = new javax.swing.JButton();
+        jLabel_resultado = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 204));
+        setClosable(true);
         setIconifiable(true);
         setResizable(true);
         setTitle("Registro de Clientes");
@@ -113,7 +118,7 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         });
 
         jLabel_codUser.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel_codUser.setText("Código Cliente");
+        jLabel_codUser.setText("Código Usuario");
 
         jTextField_codUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +133,8 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel_resultado.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,7 +143,8 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel_resultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_Enviar)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_Limpiar)
@@ -146,22 +154,18 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel_apellido1)
-                                .addGap(45, 45, 45)
-                                .addComponent(jTextField_apellido1))
+                                .addGap(49, 49, 49)
+                                .addComponent(jTextField_apellido1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel_clienteNIF)
                                     .addComponent(jLabel_telefono)
                                     .addComponent(jLabel_codUser))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField_telefono)
-                                            .addComponent(jTextField_codUser)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                                        .addComponent(jTextField_clienteNIF, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField_telefono)
+                                    .addComponent(jTextField_codUser)
+                                    .addComponent(jTextField_clienteNIF))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -186,7 +190,7 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel_apellido1)
@@ -215,11 +219,16 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
                     .addComponent(jTextField_codUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_password)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_Salir)
-                    .addComponent(jButton_Enviar)
-                    .addComponent(jButton_Limpiar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton_Salir)
+                            .addComponent(jButton_Enviar)
+                            .addComponent(jButton_Limpiar)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -234,9 +243,12 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         jTextField_apellido2.setText("");
         jTextField_telefono.setText("");
         jTextField_email.setText("");
-
+        jTextField_codUser.setText("");
+        jPasswordField.setText("");
+        jLabel_resultado.setText(" ");
     }
     /**
+     * TODO!!!! -----> CHEMA, Añadido el closable en la ventana, ¿eliminamos este método y boton correspondiente????
      * Esto sirve para ocultar la ventana sin necesidad
      * de cerrar el programa entero.
      * @param evt 
@@ -246,9 +258,14 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton_SalirActionPerformed
 
     private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
+        
         // Recojo datos del botón de enviar formulario
         String nif, nom, ape1, ape2, tel, mail, pass, codUser;
-
+        
+        // Stringify un char extraído del passwordfield
+        String passText = new String(jPasswordField.getPassword());
+        pass = passText;
+        
         // Datos recogidos del formulario
         nif = jTextField_clienteNIF.getText();
         nom = jTextField_nombre.getText();
@@ -257,15 +274,13 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         tel = jTextField_telefono.getText();
         mail = jTextField_email.getText();
         codUser = jTextField_codUser.getText();
-
-        // Stringify un char extraído del passwordfield
-        String passText = new String(jPasswordField.getPassword());
-        pass = passText;
-
+        
         // Rol fijado manualmente
         int rol = 1;
 
-        // Control de clientes y mensajes informativos
+        Usuario nuevoCliente = new Usuario(nif, nom, ape1, ape2, tel, mail, rol,pass,codUser);
+
+        nuevoCliente.insertRegistro(jLabel_resultado);
         
     }//GEN-LAST:event_jButton_EnviarActionPerformed
 
@@ -300,6 +315,7 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel_email;
     private javax.swing.JLabel jLabel_nombre;
     private javax.swing.JLabel jLabel_password;
+    private javax.swing.JLabel jLabel_resultado;
     private javax.swing.JLabel jLabel_telefono;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextField_apellido1;

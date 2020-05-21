@@ -4,10 +4,19 @@
  */
 package RentaCar;
 
+import static RentaCar.Consultas_BBDD.*;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+
 /**
  * @author victoriapenas & josemariahernandez
- * @version 1.0
- * @since 2020-19-05
+ * @version 2.0
+ * @since 2020-25-05
  */
 public class Usuario {
 
@@ -131,11 +140,121 @@ public class Usuario {
         this.codUsuario = codUsuario;
     }
 
+    /**
+     * Método para recuperar el id del rol en función de su nombre
+     * @param rol recibe el nombre del rol
+     * @return devuelve el codigo del rol
+     */
     public static int obtenerRolId(String rol) {
         int rolId = 0;
         if (rol.equals("Cliente")) {
             rolId = 1;
         }
         return rolId;
+    }
+    
+    /**
+     * Método para crear nuevos usuarios.
+     * 
+     * @param nif del cliente
+     * @param nombre del cliente
+     * @param apellido1 del cliente
+     * @param apellido2 del cliente
+     * @param telefono del cliente
+     * @param email correo electronico del cliente
+     * @param rol tipo de perfil en la aplicación del cliente
+     * @param user usuario de login del cliente
+     * @param pw contraseña del cliente
+     * @param resultado etiqueta para informar si se ha realizado con éxito la creación del usuario
+     * @throws SQLException 
+     */
+    public void insertRegistro(JLabel resultado){
+            PreparedStatement pst = null;
+            Connection con = null;
+            try {
+                con = obtenerConexion();
+                if (!revisarCampos()){
+                    resultado.setForeground(Color.RED);
+                    resultado.setText("Faltan datos por cumplimentar.");
+                }else{                
+                    con.setAutoCommit(false);
+                    //sql insert statement para tabla clientes
+                    String queryClientes = insertClientes();
+                    pst = con.prepareStatement(queryClientes);
+                    pst.setString(1, this.getClienteNIF());
+                    pst.setString(2, this.getNombre());
+                    pst.setString(3, this.getApellido1());
+                    pst.setString(4, this.getApellido2());
+                    pst.setString(5, this.getTelefono());
+                    pst.setString(6, this.getEmail());
+                    pst.executeUpdate();
+                    
+                    //sql insert statement para tabla usuarios
+                    String queryUsuarios = insertUsuarios();
+                    pst = con.prepareStatement(queryUsuarios);
+                    pst.setString(1, this.getCodUsuario());
+                    pst.setString(2, this.getPassword());
+                    pst.setString(3, this.getClienteNIF());
+                    pst.setInt(4, this.getRol());
+                    pst.executeUpdate();
+                    resultado.setForeground(Color.GREEN);
+                    resultado.setText("Usuario creado correctamente");
+                    
+                    con.commit();
+                }
+            } catch (SQLException ex) {
+                try {
+                    con.rollback();
+                    resultado.setForeground(Color.RED);
+                    if (ex.getSQLState().equals("23505")){
+                        resultado.setText("Ya existe un usuario con estos datos.");
+                    }else{
+                        resultado.setText(ex.getSQLState() + ex.getMessage());
+                        System.out.println(ex.getSQLState());
+                        System.out.println(ex.getMessage());
+                    }
+                } catch (SQLException ex1) {
+                    resultado.setForeground(Color.RED);
+                    resultado.setText("Se ha producido en un error inesperado.");
+                }
+            } finally{
+                if (con != null){
+                    try {
+                        con.close();
+                        con.setAutoCommit(true);
+                    } catch (SQLException ex) {
+                        System.out.println(ex.getSQLState());
+                        System.out.println(ex.getMessage());
+                    }
+                }
+                if (pst != null) {
+                    try {
+                        pst.close();
+                    } catch (SQLException ex) {
+                        System.out.println(ex.getSQLState());
+                        System.out.println(ex.getMessage());
+                    }
+                }
+            }
+        }
+    
+    /**
+     * Método para comprobar si todos los campos de alta de un usuario están completados
+     * @return devuelve un booleano con el resultado
+     */
+    public boolean revisarCampos(){
+        boolean camposCompletos = true;
+        
+        if (this.getClienteNIF().isEmpty() || this.getClienteNIF() == null ||
+            this.getNombre().isEmpty() || this.getNombre() == null || this.getApellido1().isEmpty() ||
+            this.getApellido1() == null || this.getApellido2().isEmpty() || this.getApellido2() == null
+            || this.getTelefono().isEmpty() || this.getTelefono() == null || this.getEmail().isEmpty()
+            || this.getEmail() == null || this.getRol() == 0 || this.getCodUsuario().isEmpty() 
+            || this.getCodUsuario() == null || this.getPassword().isEmpty() || this.getPassword() == null){
+            
+            camposCompletos = false;
+        }
+        
+        return camposCompletos;
     }
 }
