@@ -239,6 +239,9 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        Interfaz_ListarVehiculos listarVehi = new Interfaz_ListarVehiculos();
+        jDesktopPane1.add(listarVehi);
+        listarVehi.setVisible(rootPaneCheckingEnabled);
         try {
             listarVehiculos();
         } catch (SQLException ex) {
