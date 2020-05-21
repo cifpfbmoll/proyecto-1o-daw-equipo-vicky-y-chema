@@ -23,6 +23,7 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
     public Interfaz_Clientes() {
         initComponents();
         limpiar();
+        limpiar();
     }
 
     /**
