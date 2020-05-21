@@ -16,7 +16,6 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
     /**
      * Creates new form Interfaz_Clientes
      */
-    ComboBox cbx = new ComboBox();
     /**
      * 
      */
@@ -267,19 +266,7 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
         int rol = 1;
 
         // Control de clientes y mensajes informativos
-        Control_Clientes control = new Control_Clientes(nif, nom, ape1, ape2, tel, mail, rol, pass, codUser);
-        if (!nif.isEmpty() && !nom.isEmpty() && !ape1.isEmpty() && !ape2.isEmpty() && !tel.isEmpty() && !mail.isEmpty()
-                && !pass.isEmpty() && codUser.isEmpty()) {
-            if (control.registrarDatosCliente("clientes") && control.registrarDatosUsuario("usuarios")) {
-                JOptionPane.showMessageDialog(null, "Cliente registrado con éxito.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                limpiar();
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al registrar el cliente");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Hay campos obligatorios");
-        }
+        
     }//GEN-LAST:event_jButton_EnviarActionPerformed
 
     private void jTextField_apellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_apellido2ActionPerformed

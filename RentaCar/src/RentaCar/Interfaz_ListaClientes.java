@@ -4,8 +4,6 @@
  */
 package rentacar;
 
-import javax.swing.table.DefaultTableModel;
-
 /**
  * @author victoriapenas & josemariahernandez
  * @version 1.0
@@ -16,22 +14,8 @@ public final class Interfaz_ListaClientes extends javax.swing.JInternalFrame {
     /**
      * Creates new form Interfaz_ListaClientes
      */
-    private Object[][] tabla;
-
     public Interfaz_ListaClientes() {
         initComponents();
-        mostrar_tabla();
-        
-    }
-
-    public void mostrar_tabla() {
-        
-        Control_Clientes ctr;
-        ctr = new Control_Clientes("", "", "", "", "", "", Integer.parseInt(""), "", "");
-        String[] columnas = {"NIF", "nombre", "apellido1", "apellido2", "telefono", "email"};
-        tabla = ctr.consultarClientes();
-        DefaultTableModel datos = new DefaultTableModel(tabla, columnas);
-        jTable1.setModel(datos);
     }
 
     /**
