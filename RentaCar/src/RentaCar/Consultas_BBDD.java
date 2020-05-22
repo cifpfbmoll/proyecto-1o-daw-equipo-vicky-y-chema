@@ -30,7 +30,7 @@ public interface Consultas_BBDD {
     }
     
     /**
-     * método para recuperar todos los vehiculos 
+     * query para recuperar todos los vehiculos 
      * @return devuelve la query para recuperar los vehiculos
      */
     public static String selectVehiculos(){
@@ -53,6 +53,22 @@ public interface Consultas_BBDD {
     public static String insertUsuarios(){
         return "insert into usuarios (usuario,password,clientenif,rolid)" + 
                 "values (?, crypt(?, gen_salt('bf')), ?, ?)";
+    }
+    
+    /**
+     * query para validar contraseñas
+     * @return devuelve la query de validación
+     */
+    public static String comprobarPw(){
+        return "SELECT (password = crypt(?, password)) AS pswmatch FROM USUARIOS where usuario = ?";
+    }
+    
+    /**
+     * query para validar contraseñas
+     * @return devuelve la query de validación
+     */
+    public static String recuperarUsuario(String user){
+        return "SELECT rolid from usuarios where usuario = '" + user + "'";
     }
     
 }

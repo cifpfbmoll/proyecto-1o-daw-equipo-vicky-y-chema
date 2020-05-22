@@ -8,7 +8,10 @@ import static RentaCar.Consultas_BBDD.*;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -152,6 +155,23 @@ public class Usuario {
         }
         return rolId;
     }
+    
+    /**
+     * Método para obtener el rol de un usuario
+     * @param user recibe el codigo de usuario
+     * @return devuelve el codigo del rol
+     * @throws SQLException 
+     */
+    public static int comprobarRol(String user) throws SQLException{
+        int rol = 1;
+        try (Connection con = obtenerConexion();PreparedStatement ps = con.prepareStatement(recuperarUsuario(user));
+                ResultSet rs = ps.executeQuery()){
+            while (rs.next ()) {
+                rol = rs.getInt(1);
+            }
+        }
+        return rol;
+    }
 
     /**
      * Método para crear nuevos usuarios.
@@ -259,5 +279,35 @@ public class Usuario {
         }
 
         return camposCompletos;
+    }
+    
+    /**
+     * Método para validar el acceso de un usuario
+     * @param user codigo de usuario que se ha introducido
+     * @param pw contraseña que se ha introducido
+     * @return devuelve true si el usuario existe en ls BBDD
+     * @throws SQLException 
+     */
+    public static boolean comprobarUsuario(String user, String pw) throws SQLException{
+        boolean encontrado = false;
+        Connection con = obtenerConexion();   
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement(comprobarPw());
+            ps.setString(1, pw);
+            ps.setString(2, user);
+            rs = ps.executeQuery();
+            while (rs.next ()) {
+                if (rs.getBoolean(1)){
+                    encontrado = true;
+                }
+            }       
+        }finally{
+            con.close();
+            ps.close();
+            rs.close();
+        }
+        return encontrado;
     }
 }
