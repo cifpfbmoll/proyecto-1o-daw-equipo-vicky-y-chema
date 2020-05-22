@@ -71,7 +71,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         jLabel_TipoVehículo.setText("Tipo de Vehículo");
         jPanel_Main.add(jLabel_TipoVehículo, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 12, 120, 24));
 
-        jComboBox_Selector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Coche", "Moto", "Caravana" }));
+        jComboBox_Selector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Coche", "Moto", "Caravana" }));
         jComboBox_Selector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_SelectorActionPerformed(evt);
