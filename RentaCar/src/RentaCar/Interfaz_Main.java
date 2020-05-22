@@ -5,15 +5,20 @@
  */
 package RentaCar;
 
+import static RentaCar.Usuario.comprobarRol;
+import static RentaCar.Usuario.comprobarUsuario;
 import static RentaCar.Vehiculo.listarVehiculos;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JDesktopPane;
 
 /**
  *
@@ -27,7 +32,8 @@ public class Interfaz_Main extends javax.swing.JFrame {
     public Interfaz_Main() {
         initComponents();
     }
-        /*@Override
+
+    /*@Override
         public Dimension getPreferredSize() {
             return new Dimension(imagen.getWidth(), imagen.getHeight());
         }*/
@@ -60,7 +66,12 @@ public class Interfaz_Main extends javax.swing.JFrame {
         jButton_ConsultarVeh = new javax.swing.JButton();
         jButton_Registrarse = new javax.swing.JButton();
         jButton_Acceder = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_Mensaje = new javax.swing.JLabel();
+        jLabel_Usuario = new javax.swing.JLabel();
+        jTextField_Usuario = new javax.swing.JTextField();
+        jLabel_Contraseña = new javax.swing.JLabel();
+        jPasswordField_Contraseña = new javax.swing.JPasswordField();
+        jLabel_verificacionUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("HOME RENTACAR");
@@ -104,51 +115,96 @@ public class Interfaz_Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("¡Este es el RentaCar de Vicky y Chema!");
+        jLabel_Mensaje.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel_Mensaje.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Mensaje.setText("¡Este es el RentaCar de Vicky y Chema!");
+
+        jLabel_Usuario.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel_Usuario.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Usuario.setText("USUARIO");
+
+        jTextField_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_UsuarioActionPerformed(evt);
+            }
+        });
+
+        jLabel_Contraseña.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel_Contraseña.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Contraseña.setText("CONTRASEÑA");
+
+        jPasswordField_Contraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField_ContraseñaActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jLabel_bienvenidos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton_ConsultarVeh, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton_Registrarse, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton_Acceder, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel_Mensaje, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel_Usuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jTextField_Usuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel_Contraseña, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jPasswordField_Contraseña, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel_verificacionUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton_Registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Acceder, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(226, 226, 226))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton_ConsultarVeh, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addGap(213, 213, 213)
-                            .addComponent(jLabel1))
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                            .addGap(256, 256, 256)
-                            .addComponent(jLabel_bienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addComponent(jLabel_bienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jLabel_Mensaje))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton_ConsultarVeh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jButton_Registrarse)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton_Acceder, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel_verificacionUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_Contraseña, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel_Usuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_Usuario)
+                            .addComponent(jPasswordField_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addComponent(jLabel_bienvenidos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel_Mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPasswordField_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_Registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Acceder, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton_Acceder, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_Registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton_ConsultarVeh, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_verificacionUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,6 +222,52 @@ public class Interfaz_Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jPasswordField_ContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_ContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField_ContraseñaActionPerformed
+
+    private void jTextField_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_UsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_UsuarioActionPerformed
+
+    private void jButton_AccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AccederActionPerformed
+        int rol;
+        try {
+            String passText = new String(jPasswordField_Contraseña.getPassword());
+            String pass = passText;
+            boolean encontrado = comprobarUsuario(jTextField_Usuario.getText(), pass);
+            if (encontrado) {
+                rol = comprobarRol(jTextField_Usuario.getText());
+                if (rol == 1) {
+                    //TODO JFrame MENU DEL CLIENTE
+                } else if (rol == 2) {
+                    //TODO eliminar si nos quedamos con el dispose --> this.setClosed(true);
+                    Interfaz_Administrador admin = new Interfaz_Administrador();
+                    admin.setVisible(rootPaneCheckingEnabled);
+                    this.dispose();
+                }
+                //TODO tendriamos que encontrar la forma si el usuario se valida, se cierre el JFram Interfaz Main
+            } else {
+                jLabel_verificacionUsuario.setForeground(Color.RED);
+                jLabel_verificacionUsuario.setText("Las claves indicadas no son correctas."
+                        + "Intentalo de nuevo");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Interfaz_Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /* TODO --> dejar o quitar el Acceso a jframe interno de Interfaz_Login
+        Interfaz_Login ventanaLogin = new Interfaz_Login();
+        jDesktopPane1.add(ventanaLogin);
+        ventanaLogin.setVisible(rootPaneCheckingEnabled);
+         */
+    }//GEN-LAST:event_jButton_AccederActionPerformed
+
+    private void jButton_RegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarseActionPerformed
+        Interfaz_RegistroClientes cli = new Interfaz_RegistroClientes();
+        jDesktopPane1.add(cli);
+        cli.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_jButton_RegistrarseActionPerformed
+
     private void jButton_ConsultarVehActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConsultarVehActionPerformed
         Interfaz_ListarVehiculos listarVehi = new Interfaz_ListarVehiculos();
         jDesktopPane1.add(listarVehi);
@@ -176,18 +278,6 @@ public class Interfaz_Main extends javax.swing.JFrame {
             System.out.println("error en la BBDD");
         }
     }//GEN-LAST:event_jButton_ConsultarVehActionPerformed
-
-    private void jButton_RegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarseActionPerformed
-        Interfaz_Clientes cli = new Interfaz_Clientes();
-        jDesktopPane1.add(cli);
-        cli.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_jButton_RegistrarseActionPerformed
-
-    private void jButton_AccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AccederActionPerformed
-        Interfaz_Login ventanaLogin = new Interfaz_Login();
-        jDesktopPane1.add(ventanaLogin);
-        ventanaLogin.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_jButton_AccederActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +319,12 @@ public class Interfaz_Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton_ConsultarVeh;
     private javax.swing.JButton jButton_Registrarse;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel_Contraseña;
+    private javax.swing.JLabel jLabel_Mensaje;
+    private javax.swing.JLabel jLabel_Usuario;
     private javax.swing.JLabel jLabel_bienvenidos;
+    private javax.swing.JLabel jLabel_verificacionUsuario;
+    private javax.swing.JPasswordField jPasswordField_Contraseña;
+    private javax.swing.JTextField jTextField_Usuario;
     // End of variables declaration//GEN-END:variables
 }

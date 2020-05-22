@@ -9,12 +9,12 @@ package RentaCar;
  * @version 1.0
  * @since 2020-19-05
  */
-public class Interfaz_Vehiculos extends javax.swing.JInternalFrame {
+public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Interfaz_Vehiculos
      */
-    public Interfaz_Vehiculos() {
+    public Interfaz_RegistroVehiculos() {
         initComponents();
         ocultarPaneles();
         // TODO VICKY, ENVIAR DATOS A LA BBDD

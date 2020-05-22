@@ -210,13 +210,13 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Interfaz_Clientes cli = new Interfaz_Clientes();
+        Interfaz_RegistroClientes cli = new Interfaz_RegistroClientes();
         jDesktopPane1.add(cli);
         cli.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Interfaz_Clientes cli = new Interfaz_Clientes();
+        Interfaz_RegistroClientes cli = new Interfaz_RegistroClientes();
         jDesktopPane1.add(cli);
         cli.setVisible(rootPaneCheckingEnabled);
 
@@ -227,13 +227,13 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        Interfaz_Vehiculos aut = new Interfaz_Vehiculos();
+        Interfaz_RegistroVehiculos aut = new Interfaz_RegistroVehiculos();
         jDesktopPane1.add(aut);
         aut.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Interfaz_Vehiculos aut = new Interfaz_Vehiculos();
+        Interfaz_RegistroVehiculos aut = new Interfaz_RegistroVehiculos();
         jDesktopPane1.add(aut);
         aut.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButton3ActionPerformed

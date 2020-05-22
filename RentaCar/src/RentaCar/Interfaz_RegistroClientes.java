@@ -9,7 +9,7 @@ package RentaCar;
  * @version 1.0
  * @since 2020-18-05
  */
-public class Interfaz_Clientes extends javax.swing.JInternalFrame {
+public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Interfaz_Clientes
@@ -17,7 +17,7 @@ public class Interfaz_Clientes extends javax.swing.JInternalFrame {
     /**
      *
      */
-    public Interfaz_Clientes() {
+    public Interfaz_RegistroClientes() {
         initComponents();
         limpiar();
     }

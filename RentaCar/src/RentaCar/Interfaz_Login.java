@@ -39,9 +39,9 @@ public class Interfaz_Login extends javax.swing.JInternalFrame {
         jEditorPane1 = new javax.swing.JEditorPane();
         jPanel1 = new javax.swing.JPanel();
         jTextField_Usuario = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jButton_Acceder = new javax.swing.JButton();
+        jLabel_Usuario = new javax.swing.JLabel();
+        jLabel_Contraseña = new javax.swing.JLabel();
         jLabel_verificacionUsuario = new javax.swing.JLabel();
         jLabel_titulo = new javax.swing.JLabel();
         jPasswordField_pw = new javax.swing.JPasswordField();
@@ -62,23 +62,23 @@ public class Interfaz_Login extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("ACCEDER");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Acceder.setBackground(new java.awt.Color(255, 255, 255));
+        jButton_Acceder.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
+        jButton_Acceder.setForeground(new java.awt.Color(0, 0, 0));
+        jButton_Acceder.setText("ACCEDER");
+        jButton_Acceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_AccederActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Usuario");
+        jLabel_Usuario.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
+        jLabel_Usuario.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Usuario.setText("Usuario");
 
-        jLabel2.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Contraseña");
+        jLabel_Contraseña.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
+        jLabel_Contraseña.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Contraseña.setText("Contraseña");
 
         jLabel_verificacionUsuario.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_verificacionUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -94,8 +94,8 @@ public class Interfaz_Login extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel_Contraseña)
+                    .addComponent(jLabel_Usuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField_Usuario)
@@ -108,7 +108,7 @@ public class Interfaz_Login extends javax.swing.JInternalFrame {
                         .addComponent(jLabel_titulo)
                         .addGap(70, 70, 70))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButton_Acceder)
                         .addGap(175, 175, 175))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -121,16 +121,16 @@ public class Interfaz_Login extends javax.swing.JInternalFrame {
                 .addComponent(jLabel_titulo)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jTextField_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabel_Contraseña)
                     .addComponent(jPasswordField_pw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton_Acceder, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_verificacionUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
@@ -154,23 +154,23 @@ public class Interfaz_Login extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_UsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_AccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AccederActionPerformed
         int rol;
         try {
             String passText = new String(jPasswordField_pw.getPassword());
             String pass = passText;
-            boolean encontrado = comprobarUsuario(jTextField_Usuario.getText(),pass);
-            if (encontrado){
+            boolean encontrado = comprobarUsuario(jTextField_Usuario.getText(), pass);
+            if (encontrado) {
                 rol = comprobarRol(jTextField_Usuario.getText());
-                if (rol == 1){
+                if (rol == 1) {
                     //TODO JFrame MENU DEL CLIENTE
-                }else if (rol == 2){
+                } else if (rol == 2) {
                     this.setClosed(true);
                     Interfaz_Administrador admin = new Interfaz_Administrador();
                     admin.setVisible(rootPaneCheckingEnabled);
                 }
                 //TODO tendriamos que encontrar la forma si el usuario se valida, se cierre el JFram Interfaz Main
-            }else{
+            } else {
                 jLabel_verificacionUsuario.setForeground(Color.RED);
                 jLabel_verificacionUsuario.setText("Las claves indicadas no son correctas."
                         + "Intentalo de nuevo");
@@ -180,14 +180,14 @@ public class Interfaz_Login extends javax.swing.JInternalFrame {
         } catch (PropertyVetoException ex) {
             Logger.getLogger(Interfaz_Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton_AccederActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton_Acceder;
     private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel_Contraseña;
+    private javax.swing.JLabel jLabel_Usuario;
     private javax.swing.JLabel jLabel_titulo;
     private javax.swing.JLabel jLabel_verificacionUsuario;
     private javax.swing.JPanel jPanel1;
