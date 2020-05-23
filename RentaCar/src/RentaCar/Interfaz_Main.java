@@ -84,7 +84,6 @@ public class Interfaz_Main extends javax.swing.JFrame {
         setTitle("HOME RENTACAR");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
-        jDesktopPane.setBackground(new java.awt.Color(153, 153, 255));
         jDesktopPane.setForeground(new java.awt.Color(255, 255, 255));
         jDesktopPane.setToolTipText("");
 
@@ -120,7 +119,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
         jButton_Acceder.setBackground(new java.awt.Color(55, 59, 62));
         jButton_Acceder.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jButton_Acceder.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_Acceder.setText("ACCEDER");
+        jButton_Acceder.setText("LOGIN");
         jButton_Acceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AccederActionPerformed(evt);
@@ -129,7 +128,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
 
         jPanel_Login.setOpaque(false);
 
-        jLabel_Usuario.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel_Usuario.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jLabel_Usuario.setForeground(new java.awt.Color(55, 59, 62));
         jLabel_Usuario.setText("USUARIO");
 
@@ -141,7 +140,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel_Contraseña.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel_Contraseña.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jLabel_Contraseña.setForeground(new java.awt.Color(55, 59, 62));
         jLabel_Contraseña.setText("CONTRASEÑA");
 
@@ -257,21 +256,20 @@ public class Interfaz_Main extends javax.swing.JFrame {
             .addGroup(jDesktopPaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel_Login1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
-                .addComponent(jLabel_Mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 605, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_Mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPaneLayout.createSequentialGroup()
-                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jDesktopPaneLayout.createSequentialGroup()
-                        .addComponent(jPanel_Login1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel_verificacionUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 160, Short.MAX_VALUE))
-                    .addGroup(jDesktopPaneLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel_Mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel_Login1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel_verificacionUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addComponent(jLabel_Mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 

@@ -133,7 +133,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jDesktopPane.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
         jDesktopPane.setName(""); // NOI18N
 
-        jLabel_Bienvenida.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        jLabel_Bienvenida.setFont(new java.awt.Font("Heiti TC", 1, 22)); // NOI18N
         jLabel_Bienvenida.setForeground(new java.awt.Color(254, 255, 249));
         jLabel_Bienvenida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/administrative_tools_64px.png"))); // NOI18N
         jLabel_Bienvenida.setText("   BIENVENIDO AL ENTORNO ADMINISTRADOR");
@@ -238,8 +238,8 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jDesktopPaneLayout.createSequentialGroup()
                 .addGap(235, 235, 235)
-                .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -262,7 +262,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                 .addComponent(jButton_registrarVehiculo)
                 .addGap(30, 30, 30)
                 .addComponent(jButton_listarVehiculos)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,7 +276,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             .addComponent(jDesktopPane)
         );
 
-        setSize(new java.awt.Dimension(1066, 629));
+        setSize(new java.awt.Dimension(1050, 612));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

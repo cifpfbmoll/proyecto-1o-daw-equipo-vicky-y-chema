@@ -132,7 +132,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
         jDesktopPane.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
         jDesktopPane.setName(""); // NOI18N
 
-        jLabel_Bienvenida.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        jLabel_Bienvenida.setFont(new java.awt.Font("Heiti TC", 1, 22)); // NOI18N
         jLabel_Bienvenida.setForeground(new java.awt.Color(254, 255, 249));
         jLabel_Bienvenida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/sale_64px.png"))); // NOI18N
         jLabel_Bienvenida.setText("         BIENVENIDO AL ENTORNO CLIENTE");
@@ -234,7 +234,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
                 .addComponent(jButton_listarReservas)
                 .addGap(28, 28, 28)
                 .addComponent(jButton_cancelarReservas)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -248,7 +248,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
             .addComponent(jDesktopPane)
         );
 
-        setSize(new java.awt.Dimension(1066, 629));
+        setSize(new java.awt.Dimension(1050, 612));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -246,8 +246,8 @@ public class Usuario {
         } finally {
             if (con != null) {
                 try {
-                    con.close();
                     con.setAutoCommit(true);
+                    con.close();
                 } catch (SQLException ex) {
                     resultado.setForeground(Color.RED);
                     resultado.setText(ex.getSQLState() + ex.getMessage());
