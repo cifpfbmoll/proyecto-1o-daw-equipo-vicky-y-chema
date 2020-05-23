@@ -18,15 +18,16 @@ import javax.swing.ImageIcon;
  * @version 1.0
  * @since 2020-18-05
  */
-public class Interfaz_Administrador extends javax.swing.JFrame {
+public class Interfaz_Cliente extends javax.swing.JFrame {
 
     /**
-     * Creates new form Interfaz_Administrador
+     * Creates new form Interfaz_Cliente
      */
-    public Interfaz_Administrador() {
+    public Interfaz_Cliente() {
         initComponents();
-        ImageIcon img = new ImageIcon("src/image/administrator_64px.png");
+        ImageIcon img = new ImageIcon("src/image/customer_64px.png");
         setIconImage(img.getImage());
+        
 
     }
 
@@ -51,7 +52,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                 super.paintComponents(g);
 
                 try {
-                    imagen = ImageIO.read(new File("src/image/bg_admin.jpg"));
+                    imagen = ImageIO.read(new File("src/image/bg_customer.jpg"));
                 } catch (IOException ex) {
                     System.out.println("La imagen no se encuentra");
                 }
@@ -60,13 +61,11 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         };
         jLabel_Bienvenida = new javax.swing.JLabel();
-        jButton_registrarClientes = new javax.swing.JButton();
-        jButton_listarClientes = new javax.swing.JButton();
-        jButton_registrarVehiculo = new javax.swing.JButton();
         jButton_listarVehiculos = new javax.swing.JButton();
         jButton_realizarReserva = new javax.swing.JButton();
         jButton_listarReservas = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton_cerrarSesion = new javax.swing.JButton();
+        jButton_cancelarReservas = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -124,7 +123,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Panel Administrativo");
+        setTitle("Panel Cliente");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
         jDesktopPane.setBackground(new java.awt.Color(204, 204, 255));
@@ -135,38 +134,8 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
 
         jLabel_Bienvenida.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         jLabel_Bienvenida.setForeground(new java.awt.Color(254, 255, 249));
-        jLabel_Bienvenida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/administrative_tools_64px.png"))); // NOI18N
-        jLabel_Bienvenida.setText("   BIENVENIDO AL ENTORNO ADMINISTRADOR");
-
-        jButton_registrarClientes.setBackground(new java.awt.Color(55, 59, 62));
-        jButton_registrarClientes.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
-        jButton_registrarClientes.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_registrarClientes.setText("REGISTRAR CLIENTE");
-        jButton_registrarClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_registrarClientesActionPerformed(evt);
-            }
-        });
-
-        jButton_listarClientes.setBackground(new java.awt.Color(55, 59, 62));
-        jButton_listarClientes.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
-        jButton_listarClientes.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_listarClientes.setText("LISTAR CLIENTES (SOON)");
-        jButton_listarClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_listarClientesActionPerformed(evt);
-            }
-        });
-
-        jButton_registrarVehiculo.setBackground(new java.awt.Color(55, 59, 62));
-        jButton_registrarVehiculo.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
-        jButton_registrarVehiculo.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_registrarVehiculo.setText("REGISTRAR VEHÍCULO");
-        jButton_registrarVehiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_registrarVehiculoActionPerformed(evt);
-            }
-        });
+        jLabel_Bienvenida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/sale_64px.png"))); // NOI18N
+        jLabel_Bienvenida.setText("         BIENVENIDO AL ENTORNO CLIENTE");
 
         jButton_listarVehiculos.setBackground(new java.awt.Color(55, 59, 62));
         jButton_listarVehiculos.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
@@ -198,71 +167,74 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(45, 45, 45));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/sign_out_32px.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusCycleRoot(true);
-        jButton1.setFocusPainted(false);
-        jButton1.setPreferredSize(new java.awt.Dimension(64, 64));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_cerrarSesion.setBackground(new java.awt.Color(45, 45, 45));
+        jButton_cerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/sign_out_32px.png"))); // NOI18N
+        jButton_cerrarSesion.setBorderPainted(false);
+        jButton_cerrarSesion.setContentAreaFilled(false);
+        jButton_cerrarSesion.setFocusCycleRoot(true);
+        jButton_cerrarSesion.setFocusPainted(false);
+        jButton_cerrarSesion.setPreferredSize(new java.awt.Dimension(64, 64));
+        jButton_cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_cerrarSesionActionPerformed(evt);
+            }
+        });
+
+        jButton_cancelarReservas.setBackground(new java.awt.Color(55, 59, 62));
+        jButton_cancelarReservas.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
+        jButton_cancelarReservas.setForeground(new java.awt.Color(254, 255, 249));
+        jButton_cancelarReservas.setText("CANCELAR RESERVAS (SOON)");
+        jButton_cancelarReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_cancelarReservasActionPerformed(evt);
             }
         });
 
         jDesktopPane.setLayer(jLabel_Bienvenida, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane.setLayer(jButton_registrarClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane.setLayer(jButton_listarClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane.setLayer(jButton_registrarVehiculo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jButton_listarVehiculos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jButton_realizarReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jButton_listarReservas, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane.setLayer(jButton_cerrarSesion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane.setLayer(jButton_cancelarReservas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
         jDesktopPane.setLayout(jDesktopPaneLayout);
         jDesktopPaneLayout.setHorizontalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPaneLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton_registrarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton_listarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
                         .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_listarReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_realizarReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton_registrarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_listarVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jDesktopPaneLayout.createSequentialGroup()
-                .addGap(235, 235, 235)
-                .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_cancelarReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton_listarReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_realizarReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_listarVehiculos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                        .addComponent(jButton_cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Bienvenida))
-                .addGap(24, 24, 24)
-                .addComponent(jButton_registrarClientes)
-                .addGap(30, 30, 30)
-                .addComponent(jButton_listarClientes)
+                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(91, 91, 91)
+                .addComponent(jButton_listarVehiculos)
                 .addGap(30, 30, 30)
                 .addComponent(jButton_realizarReserva)
                 .addGap(30, 30, 30)
                 .addComponent(jButton_listarReservas)
-                .addGap(30, 30, 30)
-                .addComponent(jButton_registrarVehiculo)
-                .addGap(30, 30, 30)
-                .addComponent(jButton_listarVehiculos)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jButton_cancelarReservas)
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -280,36 +252,12 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_listarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarClientesActionPerformed
-        /* TODO LISTAR CLIENTES
-        Interfaz_ListarClientes listarCli = new Interfaz_ListarClientes();
-        centrarFrame(jDesktopPane, listarCli);
-        jDesktopPane.add(listarCli);
-        listarCli.setVisible(rootPaneCheckingEnabled);
-         */
-    }//GEN-LAST:event_jButton_listarClientesActionPerformed
-
-    private void jButton_registrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registrarClientesActionPerformed
-        Interfaz_RegistroClientes rCli = new Interfaz_RegistroClientes();
-        centrarFrame(jDesktopPane, rCli);
-        jDesktopPane.add(rCli);
-        rCli.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_jButton_registrarClientesActionPerformed
-
-    private void jButton_registrarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registrarVehiculoActionPerformed
-        Interfaz_RegistroVehiculos rVehi = new Interfaz_RegistroVehiculos();
-        centrarFrame(jDesktopPane, rVehi);
-        jDesktopPane.add(rVehi);
-        rVehi.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_jButton_registrarVehiculoActionPerformed
-
     private void jButton_listarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarVehiculosActionPerformed
         Interfaz_ListarVehiculos lisVehi = new Interfaz_ListarVehiculos();
         centrarFrame(jDesktopPane, lisVehi);
         jDesktopPane.add(lisVehi);
         lisVehi.setVisible(rootPaneCheckingEnabled);
         listarVehiculos(lisVehi);
-
     }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
 
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
@@ -326,20 +274,22 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         cRes.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButton_realizarReservaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cerrarSesionActionPerformed
         Interfaz_Main main = new Interfaz_Main();
         main.setVisible(rootPaneCheckingEnabled);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton_cerrarSesionActionPerformed
+
+    private void jButton_cancelarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelarReservasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_cancelarReservasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton_listarClientes;
+    private javax.swing.JButton jButton_cancelarReservas;
+    private javax.swing.JButton jButton_cerrarSesion;
     private javax.swing.JButton jButton_listarReservas;
     private javax.swing.JButton jButton_listarVehiculos;
     private javax.swing.JButton jButton_realizarReserva;
-    private javax.swing.JButton jButton_registrarClientes;
-    private javax.swing.JButton jButton_registrarVehiculo;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;

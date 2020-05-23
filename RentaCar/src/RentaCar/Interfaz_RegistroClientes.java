@@ -14,9 +14,6 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
     /**
      * Creates new form Interfaz_Clientes
      */
-    /**
-     *
-     */
     public Interfaz_RegistroClientes() {
         initComponents();
         limpiar();
@@ -139,7 +136,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel_apellido1)
                                 .addGap(49, 49, 49)
-                                .addComponent(jTextField_apellido1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                                .addComponent(jTextField_apellido1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel_clienteNIF)
@@ -174,7 +171,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel_apellido1)

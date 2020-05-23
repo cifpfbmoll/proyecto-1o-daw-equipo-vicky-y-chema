@@ -28,7 +28,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="ventanaVehiculos" alignment="1" pref="604" max="32767" attributes="0"/>
+                  <Component id="ventanaVehiculos" alignment="1" pref="616" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="totalVehiculos" min="-2" pref="201" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -45,7 +45,7 @@
               <Component id="ventanaVehiculos" min="-2" pref="205" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="totalVehiculos" min="-2" pref="28" max="-2" attributes="0"/>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

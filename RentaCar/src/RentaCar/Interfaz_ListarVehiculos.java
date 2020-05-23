@@ -5,6 +5,8 @@
  */
 package RentaCar;
 
+import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -47,6 +49,18 @@ public class Interfaz_ListarVehiculos extends javax.swing.JInternalFrame {
     public void setVentanaVehiculos(JScrollPane ventanaVehiculos) {
         this.ventanaVehiculos = ventanaVehiculos;
     }
+    /**
+     * Método para listar vehículos en cualquier frame
+     * @param listando 
+     */
+    public static void listarVehiculos(Interfaz_ListarVehiculos listando) {
+        try {
+            Vehiculo.listarVehiculos(listando);
+        } catch (SQLException ex) {
+            System.out.println("error en la BBDD");
+        }
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +98,7 @@ public class Interfaz_ListarVehiculos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ventanaVehiculos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
+                    .addComponent(ventanaVehiculos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(totalVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -97,7 +111,7 @@ public class Interfaz_ListarVehiculos extends javax.swing.JInternalFrame {
                 .addComponent(ventanaVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(totalVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
