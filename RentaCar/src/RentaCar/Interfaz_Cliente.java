@@ -125,6 +125,8 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel Cliente");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setPreferredSize(new java.awt.Dimension(1050, 590));
+        setResizable(false);
 
         jDesktopPane.setBackground(new java.awt.Color(204, 204, 255));
         jDesktopPane.setForeground(new java.awt.Color(0, 0, 0));

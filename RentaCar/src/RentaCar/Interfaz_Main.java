@@ -83,6 +83,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("HOME RENTACAR");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setResizable(false);
 
         jDesktopPane.setForeground(new java.awt.Color(255, 255, 255));
         jDesktopPane.setToolTipText("");

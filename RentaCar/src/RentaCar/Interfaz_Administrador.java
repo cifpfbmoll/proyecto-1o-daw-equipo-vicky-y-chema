@@ -126,6 +126,8 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel Administrativo");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setPreferredSize(new java.awt.Dimension(1050, 590));
+        setResizable(false);
 
         jDesktopPane.setBackground(new java.awt.Color(204, 204, 255));
         jDesktopPane.setForeground(new java.awt.Color(0, 0, 0));
