@@ -10,8 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -187,7 +185,7 @@ public class Usuario {
      * @param pw contraseña del cliente
      * @param resultado etiqueta para informar si se ha realizado con éxito la
      * creación del usuario
-     * @throws SQLException
+     * @throws SQLException TODO ELEVAR EXCEPTION!!-------------------------VICKY
      */
     public void insertRegistro(JLabel resultado) {
         PreparedStatement pst = null;
@@ -238,22 +236,29 @@ public class Usuario {
                 resultado.setForeground(Color.RED);
                 resultado.setText("Se ha producido en un error inesperado.");
             }
+        } catch (Exception ex){
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                resultado.setForeground(Color.RED);
+                resultado.setText(ex.getMessage());
+            }
         } finally {
             if (con != null) {
                 try {
                     con.close();
                     con.setAutoCommit(true);
                 } catch (SQLException ex) {
-                    System.out.println(ex.getSQLState());
-                    System.out.println(ex.getMessage());
+                    resultado.setForeground(Color.RED);
+                    resultado.setText(ex.getSQLState() + ex.getMessage());
                 }
             }
             if (pst != null) {
                 try {
                     pst.close();
                 } catch (SQLException ex) {
-                    System.out.println(ex.getSQLState());
-                    System.out.println(ex.getMessage());
+                    resultado.setForeground(Color.RED);
+                    resultado.setText(ex.getSQLState() + ex.getMessage());
                 }
             }
         }

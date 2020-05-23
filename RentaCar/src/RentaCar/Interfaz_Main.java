@@ -66,7 +66,6 @@ public class Interfaz_Main extends javax.swing.JFrame {
         setTitle("HOME RENTACAR");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
-        jDesktopPane1.setBackground(new java.awt.Color(153, 153, 255));
         jDesktopPane1.setForeground(new java.awt.Color(255, 255, 255));
         jDesktopPane1.setToolTipText("");
 

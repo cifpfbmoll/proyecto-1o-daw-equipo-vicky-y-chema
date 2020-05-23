@@ -29,13 +29,7 @@ public interface Consultas_BBDD {
         return DriverManager.getConnection (url, "Admin", "Admin123");
     }
     
-    /**
-     * query para recuperar todos los vehiculos 
-     * @return devuelve la query para recuperar los vehiculos
-     */
-    public static String selectVehiculos(){
-        return "select * from vehiculos";
-    }
+    //---------------QUERIES CLIENTES/USUARIOS---------------------------
     
     /**
      * Query para insertar nuevos clientes a la BBDD
@@ -71,4 +65,70 @@ public interface Consultas_BBDD {
         return "SELECT rolid from usuarios where usuario = '" + user + "'";
     }
     
+    //---------------------QUERIES VEHICULOS--------------------------------
+    
+    /**
+     * query para recuperar todos los vehiculos 
+     * @return devuelve la query para recuperar los vehiculos
+     */
+    public static String selectVehiculos(){
+        return "select * from vehiculos";
+    }
+    
+    /**
+     * query para recuperar las marcas de los vehiculos existentes
+     * @return devuelve la query
+     */
+    public static String listarMarcas(){
+        return "select distinct marca from vehiculos";
+    }
+    
+    /**
+     * query para recuperar las marcas de las clases existentes
+     * @return devuelve la query
+     */
+    public static String listarClases(){
+        return "select distinct nombre from clases_vehiculos";
+    }
+    
+    public static String reuperarPKClase(){
+        return "select cod from clases_vehiculos where nombre = ?";
+    }
+    /**
+     * Query para insertar en la tabla vehiculos
+     * @param matricula
+     * @param marca
+     * @param modelo
+     * @param clase
+     * @param precioDia
+     * @return devuelve la query
+     */
+    public static String insertarVehiculo(String matricula, String marca, String modelo, char clase, Double precioDia){
+        return "insert into vehiculos values ('" + matricula + "','" + marca + "','" + 
+                modelo + "','" + clase + "'," + precioDia + ")";
+    }
+    
+    /**
+     * query para insertar especificaciones de un coche
+     * @return devuelve la query
+     */
+    public static String insertarCoche(){
+        return "insert into especificaciones_coches values (?,?,?)";
+    }
+    
+    /**
+     * query para insertar especificaciones de una caravana
+     * @return devuelve la query
+     */
+    public static String insertarCaravana(){
+        return "insert into especificaciones_caravanas values (?,?,?)";
+    }
+    
+    /**
+     * query para insertar especificaciones de una caravana
+     * @return devuelve la query
+     */
+    public static String insertarMoto(){
+        return "insert into especificaciones_motos values (?,?)";
+    }
 }
