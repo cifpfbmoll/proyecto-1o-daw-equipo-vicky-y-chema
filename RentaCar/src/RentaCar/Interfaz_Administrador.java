@@ -67,6 +67,9 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jButton_realizarReserva = new javax.swing.JButton();
         jButton_listarReservas = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton_retirarVehiculo = new javax.swing.JButton();
+        jButton_modificarPrecio = new javax.swing.JButton();
+        jButton_listarReservas1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -213,6 +216,36 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         });
 
+        jButton_retirarVehiculo.setBackground(new java.awt.Color(55, 59, 62));
+        jButton_retirarVehiculo.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
+        jButton_retirarVehiculo.setForeground(new java.awt.Color(254, 255, 249));
+        jButton_retirarVehiculo.setText("RETIRAR VEHÍCULO (SOON)");
+        jButton_retirarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_retirarVehiculoActionPerformed(evt);
+            }
+        });
+
+        jButton_modificarPrecio.setBackground(new java.awt.Color(55, 59, 62));
+        jButton_modificarPrecio.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
+        jButton_modificarPrecio.setForeground(new java.awt.Color(254, 255, 249));
+        jButton_modificarPrecio.setText("MODIFICAR PRECIO (SOON)");
+        jButton_modificarPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_modificarPrecioActionPerformed(evt);
+            }
+        });
+
+        jButton_listarReservas1.setBackground(new java.awt.Color(55, 59, 62));
+        jButton_listarReservas1.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
+        jButton_listarReservas1.setForeground(new java.awt.Color(254, 255, 249));
+        jButton_listarReservas1.setText("CANCELAR RESERVAS (SOON)");
+        jButton_listarReservas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_listarReservas1ActionPerformed(evt);
+            }
+        });
+
         jDesktopPane.setLayer(jLabel_Bienvenida, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jButton_registrarClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jButton_listarClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -221,29 +254,38 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jDesktopPane.setLayer(jButton_realizarReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jButton_listarReservas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane.setLayer(jButton_retirarVehiculo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane.setLayer(jButton_modificarPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane.setLayer(jButton_listarReservas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
         jDesktopPane.setLayout(jDesktopPaneLayout);
         jDesktopPaneLayout.setHorizontalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPaneLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton_registrarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton_listarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_listarReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_realizarReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton_registrarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_listarVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jDesktopPaneLayout.createSequentialGroup()
                 .addGap(235, 235, 235)
                 .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_listarReservas1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                        .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton_registrarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_listarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton_listarReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_realizarReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(83, 83, 83)
+                        .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton_registrarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_listarVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_retirarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_modificarPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,18 +295,24 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Bienvenida))
                 .addGap(24, 24, 24)
-                .addComponent(jButton_registrarClientes)
+                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_registrarClientes)
+                    .addComponent(jButton_registrarVehiculo))
                 .addGap(30, 30, 30)
-                .addComponent(jButton_listarClientes)
+                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_listarClientes)
+                    .addComponent(jButton_listarVehiculos))
                 .addGap(30, 30, 30)
-                .addComponent(jButton_realizarReserva)
+                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_realizarReserva)
+                    .addComponent(jButton_retirarVehiculo))
                 .addGap(30, 30, 30)
-                .addComponent(jButton_listarReservas)
+                .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_listarReservas)
+                    .addComponent(jButton_modificarPrecio))
                 .addGap(30, 30, 30)
-                .addComponent(jButton_registrarVehiculo)
-                .addGap(30, 30, 30)
-                .addComponent(jButton_listarVehiculos)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addComponent(jButton_listarReservas1)
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -334,14 +382,29 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton_retirarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_retirarVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_retirarVehiculoActionPerformed
+
+    private void jButton_modificarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_modificarPrecioActionPerformed
+
+    private void jButton_listarReservas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_listarReservas1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_listarClientes;
     private javax.swing.JButton jButton_listarReservas;
+    private javax.swing.JButton jButton_listarReservas1;
     private javax.swing.JButton jButton_listarVehiculos;
+    private javax.swing.JButton jButton_modificarPrecio;
     private javax.swing.JButton jButton_realizarReserva;
     private javax.swing.JButton jButton_registrarClientes;
     private javax.swing.JButton jButton_registrarVehiculo;
+    private javax.swing.JButton jButton_retirarVehiculo;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
