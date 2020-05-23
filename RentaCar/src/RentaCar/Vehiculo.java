@@ -5,54 +5,64 @@
  */
 package RentaCar;
 
-import static RentaCar.Consultas_BBDD.obtenerConexion;
-import static RentaCar.Consultas_BBDD.selectVehiculos;
+import static RentaCar.Consultas_BBDD.*;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 
 /**
- *
+ * Clase abstracta Vehiculo
+ * 
+ * @version 2.0
  * @author Chema
  */
-public class Vehiculo {
+public abstract class Vehiculo implements Consultas_BBDD {
     
-    // Atributos
+    /*Atributos precioDia es Double para poder checkear si está a nulo*/
     private String matricula;
     private String marca;
     private String modelo;
-    private double precioDia;
+    private Double precioDia;
     private char clase;
-    private int numeroPuertas;
-    private boolean disponible;
     
-    // Constructor vacío
+    /**
+     * Constructor vacío
+     */ 
     public Vehiculo(){
         
     }
     
-    // Constructor
-    public Vehiculo(String matricula, String marca, String modelo, double precioDia, char clase, int numeroPuertas, boolean disponible) {
+    /**
+     * Constructor con parametros
+     * @param matricula
+     * @param marca
+     * @param modelo
+     * @param precioDia coste por dia de alquiler
+     * @param clase categoria del vehiculo
+     */
+    public Vehiculo(String matricula, String marca, String modelo, double precioDia, char clase) {
         this.setMatricula(matricula);
         this.setMarca(marca);
         this.setModelo(modelo);
         this.setPrecioDia(precioDia);
         this.setClase(clase);
-        this.setNumeroPuertas(numeroPuertas);
-        this.setDisponible(disponible);
     }
     
-    // Constructor copia
+    /**
+     * Constructor copia
+     * @param v1 Vehiculo recibido
+     */
     public Vehiculo(Vehiculo v1) {
         this.setMatricula(v1.getMatricula());
         this.setMarca(v1.getMarca());
         this.setModelo(v1.getModelo());
         this.setPrecioDia(v1.getPrecioDia());
         this.setClase(v1.getClase());
-        this.setNumeroPuertas(v1.getNumeroPuertas());
-        this.setDisponible(v1.isDisponible());
     }
 
     public String getMatricula() {
@@ -79,11 +89,11 @@ public class Vehiculo {
         this.modelo = modelo;
     }
 
-    public double getPrecioDia() {
+    public Double getPrecioDia() {
         return precioDia;
     }
 
-    public void setPrecioDia(double precioDia) {
+    public void setPrecioDia(Double precioDia) {
         this.precioDia = precioDia;
     }
 
@@ -93,22 +103,6 @@ public class Vehiculo {
 
     public void setClase(char clase) {
         this.clase = clase;
-    }
-
-    public int getNumeroPuertas() {
-        return numeroPuertas;
-    }
-
-    public void setNumeroPuertas(int numeroPuertas) {
-        this.numeroPuertas = numeroPuertas;
-    }
-
-    public boolean isDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
     }
     
     /**
@@ -133,9 +127,88 @@ public class Vehiculo {
                 ventana.getTotalVehiculos().setText("No se han encontrado vehiculos");
                 ventana.getTotalVehiculos().setForeground(Color.RED);
             }
-            
         } finally{
             if (con != null) con.close ();
         }
-    }   
+    }
+    
+    public static void extraerMarcas(JComboBox marcas) throws SQLException{
+        Connection con = obtenerConexion();        
+        try (PreparedStatement ps = con.prepareStatement(listarMarcas()); ResultSet rs = ps.executeQuery()){
+            while (rs.next ()) {
+                marcas.addItem(rs.getString(1));
+            }
+        }finally{
+            if (con != null) con.close ();
+        }
+    }
+    
+    public static void extraerClases(JComboBox clases) throws SQLException{
+        Connection con = obtenerConexion();        
+        try (PreparedStatement ps = con.prepareStatement(listarClases()); ResultSet rs = ps.executeQuery()){
+            while (rs.next ()) {
+                clases.addItem(rs.getString(1));
+            }
+        }finally{
+            if (con != null) con.close ();
+        }
+    }
+    
+    /**
+     * Método para comprobar si todos los campos de alta de un usuario están
+     * completados
+     *
+     * @return devuelve un booleano con el resultado
+     */
+    public boolean revisarDatosVehiculo() {
+        boolean camposCompletos = true;
+        if (this.getMatricula().isEmpty() || this.getMatricula() == null || this.getMarca().isEmpty()
+                || this.getMarca() == null || this.getMarca() == " " || this.getModelo().isEmpty()
+                || this.getModelo() == null || this.getClase() == 0 || this.getPrecioDia() == 0) {
+
+            camposCompletos = false;
+        }
+        
+        return camposCompletos;
+    }
+    
+    /**
+     * Método para recuperar la PK de la clase seleccionada
+     */
+    public abstract void registrarVehiculo(JLabel resultado) throws SQLException;
+    
+    public static char obtenerClasePK(String nombre) throws SQLException{
+        char cod = 0;
+        String query = reuperarPKClase();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = obtenerConexion();
+            pst = con.prepareStatement(query);
+            pst.setString(1, nombre);
+            rs = pst.executeQuery();
+            while (rs.next ()) {
+                 cod = rs.getString(1).charAt(0);
+            }
+        }finally{
+            con.close();
+            pst.close();
+            rs.close();
+        }
+        return cod;
+    }
+    
+    /**
+     * Método para saber si el vehiculo está disponible
+     * @param disponible valor true/false disponibilidad
+     * @return valor disponibilidad
+     */
+    public static boolean estaDisponible(JCheckBox disponible){
+        if (!disponible.isSelected()){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
