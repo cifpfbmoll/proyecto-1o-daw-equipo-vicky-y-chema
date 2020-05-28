@@ -392,7 +392,8 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + dato + " eliminado.","VEHICULO ELIMINADO", JOptionPane.DEFAULT_OPTION);
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "La matrícula indicada no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Es posible que el vehiculo ya esté dado de baja o"
+                        + "que la matrícula indicada no exista","ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
