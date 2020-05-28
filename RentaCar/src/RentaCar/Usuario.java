@@ -345,32 +345,31 @@ public class Usuario implements Consultas_BBDD {
         return existe;
     }
     
+    /**
+     * Método para listar los datos de un cliente en función del nif
+     * @param nif nif del cliente
+     * @throws SQLException 
+     */
     public static void mostrarCliente(String nif) throws SQLException{
         PreparedStatement pst = null;
         ResultSet rs = null;
-        ResulsetModeloTabla modelo = null;
+        ModeloTabla modelo = null;
         JTable tabla = new JTable(modelo);
         JFrame ventana = new JFrame();
         try (Connection con = obtenerConexion()){            
-            ventana.setTitle("LISTADO DE CLIENTES");
+            ventana.setTitle("DATOS DE CLIENTE");
             ventana.setBounds(400, 300, 600, 200);
             pst = con.prepareStatement(buscarCliente(),ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             pst.setString(1,nif);
             rs = pst.executeQuery();
-            modelo = new ResulsetModeloTabla(rs);
-            tabla = new JTable(modelo);
-            ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
-            ventana.setVisible(true);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-        }finally{
-            pst.close();
-            rs.close();
         }
-        
+        modelo = new ModeloTabla(rs);
+        tabla = new JTable(modelo);
+        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        //TODO no puedo cerrar los recursos rs y pst porqué sino no me pintan los datos en el frame
     }
 }

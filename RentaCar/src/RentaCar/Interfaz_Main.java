@@ -7,6 +7,7 @@ package RentaCar;
 
 import static RentaCar.Usuario.comprobarRol;
 import static RentaCar.Usuario.comprobarUsuario;
+import static RentaCar.Vehiculo.listarVehiculos;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -18,7 +19,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
-import static RentaCar.Interfaz_ListarVehiculos.listarVehiculos;
 import javax.swing.ImageIcon;
 
 /**
@@ -301,11 +301,8 @@ public class Interfaz_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_RegistrarseActionPerformed
 
     private void jButton_ConsultarVehActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConsultarVehActionPerformed
-        Interfaz_ListarVehiculos lisVehi = new Interfaz_ListarVehiculos();
-        centrarFrame(jDesktopPane, lisVehi);
-        jDesktopPane.add(lisVehi);
-        lisVehi.setVisible(rootPaneCheckingEnabled);
-        listarVehiculos(lisVehi);
+
+        listarVehiculos();
     }//GEN-LAST:event_jButton_ConsultarVehActionPerformed
 
     private void jPasswordField_ContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_ContraseñaActionPerformed
@@ -325,7 +322,6 @@ public class Interfaz_Main extends javax.swing.JFrame {
             if (encontrado) {
                 rol = comprobarRol(jTextField_Usuario.getText());
                 if (rol == 1) {
-                    //TODO JFrame MENU DEL CLIENTE
                     Interfaz_Cliente cliente = new Interfaz_Cliente();
                     cliente.setVisible(rootPaneCheckingEnabled);
                     this.dispose();

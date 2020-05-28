@@ -32,9 +32,8 @@ public class Interfaz_ListarClientes extends JFrame {
     private ResultSet rs;
     private Connection con;
     private PreparedStatement pst;
-    private ResulsetModeloTabla modelo;
+    private ModeloTabla modelo;
     private JButton buscarCliente;
-    private JTable tabla;
 
     public Interfaz_ListarClientes() {
         JPanel buscar = new JPanel();
@@ -46,9 +45,9 @@ public class Interfaz_ListarClientes extends JFrame {
             pst = con.prepareStatement(listarClientes(), ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             rs = pst.executeQuery();
-            modelo = new ResulsetModeloTabla(rs);
-            tabla = new JTable(modelo);
-            this.add(new JScrollPane(tabla), BorderLayout.CENTER);
+            modelo = new ModeloTabla(rs);
+            JTable tabla = new JTable(modelo);
+            this.add(new JScrollPane(tabla),BorderLayout.CENTER);
             validate();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

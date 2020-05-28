@@ -386,7 +386,6 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField_ModeloActionPerformed
 
     private void jComboBox_ClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_ClaseActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_ClaseActionPerformed
 
     private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
