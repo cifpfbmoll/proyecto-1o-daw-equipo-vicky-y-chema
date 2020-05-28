@@ -11,7 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import static RentaCar.Interfaz_ListarVehiculos.listarVehiculos;
+import static RentaCar.Vehiculo.bajaVehiculo;
+import static RentaCar.Vehiculo.comprobarVehiculo;
+import static RentaCar.Vehiculo.modificarPrecio;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -129,7 +134,6 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel Administrativo");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        setPreferredSize(new java.awt.Dimension(1050, 590));
         setResizable(false);
 
         jDesktopPane.setBackground(new java.awt.Color(204, 204, 255));
@@ -156,7 +160,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jButton_listarClientes.setBackground(new java.awt.Color(55, 59, 62));
         jButton_listarClientes.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jButton_listarClientes.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_listarClientes.setText("LISTAR CLIENTES (SOON)");
+        jButton_listarClientes.setText("LISTAR CLIENTES");
         jButton_listarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_listarClientesActionPerformed(evt);
@@ -219,7 +223,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jButton_retirarVehiculo.setBackground(new java.awt.Color(55, 59, 62));
         jButton_retirarVehiculo.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jButton_retirarVehiculo.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_retirarVehiculo.setText("RETIRAR VEHÍCULO (SOON)");
+        jButton_retirarVehiculo.setText("RETIRAR VEHÍCULO");
         jButton_retirarVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_retirarVehiculoActionPerformed(evt);
@@ -229,7 +233,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jButton_modificarPrecio.setBackground(new java.awt.Color(55, 59, 62));
         jButton_modificarPrecio.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jButton_modificarPrecio.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_modificarPrecio.setText("MODIFICAR PRECIO (SOON)");
+        jButton_modificarPrecio.setText("MODIFICAR PRECIO");
         jButton_modificarPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_modificarPrecioActionPerformed(evt);
@@ -265,7 +269,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             .addGroup(jDesktopPaneLayout.createSequentialGroup()
                 .addGap(235, 235, 235)
                 .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jDesktopPaneLayout.createSequentialGroup()
@@ -312,7 +316,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                     .addComponent(jButton_modificarPrecio))
                 .addGap(30, 30, 30)
                 .addComponent(jButton_listarReservas1)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -331,12 +335,9 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_listarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarClientesActionPerformed
-        /* TODO LISTAR CLIENTES
-        Interfaz_ListarClientes listarCli = new Interfaz_ListarClientes();
-        centrarFrame(jDesktopPane, listarCli);
-        jDesktopPane.add(listarCli);
+        Interfaz_ListarClientesv2 listarCli = new Interfaz_ListarClientesv2();
         listarCli.setVisible(rootPaneCheckingEnabled);
-         */
+        listarCli.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton_listarClientesActionPerformed
 
     private void jButton_registrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registrarClientesActionPerformed
@@ -354,14 +355,18 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_registrarVehiculoActionPerformed
 
     private void jButton_listarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarVehiculosActionPerformed
+        mostrarVehiculos();
+    }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
+
+    //TODO, en los resultados no indicamos si es coche, moto o caravana
+    public Interfaz_ListarVehiculos mostrarVehiculos(){
         Interfaz_ListarVehiculos lisVehi = new Interfaz_ListarVehiculos();
-        centrarFrame(jDesktopPane, lisVehi);
         jDesktopPane.add(lisVehi);
         lisVehi.setVisible(rootPaneCheckingEnabled);
         listarVehiculos(lisVehi);
-
-    }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
-
+        return lisVehi;
+    }
+    
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
         /**
          * TODO pendiente de listar reservas
@@ -382,14 +387,50 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //TODO controlar si se deja input en blanco
     private void jButton_retirarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_retirarVehiculoActionPerformed
-        // TODO add your handling code here:
+        int reply = 0;
+        Interfaz_ListarVehiculos lista = mostrarVehiculos();
+        String dato = JOptionPane.showInputDialog(null, "Introduce la matrícula", "BAJA VEHICULO", JOptionPane.QUESTION_MESSAGE);
+        // Solicita confirmación
+        try {
+            if (comprobarVehiculo(dato)){
+                reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
+                if (reply == JOptionPane.YES_OPTION) {
+                    bajaVehiculo(dato);
+                    JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + dato + " eliminado.","VEHICULO ELIMINADO", JOptionPane.DEFAULT_OPTION);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "La matrícula indicada no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            lista.setClosed(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_retirarVehiculoActionPerformed
 
     private void jButton_modificarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarPrecioActionPerformed
-        // TODO add your handling code here:
+        int reply = 0;
+        Interfaz_ListarVehiculos lista = mostrarVehiculos();
+        String matricula = JOptionPane.showInputDialog(null, "Introduce la matrícula", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
+        try {
+            if (comprobarVehiculo(matricula)){
+                Double precio = Double.parseDouble(JOptionPane.showInputDialog(null, "Introduce el nuevo precio", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE));
+                reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
+                if (reply == JOptionPane.YES_OPTION) {
+                    modificarPrecio(precio,matricula);
+                    JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + matricula + " actualizado.","VEHICULO ACTUALIZADO", JOptionPane.DEFAULT_OPTION);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "La matrícula indicada no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            lista.setClosed(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_modificarPrecioActionPerformed
 
+    
     private void jButton_listarReservas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservas1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_listarReservas1ActionPerformed

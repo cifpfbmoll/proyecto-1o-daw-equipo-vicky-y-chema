@@ -84,9 +84,6 @@
     <Property name="bounds" type="java.awt.Rectangle" editor="org.netbeans.beaninfo.editors.RectangleEditor">
       <Rectangle value="[0, 0, 0, 0]"/>
     </Property>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1050, 590]"/>
-    </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -146,7 +143,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
                   <Component id="jLabel_Bienvenida" min="-2" pref="594" max="-2" attributes="0"/>
-                  <EmptySpace pref="162" max="32767" attributes="0"/>
+                  <EmptySpace pref="178" max="32767" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -206,7 +203,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jButton_listarReservas1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="183" max="32767" attributes="0"/>
+                  <EmptySpace pref="220" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -254,7 +251,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f9" green="ff" red="fe" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="LISTAR CLIENTES (SOON)"/>
+            <Property name="text" type="java.lang.String" value="LISTAR CLIENTES"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_listarClientesActionPerformed"/>
@@ -359,7 +356,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f9" green="ff" red="fe" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="RETIRAR VEH&#xcd;CULO (SOON)"/>
+            <Property name="text" type="java.lang.String" value="RETIRAR VEH&#xcd;CULO"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_retirarVehiculoActionPerformed"/>
@@ -376,7 +373,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f9" green="ff" red="fe" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="MODIFICAR PRECIO (SOON)"/>
+            <Property name="text" type="java.lang.String" value="MODIFICAR PRECIO"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_modificarPrecioActionPerformed"/>

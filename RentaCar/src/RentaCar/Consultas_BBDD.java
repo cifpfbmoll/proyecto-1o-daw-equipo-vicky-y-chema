@@ -32,6 +32,13 @@ public interface Consultas_BBDD {
     //---------------QUERIES CLIENTES/USUARIOS---------------------------
     
     /**
+     * Query para buscar un cliente por NIF
+     * @return devuelve la query
+     */
+    public static String buscarCliente(){
+        return "select * from clientes where nif = ?";
+    }
+    /**
      * Query para insertar nuevos clientes a la BBDD
      * @return devuelve el insert
      */
@@ -63,6 +70,14 @@ public interface Consultas_BBDD {
      */
     public static String recuperarUsuario(String user){
         return "SELECT rolid from usuarios where usuario = '" + user + "'";
+    }
+    
+    /**
+     * query para recuperar todos los clientes existentes
+     * @return query de clientes
+     */
+    public static String listarClientes(){
+        return "select * from clientes";
     }
     
     //---------------------QUERIES VEHICULOS--------------------------------
@@ -130,5 +145,35 @@ public interface Consultas_BBDD {
      */
     public static String insertarMoto(){
         return "insert into especificaciones_motos values (?,?)";
+    }
+    
+    /**
+     * Método para dar de baja vehiculos
+     * @return devuelve la query
+     */
+    public static String eliminarVehiculo(){
+        return "update vehiculos set retirado = true where matricula=?";
+    }
+    
+    /**
+     * Método para obtener un solo vehiculo por num de matricula
+     * @return devuelve la query
+     */
+    public static String recuperarVehiculo(){
+        return "select * from vehiculos where matricula=? and retirado=false";
+    }
+    
+    /**
+     * Método para modificar el precio de un vehiculo
+     * @return devuelve la query
+     */
+    public static String modificarPrecioSQL(){
+        return "update vehiculos set preciodia = ? where matricula = ?";
+    }
+    
+    //---------------------QUERIES RESERVAS--------------------------------
+    
+    public static String cancelarReserva(){
+        return "";
     }
 }

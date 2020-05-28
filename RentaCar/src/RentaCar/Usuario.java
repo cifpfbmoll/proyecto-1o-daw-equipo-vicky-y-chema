@@ -5,19 +5,26 @@
 package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  * @author victoriapenas & josemariahernandez
  * @version 2.0
  * @since 2020-25-05
  */
-public class Usuario {
+public class Usuario implements Consultas_BBDD {
 
     // Atributos
     private String clienteNIF;
@@ -314,5 +321,56 @@ public class Usuario {
             rs.close();
         }
         return encontrado;
+    }
+    
+    public static boolean comprobarCliente(String nif) throws SQLException{
+        boolean existe = false;
+        String query = buscarCliente();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = obtenerConexion();
+            pst = con.prepareStatement(query);
+            pst.setString(1,nif);
+            rs = pst.executeQuery();
+            if (rs.next ()) {
+                existe = true;
+            }
+        }finally{
+            rs.close();
+            pst.close();
+            con.close();
+        }
+        return existe;
+    }
+    
+    public static void mostrarCliente(String nif) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ResulsetModeloTabla modelo = null;
+        JTable tabla = new JTable(modelo);
+        JFrame ventana = new JFrame();
+        try (Connection con = obtenerConexion()){            
+            ventana.setTitle("LISTADO DE CLIENTES");
+            ventana.setBounds(400, 300, 600, 200);
+            pst = con.prepareStatement(buscarCliente(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            pst.setString(1,nif);
+            rs = pst.executeQuery();
+            modelo = new ResulsetModeloTabla(rs);
+            tabla = new JTable(modelo);
+            ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+            ventana.setVisible(true);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }finally{
+            pst.close();
+            rs.close();
+        }
+        
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        //TODO no puedo cerrar los recursos rs y pst porqué sino no me pintan los datos en el frame
     }
 }

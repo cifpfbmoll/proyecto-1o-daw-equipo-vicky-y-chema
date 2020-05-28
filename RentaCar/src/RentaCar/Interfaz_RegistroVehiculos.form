@@ -73,18 +73,11 @@
         <Component class="javax.swing.JComboBox" name="jComboBox_Selector">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-<<<<<<< HEAD:RentaCar/src/RentaCar/Interfaz_RegistroVehiculos.form
-              <StringArray count="3">
-                <StringItem index="0" value="Coche"/>
-                <StringItem index="1" value="Moto"/>
-                <StringItem index="2" value="Caravana"/>
-=======
               <StringArray count="4">
                 <StringItem index="0" value=" "/>
                 <StringItem index="1" value="COCHE"/>
                 <StringItem index="2" value="MOTO"/>
                 <StringItem index="3" value="CARAVANA"/>
->>>>>>> Rama_InterfazVehiculosBBDD:RentaCar/src/RentaCar/Interfaz_Vehiculos.form
               </StringArray>
             </Property>
           </Properties>

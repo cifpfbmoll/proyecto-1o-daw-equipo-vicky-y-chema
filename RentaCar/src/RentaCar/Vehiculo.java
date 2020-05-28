@@ -115,11 +115,13 @@ public abstract class Vehiculo implements Consultas_BBDD {
         Connection con = obtenerConexion();        
         try (PreparedStatement ps = con.prepareStatement(selectVehiculos()); ResultSet rs = ps.executeQuery()){
             while (rs.next ()) {
-                ventana.getVehiculosEncontrados().append("MATRICULA: " + rs.getString(1) + " - MARCA: " + rs.getString(2) + 
-                " - MODELO: " + rs.getString(3) + " - CATEGORIA: " + rs.getString(4) + " - PRECIO: " + rs.getInt(5)
-                + " €/DIA.");
-                ventana.getVehiculosEncontrados().append("\n");
-                count++;
+                if (!rs.getBoolean("retirado")){
+                    ventana.getVehiculosEncontrados().append("MATRICULA: " + rs.getString(1) + " - MARCA: " + rs.getString(2) + 
+                    " - MODELO: " + rs.getString(3) + " - CATEGORIA: " + rs.getString(4) + " - PRECIO: " + rs.getInt(5)
+                    + " €/DIA.");
+                    ventana.getVehiculosEncontrados().append("\n");
+                    count++;
+                }
             }
             if (count > 0){
                 ventana.getTotalVehiculos().setText("Se han econtrado " + count + " vehiculos.");
@@ -189,7 +191,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
             pst.setString(1, nombre);
             rs = pst.executeQuery();
             while (rs.next ()) {
-                 cod = rs.getString(1).charAt(0);
+                cod = rs.getString(1).charAt(0);
             }
         }finally{
             con.close();
@@ -210,5 +212,69 @@ public abstract class Vehiculo implements Consultas_BBDD {
         }else{
             return true;
         }
+    }
+    
+    /**
+     * Método para modificar un vehiculo de la BBDD a retirado = true
+     * @param matricula matricula para filtrar el vehiculo en la BBDD
+     * @throws SQLException 
+     */
+    public static void bajaVehiculo(String matricula) throws SQLException{
+        String query = eliminarVehiculo();
+        PreparedStatement pst = null;
+        Connection con = null;
+        try {
+            con = obtenerConexion();
+            pst = con.prepareStatement(query);
+            pst.setString(1, matricula);
+            pst.executeUpdate();
+        }finally{
+            con.close();
+            pst.close();
+        }
+    }
+    
+    public static void modificarPrecio(Double precio, String matricula) throws SQLException{
+        String query = modificarPrecioSQL();
+        PreparedStatement pst = null;
+        Connection con = null;
+        try {
+            con = obtenerConexion();
+            pst = con.prepareStatement(query);
+            pst.setDouble(1, precio);
+            pst.setString(2, matricula);
+            pst.executeUpdate();
+        }finally{
+            con.close();
+            pst.close();
+        }
+    }
+    
+    /**
+     * Método para comprobar si un vehiculo existe y está operativo
+     * @param matricula matricula para localizar el vehiculo en la BBDD
+     * @return booleano con el resultado
+     * @throws SQLException 
+     */
+    public static boolean comprobarVehiculo(String matricula) throws SQLException{
+        boolean existe = false;
+        String query = recuperarVehiculo();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = obtenerConexion();
+            pst = con.prepareStatement(query);
+            pst.setString(1,matricula);
+            rs = pst.executeQuery();
+            if (rs.next ()) {
+                existe = true;
+            }
+        }finally{
+            rs.close();
+            pst.close();
+            con.close();
+        }
+        return existe;
     }
 }
