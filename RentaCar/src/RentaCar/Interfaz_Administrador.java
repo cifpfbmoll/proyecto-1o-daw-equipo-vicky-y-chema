@@ -10,9 +10,9 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import static RentaCar.Interfaz_ListarVehiculos.listarVehiculos;
 import static RentaCar.Vehiculo.bajaVehiculo;
 import static RentaCar.Vehiculo.comprobarVehiculo;
+import static RentaCar.Vehiculo.listarVehiculos;
 import static RentaCar.Vehiculo.modificarPrecio;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -355,17 +355,9 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_registrarVehiculoActionPerformed
 
     private void jButton_listarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarVehiculosActionPerformed
-        mostrarVehiculos();
+        listarVehiculos();
     }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
 
-    //TODO, en los resultados no indicamos si es coche, moto o caravana
-    public Interfaz_ListarVehiculos mostrarVehiculos(){
-        Interfaz_ListarVehiculos lisVehi = new Interfaz_ListarVehiculos();
-        jDesktopPane.add(lisVehi);
-        lisVehi.setVisible(rootPaneCheckingEnabled);
-        listarVehiculos(lisVehi);
-        return lisVehi;
-    }
     
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
         /**
@@ -387,10 +379,9 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    //TODO controlar si se deja input en blanco
     private void jButton_retirarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_retirarVehiculoActionPerformed
         int reply = 0;
-        Interfaz_ListarVehiculos lista = mostrarVehiculos();
+        listarVehiculos();
         String dato = JOptionPane.showInputDialog(null, "Introduce la matrícula", "BAJA VEHICULO", JOptionPane.QUESTION_MESSAGE);
         // Solicita confirmación
         try {
@@ -403,7 +394,6 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "La matrícula indicada no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
             }
-            lista.setClosed(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -411,7 +401,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
 
     private void jButton_modificarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarPrecioActionPerformed
         int reply = 0;
-        Interfaz_ListarVehiculos lista = mostrarVehiculos();
+        listarVehiculos();
         String matricula = JOptionPane.showInputDialog(null, "Introduce la matrícula", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
         try {
             if (comprobarVehiculo(matricula)){
@@ -424,7 +414,6 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "La matrícula indicada no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
             }
-            lista.setClosed(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }

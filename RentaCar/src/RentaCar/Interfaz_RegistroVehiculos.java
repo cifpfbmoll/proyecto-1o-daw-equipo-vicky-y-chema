@@ -202,12 +202,13 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
             jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_VehiculoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Matricula)
-                    .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel_Marca)
-                        .addComponent(jComboBox_Marca)))
+                        .addComponent(jComboBox_Marca))
+                    .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_Matricula)
+                        .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -407,13 +408,11 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox_wcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_wcActionPerformed
-        // TODO Lo que hará el check de wc        
     }//GEN-LAST:event_jCheckBox_wcActionPerformed
 
     private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
         limpiarCampos();
     }//GEN-LAST:event_jButton_LimpiarActionPerformed
-    //TODO podríamos unificar el campo potenciaMOTOR ??????????????????
     private void jComboBox_SelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_SelectorActionPerformed
         // Permite la visibilidad de sólo los campos elegidos por el selector
         String selector = (String) jComboBox_Selector.getSelectedItem();
@@ -447,7 +446,6 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField_MatriculaActionPerformed
 
     private void jComboBox_ClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_ClaseActionPerformed
-        // TODO Al desplegar el combobox deja un fondo gris
     }//GEN-LAST:event_jComboBox_ClaseActionPerformed
 
     private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed

@@ -23,7 +23,7 @@ public class Interfaz_ListarClientes extends javax.swing.JInternalFrame {
     private ResultSet rs;
     private Connection con;
     private PreparedStatement pst;
-    private ResulsetModeloTabla modelo;
+    private ModeloTabla modelo;
 
     /**
      * Creates new form Interfaz_ListarClientes
@@ -38,7 +38,7 @@ public class Interfaz_ListarClientes extends javax.swing.JInternalFrame {
             pst = con.prepareStatement(listarClientes(),ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             rs = pst.executeQuery();
-            modelo = new ResulsetModeloTabla(rs);
+            modelo = new ModeloTabla(rs);
             JTable tabla = new JTable(modelo);
             this.add(new JScrollPane(tabla),BorderLayout.CENTER);
             validate();

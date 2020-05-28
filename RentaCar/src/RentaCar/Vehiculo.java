@@ -6,6 +6,7 @@
 package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  * Clase abstracta Vehiculo
@@ -107,31 +112,28 @@ public abstract class Vehiculo implements Consultas_BBDD {
     
     /**
      * Este metodo se encarga de listar los vehiculos existentes en el sistema
-     * @param ventana ventana es el internalFrame donde se listarán los vehiculos
-     * @throws SQLException 
-     */
-    public static void listarVehiculos(Interfaz_ListarVehiculos ventana) throws SQLException{
-        int count = 0;
-        Connection con = obtenerConexion();        
-        try (PreparedStatement ps = con.prepareStatement(selectVehiculos()); ResultSet rs = ps.executeQuery()){
-            while (rs.next ()) {
-                if (!rs.getBoolean("retirado")){
-                    ventana.getVehiculosEncontrados().append("MATRICULA: " + rs.getString(1) + " - MARCA: " + rs.getString(2) + 
-                    " - MODELO: " + rs.getString(3) + " - CATEGORIA: " + rs.getString(4) + " - PRECIO: " + rs.getInt(5)
-                    + " €/DIA.");
-                    ventana.getVehiculosEncontrados().append("\n");
-                    count++;
-                }
-            }
-            if (count > 0){
-                ventana.getTotalVehiculos().setText("Se han econtrado " + count + " vehiculos.");
-            }else{
-                ventana.getTotalVehiculos().setText("No se han encontrado vehiculos");
-                ventana.getTotalVehiculos().setForeground(Color.RED);
-            }
-        } finally{
-            if (con != null) con.close ();
+     */    
+    public static void listarVehiculos(){
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ModeloTabla modelo = null;
+        JTable tabla = new JTable(modelo);
+        JFrame ventana = new JFrame();
+        try (Connection con = obtenerConexion()){            
+            ventana.setTitle("LISTADO DE VEHICULOS");
+            ventana.setBounds(400, 300, 800, 300);
+            pst = con.prepareStatement(selectVehiculos(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        modelo = new ModeloTabla(rs);
+        tabla = new JTable(modelo);
+        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
     }
     
     public static void extraerMarcas(JComboBox marcas) throws SQLException{
@@ -234,6 +236,12 @@ public abstract class Vehiculo implements Consultas_BBDD {
         }
     }
     
+    /**
+     * Método para modificar el precio de un vehiculo
+     * @param precio precio es el nuevo precio del vehiculo seleccionado
+     * @param matricula matricula corresponde a la matricula del vehiculo que se tiene que actualizar
+     * @throws SQLException 
+     */
     public static void modificarPrecio(Double precio, String matricula) throws SQLException{
         String query = modificarPrecioSQL();
         PreparedStatement pst = null;

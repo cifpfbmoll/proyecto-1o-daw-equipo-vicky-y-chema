@@ -87,7 +87,10 @@ public interface Consultas_BBDD {
      * @return devuelve la query para recuperar los vehiculos
      */
     public static String selectVehiculos(){
-        return "select * from vehiculos";
+        return "SELECT *, CASE WHEN EXISTS (SELECT matricula FROM especificaciones_coches c WHERE c.matricula = v.matricula) THEN 'coche'" +
+                "WHEN EXISTS (SELECT matricula FROM especificaciones_caravanas c WHERE c.matricula = v.matricula) THEN 'caravana'" +
+                "WHEN EXISTS (SELECT matricula FROM especificaciones_motos c WHERE c.matricula = v.matricula) THEN 'moto'" +
+                "end as tipo FROM vehiculos v;";
     }
     
     /**
