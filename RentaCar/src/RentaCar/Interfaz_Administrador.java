@@ -335,7 +335,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_listarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarClientesActionPerformed
-        Interfaz_ListarClientesv2 listarCli = new Interfaz_ListarClientesv2();
+        Interfaz_ListarClientes listarCli = new Interfaz_ListarClientes();
         listarCli.setVisible(rootPaneCheckingEnabled);
         listarCli.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton_listarClientesActionPerformed

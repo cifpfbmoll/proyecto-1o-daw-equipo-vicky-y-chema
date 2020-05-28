@@ -6,12 +6,7 @@ package RentaCar;
 
 import static RentaCar.Vehiculo.*;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
-import javax.imageio.ImageIO;
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -25,7 +20,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
      */
     public Interfaz_RegistroVehiculos() {
         initComponents();
-        ocultarPaneles();
+        ocultarCampos();
         try {
             extraerClases(jComboBox_Clase);
         } catch (SQLException ex) {
@@ -43,24 +38,11 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel_Main = new javax.swing.JPanel(){
-            @Override
-            public void paintComponent(Graphics g){
-                Image imagen = null;
-                super.paintComponent(g);
-
-                try {
-                    imagen = ImageIO.read(new File("src/image/fondo-registroVehiculos.jpg"));
-                } catch (IOException ex) {
-                    System.out.println("La imagen no se encuentra");
-                }
-
-                g.drawImage(imagen, 0, 0, null);
-            }
-        };
+        jPanel = new javax.swing.JPanel();
+        jLabel_Bienvenida = new javax.swing.JLabel();
         jLabel_TipoVehículo = new javax.swing.JLabel();
         jComboBox_Selector = new javax.swing.JComboBox<>();
-        jPanel_Vehiculo = new javax.swing.JPanel();
+        jLabel_result = new javax.swing.JLabel();
         jLabel_Matricula = new javax.swing.JLabel();
         jTextField_Matricula = new javax.swing.JTextField();
         jLabel_Marca = new javax.swing.JLabel();
@@ -71,36 +53,34 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         jTextField_precioDia = new javax.swing.JTextField();
         jLabel_Clase = new javax.swing.JLabel();
         jComboBox_Clase = new javax.swing.JComboBox<>();
-        jPanel_Moto = new javax.swing.JPanel();
-        jTextField_Cilindrada = new javax.swing.JTextField();
-        jLabel_Cilindrada = new javax.swing.JLabel();
-        jPanel_Caravana = new javax.swing.JPanel();
-        jCheckBox_wc = new javax.swing.JCheckBox();
-        jPanel_Botonera = new javax.swing.JPanel();
-        jButton_Enviar = new javax.swing.JButton();
-        jButton_Limpiar = new javax.swing.JButton();
-        jLabel_result = new javax.swing.JLabel();
-        jPanel_Coche = new javax.swing.JPanel();
         jLabel_potenciaMotor = new javax.swing.JLabel();
         jTextField_potenciaMotor = new javax.swing.JTextField();
         jLabel_numPuertasCoche = new javax.swing.JLabel();
         jTextField_numPuertasCoche = new javax.swing.JTextField();
+        jLabel_Cilindrada = new javax.swing.JLabel();
+        jTextField_Cilindrada = new javax.swing.JTextField();
+        jCheckBox_wc = new javax.swing.JCheckBox();
+        jButton_Enviar = new javax.swing.JButton();
+        jButton_Limpiar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 204));
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("REGISTRO DE VEHICULOS");
         setToolTipText("");
 
-        jPanel_Main.setPreferredSize(new java.awt.Dimension(1050, 575));
-        jPanel_Main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel_Bienvenida.setFont(new java.awt.Font("Heiti TC", 1, 22)); // NOI18N
+        jLabel_Bienvenida.setForeground(new java.awt.Color(254, 255, 249));
+        jLabel_Bienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Bienvenida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/administrative_tools_64px.png"))); // NOI18N
+        jLabel_Bienvenida.setText("   ¡REGISTRA NUEVOS VEHÍCULOS!");
 
         jLabel_TipoVehículo.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
         jLabel_TipoVehículo.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_TipoVehículo.setText("Tipo de Vehículo*");
-        jPanel_Main.add(jLabel_TipoVehículo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 130, 24));
 
         jComboBox_Selector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "COCHE", "MOTO", "CARAVANA" }));
         jComboBox_Selector.addActionListener(new java.awt.event.ActionListener() {
@@ -108,10 +88,10 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                 jComboBox_SelectorActionPerformed(evt);
             }
         });
-        jPanel_Main.add(jComboBox_Selector, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 149, -1));
 
-        jPanel_Vehiculo.setBackground(new Color(0,0,0,0));
-        jPanel_Vehiculo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_result.setFont(new java.awt.Font("Heiti TC", 1, 12)); // NOI18N
+        jLabel_result.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_result.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel_Matricula.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
         jLabel_Matricula.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,6 +130,12 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         jLabel_precioDia.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_precioDia.setText("Precio/Día*");
 
+        jTextField_precioDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_precioDiaActionPerformed(evt);
+            }
+        });
+
         jLabel_Clase.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
         jLabel_Clase.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_Clase.setText("Clase*");
@@ -163,182 +149,6 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                 jComboBox_ClaseActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel_VehiculoLayout = new javax.swing.GroupLayout(jPanel_Vehiculo);
-        jPanel_Vehiculo.setLayout(jPanel_VehiculoLayout);
-        jPanel_VehiculoLayout.setHorizontalGroup(
-            jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_VehiculoLayout.createSequentialGroup()
-                .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel_VehiculoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_Modelo))
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField_Modelo, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                            .addComponent(jTextField_Matricula))
-                        .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_VehiculoLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel_Marca)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel_VehiculoLayout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel_Clase)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox_Clase, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel_VehiculoLayout.createSequentialGroup()
-                        .addContainerGap(153, Short.MAX_VALUE)
-                        .addComponent(jLabel_precioDia)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_precioDia, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(162, 162, 162)))
-                .addContainerGap())
-        );
-        jPanel_VehiculoLayout.setVerticalGroup(
-            jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_VehiculoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Matricula)
-                    .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel_Marca)
-                        .addComponent(jComboBox_Marca)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel_Clase)
-                        .addComponent(jComboBox_Clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel_Modelo)))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel_VehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_precioDia)
-                    .addComponent(jTextField_precioDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
-        );
-
-        jPanel_Main.add(jPanel_Vehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 480, 150));
-
-        jPanel_Moto.setBackground(new Color(0,0,0,0));
-        jPanel_Moto.setPreferredSize(new java.awt.Dimension(200, 240));
-
-        jLabel_Cilindrada.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
-        jLabel_Cilindrada.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_Cilindrada.setText("Cilindrada*");
-
-        javax.swing.GroupLayout jPanel_MotoLayout = new javax.swing.GroupLayout(jPanel_Moto);
-        jPanel_Moto.setLayout(jPanel_MotoLayout);
-        jPanel_MotoLayout.setHorizontalGroup(
-            jPanel_MotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_MotoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_Cilindrada)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_Cilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        jPanel_MotoLayout.setVerticalGroup(
-            jPanel_MotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_MotoLayout.createSequentialGroup()
-                .addGroup(jPanel_MotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Cilindrada)
-                    .addComponent(jTextField_Cilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 2, Short.MAX_VALUE))
-        );
-
-        jPanel_Main.add(jPanel_Moto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 190, 20));
-
-        jPanel_Caravana.setBackground(new Color(0,0,0,0));
-        jPanel_Caravana.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel_Caravana.setPreferredSize(new java.awt.Dimension(200, 240));
-
-        jCheckBox_wc.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
-        jCheckBox_wc.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox_wc.setText("Dispone de WC*");
-        jCheckBox_wc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_wcActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel_CaravanaLayout = new javax.swing.GroupLayout(jPanel_Caravana);
-        jPanel_Caravana.setLayout(jPanel_CaravanaLayout);
-        jPanel_CaravanaLayout.setHorizontalGroup(
-            jPanel_CaravanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CaravanaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox_wc)
-                .addContainerGap())
-        );
-        jPanel_CaravanaLayout.setVerticalGroup(
-            jPanel_CaravanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_CaravanaLayout.createSequentialGroup()
-                .addComponent(jCheckBox_wc)
-                .addGap(0, 7, Short.MAX_VALUE))
-        );
-
-        jPanel_Main.add(jPanel_Caravana, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 150, 30));
-
-        jPanel_Botonera.setBackground(new Color(0,0,0,0));
-        jPanel_Botonera.setForeground(new java.awt.Color(255, 255, 255));
-
-        jButton_Enviar.setFont(new java.awt.Font("Heiti TC", 1, 12)); // NOI18N
-        jButton_Enviar.setForeground(new java.awt.Color(0, 0, 0));
-        jButton_Enviar.setText("Enviar Formulario");
-        jButton_Enviar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_EnviarActionPerformed(evt);
-            }
-        });
-
-        jButton_Limpiar.setFont(new java.awt.Font("Heiti TC", 1, 12)); // NOI18N
-        jButton_Limpiar.setForeground(new java.awt.Color(0, 0, 0));
-        jButton_Limpiar.setText("Limpiar");
-        jButton_Limpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_LimpiarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel_BotoneraLayout = new javax.swing.GroupLayout(jPanel_Botonera);
-        jPanel_Botonera.setLayout(jPanel_BotoneraLayout);
-        jPanel_BotoneraLayout.setHorizontalGroup(
-            jPanel_BotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_BotoneraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton_Enviar, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel_BotoneraLayout.setVerticalGroup(
-            jPanel_BotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_BotoneraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_BotoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_BotoneraLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton_Limpiar))
-                    .addComponent(jButton_Enviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jPanel_Main.add(jPanel_Botonera, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 270, 40));
-
-        jLabel_result.setFont(new java.awt.Font("Heiti TC", 1, 12)); // NOI18N
-        jLabel_result.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_result.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel_Main.add(jLabel_result, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 520, 20));
-
-        jPanel_Coche.setBackground(new Color(0,0,0,0));
-        jPanel_Coche.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel_Coche.setPreferredSize(new java.awt.Dimension(200, 240));
 
         jLabel_potenciaMotor.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
         jLabel_potenciaMotor.setForeground(new java.awt.Color(255, 255, 255));
@@ -362,178 +172,311 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel_CocheLayout = new javax.swing.GroupLayout(jPanel_Coche);
-        jPanel_Coche.setLayout(jPanel_CocheLayout);
-        jPanel_CocheLayout.setHorizontalGroup(
-            jPanel_CocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_CocheLayout.createSequentialGroup()
-                .addGroup(jPanel_CocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_potenciaMotor)
-                    .addComponent(jLabel_numPuertasCoche))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_CocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_potenciaMotor)
-                    .addComponent(jTextField_numPuertasCoche, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
+        jLabel_Cilindrada.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
+        jLabel_Cilindrada.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Cilindrada.setText("Cilindrada*");
+
+        jCheckBox_wc.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
+        jCheckBox_wc.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox_wc.setText("Dispone de WC*");
+        jCheckBox_wc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox_wcActionPerformed(evt);
+            }
+        });
+
+        jButton_Enviar.setFont(new java.awt.Font("Heiti TC", 1, 12)); // NOI18N
+        jButton_Enviar.setForeground(new java.awt.Color(0, 0, 0));
+        jButton_Enviar.setText("Enviar Formulario");
+        jButton_Enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EnviarActionPerformed(evt);
+            }
+        });
+
+        jButton_Limpiar.setFont(new java.awt.Font("Heiti TC", 1, 12)); // NOI18N
+        jButton_Limpiar.setForeground(new java.awt.Color(0, 0, 0));
+        jButton_Limpiar.setText("Limpiar");
+        jButton_Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LimpiarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel_Modelo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel_numPuertasCoche)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField_numPuertasCoche, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel_potenciaMotor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField_potenciaMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel_Cilindrada)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField_Cilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel_Clase)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox_Clase, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel_Marca)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jComboBox_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel_precioDia)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField_precioDia, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jCheckBox_wc))
+                .addGap(174, 174, 174))
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_result, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addComponent(jButton_Enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel_TipoVehículo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox_Selector, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(261, 261, 261))))
+        );
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jLabel_Bienvenida)
+                .addGap(8, 8, 8)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox_Selector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_TipoVehículo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_Matricula)
+                        .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jComboBox_Marca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel_Marca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_Modelo))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_potenciaMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_potenciaMotor))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_numPuertasCoche)
+                            .addComponent(jTextField_numPuertasCoche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox_Clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_Clase))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_precioDia)
+                            .addComponent(jTextField_precioDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_Cilindrada)
+                            .addComponent(jTextField_Cilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBox_wc)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel_result, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_Limpiar)
+                    .addComponent(jButton_Enviar))
                 .addContainerGap())
         );
-        jPanel_CocheLayout.setVerticalGroup(
-            jPanel_CocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_CocheLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_CocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_potenciaMotor)
-                    .addComponent(jTextField_potenciaMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_CocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_numPuertasCoche)
-                    .addComponent(jTextField_numPuertasCoche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel_Main.add(jPanel_Coche, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox_wcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_wcActionPerformed
-        // TODO Lo que hará el check de wc        
-    }//GEN-LAST:event_jCheckBox_wcActionPerformed
+    /**
+     * Método para informar si se ha realizado correctamente el insert del
+     * vehiculo
+     *
+     * @param resultado resultado de la operacion
+     */
+    public void operacioRealizada(boolean resultado) {
+        if (resultado) {
+            jLabel_result.setForeground(Color.GREEN);
+            jLabel_result.setText("Vehiculo registrado con éxito.");
+            limpiarCampos();
+        } else {
+            jLabel_result.setForeground(Color.RED);
+        }
+    }
 
-    private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
-        limpiarCampos();
-    }//GEN-LAST:event_jButton_LimpiarActionPerformed
-    //TODO podríamos unificar el campo potenciaMOTOR ??????????????????
     private void jComboBox_SelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_SelectorActionPerformed
-        // Permite la visibilidad de sólo los campos elegidos por el selector
         String selector = (String) jComboBox_Selector.getSelectedItem();
-        if (selector.equals("")) {
-            ocultarPaneles();
+        if (selector.equals(" ")) {
+            ocultarCampos();
         } else if (selector.equalsIgnoreCase("Moto")) {
-            ocultarPaneles();
-            jPanel_Moto.setVisible(true);
+            ocultarCampos();
+            jLabel_Cilindrada.setVisible(true);
+            jTextField_Cilindrada.setVisible(true);
         } else if (selector.equalsIgnoreCase("Caravana")) {
-            ocultarPaneles();
-            jPanel_Caravana.setVisible(true);
-            jPanel_Coche.setVisible(true);
-            jTextField_numPuertasCoche.setVisible(false);
-            jLabel_numPuertasCoche.setVisible(false);
+            ocultarCampos();
+            jLabel_potenciaMotor.setVisible(true);
+            jTextField_potenciaMotor.setVisible(true);
+            jCheckBox_wc.setVisible(true);
         } else if (selector.equalsIgnoreCase("Coche")) {
-            ocultarPaneles();
-            jPanel_Coche.setVisible(true);
+            ocultarCampos();
+            jLabel_numPuertasCoche.setVisible(true);
+            jTextField_numPuertasCoche.setVisible(true);
+            jLabel_potenciaMotor.setVisible(true);
+            jTextField_potenciaMotor.setVisible(true);
         }
     }//GEN-LAST:event_jComboBox_SelectorActionPerformed
 
-    private void jTextField_ModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ModeloActionPerformed
+    private void jTextField_MatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_MatriculaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_ModeloActionPerformed
+    }//GEN-LAST:event_jTextField_MatriculaActionPerformed
 
     private void jComboBox_MarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_MarcaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_MarcaActionPerformed
 
-    private void jTextField_MatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_MatriculaActionPerformed
-        
-    }//GEN-LAST:event_jTextField_MatriculaActionPerformed
+    private void jTextField_ModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_ModeloActionPerformed
 
     private void jComboBox_ClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_ClaseActionPerformed
-        // TODO Al desplegar el combobox deja un fondo gris
+        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_ClaseActionPerformed
 
-    private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
-        String tipoVehiculo = (String) jComboBox_Selector.getSelectedItem();
-        if (tipoVehiculo.equals("COCHE")){
-            try {
-                Coche coche = new Coche();
-                coche.setMatricula(jTextField_Matricula.getText());
-                coche.setMarca((String) jComboBox_Marca.getSelectedItem());
-                coche.setModelo(jTextField_Modelo.getText());
-                coche.setClase(obtenerClasePK((String)jComboBox_Clase.getSelectedItem()));
-                coche.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
-                coche.setPotenciaMotor(Integer.parseInt(jTextField_potenciaMotor.getText()));
-                coche.setNumeroPuertas(Integer.parseInt(jTextField_numPuertasCoche.getText()));
-                
-                coche.registrarVehiculo(jLabel_result);
-                operacioRealizada(true);
-                
-            } catch (SQLException ex) {
-                operacioRealizada(false);
-                jLabel_result.setText(ex.getMessage());
-            }
-        }else if (tipoVehiculo.equals("MOTO")){
-            try {
-                Moto moto = new Moto();
-                moto.setMatricula(jTextField_Matricula.getText());
-                moto.setMarca((String) jComboBox_Marca.getSelectedItem());
-                moto.setModelo(jTextField_Modelo.getText());
-                moto.setClase(obtenerClasePK((String)jComboBox_Clase.getSelectedItem()));
-                moto.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
-                moto.setCilindrada(Integer.parseInt(jTextField_Cilindrada.getText()));
-                
-                moto.registrarVehiculo(jLabel_result);
-                operacioRealizada(true);
-                
-            } catch (SQLException ex) {
-                operacioRealizada(false);
-                jLabel_result.setText(ex.getMessage());
-            }
-        }else if (tipoVehiculo.equals("CARAVANA")){
-            try {
-                Caravana caravana = new Caravana();
-                caravana.setMatricula(jTextField_Matricula.getText());
-                caravana.setMarca((String) jComboBox_Marca.getSelectedItem());
-                caravana.setModelo(jTextField_Modelo.getText());
-                caravana.setClase(obtenerClasePK((String)jComboBox_Clase.getSelectedItem()));
-                caravana.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
-                caravana.setPotenciaMotor(Integer.parseInt(jTextField_potenciaMotor.getText()));
-                caravana.setWc(estaDisponible(jCheckBox_wc));
-                
-                caravana.registrarVehiculo(jLabel_result);
-                operacioRealizada(true);
+    private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jButton_LimpiarActionPerformed
 
-            } catch (SQLException ex) {
-                operacioRealizada(false);
-            }
+    private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
+        // TODO IMPORTANTE: No se contemplan campos sin rellenar o de datatypes diferentes
+        String tipoVehiculo = (String) jComboBox_Selector.getSelectedItem();
+        switch (tipoVehiculo) {
+            case "COCHE":
+                try {
+                    Coche coche = new Coche();
+                    coche.setMatricula(jTextField_Matricula.getText());
+                    coche.setMarca((String) jComboBox_Marca.getSelectedItem());
+                    coche.setModelo(jTextField_Modelo.getText());
+                    coche.setClase(obtenerClasePK((String) jComboBox_Clase.getSelectedItem()));
+                    coche.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
+                    coche.setPotenciaMotor(Integer.parseInt(jTextField_potenciaMotor.getText()));
+                    coche.setNumeroPuertas(Integer.parseInt(jTextField_numPuertasCoche.getText()));
+
+                    coche.registrarVehiculo(jLabel_result);
+                    operacioRealizada(true);
+
+                } catch (SQLException ex) {
+                    operacioRealizada(false);
+                    jLabel_result.setText(ex.getMessage());
+                }
+                break;
+            case "MOTO":
+                try {
+                    Moto moto = new Moto();
+                    moto.setMatricula(jTextField_Matricula.getText());
+                    moto.setMarca((String) jComboBox_Marca.getSelectedItem());
+                    moto.setModelo(jTextField_Modelo.getText());
+                    moto.setClase(obtenerClasePK((String) jComboBox_Clase.getSelectedItem()));
+                    moto.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
+                    moto.setCilindrada(Integer.parseInt(jTextField_Cilindrada.getText()));
+
+                    moto.registrarVehiculo(jLabel_result);
+                    operacioRealizada(true);
+
+                } catch (SQLException ex) {
+                    operacioRealizada(false);
+                    jLabel_result.setText(ex.getMessage());
+                }
+                break;
+            case "CARAVANA":
+                try {
+                    Caravana caravana = new Caravana();
+                    caravana.setMatricula(jTextField_Matricula.getText());
+                    caravana.setMarca((String) jComboBox_Marca.getSelectedItem());
+                    caravana.setModelo(jTextField_Modelo.getText());
+                    caravana.setClase(obtenerClasePK((String) jComboBox_Clase.getSelectedItem()));
+                    caravana.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
+                    caravana.setPotenciaMotor(Integer.parseInt(jTextField_potenciaMotor.getText()));
+                    caravana.setWc(estaDisponible(jCheckBox_wc));
+
+                    caravana.registrarVehiculo(jLabel_result);
+                    operacioRealizada(true);
+
+                } catch (SQLException ex) {
+                    operacioRealizada(false);
+                }
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_jButton_EnviarActionPerformed
+    private void jTextField_potenciaMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_potenciaMotorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_potenciaMotorActionPerformed
 
-    /**
-     * Método para informar si se ha realizado correctamente el insert del vehiculo
-     * @param resultado resultado de la operacion
-     */
-    public void operacioRealizada(boolean resultado){
-        if (resultado){
-            jLabel_result.setForeground(Color.GREEN);
-            jLabel_result.setText("Vehiculo registrado con éxito.");
-            limpiarCampos();
-        }else{
-            jLabel_result.setForeground(Color.RED);
-        }
-    }
-    
     private void jTextField_numPuertasCocheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_numPuertasCocheActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_numPuertasCocheActionPerformed
 
-    private void jTextField_potenciaMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_potenciaMotorActionPerformed
+    private void jCheckBox_wcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_wcActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_potenciaMotorActionPerformed
+    }//GEN-LAST:event_jCheckBox_wcActionPerformed
+
+    private void jTextField_precioDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_precioDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_precioDiaActionPerformed
 
     /**
      * Limpia los datos de la ventana Interfaz_Vehículos
      */
     public void limpiarCampos() {
-        ocultarPaneles();
+        ocultarCampos();
         // Borrando textos
         jTextField_Cilindrada.setText("");
         jTextField_Matricula.setText("");
@@ -542,7 +485,6 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         jTextField_potenciaMotor.setText("");
         jTextField_precioDia.setText("");
         jTextField_numPuertasCoche.setText("");
-        // Seteando a -1 los combobox//TODO NO FUNCIONA, he tenido que meter espacios en blanco
         jComboBox_Selector.setSelectedItem(" ");
         jComboBox_Marca.setSelectedItem(" ");
         jComboBox_Clase.setSelectedItem(" ");
@@ -553,10 +495,14 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     /**
      * Método para ocultar paneles según la seleccion del tipo de vehiculo
      */
-    public void ocultarPaneles() {
-        jPanel_Coche.setVisible(false);
-        jPanel_Moto.setVisible(false);
-        jPanel_Caravana.setVisible(false);
+    public void ocultarCampos() {
+        jLabel_Cilindrada.setVisible(false);
+        jTextField_Cilindrada.setVisible(false);
+        jLabel_potenciaMotor.setVisible(false);
+        jTextField_potenciaMotor.setVisible(false);
+        jCheckBox_wc.setVisible(false);
+        jLabel_numPuertasCoche.setVisible(false);
+        jTextField_numPuertasCoche.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -566,6 +512,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBox_Clase;
     private javax.swing.JComboBox<String> jComboBox_Marca;
     private javax.swing.JComboBox<String> jComboBox_Selector;
+    private javax.swing.JLabel jLabel_Bienvenida;
     private javax.swing.JLabel jLabel_Cilindrada;
     private javax.swing.JLabel jLabel_Clase;
     private javax.swing.JLabel jLabel_Marca;
@@ -576,12 +523,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel_potenciaMotor;
     private javax.swing.JLabel jLabel_precioDia;
     private javax.swing.JLabel jLabel_result;
-    private javax.swing.JPanel jPanel_Botonera;
-    private javax.swing.JPanel jPanel_Caravana;
-    private javax.swing.JPanel jPanel_Coche;
-    private javax.swing.JPanel jPanel_Main;
-    private javax.swing.JPanel jPanel_Moto;
-    private javax.swing.JPanel jPanel_Vehiculo;
+    private javax.swing.JPanel jPanel;
     private javax.swing.JTextField jTextField_Cilindrada;
     private javax.swing.JTextField jTextField_Matricula;
     private javax.swing.JTextField jTextField_Modelo;
