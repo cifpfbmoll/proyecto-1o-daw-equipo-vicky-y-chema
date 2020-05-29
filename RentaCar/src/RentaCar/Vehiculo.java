@@ -133,7 +133,6 @@ public abstract class Vehiculo implements Consultas_BBDD {
         ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
     }
     
     public static void extraerMarcas(JComboBox marcas) throws SQLException{
