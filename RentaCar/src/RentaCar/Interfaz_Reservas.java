@@ -7,12 +7,15 @@ package RentaCar;
 import static RentaCar.Automovil.selectAutomoviles;
 import static RentaCar.Consultas_BBDD.obtenerConexion;
 import static RentaCar.Impresora.imprimir;
+import java.awt.BorderLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -32,12 +35,8 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
      */
     public Interfaz_Reservas() {
         initComponents();
-        mostrarAutos();
-        // Implantación de la fecha del sistema
-        Date hoy = new Date();
-        jLabel_fechaActual.setText(hoy.getDate() + "/"
-                + (hoy.getMonth() + 1) + "/"
-                + (hoy.getYear() + 1900));
+        autosList();
+
         /**
          * Permite rellenar los campos sólo con seleccionar las rows
          */
@@ -50,6 +49,7 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
             jTextField_precioDia.setText(model.getValueAt(fila, 3).toString());
             jTextField_clase.setText(model.getValueAt(fila, 4).toString());
         });
+
     }
 
     /**
@@ -90,16 +90,13 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jTextField_precioDia = new javax.swing.JTextField();
         jLabel_clase = new javax.swing.JLabel();
         jTextField_clase = new javax.swing.JTextField();
-        jLabel_clase1 = new javax.swing.JLabel();
-        jTextField_clase1 = new javax.swing.JTextField();
-        jLabel_numPuertas = new javax.swing.JLabel();
-        jTextField_numPuertas = new javax.swing.JTextField();
-        jLabel_potenciaMotor = new javax.swing.JLabel();
-        jTextField_potenciaMotor = new javax.swing.JTextField();
-        jLabel_wc = new javax.swing.JLabel();
-        jTextField_wc = new javax.swing.JTextField();
         jLabel_cilindrada = new javax.swing.JLabel();
         jTextField_cilindrada = new javax.swing.JTextField();
+        jLabel_potenciaMotor = new javax.swing.JLabel();
+        jTextField_potenciaMotor = new javax.swing.JTextField();
+        jLabel_numPuertas = new javax.swing.JLabel();
+        jTextField_numPuertas = new javax.swing.JTextField();
+        jCheckBox_wc = new javax.swing.JCheckBox();
         jPanel_datosReserva = new javax.swing.JPanel();
         jLabel_infoReserva = new javax.swing.JLabel();
         jLabel_numReserva = new javax.swing.JLabel();
@@ -107,18 +104,16 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jLabel_fechaSolicitud = new javax.swing.JLabel();
         jTextField_fechaSolicitud = new javax.swing.JTextField();
         jLabel_fechaRecogida = new javax.swing.JLabel();
-        jTextField_fechaRecogida = new javax.swing.JTextField();
+        jDateChooser_recogida = new com.toedter.calendar.JDateChooser();
         jLabel_horaRecogida = new javax.swing.JLabel();
         jComboBox_horaRecogida = new javax.swing.JComboBox<>();
         jLabel_fechaDevolucion = new javax.swing.JLabel();
-        jTextField_fechaDevolucion = new javax.swing.JTextField();
+        jDateChooser_devolucion = new com.toedter.calendar.JDateChooser();
         jLabel_horaDevolucion = new javax.swing.JLabel();
-        jTextField_horaDevolucion = new javax.swing.JTextField();
+        jComboBox_horaDevolucion = new javax.swing.JComboBox<>();
         Observaciones = new java.awt.TextField();
         jLabel_Observaciones = new javax.swing.JLabel();
         jPanel_botonera = new javax.swing.JPanel();
-        jLabel_fecha = new javax.swing.JLabel();
-        jLabel_fechaActual = new javax.swing.JLabel();
         jButton_guardar = new javax.swing.JButton();
         jButton_limpiar = new javax.swing.JButton();
 
@@ -294,17 +289,11 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jTextField_clase.setForeground(new java.awt.Color(51, 51, 55));
         jTextField_clase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel_clase1.setText("Clase");
+        jLabel_cilindrada.setText("Cilindrada");
 
-        jTextField_clase1.setEditable(false);
-        jTextField_clase1.setForeground(new java.awt.Color(51, 51, 55));
-        jTextField_clase1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        jLabel_numPuertas.setText("Nº Puertas");
-
-        jTextField_numPuertas.setEditable(false);
-        jTextField_numPuertas.setForeground(new java.awt.Color(51, 51, 55));
-        jTextField_numPuertas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_cilindrada.setEditable(false);
+        jTextField_cilindrada.setForeground(new java.awt.Color(51, 51, 55));
+        jTextField_cilindrada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel_potenciaMotor.setText("Motor");
 
@@ -312,17 +301,18 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jTextField_potenciaMotor.setForeground(new java.awt.Color(51, 51, 55));
         jTextField_potenciaMotor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel_wc.setText("WC");
+        jLabel_numPuertas.setText("Nº Puertas");
 
-        jTextField_wc.setEditable(false);
-        jTextField_wc.setForeground(new java.awt.Color(51, 51, 55));
-        jTextField_wc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_numPuertas.setEditable(false);
+        jTextField_numPuertas.setForeground(new java.awt.Color(51, 51, 55));
+        jTextField_numPuertas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_numPuertas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_numPuertasActionPerformed(evt);
+            }
+        });
 
-        jLabel_cilindrada.setText("Cilindrada");
-
-        jTextField_cilindrada.setEditable(false);
-        jTextField_cilindrada.setForeground(new java.awt.Color(51, 51, 55));
-        jTextField_cilindrada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jCheckBox_wc.setText("Dispone WC");
 
         javax.swing.GroupLayout jPanel_datosVehiculoLayout = new javax.swing.GroupLayout(jPanel_datosVehiculo);
         jPanel_datosVehiculo.setLayout(jPanel_datosVehiculoLayout);
@@ -335,38 +325,32 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel_marca)
                     .addComponent(jLabel_matricula)
                     .addComponent(jLabel_modelo)
-                    .addComponent(jLabel_precioDia)
-                    .addComponent(jLabel_clase))
+                    .addComponent(jLabel_precioDia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_precioDia, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_clase, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel_clase1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_clase1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosVehiculoLayout.createSequentialGroup()
+                    .addGroup(jPanel_datosVehiculoLayout.createSequentialGroup()
                         .addComponent(jLabel_numPuertas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_numPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_numPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel_potenciaMotor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_potenciaMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel_wc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_wc, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel_cilindrada)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_cilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5))
+                        .addComponent(jLabel_clase)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_clase, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_datosVehiculoLayout.createSequentialGroup()
+                        .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_potenciaMotor)
+                            .addComponent(jLabel_cilindrada))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox_wc)
+                            .addComponent(jTextField_potenciaMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_cilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         jPanel_datosVehiculoLayout.setVerticalGroup(
             jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,33 +361,33 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField_matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_matricula)
-                    .addComponent(jLabel_clase1)
-                    .addComponent(jTextField_clase1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_marca)
-                    .addComponent(jTextField_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_clase)
+                    .addComponent(jTextField_clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_numPuertas)
                     .addComponent(jTextField_numPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_modelo)
-                    .addComponent(jTextField_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_potenciaMotor)
-                    .addComponent(jTextField_potenciaMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_datosVehiculoLayout.createSequentialGroup()
+                        .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_marca)
+                            .addComponent(jTextField_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_cilindrada))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_modelo)
+                            .addComponent(jTextField_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_potenciaMotor)))
+                    .addGroup(jPanel_datosVehiculoLayout.createSequentialGroup()
+                        .addComponent(jTextField_cilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField_potenciaMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_precioDia)
-                    .addComponent(jTextField_precioDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_wc)
-                    .addComponent(jTextField_wc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_clase)
-                    .addComponent(jTextField_clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_cilindrada)
-                    .addComponent(jTextField_cilindrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_precioDia)
+                        .addComponent(jTextField_precioDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBox_wc))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jLabel_infoReserva.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
@@ -413,6 +397,7 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
         jLabel_numReserva.setText("Nº Reserva");
 
+        jTextField_numReserva.setEditable(false);
         jTextField_numReserva.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField_numReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -422,11 +407,12 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
         jLabel_fechaSolicitud.setText("Fecha Solicitud");
 
+        jTextField_fechaSolicitud.setEditable(false);
         jTextField_fechaSolicitud.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel_fechaRecogida.setText("Fecha Recogida");
 
-        jTextField_fechaRecogida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jDateChooser_recogida.setDateFormatString("dd-MM-yyyy");
 
         jLabel_horaRecogida.setText("Hora Recogida");
 
@@ -434,11 +420,11 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
         jLabel_fechaDevolucion.setText("Fecha Devolución");
 
-        jTextField_fechaDevolucion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jDateChooser_devolucion.setDateFormatString("dd-MM-yyyy");
 
         jLabel_horaDevolucion.setText("Hora Devolución");
 
-        jTextField_horaDevolucion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jComboBox_horaDevolucion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00" }));
 
         javax.swing.GroupLayout jPanel_datosReservaLayout = new javax.swing.GroupLayout(jPanel_datosReserva);
         jPanel_datosReserva.setLayout(jPanel_datosReservaLayout);
@@ -454,14 +440,17 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel_horaRecogida)
                     .addComponent(jLabel_fechaDevolucion)
                     .addComponent(jLabel_horaDevolucion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField_numReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                    .addComponent(jTextField_fechaSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                    .addComponent(jTextField_fechaRecogida, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                    .addComponent(jTextField_fechaDevolucion, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_horaDevolucion, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                    .addComponent(jComboBox_horaRecogida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_datosReservaLayout.createSequentialGroup()
+                        .addGap(0, 1, Short.MAX_VALUE)
+                        .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextField_numReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(jTextField_fechaSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(jComboBox_horaRecogida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox_horaDevolucion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateChooser_recogida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jDateChooser_devolucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(5, 5, 5))
         );
         jPanel_datosReservaLayout.setVerticalGroup(
@@ -478,22 +467,22 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel_fechaSolicitud)
                     .addComponent(jTextField_fechaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel_fechaRecogida)
-                    .addComponent(jTextField_fechaRecogida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser_recogida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_horaRecogida)
                     .addComponent(jComboBox_horaRecogida, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel_fechaDevolucion)
-                    .addComponent(jTextField_fechaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser_devolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_horaDevolucion)
-                    .addComponent(jTextField_horaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jComboBox_horaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         Observaciones.addActionListener(new java.awt.event.ActionListener() {
@@ -506,11 +495,6 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jLabel_Observaciones.setForeground(new java.awt.Color(0, 0, 0));
         jLabel_Observaciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Observaciones.setText("Observaciones");
-
-        jLabel_fecha.setText("Fecha");
-
-        jLabel_fechaActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_fechaActual.setText("Fecha Actual");
 
         jButton_guardar.setText("Guardar");
         jButton_guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -531,15 +515,10 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jPanel_botoneraLayout.setHorizontalGroup(
             jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_botoneraLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel_fecha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_fechaActual)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addContainerGap(150, Short.MAX_VALUE)
                 .addComponent(jButton_limpiar)
-                .addGap(18, 18, 18)
-                .addComponent(jButton_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(29, 29, 29)
+                .addComponent(jButton_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel_botoneraLayout.setVerticalGroup(
             jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,9 +526,7 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                 .addGap(3, 3, 3)
                 .addGroup(jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_fecha)
-                    .addComponent(jLabel_fechaActual))
+                    .addComponent(jButton_limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(5, 5, 5))
         );
 
@@ -557,17 +534,15 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane)
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane))
-            .addGroup(jPanelLayout.createSequentialGroup()
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel_datosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Observaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 0, 0)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel_Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel_datosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addComponent(Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                         .addComponent(jPanel_datosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -586,15 +561,14 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel_datosReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel_datosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel_botonera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jPanel_datosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, 0)
                         .addComponent(jLabel_Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(Observaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -618,18 +592,34 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jTextField_NIF.setText("");
         jTextField_apellido1.setText("");
         jTextField_apellido2.setText("");
+        jTextField_cilindrada.setText("");
         jTextField_clase.setText("");
         jTextField_email.setText("");
-        jTextField_matricula.setText("");
         jTextField_marca.setText("");
+        jTextField_matricula.setText("");
+        jTextField_modelo.setText("");
         jTextField_nombrecliente.setText("");
+        jTextField_numReserva.setText("");
+        jTextField_potenciaMotor.setText("");
+        jTextField_numPuertas.setText("");
         jTextField_precioDia.setText("");
         jTextField_telefono.setText("");
-        jTextField_matricula.setText("");
-        jTextField_marca.setText("");
-        jTextField_modelo.setText("");
-        jTextField_precioDia.setText("");
-        jTextField_clase.setText("");
+        Observaciones.setText("");
+        jCheckBox_wc.setSelected(false);
+        jComboBox_horaDevolucion.setSelectedItem(" ");
+        jComboBox_horaRecogida.setSelectedItem(" ");
+        jDateChooser_devolucion.setCalendar(null);
+        jDateChooser_recogida.setCalendar(null);
+        /**
+         * Implantación de la fecha del sistema
+         */
+        Date fecha = new Date();
+        String hoy = fecha.getDate() + "/"
+                + (fecha.getMonth() + 1) + "/"
+                + (fecha.getYear() + 1900);
+
+        jTextField_fechaSolicitud.setText(hoy);
+
     }
 
     /**
@@ -657,7 +647,8 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     }
 
     /**
-     * TODO: Muestra los coches por ahora
+     * TODO: Muestra los coches por ahora, puta mierda
+     * lo movere a vehiculos
      */
     public void mostrarAutos() {
         ArrayList<Automovil> lista = autosList();
@@ -698,21 +689,26 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ObservacionesActionPerformed
 
+    private void jTextField_numPuertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_numPuertasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_numPuertasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextField Observaciones;
     private javax.swing.JButton jButton_guardar;
     private javax.swing.JButton jButton_limpiar;
+    private javax.swing.JCheckBox jCheckBox_wc;
+    private javax.swing.JComboBox<String> jComboBox_horaDevolucion;
     private javax.swing.JComboBox<String> jComboBox_horaRecogida;
+    private com.toedter.calendar.JDateChooser jDateChooser_devolucion;
+    private com.toedter.calendar.JDateChooser jDateChooser_recogida;
     private javax.swing.JLabel jLabel_NIF;
     private javax.swing.JLabel jLabel_Observaciones;
     private javax.swing.JLabel jLabel_apellido1;
     private javax.swing.JLabel jLabel_apellido2;
     private javax.swing.JLabel jLabel_cilindrada;
     private javax.swing.JLabel jLabel_clase;
-    private javax.swing.JLabel jLabel_clase1;
     private javax.swing.JLabel jLabel_email;
-    private javax.swing.JLabel jLabel_fecha;
-    private javax.swing.JLabel jLabel_fechaActual;
     private javax.swing.JLabel jLabel_fechaDevolucion;
     private javax.swing.JLabel jLabel_fechaRecogida;
     private javax.swing.JLabel jLabel_fechaSolicitud;
@@ -730,7 +726,6 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel_potenciaMotor;
     private javax.swing.JLabel jLabel_precioDia;
     private javax.swing.JLabel jLabel_telefono;
-    private javax.swing.JLabel jLabel_wc;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel_botonera;
     private javax.swing.JPanel jPanel_datosCliente;
@@ -743,12 +738,8 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField_apellido2;
     private javax.swing.JTextField jTextField_cilindrada;
     private javax.swing.JTextField jTextField_clase;
-    private javax.swing.JTextField jTextField_clase1;
     private javax.swing.JTextField jTextField_email;
-    private javax.swing.JTextField jTextField_fechaDevolucion;
-    private javax.swing.JTextField jTextField_fechaRecogida;
     private javax.swing.JTextField jTextField_fechaSolicitud;
-    private javax.swing.JTextField jTextField_horaDevolucion;
     private javax.swing.JTextField jTextField_marca;
     private javax.swing.JTextField jTextField_matricula;
     private javax.swing.JTextField jTextField_modelo;
@@ -758,6 +749,5 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField_potenciaMotor;
     private javax.swing.JTextField jTextField_precioDia;
     private javax.swing.JTextField jTextField_telefono;
-    private javax.swing.JTextField jTextField_wc;
     // End of variables declaration//GEN-END:variables
 }

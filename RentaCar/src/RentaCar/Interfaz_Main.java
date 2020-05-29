@@ -309,11 +309,9 @@ public class Interfaz_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_ConsultarVehActionPerformed
 
     private void jPasswordField_ContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_ContraseñaActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField_ContraseñaActionPerformed
 
     private void jTextField_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_UsuarioActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_UsuarioActionPerformed
 
     private void jButton_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EntrarActionPerformed
@@ -325,7 +323,6 @@ public class Interfaz_Main extends javax.swing.JFrame {
             if (encontrado) {
                 rol = comprobarRol(jTextField_Usuario.getText());
                 if (rol == 1) {
-                    //TODO JFrame MENU DEL CLIENTE
                     Interfaz_Cliente cliente = new Interfaz_Cliente();
                     cliente.setVisible(rootPaneCheckingEnabled);
                     this.dispose();
