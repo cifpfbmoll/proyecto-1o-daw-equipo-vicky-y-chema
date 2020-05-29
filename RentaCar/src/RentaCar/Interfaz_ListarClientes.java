@@ -52,13 +52,6 @@ public class Interfaz_ListarClientes extends JFrame {
             validate();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-                //TODO no puedo cerrar los recursos rs y pst porqué sino no me pintan los datos en el frame
-            }
         }
         this.setVisible(true);
 
