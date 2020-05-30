@@ -82,12 +82,24 @@ public interface Consultas_BBDD {
     
     //---------------------QUERIES VEHICULOS--------------------------------
     
+    
+    /**
+     * Query para buscar un vehiculo por matricula
+     * @return devuelve la query
+     */
+    public static String buscarVehiculo(){
+        return "select * from vehiculos where matricula = ?";
+    }
+    
     /**
      * query para recuperar todos los vehiculos 
      * @return devuelve la query para recuperar los vehiculos
      */
     public static String selectVehiculos(){
-        return "select * from vehiculos";
+        return "SELECT *, CASE WHEN EXISTS (SELECT matricula FROM especificaciones_coches c WHERE c.matricula = v.matricula) THEN 'coche'" +
+                "WHEN EXISTS (SELECT matricula FROM especificaciones_caravanas c WHERE c.matricula = v.matricula) THEN 'caravana'" +
+                "WHEN EXISTS (SELECT matricula FROM especificaciones_motos c WHERE c.matricula = v.matricula) THEN 'moto'" +
+                "end as tipo FROM vehiculos v where retirado = 'false'";
     }
     
     /**
@@ -106,9 +118,14 @@ public interface Consultas_BBDD {
         return "select distinct nombre from clases_vehiculos";
     }
     
-    public static String reuperarPKClase(){
+    /**
+     * query para recuperar el codigo de una clase de vehiculo según su nombre
+     * @return la query
+     */
+    public static String recuperarPKClase(){
         return "select cod from clases_vehiculos where nombre = ?";
     }
+    
     /**
      * Query para insertar en la tabla vehiculos
      * @param matricula

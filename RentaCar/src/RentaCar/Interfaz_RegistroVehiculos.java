@@ -89,7 +89,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel_result.setFont(new java.awt.Font("Heiti TC", 1, 12)); // NOI18N
+        jLabel_result.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
         jLabel_result.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_result.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -283,10 +283,8 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                     .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jComboBox_Marca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(jLabel_Marca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel_Modelo))
@@ -356,15 +354,18 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         if (selector.equals(" ")) {
             ocultarCampos();
         } else if (selector.equalsIgnoreCase("Moto")) {
+            jLabel_result.setText("");
             ocultarCampos();
             jLabel_Cilindrada.setVisible(true);
             jTextField_Cilindrada.setVisible(true);
         } else if (selector.equalsIgnoreCase("Caravana")) {
+            jLabel_result.setText("");
             ocultarCampos();
             jLabel_potenciaMotor.setVisible(true);
             jTextField_potenciaMotor.setVisible(true);
             jCheckBox_wc.setVisible(true);
         } else if (selector.equalsIgnoreCase("Coche")) {
+            jLabel_result.setText("");
             ocultarCampos();
             jLabel_numPuertasCoche.setVisible(true);
             jTextField_numPuertasCoche.setVisible(true);
@@ -386,7 +387,6 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField_ModeloActionPerformed
 
     private void jComboBox_ClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_ClaseActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_ClaseActionPerformed
 
     private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
@@ -394,23 +394,27 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton_LimpiarActionPerformed
 
     private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
-        // TODO IMPORTANTE: No se contemplan campos sin rellenar o de datatypes diferentes
         String tipoVehiculo = (String) jComboBox_Selector.getSelectedItem();
         switch (tipoVehiculo) {
             case "COCHE":
                 try {
                     Coche coche = new Coche();
-                    coche.setMatricula(jTextField_Matricula.getText());
-                    coche.setMarca((String) jComboBox_Marca.getSelectedItem());
-                    coche.setModelo(jTextField_Modelo.getText());
-                    coche.setClase(obtenerClasePK((String) jComboBox_Clase.getSelectedItem()));
-                    coche.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
-                    coche.setPotenciaMotor(Integer.parseInt(jTextField_potenciaMotor.getText()));
-                    coche.setNumeroPuertas(Integer.parseInt(jTextField_numPuertasCoche.getText()));
-
-                    coche.registrarVehiculo(jLabel_result);
-                    operacioRealizada(true);
-
+                    if (revisarCamposObligatorios() && !jTextField_potenciaMotor.getText().isEmpty() &&
+                            !jTextField_numPuertasCoche.getText().isEmpty()){
+                        coche.setMatricula(jTextField_Matricula.getText());
+                        coche.setMarca((String) jComboBox_Marca.getSelectedItem());
+                        coche.setModelo(jTextField_Modelo.getText());
+                        coche.setClase(obtenerClasePK((String) jComboBox_Clase.getSelectedItem()));
+                        coche.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
+                        coche.setPotenciaMotor(Integer.parseInt(jTextField_potenciaMotor.getText()));
+                        coche.setNumeroPuertas(Integer.parseInt(jTextField_numPuertasCoche.getText()));
+                        coche.registrarVehiculo();
+                        operacioRealizada(true);
+                    } else{
+                        operacioRealizada(false);
+                        jLabel_result.setText("Hay datos del coche sin rellenar.");
+                    }
+                    
                 } catch (SQLException ex) {
                     operacioRealizada(false);
                     jLabel_result.setText(ex.getMessage());
@@ -419,16 +423,19 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
             case "MOTO":
                 try {
                     Moto moto = new Moto();
-                    moto.setMatricula(jTextField_Matricula.getText());
-                    moto.setMarca((String) jComboBox_Marca.getSelectedItem());
-                    moto.setModelo(jTextField_Modelo.getText());
-                    moto.setClase(obtenerClasePK((String) jComboBox_Clase.getSelectedItem()));
-                    moto.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
-                    moto.setCilindrada(Integer.parseInt(jTextField_Cilindrada.getText()));
-
-                    moto.registrarVehiculo(jLabel_result);
-                    operacioRealizada(true);
-
+                    if (revisarCamposObligatorios() && !jTextField_Cilindrada.getText().isEmpty()){
+                        moto.setMatricula(jTextField_Matricula.getText());
+                        moto.setMarca((String) jComboBox_Marca.getSelectedItem());
+                        moto.setModelo(jTextField_Modelo.getText());
+                        moto.setClase(obtenerClasePK((String) jComboBox_Clase.getSelectedItem()));
+                        moto.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
+                        moto.setCilindrada(Integer.parseInt(jTextField_Cilindrada.getText()));
+                        moto.registrarVehiculo();
+                        operacioRealizada(true);
+                    } else{
+                        operacioRealizada(false);
+                        jLabel_result.setText("Hay datos de la moto sin rellenar.");
+                    }
                 } catch (SQLException ex) {
                     operacioRealizada(false);
                     jLabel_result.setText(ex.getMessage());
@@ -437,22 +444,27 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
             case "CARAVANA":
                 try {
                     Caravana caravana = new Caravana();
-                    caravana.setMatricula(jTextField_Matricula.getText());
-                    caravana.setMarca((String) jComboBox_Marca.getSelectedItem());
-                    caravana.setModelo(jTextField_Modelo.getText());
-                    caravana.setClase(obtenerClasePK((String) jComboBox_Clase.getSelectedItem()));
-                    caravana.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
-                    caravana.setPotenciaMotor(Integer.parseInt(jTextField_potenciaMotor.getText()));
-                    caravana.setWc(estaDisponible(jCheckBox_wc));
-
-                    caravana.registrarVehiculo(jLabel_result);
-                    operacioRealizada(true);
-
+                    if (revisarCamposObligatorios() && !jTextField_potenciaMotor.getText().isEmpty()){
+                        caravana.setMatricula(jTextField_Matricula.getText());
+                        caravana.setMarca((String) jComboBox_Marca.getSelectedItem());
+                        caravana.setModelo(jTextField_Modelo.getText());
+                        caravana.setClase(obtenerClasePK((String) jComboBox_Clase.getSelectedItem()));
+                        caravana.setPrecioDia(Double.parseDouble(jTextField_precioDia.getText()));
+                        caravana.setPotenciaMotor(Integer.parseInt(jTextField_potenciaMotor.getText()));
+                        caravana.setWc(estaDisponible(jCheckBox_wc));
+                        caravana.registrarVehiculo();
+                        operacioRealizada(true);
+                    }else{
+                        operacioRealizada(false);
+                        jLabel_result.setText("Hay datos de la caravana sin rellenar.");
+                    }
                 } catch (SQLException ex) {
                     operacioRealizada(false);
                 }
                 break;
             default:
+                jLabel_result.setForeground(Color.RED);
+                jLabel_result.setText("Por favor, selecciona el tipo de vehiculo que quieres registrar");
                 break;
         }
     }//GEN-LAST:event_jButton_EnviarActionPerformed
@@ -472,6 +484,24 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_precioDiaActionPerformed
 
+    /**
+     * Método para comprobar si hay datos vaciós que son obligatorios 
+     * para el registro del vehiculo
+     * @return devuelve true/false en función del chequeo
+     */
+    public boolean revisarCamposObligatorios(){
+        boolean todosRellenados = true;
+        if (jTextField_Matricula.getText().isEmpty() || jTextField_Matricula.getText().isEmpty()
+                || jComboBox_Marca.getSelectedItem().equals("") || jTextField_Modelo.getText().isEmpty()
+                || jComboBox_Clase.getSelectedItem().equals("") || jTextField_precioDia.getText().isEmpty()){
+            todosRellenados = false;
+        }else{
+            todosRellenados = true;
+        }
+
+        return todosRellenados;
+    }
+    
     /**
      * Limpia los datos de la ventana Interfaz_Vehículos
      */

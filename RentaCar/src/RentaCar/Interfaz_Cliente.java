@@ -10,7 +10,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import static RentaCar.Interfaz_ListarVehiculos.listarVehiculos;
+import static RentaCar.Vehiculo.listarVehiculos;
 import javax.swing.ImageIcon;
 
 /**
@@ -257,11 +257,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_listarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarVehiculosActionPerformed
-        Interfaz_ListarVehiculos lisVehi = new Interfaz_ListarVehiculos();
-        centrarFrame(jDesktopPane, lisVehi);
-        jDesktopPane.add(lisVehi);
-        lisVehi.setVisible(rootPaneCheckingEnabled);
-        listarVehiculos(lisVehi);
+        listarVehiculos();
     }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
 
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed

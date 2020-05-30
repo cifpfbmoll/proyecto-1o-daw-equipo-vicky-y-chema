@@ -63,44 +63,33 @@ public class Moto extends Vehiculo{
     public void setCilindrada(Integer cilindrada) {
         this.cilindrada = cilindrada;
     }
-
-    @Override
-    public boolean revisarDatosVehiculo() {
-        boolean datosVehiculo = super.revisarDatosVehiculo();
-        if (!datosVehiculo || this.getCilindrada() == null){
-            return false;
-        }
-        return true;
-    }
     
+    /**
+     * Método para insertar motos en la BBDD
+     * @param resultado resultado es el warning para informar si se ha registrado correctamente o no
+     * @throws SQLException 
+     */
     @Override
-    public void registrarVehiculo(JLabel resultado) throws SQLException {
+    public void registrarVehiculo() throws SQLException {
         PreparedStatement pst = null;
         Connection con = null;
         String queryVehiculos = null;
         String queryMoto = null;
         try {
             con = obtenerConexion();
-            if (!this.revisarDatosVehiculo()) {
-                resultado.setForeground(Color.RED);
-                resultado.setText("Faltan datos por cumplimentar.");
-            } else {
-                con.setAutoCommit(false);
-                
-                //INSERT tabla vehiculos
-                queryVehiculos = insertarVehiculo(this.getMatricula(), this.getMarca(),
-                        this.getModelo(), this.getClase(), this.getPrecioDia());
-                pst = con.prepareStatement(queryVehiculos);
-                pst.executeUpdate();
-                
-                //INSERT tabla especificaciones moto
-                queryMoto = insertarMoto();
-                pst = con.prepareStatement(queryMoto);
-                pst.setString(1, this.getMatricula());
-                pst.setInt(2, this.getCilindrada());
-                pst.executeUpdate();
-                con.commit();
-            }
+            con.setAutoCommit(false);
+            //INSERT tabla vehiculos
+            queryVehiculos = insertarVehiculo(this.getMatricula(), this.getMarca(),
+                    this.getModelo(), this.getClase(), this.getPrecioDia());
+            pst = con.prepareStatement(queryVehiculos);
+            pst.executeUpdate();              
+            //INSERT tabla especificaciones moto
+            queryMoto = insertarMoto();
+            pst = con.prepareStatement(queryMoto);
+            pst.setString(1, this.getMatricula());
+            pst.setInt(2, this.getCilindrada());
+            pst.executeUpdate();
+            con.commit();
         }catch (Exception ex){
             con.rollback();
         }finally {

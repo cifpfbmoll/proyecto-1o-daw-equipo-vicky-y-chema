@@ -5,15 +5,23 @@
 package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
+import static RentaCar.Interfaz_Administrador.crearVentana;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import static java.awt.Toolkit.getDefaultToolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -277,7 +285,6 @@ public class Usuario implements Consultas_BBDD {
      */
     public boolean revisarCampos() {
         boolean camposCompletos = true;
-
         if (this.getClienteNIF().isEmpty() || this.getClienteNIF() == null
                 || this.getNombre().isEmpty() || this.getNombre() == null || this.getApellido1().isEmpty()
                 || this.getApellido1() == null || this.getApellido2().isEmpty() || this.getApellido2() == null
@@ -287,7 +294,6 @@ public class Usuario implements Consultas_BBDD {
 
             camposCompletos = false;
         }
-
         return camposCompletos;
     }
     
@@ -343,32 +349,80 @@ public class Usuario implements Consultas_BBDD {
         return existe;
     }
     
+    /**
+     * Método para listar los datos de un cliente en función del nif
+     * @param nif nif del cliente
+     * @throws SQLException 
+     */
     public static void mostrarCliente(String nif) throws SQLException{
         PreparedStatement pst = null;
         ResultSet rs = null;
-        ResulsetModeloTabla modelo = null;
+        ModeloTabla modelo = null;
         JTable tabla = new JTable(modelo);
-        JFrame ventana = new JFrame();
+        JFrame ventana = crearVentana();
         try (Connection con = obtenerConexion()){            
-            ventana.setTitle("LISTADO DE CLIENTES");
-            ventana.setBounds(400, 300, 600, 200);
+            ventana.setTitle("DATOS DE CLIENTE");
             pst = con.prepareStatement(buscarCliente(),ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             pst.setString(1,nif);
             rs = pst.executeQuery();
-            modelo = new ResulsetModeloTabla(rs);
-            tabla = new JTable(modelo);
-            ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
-            ventana.setVisible(true);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-        }finally{
-            pst.close();
-            rs.close();
         }
-        
+        modelo = new ModeloTabla(rs);
+        tabla = new JTable(modelo);
+        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+    
+    /**
+     * Este metodo se encarga de listar los clientes registrados en una JTable
+     * 
+     * @see javax.swing.JTable
+     * @see javax.swing.table.AbstractTableModel
+     */    
+    public static void listarClientesTabla(){
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ModeloTabla modelo = null;
+        JTable tabla = new JTable(modelo); 
+        JFrame ventana = crearVentana();
+        JPanel buscar = new JPanel();
+        JButton buscarCliente = new JButton("BUSCAR CLIENTE");
+        ventana.setTitle("LISTADO DE CLIENTES");
+        try (Connection con = obtenerConexion()){
+            pst = con.prepareStatement(listarClientes(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        modelo = new ModeloTabla(rs);
+        tabla = new JTable(modelo);
+        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        ventana.validate();
+        ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        //TODO no puedo cerrar los recursos rs y pst porqué sino no me pintan los datos en el frame
+        buscarCliente.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String nif = JOptionPane.showInputDialog(null, "Introduce el NIF del cliente", "BUSCAR CLIENTE", JOptionPane.QUESTION_MESSAGE);
+            try {
+                if ((nif != null) && (nif.trim().length() > 0)){
+                    if (comprobarCliente(nif)){
+                        mostrarCliente(nif);
+                    }else if (!comprobarCliente(nif)){
+                        JOptionPane.showMessageDialog(null, "El NIF indicado no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        });
+        buscar.add(buscarCliente);
+        ventana.add(buscar,BorderLayout.SOUTH);
     }
 }
