@@ -5,6 +5,7 @@
 package RentaCar;
 
 import static RentaCar.Interfaz_Main.centrarFrame;
+import static RentaCar.Usuario.listarClientesTabla;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -14,9 +15,14 @@ import static RentaCar.Vehiculo.bajaVehiculo;
 import static RentaCar.Vehiculo.comprobarVehiculo;
 import static RentaCar.Vehiculo.listarVehiculos;
 import static RentaCar.Vehiculo.modificarPrecio;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import static java.awt.Toolkit.getDefaultToolkit;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -32,9 +38,24 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         initComponents();
         ImageIcon img = new ImageIcon("src/image/administrator_64px.png");
         setIconImage(img.getImage());
-
     }
 
+    //TODO este método es general, ¿donde lo metemos?
+    /**
+     * Método para crear un JFrame centrados en la pantalla en función de la resolución
+     * @return devuelve el JFrame
+     */
+    public static JFrame crearVentana(){
+        JFrame ventana = new JFrame();
+        Toolkit miPantalla = getDefaultToolkit();
+        Dimension medidaPantalla = miPantalla.getScreenSize();
+        int alturaPantalla = medidaPantalla.height;
+        int anchoPantalla = medidaPantalla.width;
+        ventana.setSize(anchoPantalla/2,alturaPantalla/2);
+        ventana.setLocation(anchoPantalla/4,alturaPantalla/4);
+        
+        return ventana;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -335,9 +356,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_listarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarClientesActionPerformed
-        Interfaz_ListarClientes listarCli = new Interfaz_ListarClientes();
-        listarCli.setVisible(rootPaneCheckingEnabled);
-        listarCli.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        listarClientesTabla();
     }//GEN-LAST:event_jButton_listarClientesActionPerformed
 
     private void jButton_registrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registrarClientesActionPerformed
@@ -358,7 +377,6 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         listarVehiculos();
     }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
 
-    
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
         /**
          * TODO pendiente de listar reservas
@@ -381,20 +399,22 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
 
     private void jButton_retirarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_retirarVehiculoActionPerformed
         int reply = 0;
-        listarVehiculos();
+        JFrame ventana = listarVehiculos();
         String dato = JOptionPane.showInputDialog(null, "Introduce la matrícula", "BAJA VEHICULO", JOptionPane.QUESTION_MESSAGE);
         // Solicita confirmación
         try {
-            if (comprobarVehiculo(dato)){
-                reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
-                if (reply == JOptionPane.YES_OPTION) {
-                    bajaVehiculo(dato);
-                    JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + dato + " eliminado.","VEHICULO ELIMINADO", JOptionPane.DEFAULT_OPTION);
+            if ((dato != null) && (dato.trim().length() > 0)){
+                if (comprobarVehiculo(dato)){
+                    reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
+                    if (reply == JOptionPane.YES_OPTION) {
+                        bajaVehiculo(dato);
+                        JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + dato + " eliminado.","VEHICULO ELIMINADO", JOptionPane.DEFAULT_OPTION);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "La matrícula indicada no existe o no está activa","ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-            }else{
-                JOptionPane.showMessageDialog(null, "Es posible que el vehiculo ya esté dado de baja o"
-                        + "que la matrícula indicada no exista","ERROR", JOptionPane.ERROR_MESSAGE);
             }
+            ventana.dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -402,21 +422,32 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
 
     private void jButton_modificarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarPrecioActionPerformed
         int reply = 0;
-        listarVehiculos();
+        JFrame ventana = listarVehiculos();
         String matricula = JOptionPane.showInputDialog(null, "Introduce la matrícula", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
         try {
-            if (comprobarVehiculo(matricula)){
-                Double precio = Double.parseDouble(JOptionPane.showInputDialog(null, "Introduce el nuevo precio", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE));
-                reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
-                if (reply == JOptionPane.YES_OPTION) {
-                    modificarPrecio(precio,matricula);
-                    JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + matricula + " actualizado.","VEHICULO ACTUALIZADO", JOptionPane.DEFAULT_OPTION);
+            if ((matricula != null) && (matricula.trim().length() > 0)){
+                if (comprobarVehiculo(matricula)){
+                    String precio = JOptionPane.showInputDialog(null, "Introduce el nuevo precio", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
+                    if ((precio != null) && (precio.trim().length() > 0)){
+                        if(Double.parseDouble(precio)<0){
+                            JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0","ERROR", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
+                            if (reply == JOptionPane.YES_OPTION) {
+                                modificarPrecio(Double.parseDouble(precio),matricula);
+                                JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + matricula + " actualizado.","VEHICULO ACTUALIZADO", JOptionPane.DEFAULT_OPTION);
+                            }
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "La matrícula indicada no existe o no está activa.","ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-            }else{
-                JOptionPane.showMessageDialog(null, "La matrícula indicada no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
             }
+            ventana.dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton_modificarPrecioActionPerformed
 

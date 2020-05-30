@@ -73,45 +73,37 @@ public class Coche extends Vehiculo{
     public void setPotenciaMotor(Integer potenciaMotor) {
         this.potenciaMotor = potenciaMotor;
     }
-
-    @Override
-    public boolean revisarDatosVehiculo() {
-        boolean datosVehiculo = super.revisarDatosVehiculo();
-        if (!datosVehiculo || this.getNumeroPuertas() == null || this.getPotenciaMotor() == null){
-            return false;
-        }
-        return true;
-    }
     
+    
+    /**
+     * Método para insertar coches en la BBDD
+     * @param resultado resultado es el warning para informar si se ha registrado correctamente o no
+     * @throws SQLException 
+     */
     @Override
-    public void registrarVehiculo(JLabel resultado) throws SQLException{
+    public void registrarVehiculo() throws SQLException{
         PreparedStatement pst = null;
         Connection con = null;
         String queryVehiculos = null;
         String queryCoche = null;
         try {
             con = obtenerConexion();
-            if (!this.revisarDatosVehiculo()) {
-                resultado.setForeground(Color.RED);
-                resultado.setText("Faltan datos por cumplimentar.");
-            } else {
-                con.setAutoCommit(false);
-                //INSERT tabla vehiculos
-                queryVehiculos = insertarVehiculo(this.getMatricula(), this.getMarca(),
-                        this.getModelo(), this.getClase(), this.getPrecioDia());
-                pst = con.prepareStatement(queryVehiculos);
-                pst.executeUpdate();
-                
-                //INSERT tabla especificaciones coche
-                queryCoche = insertarCoche();
-                pst = con.prepareStatement(queryCoche);
-                pst.setString(1, this.getMatricula());
-                pst.setInt(2, this.getNumeroPuertas());
-                pst.setInt(3, this.getPotenciaMotor());
-                pst.executeUpdate();
-                
-                con.commit();
-            }
+            con.setAutoCommit(false);
+            //INSERT tabla vehiculos
+            queryVehiculos = insertarVehiculo(this.getMatricula(), this.getMarca(),
+                    this.getModelo(), this.getClase(), this.getPrecioDia());
+            pst = con.prepareStatement(queryVehiculos);
+            pst.executeUpdate();
+
+            //INSERT tabla especificaciones coche
+            queryCoche = insertarCoche();
+            pst = con.prepareStatement(queryCoche);
+            pst.setString(1, this.getMatricula());
+            pst.setInt(2, this.getNumeroPuertas());
+            pst.setInt(3, this.getPotenciaMotor());
+            pst.executeUpdate();
+
+            con.commit();
         }catch (Exception ex){
             con.rollback();
         }finally {

@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
@@ -93,7 +94,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
         jLabel_Mensaje.setText("¡Este es el RentaCar de Vicky y Chema!");
 
         jLabel_verificacionUsuario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel_verificacionUsuario.setForeground(java.awt.Color.white);
+        jLabel_verificacionUsuario.setForeground(new java.awt.Color(255, 0, 0));
 
         jPanel_Login1.setOpaque(false);
 
@@ -302,7 +303,8 @@ public class Interfaz_Main extends javax.swing.JFrame {
 
     private void jButton_ConsultarVehActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConsultarVehActionPerformed
 
-        listarVehiculos();
+        //CHEMA --> si llamo directamente a listarVehiculos() salta una excepcion, para que funcione bien lo tengo que que hacer asi
+        JFrame ventana = listarVehiculos();
     }//GEN-LAST:event_jButton_ConsultarVehActionPerformed
 
     private void jPasswordField_ContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_ContraseñaActionPerformed

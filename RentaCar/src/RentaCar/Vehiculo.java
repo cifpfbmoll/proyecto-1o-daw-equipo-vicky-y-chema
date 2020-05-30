@@ -6,17 +6,25 @@
 package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
+import static RentaCar.Interfaz_Administrador.crearVentana;
+import static RentaCar.Usuario.comprobarCliente;
+import static RentaCar.Usuario.mostrarCliente;
 import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import static java.awt.Toolkit.getDefaultToolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -111,17 +119,21 @@ public abstract class Vehiculo implements Consultas_BBDD {
     }
     
     /**
-     * Este metodo se encarga de listar los vehiculos existentes en el sistema
+     * Este metodo se encarga de listar los vehiculos existentes en una JTable
+     * 
+     * @see javax.swing.JTable
+     * @see javax.swing.table.AbstractTableModel
      */    
-    public static void listarVehiculos(){
+    public static JFrame listarVehiculos(){
         PreparedStatement pst = null;
         ResultSet rs = null;
         ModeloTabla modelo = null;
         JTable tabla = new JTable(modelo);
-        JFrame ventana = new JFrame();
-        try (Connection con = obtenerConexion()){            
-            ventana.setTitle("LISTADO DE VEHICULOS");
-            ventana.setBounds(400, 300, 800, 300);
+        JFrame ventana = crearVentana();
+        JPanel buscar = new JPanel();
+        JButton buscarVehiculo = new JButton("BUSCAR VEHICULO");
+        ventana.setTitle("LISTADO DE VEHICULOS");
+        try (Connection con = obtenerConexion()){                      
             pst = con.prepareStatement(selectVehiculos(),ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             rs = pst.executeQuery();
@@ -133,8 +145,59 @@ public abstract class Vehiculo implements Consultas_BBDD {
         ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        buscarVehiculo.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String matricula = JOptionPane.showInputDialog(null, "Introduce la matricula del vehiculo", "BUSCAR VEHICULO", JOptionPane.QUESTION_MESSAGE);
+            try {
+                if ((matricula != null) && (matricula.trim().length() > 0)){
+                    if (comprobarVehiculo(matricula)){
+                        mostrarVehiculo(matricula);
+                    }else if (!comprobarVehiculo(matricula)){
+                        JOptionPane.showMessageDialog(null, "La matricula indicada no existe o no está activa.","ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                ventana.dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        });
+        buscar.add(buscarVehiculo);
+        ventana.add(buscar,BorderLayout.SOUTH);
+        
+        return ventana;
     }
     
+    public static void mostrarVehiculo(String matricula) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ModeloTabla modelo = null;
+        JTable tabla = new JTable(modelo);
+        JFrame ventana = crearVentana();
+        try (Connection con = obtenerConexion()){            
+            ventana.setTitle("VEHICULO");
+            pst = con.prepareStatement(buscarVehiculo(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            pst.setString(1,matricula);
+            rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        modelo = new ModeloTabla(rs);
+        tabla = new JTable(modelo);
+        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+    
+    /**
+     * Método para rellenar el desplegable de marcas Interfaz_RegistroVehiculos
+     * con datos de las BBDD
+     * @param marcas marcas es el JCombobox a rellenar
+     * @throws SQLException 
+     */
     public static void extraerMarcas(JComboBox marcas) throws SQLException{
         Connection con = obtenerConexion();        
         try (PreparedStatement ps = con.prepareStatement(listarMarcas()); ResultSet rs = ps.executeQuery()){
@@ -146,6 +209,12 @@ public abstract class Vehiculo implements Consultas_BBDD {
         }
     }
     
+    /**
+     * Método para rellenar el desplegable de clases Interfaz_RegistroVehiculos
+     * con datos de las BBDD
+     * @param clases clases es el JCombobox a rellenar
+     * @throws SQLException 
+     */
     public static void extraerClases(JComboBox clases) throws SQLException{
         Connection con = obtenerConexion();        
         try (PreparedStatement ps = con.prepareStatement(listarClases()); ResultSet rs = ps.executeQuery()){
@@ -158,31 +227,19 @@ public abstract class Vehiculo implements Consultas_BBDD {
     }
     
     /**
-     * Método para comprobar si todos los campos de alta de un usuario están
-     * completados
-     *
-     * @return devuelve un booleano con el resultado
-     */
-    public boolean revisarDatosVehiculo() {
-        boolean camposCompletos = true;
-        if (this.getMatricula().isEmpty() || this.getMatricula() == null || this.getMarca().isEmpty()
-                || this.getMarca() == null || this.getMarca() == " " || this.getModelo().isEmpty()
-                || this.getModelo() == null || this.getClase() == 0 || this.getPrecioDia() == 0) {
-
-            camposCompletos = false;
-        }
-        
-        return camposCompletos;
-    }
-    
-    /**
      * Método para recuperar la PK de la clase seleccionada
      */
-    public abstract void registrarVehiculo(JLabel resultado) throws SQLException;
+    public abstract void registrarVehiculo() throws SQLException;
     
+    /**
+     * Método para obtener el codigo de una clase en función de su nombre
+     * @param nombre nombre de la clase que se quiere recuperar
+     * @return devuelve el codigo de la clase
+     * @throws SQLException 
+     */
     public static char obtenerClasePK(String nombre) throws SQLException{
         char cod = 0;
-        String query = reuperarPKClase();
+        String query = recuperarPKClase();
         PreparedStatement pst = null;
         ResultSet rs = null;
         Connection con = null;

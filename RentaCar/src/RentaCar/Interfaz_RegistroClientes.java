@@ -276,11 +276,8 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
 
         // Rol fijado manualmente
         int rol = 1;
-
         Usuario nuevoCliente = new Usuario(nif, nom, ape1, ape2, tel, mail, rol, pass, codUser);
-
         nuevoCliente.insertRegistro(jLabel_resultado);
-
     }//GEN-LAST:event_jButton_EnviarActionPerformed
 
     private void jTextField_apellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_apellido2ActionPerformed
