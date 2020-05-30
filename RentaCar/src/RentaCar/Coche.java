@@ -5,25 +5,29 @@
  */
 package RentaCar;
 
+import static RentaCar.Automovil.selectAutomoviles;
 import static RentaCar.Consultas_BBDD.*;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author victoriapenas
  */
-public class Coche extends Vehiculo{
-    
+public class Coche extends Vehiculo {
+
     /**
      * Atributos
      */
     private Integer numeroPuertas;
     private Integer potenciaMotor;
-    
+
     /**
      * Contructor
      */
@@ -33,6 +37,7 @@ public class Coche extends Vehiculo{
 
     /**
      * Constructor con parámetros
+     *
      * @param numeroPuertas
      * @param potenciaMotor
      * @param matricula
@@ -46,9 +51,10 @@ public class Coche extends Vehiculo{
         this.setNumeroPuertas(numeroPuertas);
         this.setPotenciaMotor(potenciaMotor);
     }
-    
+
     /**
      * Contructor copia
+     *
      * @param c1 objeto de tipo Coche
      * @param v1 objeto de tipo Vehiculo
      */
@@ -77,14 +83,14 @@ public class Coche extends Vehiculo{
     @Override
     public boolean revisarDatosVehiculo() {
         boolean datosVehiculo = super.revisarDatosVehiculo();
-        if (!datosVehiculo || this.getNumeroPuertas() == null || this.getPotenciaMotor() == null){
+        if (!datosVehiculo || this.getNumeroPuertas() == null || this.getPotenciaMotor() == null) {
             return false;
         }
         return true;
     }
-    
+
     @Override
-    public void registrarVehiculo(JLabel resultado) throws SQLException{
+    public void registrarVehiculo(JLabel resultado) throws SQLException {
         PreparedStatement pst = null;
         Connection con = null;
         String queryVehiculos = null;
@@ -101,7 +107,7 @@ public class Coche extends Vehiculo{
                         this.getModelo(), this.getClase(), this.getPrecioDia());
                 pst = con.prepareStatement(queryVehiculos);
                 pst.executeUpdate();
-                
+
                 //INSERT tabla especificaciones coche
                 queryCoche = insertarCoche();
                 pst = con.prepareStatement(queryCoche);
@@ -109,15 +115,55 @@ public class Coche extends Vehiculo{
                 pst.setInt(2, this.getNumeroPuertas());
                 pst.setInt(3, this.getPotenciaMotor());
                 pst.executeUpdate();
-                
+
                 con.commit();
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             con.rollback();
-        }finally {
+        } finally {
             con.setAutoCommit(true);
             con.close();
             pst.close();
         }
+    }
+
+    /**
+     * //*************PENDIENTE*************
+     */
+    public static void mostrarVehiculosRes() {
+        ResultSet rs;
+        Connection con;
+        PreparedStatement pst;
+        
+        ArrayList<Moto> listaMotos = new ArrayList<>();
+        ArrayList<Coche> listaCoches = new ArrayList<>();
+        ArrayList<Caravana> listaCaravana = new ArrayList<>();
+        /*try {
+            con = obtenerConexion();
+            pst = con.prepareStatement(selectAutomoviles(), ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            rs = pst.executeQuery();
+            Vehiculo vehi;
+            while (rs.next()) {
+                vehi = new Vehiculo(rs.getString("matricula"), rs.getString("marca"),
+                        rs.getString("modelo"), rs.getDouble("precioDia"), rs.getString("clase"));
+                vehiLista.add(vehi);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        ArrayList<Vehiculo> lista = vehiLista();
+        DefaultTableModel model = (DefaultTableModel) jTable_Vehiculos.getModel();
+        Object[] row = new Object[5];
+        for (int i = 0;
+                i < lista.size();
+                i++) {
+            row[0] = lista.get(i).getMatricula();
+            row[1] = lista.get(i).getMarca();
+            row[2] = lista.get(i).getModelo();
+            row[3] = lista.get(i).getPrecioDia();
+            row[4] = lista.get(i).getClase();
+            model.addRow(row);
+        }*/
     }
 }

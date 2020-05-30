@@ -4,20 +4,10 @@
  */
 package RentaCar;
 
-import static RentaCar.Automovil.selectAutomoviles;
-import static RentaCar.Consultas_BBDD.obtenerConexion;
+import static RentaCar.Coche.mostrarVehiculosRes;
 import static RentaCar.Impresora.imprimir;
-import java.awt.BorderLayout;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -26,16 +16,12 @@ import javax.swing.table.TableModel;
  */
 public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
-    private ResultSet rs;
-    private Connection con;
-    private PreparedStatement pst;
-
     /**
      * Creates new form Interfaz_contratos
      */
     public Interfaz_Reservas() {
         initComponents();
-        autosList();
+        mostrarVehiculosRes();
 
         /**
          * Permite rellenar los campos sólo con seleccionar las rows
@@ -340,7 +326,7 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                         .addComponent(jTextField_numPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel_clase)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField_clase, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_datosVehiculoLayout.createSequentialGroup()
                         .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,9 +523,8 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane)
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel_Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel_datosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel_datosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                         .addComponent(Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
@@ -585,6 +570,14 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void actualizarFechas() {
+        Date fecha = new Date();
+        String hoy = fecha.getDate() + "/"
+                + (fecha.getMonth() + 1) + "/"
+                + (fecha.getYear() + 1900);
+        jTextField_fechaSolicitud.setText(hoy);
+    }
+
     /**
      * Método para limpiar los campos
      */
@@ -610,58 +603,6 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jComboBox_horaRecogida.setSelectedItem(" ");
         jDateChooser_devolucion.setCalendar(null);
         jDateChooser_recogida.setCalendar(null);
-        /**
-         * Implantación de la fecha del sistema
-         */
-        Date fecha = new Date();
-        String hoy = fecha.getDate() + "/"
-                + (fecha.getMonth() + 1) + "/"
-                + (fecha.getYear() + 1900);
-
-        jTextField_fechaSolicitud.setText(hoy);
-
-    }
-
-    /**
-     * Query para rellenar datos de Vehiculos TODO: Sólo rellena coches
-     *
-     * @return
-     */
-    public ArrayList<Automovil> autosList() {
-        ArrayList<Automovil> autosList = new ArrayList<>();
-        try {
-            con = obtenerConexion();
-            pst = con.prepareStatement(selectAutomoviles(), ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
-            rs = pst.executeQuery();
-            Automovil auto;
-            while (rs.next()) {
-                auto = new Automovil(rs.getString("matricula"), rs.getString("marca"),
-                        rs.getString("modelo"), rs.getDouble("precioDia"), rs.getString("clase"));
-                autosList.add(auto);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return autosList;
-    }
-
-    /**
-     * TODO: Muestra los coches por ahora, puta mierda
-     * lo movere a vehiculos
-     */
-    public void mostrarAutos() {
-        ArrayList<Automovil> lista = autosList();
-        DefaultTableModel model = (DefaultTableModel) jTable_Vehiculos.getModel();
-        Object[] row = new Object[5];
-        for (int i = 0; i < lista.size(); i++) {
-            row[0] = lista.get(i).getMatricula();
-            row[1] = lista.get(i).getMarca();
-            row[2] = lista.get(i).getModelo();
-            row[3] = lista.get(i).getPrecioDia();
-            row[4] = lista.get(i).getClase();
-            model.addRow(row);
-        }
     }
     private void jButton_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_limpiarActionPerformed
         limpiar();
