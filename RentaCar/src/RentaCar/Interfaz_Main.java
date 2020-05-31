@@ -393,7 +393,6 @@ public class Interfaz_Main extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Acceder;
     private javax.swing.JButton jButton_ConsultarVeh;

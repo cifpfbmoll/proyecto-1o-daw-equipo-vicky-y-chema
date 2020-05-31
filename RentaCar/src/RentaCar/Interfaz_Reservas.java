@@ -4,10 +4,19 @@
  */
 package RentaCar;
 
-import static RentaCar.Coche.mostrarVehiculosRes;
+import static RentaCar.Consultas_BBDD.obtenerConexion;
+import static RentaCar.Consultas_BBDD.selectVehiculos;
 import static RentaCar.Impresora.imprimir;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -16,12 +25,20 @@ import javax.swing.table.TableModel;
  */
 public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
+    ArrayList<Moto> listaMotos = new ArrayList<>();
+    ArrayList<Coche> listaCoches = new ArrayList<>();
+    ArrayList<Caravana> listaCaravanas = new ArrayList<>();
+
     /**
      * Creates new form Interfaz_contratos
      */
     public Interfaz_Reservas() {
         initComponents();
-        mostrarVehiculosRes();
+        try {
+            mostrarVehiculosRes(listaCoches,listaMotos,listaCaravanas);
+        } catch (SQLException ex) {
+            Logger.getLogger(Interfaz_Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         /**
          * Permite rellenar los campos sólo con seleccionar las rows
@@ -604,6 +621,80 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jDateChooser_devolucion.setCalendar(null);
         jDateChooser_recogida.setCalendar(null);
     }
+
+    /**
+     * //*************PENDIENTE*************
+     */
+    public ArrayList mostrarVehiculosRes(ArrayList<Coche> listaCoches,
+            ArrayList<Moto> listaMotos, ArrayList<Caravana> listaCaravanas) throws SQLException {
+        ResultSet rs;
+        Connection con;
+        PreparedStatement pst;
+        try {
+            con = obtenerConexion();
+            pst = con.prepareStatement(selectVehiculos(), ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            rs = pst.executeQuery();
+            Moto moto;
+            Coche coche;
+            Caravana caravana;
+            while (rs.next()) {
+                try {
+                    coche = new Coche(rs.getInt("numeropuertas"), rs.getInt("potenciapotor"),
+                            rs.getString("matricula"), rs.getString("marca"), rs.getString("modelo"),
+                            rs.getDouble("precioDia"), rs.getString("clase").charAt(0), rs.getBoolean("retirado"));
+                    // TODO comprobar que el rs del boolean es true
+                    listaCoches.add(coche);
+                    return listaCoches;
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(Coche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    caravana = new Caravana(rs.getInt("potenciaMotor"), rs.getBoolean("wc"),
+                            rs.getString("matricula"), rs.getString("marca"), rs.getString("modelo"),
+                            rs.getDouble("precioDia"), rs.getString("clase").charAt(0));
+                    // TODO comprobar que el rs del boolean es true
+                    listaCaravanas.add(caravana);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Coche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    moto = new Moto(rs.getInt("cilindrada"), rs.getString("matricula"),
+                            rs.getString("marca"), rs.getString("modelo"),
+                            rs.getDouble("precioDia"), rs.getString("clase").charAt(0));
+                    // TODO comprobar que el rs del boolean es true
+                    listaMotos.add(moto);
+                    return listaMotos;
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(Coche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return listaCaravanas;
+
+    }
+
+    public void mostrarVehiculosJtable(ArrayList<Coche> lista) {
+        DefaultTableModel model = (DefaultTableModel) jTable_Vehiculos.getModel();
+        Object[] filaCoches = new Object[7];
+        for (int i = 0; i < lista.size(); i++) {
+            filaCoches[0] = lista.get(i).getMatricula();
+            filaCoches[1] = lista.get(i).getMarca();
+            filaCoches[2] = lista.get(i).getModelo();
+            filaCoches[3] = lista.get(i).getPrecioDia();
+            filaCoches[4] = lista.get(i).getClase();
+            filaCoches[5] = lista.get(i).getPotenciaMotor();
+            filaCoches[6] = lista.get(i).getNumeroPuertas();
+            model.addRow(filaCoches);
+        }
+    }
+
+
     private void jButton_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_limpiarActionPerformed
         limpiar();
     }//GEN-LAST:event_jButton_limpiarActionPerformed
@@ -623,15 +714,12 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable_VehiculosMouseClicked
 
     private void jTextField_numReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_numReservaActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_numReservaActionPerformed
 
     private void ObservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ObservacionesActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_ObservacionesActionPerformed
 
     private void jTextField_numPuertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_numPuertasActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_numPuertasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

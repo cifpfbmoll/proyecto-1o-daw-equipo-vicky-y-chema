@@ -7,12 +7,7 @@ package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
 import static RentaCar.Interfaz_Administrador.crearVentana;
-import static RentaCar.Usuario.comprobarCliente;
-import static RentaCar.Usuario.mostrarCliente;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -340,5 +335,9 @@ public abstract class Vehiculo implements Consultas_BBDD {
             con.close();
         }
         return existe;
+    }
+
+    boolean revisarDatosVehiculo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
