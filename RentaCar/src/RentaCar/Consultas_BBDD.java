@@ -36,7 +36,7 @@ public interface Consultas_BBDD {
      * @return devuelve la query
      */
     public static String buscarCliente(){
-        return "select * from clientes where nif = ?";
+        return "select * from clientes where nif ilike ?";
     }
     /**
      * Query para insertar nuevos clientes a la BBDD
@@ -88,7 +88,7 @@ public interface Consultas_BBDD {
      * @return devuelve la query
      */
     public static String buscarVehiculo(){
-        return "select * from vehiculos where matricula = ?";
+        return "select * from vehiculos where matricula ilike ?";
     }
     
     /**
@@ -96,10 +96,39 @@ public interface Consultas_BBDD {
      * @return devuelve la query para recuperar los vehiculos
      */
     public static String selectVehiculos(){
-        return "SELECT *, CASE WHEN EXISTS (SELECT matricula FROM especificaciones_coches c WHERE c.matricula = v.matricula) THEN 'coche'" +
-                "WHEN EXISTS (SELECT matricula FROM especificaciones_caravanas c WHERE c.matricula = v.matricula) THEN 'caravana'" +
-                "WHEN EXISTS (SELECT matricula FROM especificaciones_motos c WHERE c.matricula = v.matricula) THEN 'moto'" +
+        return "SELECT *, CASE WHEN EXISTS (SELECT matricula FROM especificaciones_coches c"
+                + " WHERE c.matricula = v.matricula) THEN 'coche'" +
+                "WHEN EXISTS (SELECT matricula FROM especificaciones_caravanas c"
+                + " WHERE c.matricula = v.matricula) THEN 'caravana'" +
+                "WHEN EXISTS (SELECT matricula FROM especificaciones_motos c WHERE"
+                + " c.matricula = v.matricula) THEN 'moto'" +
                 "end as tipo FROM vehiculos v where retirado = 'false'";
+    }
+    
+    /**
+     * Método para recuperar el tipo de vehiculo
+     * @return devuleve 0,1,2 siendo 0 coches, 1 caravanas, 2 motos
+     */
+    public static String selectTipoVehiculo(){
+        return "select tipoVehiculoMatricula(?)";
+    }
+    
+    public static String datosCoche(){
+        return "select e.matricula, v.marca, v.modelo, v.clase, e.numeropuertas,"
+                + "e.potenciamotor, v.preciodia from vehiculos v, especificaciones_coches e"
+                + " where e.matricula = v.matricula and e.matricula ilike ?";
+    }
+    
+    public static String datosCaravana(){
+        return "select e.matricula, v.marca, v.modelo, v.clase, e.wc,"
+                + "e.potenciamotor, v.preciodia from vehiculos v, especificaciones_caravanas e"
+                + " where e.matricula = v.matricula and e.matricula ilike ?";
+    }
+    
+    public static String datosMoto(){
+        return "select e.matricula, v.marca, v.modelo, v.clase,"
+                + "e.cilindrada, v.preciodia from vehiculos v, especificaciones_motos e"
+                + " where e.matricula = v.matricula and e.matricula ilike ?";
     }
     
     /**
@@ -123,7 +152,7 @@ public interface Consultas_BBDD {
      * @return la query
      */
     public static String recuperarPKClase(){
-        return "select cod from clases_vehiculos where nombre = ?";
+        return "select cod from clases_vehiculos where nombre ilike ?";
     }
     
     /**
@@ -169,7 +198,7 @@ public interface Consultas_BBDD {
      * @return devuelve la query
      */
     public static String eliminarVehiculo(){
-        return "update vehiculos set retirado = true where matricula=?";
+        return "update vehiculos set retirado = true where matricula ilike ?";
     }
     
     /**
@@ -177,7 +206,7 @@ public interface Consultas_BBDD {
      * @return devuelve la query
      */
     public static String recuperarVehiculo(){
-        return "select * from vehiculos where matricula=? and retirado=false";
+        return "select * from vehiculos where matricula ilike ? and retirado=false";
     }
     
     /**
@@ -185,12 +214,22 @@ public interface Consultas_BBDD {
      * @return devuelve la query
      */
     public static String modificarPrecioSQL(){
-        return "update vehiculos set preciodia = ? where matricula = ?";
+        return "update vehiculos set preciodia = ? where matricula ilike ?";
     }
     
     //---------------------QUERIES RESERVAS--------------------------------
     
-    public static String cancelarReserva(){
-        return "";
+    public static String deleteReserva(){
+        return "delete from reservas where numreserva = ? and fecharecogida>now()";
+    }
+    
+    public static String selectReservas(){
+        return "select r.*, d.matriculavehiculo, d.preciodia, d.descuento " +
+                "from reservas r inner join detalles_reserva d " +
+                "on r.numreserva = d.numreserva";
+    }
+    
+    public static String recuperarReserva(){
+        return "select * from reservas where numreserva ilike ?";
     }
 }

@@ -150,7 +150,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton_listarReservas1" min="-2" pref="280" max="-2" attributes="0"/>
+                      <Component id="jButton_cancelrReservas" min="-2" pref="280" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jButton_registrarClientes" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
@@ -202,7 +202,7 @@
                       <Component id="jButton_modificarPrecio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jButton_listarReservas1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton_cancelrReservas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="220" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -319,7 +319,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f9" green="ff" red="fe" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="LISTAR RESERVAS (SOON)"/>
+            <Property name="text" type="java.lang.String" value="LISTAR RESERVAS"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_listarReservasActionPerformed"/>
@@ -379,7 +379,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_modificarPrecioActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton_listarReservas1">
+        <Component class="javax.swing.JButton" name="jButton_cancelrReservas">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="3e" green="3b" red="37" type="rgb"/>
@@ -393,7 +393,7 @@
             <Property name="text" type="java.lang.String" value="CANCELAR RESERVAS (SOON)"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_listarReservas1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_cancelrReservasActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

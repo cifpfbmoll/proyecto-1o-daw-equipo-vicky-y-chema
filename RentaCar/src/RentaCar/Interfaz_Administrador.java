@@ -4,7 +4,12 @@
  */
 package RentaCar;
 
+import static RentaCar.Consultas_BBDD.recuperarReserva;
+import static RentaCar.Consultas_BBDD.recuperarVehiculo;
 import static RentaCar.Interfaz_Main.centrarFrame;
+import static RentaCar.Reserva.cancelarReserva;
+import static RentaCar.Reserva.comprobarFechaReserva;
+import static RentaCar.Reserva.listarReservas;
 import static RentaCar.Usuario.listarClientesTabla;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -95,7 +100,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton_retirarVehiculo = new javax.swing.JButton();
         jButton_modificarPrecio = new javax.swing.JButton();
-        jButton_listarReservas1 = new javax.swing.JButton();
+        jButton_cancelrReservas = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -221,7 +226,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jButton_listarReservas.setBackground(new java.awt.Color(55, 59, 62));
         jButton_listarReservas.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jButton_listarReservas.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_listarReservas.setText("LISTAR RESERVAS (SOON)");
+        jButton_listarReservas.setText("LISTAR RESERVAS");
         jButton_listarReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_listarReservasActionPerformed(evt);
@@ -261,13 +266,13 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             }
         });
 
-        jButton_listarReservas1.setBackground(new java.awt.Color(55, 59, 62));
-        jButton_listarReservas1.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
-        jButton_listarReservas1.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_listarReservas1.setText("CANCELAR RESERVAS (SOON)");
-        jButton_listarReservas1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_cancelrReservas.setBackground(new java.awt.Color(55, 59, 62));
+        jButton_cancelrReservas.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
+        jButton_cancelrReservas.setForeground(new java.awt.Color(254, 255, 249));
+        jButton_cancelrReservas.setText("CANCELAR RESERVAS (SOON)");
+        jButton_cancelrReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_listarReservas1ActionPerformed(evt);
+                jButton_cancelrReservasActionPerformed(evt);
             }
         });
 
@@ -281,7 +286,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jDesktopPane.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jButton_retirarVehiculo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane.setLayer(jButton_modificarPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane.setLayer(jButton_listarReservas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane.setLayer(jButton_cancelrReservas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
         jDesktopPane.setLayout(jDesktopPaneLayout);
@@ -296,7 +301,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
             .addGroup(jDesktopPaneLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_listarReservas1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_cancelrReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jDesktopPaneLayout.createSequentialGroup()
                         .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_registrarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,7 +341,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                     .addComponent(jButton_listarReservas)
                     .addComponent(jButton_modificarPrecio))
                 .addGap(30, 30, 30)
-                .addComponent(jButton_listarReservas1)
+                .addComponent(jButton_cancelrReservas)
                 .addContainerGap(220, Short.MAX_VALUE))
         );
 
@@ -378,9 +383,8 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
 
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
-        /**
-         * TODO pendiente de listar reservas
-         */
+
+        listarReservas();
 
     }//GEN-LAST:event_jButton_listarReservasActionPerformed
 
@@ -404,7 +408,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         // Solicita confirmación
         try {
             if ((dato != null) && (dato.trim().length() > 0)){
-                if (comprobarVehiculo(dato)){
+                if (Interfaz_Main.comprobarObj(dato,recuperarVehiculo())){
                     reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
                     if (reply == JOptionPane.YES_OPTION) {
                         bajaVehiculo(dato);
@@ -426,7 +430,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         String matricula = JOptionPane.showInputDialog(null, "Introduce la matrícula", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
         try {
             if ((matricula != null) && (matricula.trim().length() > 0)){
-                if (comprobarVehiculo(matricula)){
+                if (Interfaz_Main.comprobarObj(matricula,recuperarVehiculo())){
                     String precio = JOptionPane.showInputDialog(null, "Introduce el nuevo precio", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
                     if ((precio != null) && (precio.trim().length() > 0)){
                         if(Double.parseDouble(precio)<0){
@@ -452,15 +456,44 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_modificarPrecioActionPerformed
 
     
-    private void jButton_listarReservas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservas1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_listarReservas1ActionPerformed
+    private void jButton_cancelrReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelrReservasActionPerformed
+        int reply = 0;
+        JFrame ventana = listarReservas();
+        String reserva = JOptionPane.showInputDialog(null, "Introduce el número de la reserva que quieres cancelar",
+                "CANCELAR RESERVA", JOptionPane.QUESTION_MESSAGE);
+        try {
+            if ((reserva != null) && (reserva.trim().length() > 0)){
+                if (Interfaz_Main.comprobarObj(reserva,recuperarReserva())){
+                        if(!comprobarFechaReserva(reserva)){
+                            JOptionPane.showMessageDialog(null, "Las reservas pasadas no se"
+                                    + "pueden cancelar.","ERROR", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
+                            if (reply == JOptionPane.YES_OPTION) {
+                                cancelarReserva(reserva);
+                                    JOptionPane.showMessageDialog(null, "Reserva " + reserva + " cancelada.","RESERVA CANCELADA"
+                                            , JOptionPane.DEFAULT_OPTION);
+                            }
+                        }
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "El número de reserva indicado no es "
+                            + "correcto.","ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            ventana.dispose();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton_cancelrReservasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton_cancelrReservas;
     private javax.swing.JButton jButton_listarClientes;
     private javax.swing.JButton jButton_listarReservas;
-    private javax.swing.JButton jButton_listarReservas1;
     private javax.swing.JButton jButton_listarVehiculos;
     private javax.swing.JButton jButton_modificarPrecio;
     private javax.swing.JButton jButton_realizarReserva;

@@ -5,22 +5,43 @@
  */
 package RentaCar;
 
+import static RentaCar.Consultas_BBDD.buscarVehiculo;
+import static RentaCar.Consultas_BBDD.obtenerConexion;
+import static RentaCar.Consultas_BBDD.recuperarReserva;
+import static RentaCar.Interfaz_Administrador.crearVentana;
 import static RentaCar.Usuario.comprobarRol;
 import static RentaCar.Usuario.comprobarUsuario;
 import static RentaCar.Vehiculo.listarVehiculos;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Panel;
+import java.awt.Toolkit;
+import static java.awt.Toolkit.getDefaultToolkit;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -38,10 +59,6 @@ public class Interfaz_Main extends javax.swing.JFrame {
         setIconImage(img.getImage());
     }
 
-    /*@Override
-        public Dimension getPreferredSize() {
-            return new Dimension(imagen.getWidth(), imagen.getHeight());
-        }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -302,9 +319,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_RegistrarseActionPerformed
 
     private void jButton_ConsultarVehActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConsultarVehActionPerformed
-
-        //CHEMA --> si llamo directamente a listarVehiculos() salta una excepcion, para que funcione bien lo tengo que que hacer asi
-        JFrame ventana = listarVehiculos();
+        listarVehiculos();
     }//GEN-LAST:event_jButton_ConsultarVehActionPerformed
 
     private void jPasswordField_ContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_ContraseñaActionPerformed
@@ -393,6 +408,84 @@ public class Interfaz_Main extends javax.swing.JFrame {
             }
         });
     }
+    
+    /**
+     * Método para crear un JFrame centrados en la pantalla en función de la resolución
+     * @return devuelve el JFrame
+     */
+    public static JFrame crearVentana(){
+        JFrame ventana = new JFrame();
+        Toolkit miPantalla = getDefaultToolkit();
+        Dimension medidaPantalla = miPantalla.getScreenSize();
+        int alturaPantalla = medidaPantalla.height;
+        int anchoPantalla = medidaPantalla.width;
+        ventana.setSize(anchoPantalla/2,alturaPantalla/2);
+        ventana.setLocation(anchoPantalla/4,alturaPantalla/4);
+     
+        return ventana;
+    }
+    
+    /**
+     * Método para comprobar si un objeto existe en bbdd
+     * @param info primary key a chequear en la bbdd
+     * @param query query a ejecutar
+     * @throws SQLException 
+     */
+    public static boolean comprobarObj(String info, String query) throws SQLException{
+        boolean existe = false;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = obtenerConexion();
+            pst = con.prepareStatement(query);
+            pst.setString(1,info);
+            rs = pst.executeQuery();
+            if (rs.next ()) {
+                existe = true;
+            }
+        }finally{
+            rs.close();
+            pst.close();
+            con.close();
+        }
+        return existe;
+    }
+    
+    /**
+     * Método para generar una JTable con la información exportada de la bbdd
+     * @param info primary key a chequear en la bbdd
+     * @param query query a ejecutar
+     * @param titulo titulo del JFrame
+     * @throws SQLException 
+     */
+    public static void mostrarObj(String info, String query, String titulo) throws SQLException, IOException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ModeloTabla modelo = null;
+        JTable tabla = null;
+        JFrame ventana = crearVentana();
+
+        //chema, --> help, no se como reducir el tamaño de la tabla ubicada en el north
+        LaminaConImagen2 test = new LaminaConImagen2();
+        ventana.add(test,BorderLayout.CENTER);
+        
+        try (Connection con = obtenerConexion()){            
+            ventana.setTitle(titulo);
+            pst = con.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            pst.setString(1,info);
+            rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        modelo = new ModeloTabla(rs);
+        tabla = new JTable(modelo);
+        ventana.add(new JScrollPane(tabla), BorderLayout.NORTH);
+        ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Acceder;
     private javax.swing.JButton jButton_ConsultarVeh;
@@ -410,4 +503,22 @@ public class Interfaz_Main extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField_Contraseña;
     private javax.swing.JTextField jTextField_Usuario;
     // End of variables declaration//GEN-END:variables
+}
+
+//TODO panel para pintar la imagen chema ??
+class LaminaConImagen2 extends JPanel{
+    
+    @Override
+    public void paintComponent(Graphics g){
+        Image imagen = null;
+        super.paintComponent(g);
+        
+        try {
+            imagen = ImageIO.read(new File("src/image/fondo-registroVehiculos.jpg"));
+        } catch (IOException ex) {
+            System.out.println("La imagen no se encuentra");
+        }
+                
+        g.drawImage(imagen, 80, 0, null);
+    }
 }
