@@ -7,18 +7,16 @@ package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
 import static RentaCar.Interfaz_Administrador.crearVentana;
-import static RentaCar.Usuario.comprobarCliente;
-import static RentaCar.Usuario.mostrarCliente;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -125,10 +123,11 @@ public abstract class Vehiculo implements Consultas_BBDD {
      * @see javax.swing.table.AbstractTableModel
      */    
     public static JFrame listarVehiculos(){
+        String query = recuperarVehiculo();
         PreparedStatement pst = null;
         ResultSet rs = null;
         ModeloTabla modelo = null;
-        JTable tabla = new JTable(modelo);
+        JTable tabla = null;
         JFrame ventana = crearVentana();
         JPanel buscar = new JPanel();
         JButton buscarVehiculo = new JButton("BUSCAR VEHICULO");
@@ -150,16 +149,10 @@ public abstract class Vehiculo implements Consultas_BBDD {
         @Override
         public void actionPerformed(ActionEvent e) {
             String matricula = JOptionPane.showInputDialog(null, "Introduce la matricula del vehiculo", "BUSCAR VEHICULO", JOptionPane.QUESTION_MESSAGE);
-            try {
-                if ((matricula != null) && (matricula.trim().length() > 0)){
-                    if (comprobarVehiculo(matricula)){
-                        mostrarVehiculo(matricula);
-                    }else if (!comprobarVehiculo(matricula)){
-                        JOptionPane.showMessageDialog(null, "La matricula indicada no existe o no está activa.","ERROR", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
+            try{
+                buscarTipoVehiculo(matricula, query);
                 ventana.dispose();
-            } catch (Exception ex) {
+            }catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -170,26 +163,42 @@ public abstract class Vehiculo implements Consultas_BBDD {
         return ventana;
     }
     
-    public static void mostrarVehiculo(String matricula) throws SQLException{
+    /**
+     * Método para mostrar las especificaciones del vehiculo en función del tipo
+     * @param matricula matricula del vehiculo
+     * @param query query para comprobar si la matricula existe como activa en la BBDD
+     * @throws SQLException 
+     */
+    public static void buscarTipoVehiculo(String matricula, String query) throws SQLException{
+        int tipo = 0;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        ModeloTabla modelo = null;
-        JTable tabla = new JTable(modelo);
-        JFrame ventana = crearVentana();
-        try (Connection con = obtenerConexion()){            
-            ventana.setTitle("VEHICULO");
-            pst = con.prepareStatement(buscarVehiculo(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Connection con = obtenerConexion()){
+            if ((matricula != null) && (matricula.trim().length() > 0)){
+                if (Interfaz_Main.comprobarObj(matricula,query)){
+                    pst = con.prepareStatement(selectTipoVehiculo(),ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            pst.setString(1,matricula);
-            rs = pst.executeQuery();
-        } catch (SQLException ex) {
+                    pst.setString(1, matricula);
+                    rs = pst.executeQuery();
+                    if (rs.next()){
+                        tipo = rs.getInt(1);
+                    }
+                    if (tipo == 0){
+                        Interfaz_Main.mostrarObj(matricula,datosCoche(),"COCHE");
+                    } else if (tipo == 1){
+                        Interfaz_Main.mostrarObj(matricula,datosCaravana(),"CARAVANA");
+                    } else if (tipo == 2){
+                        Interfaz_Main.mostrarObj(matricula,datosMoto(),"MOTO");
+                    }
+                }else if (!Interfaz_Main.comprobarObj(matricula,query)){
+                    JOptionPane.showMessageDialog(null, "La matricula indicada no existe o no está activa.","ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "No has indicado ninguna matricula.","ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        modelo = new ModeloTabla(rs);
-        tabla = new JTable(modelo);
-        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
-        ventana.setVisible(true);
-        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     /**
@@ -315,6 +324,8 @@ public abstract class Vehiculo implements Consultas_BBDD {
     }
     
     /**
+     * @deprecated sustituido por comprobarObj(String info, String query)
+     * 
      * Método para comprobar si un vehiculo existe y está operativo
      * @param matricula matricula para localizar el vehiculo en la BBDD
      * @return booleano con el resultado
@@ -340,5 +351,33 @@ public abstract class Vehiculo implements Consultas_BBDD {
             con.close();
         }
         return existe;
+    }
+    
+    /**
+     * @deprecated sustituido por mostrarObj(String info, String query, String titulo)
+     * @param matricula
+     * @throws SQLException 
+     */
+    public static void mostrarVehiculo(String matricula) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ModeloTabla modelo = null;
+        JTable tabla = null;
+        JFrame ventana = crearVentana();
+        try (Connection con = obtenerConexion()){            
+            ventana.setTitle("VEHICULO");
+            pst = con.prepareStatement(buscarVehiculo(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            pst.setString(1,matricula);
+            rs = pst.executeQuery();
+ 
+           } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        modelo = new ModeloTabla(rs);
+        tabla = new JTable(modelo);
+        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }

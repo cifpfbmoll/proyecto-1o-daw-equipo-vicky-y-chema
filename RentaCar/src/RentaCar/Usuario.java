@@ -8,9 +8,6 @@ import static RentaCar.Consultas_BBDD.*;
 import static RentaCar.Interfaz_Administrador.crearVentana;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import static java.awt.Toolkit.getDefaultToolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -327,55 +324,6 @@ public class Usuario implements Consultas_BBDD {
         return encontrado;
     }
     
-    public static boolean comprobarCliente(String nif) throws SQLException{
-        boolean existe = false;
-        String query = buscarCliente();
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        Connection con = null;
-        try {
-            con = obtenerConexion();
-            pst = con.prepareStatement(query);
-            pst.setString(1,nif);
-            rs = pst.executeQuery();
-            if (rs.next ()) {
-                existe = true;
-            }
-        }finally{
-            rs.close();
-            pst.close();
-            con.close();
-        }
-        return existe;
-    }
-    
-    /**
-     * Método para listar los datos de un cliente en función del nif
-     * @param nif nif del cliente
-     * @throws SQLException 
-     */
-    public static void mostrarCliente(String nif) throws SQLException{
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        ModeloTabla modelo = null;
-        JTable tabla = new JTable(modelo);
-        JFrame ventana = crearVentana();
-        try (Connection con = obtenerConexion()){            
-            ventana.setTitle("DATOS DE CLIENTE");
-            pst = con.prepareStatement(buscarCliente(),ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
-            pst.setString(1,nif);
-            rs = pst.executeQuery();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        modelo = new ModeloTabla(rs);
-        tabla = new JTable(modelo);
-        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
-        ventana.setVisible(true);
-        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    }
-    
     /**
      * Este metodo se encarga de listar los clientes registrados en una JTable
      * 
@@ -383,10 +331,11 @@ public class Usuario implements Consultas_BBDD {
      * @see javax.swing.table.AbstractTableModel
      */    
     public static void listarClientesTabla(){
+        String query = buscarCliente();
         PreparedStatement pst = null;
         ResultSet rs = null;
         ModeloTabla modelo = null;
-        JTable tabla = new JTable(modelo); 
+        JTable tabla = null; 
         JFrame ventana = crearVentana();
         JPanel buscar = new JPanel();
         JButton buscarCliente = new JButton("BUSCAR CLIENTE");
@@ -411,12 +360,15 @@ public class Usuario implements Consultas_BBDD {
             String nif = JOptionPane.showInputDialog(null, "Introduce el NIF del cliente", "BUSCAR CLIENTE", JOptionPane.QUESTION_MESSAGE);
             try {
                 if ((nif != null) && (nif.trim().length() > 0)){
-                    if (comprobarCliente(nif)){
-                        mostrarCliente(nif);
-                    }else if (!comprobarCliente(nif)){
+                    if (Interfaz_Main.comprobarObj(nif,query)){
+                        Interfaz_Main.mostrarObj(nif,query,"CLIENTE");
+                    }else if (!Interfaz_Main.comprobarObj(nif,query)){
                         JOptionPane.showMessageDialog(null, "El NIF indicado no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
                     }
+                }else{
+                    JOptionPane.showMessageDialog(null, "No has indicado ningun NIF.","ERROR", JOptionPane.ERROR_MESSAGE);
                 }
+                ventana.dispose();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -424,5 +376,61 @@ public class Usuario implements Consultas_BBDD {
         });
         buscar.add(buscarCliente);
         ventana.add(buscar,BorderLayout.SOUTH);
+    }
+    
+    /**
+     * @deprecated sustituido por comprobarObj(String info, String query)
+     * @param nif
+     * @return
+     * @throws SQLException 
+     */
+    public static boolean comprobarCliente(String nif) throws SQLException{
+        boolean existe = false;
+        String query = buscarCliente();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+            con = obtenerConexion();
+            pst = con.prepareStatement(query);
+            pst.setString(1,nif);
+            rs = pst.executeQuery();
+            if (rs.next ()) {
+                existe = true;
+            }
+        }finally{
+            rs.close();
+            pst.close();
+            con.close();
+        }
+        return existe;
+    }
+    
+    /**
+     * @deprecated sustituido por mostrarObj(String info, String query, String titulo)
+     * Método para listar los datos de un cliente en función del nif
+     * @param nif nif del cliente
+     * @throws SQLException 
+     */
+    public static void mostrarCliente(String nif) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ModeloTabla modelo = null;
+        JTable tabla = null;
+        JFrame ventana = crearVentana();
+        try (Connection con = obtenerConexion()){            
+            ventana.setTitle("DATOS DE CLIENTE");
+            pst = con.prepareStatement(buscarCliente(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            pst.setString(1,nif);
+            rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        modelo = new ModeloTabla(rs);
+        tabla = new JTable(modelo);
+        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }
