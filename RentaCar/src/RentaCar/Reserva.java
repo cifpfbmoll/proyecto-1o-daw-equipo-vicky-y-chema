@@ -10,6 +10,7 @@ import static RentaCar.Consultas_BBDD.modificarPrecioSQL;
 import static RentaCar.Consultas_BBDD.obtenerConexion;
 import static RentaCar.Consultas_BBDD.recuperarReserva;
 import static RentaCar.Consultas_BBDD.selectReservas;
+import static RentaCar.Interfaz_Main.crearVentana;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -146,7 +147,8 @@ public class Reserva {
         ResultSet rs = null;
         ModeloTabla modelo = null;
         JTable tabla = null;
-        JFrame ventana = crearVentanaReservas();
+        JFrame ventana = crearVentana(true);
+        ventana.setTitle("LISTADO DE RESERVAS");
         JPanel buscar = new JPanel();
         JButton buscarReserva = new JButton("BUSCAR RESERVA");
         try (Connection con = obtenerConexion()){                      
@@ -171,10 +173,10 @@ public class Reserva {
                     if (Interfaz_Main.comprobarObj(reserva,query)){
                         Interfaz_Main.mostrarObj(reserva,query,"RESERVA");
                     }else if (!Interfaz_Main.comprobarObj(reserva,query)){
-                        JOptionPane.showMessageDialog(null, "El número de reserva indicado no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
+                        throw new RCException("El número de reserva indicado no existe.");
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "No has indicado ningun numero de reserva.","ERROR", JOptionPane.ERROR_MESSAGE);
+                    throw new RCException("No has indicado ningun numero de reserva.");
                 }
                 ventana.dispose();
             } catch (Exception ex) {
@@ -188,19 +190,6 @@ public class Reserva {
         return ventana;
     }
     
-    public static JFrame crearVentanaReservas(){
-        JFrame ventana = new JFrame();
-        ventana.setTitle("LISTADO DE RESERVAS");
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        ventana.setSize(1100,400);
-        int x = (int) ((dimension.getWidth() - ventana.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - ventana.getHeight()) / 2);
-        ventana.setLocation(x, y);
-        ventana.setVisible(true);
-        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        return ventana;
-    }
     
     public static void setearColumnasReservas(JTable tabla){
         tabla.getColumnModel().getColumn(8).setPreferredWidth(100);
@@ -213,7 +202,7 @@ public class Reserva {
      * @param numReserva numero de reserva a verificar
      * @return true si la fecha de recogida no está pasada
      */
-    public static boolean comprobarFechaReserva(String numReserva) throws SQLException{
+    public static boolean comprobarFechaReserva(String numReserva) throws SQLException, RCException{
         boolean cancelable = false;
         Calendar calendario = Calendar.getInstance();
         String query = recuperarReserva();
@@ -236,9 +225,11 @@ public class Reserva {
                             cancelable = true;
                         }
                     }
+                }else{
+                    throw new RCException("Las reservas pasadas no se pueden cancelar.");
                 }
             }
-        }finally{
+        } finally{
             rs.close();
             pst.close();
             con.close();
@@ -260,8 +251,6 @@ public class Reserva {
             pst = con.prepareStatement(query);
             pst.setString(1, numReserva);
             pst.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.DEFAULT_OPTION);
         }finally{
             con.close();
             pst.close();

@@ -5,7 +5,7 @@
 package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
-import static RentaCar.Interfaz_Administrador.crearVentana;
+import static RentaCar.Interfaz_Main.crearVentana;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -14,22 +14,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import java.util.regex.Pattern;
+import javax.swing.*;
 
 /**
  * @author victoriapenas & josemariahernandez
  * @version 2.0
- * @since 2020-25-05
+ * @since 2020-05-25
  */
 public class Usuario implements Consultas_BBDD {
 
-    // Atributos
     private String clienteNIF;
     private String nombre;
     private String apellido1;
@@ -40,7 +34,9 @@ public class Usuario implements Consultas_BBDD {
     private String password;
     private String codUsuario;
 
-    // Contructor vacío
+    /**
+     * Contructor vacío
+     */
     public Usuario() {
     }
 
@@ -49,7 +45,7 @@ public class Usuario implements Consultas_BBDD {
      */
     public Usuario(String clienteNIF, String nombre, String apellido1,
             String apellido2, String telefono, String email, int rol,
-            String password, String codUsuario) {
+            String password, String codUsuario) throws RCException {
         this.setClienteNIF(clienteNIF);
         this.setNombre(nombre);
         this.setApellido1(apellido1);
@@ -65,7 +61,7 @@ public class Usuario implements Consultas_BBDD {
      * Contructor copia. El NIF y el codUsuario no puede estar duplicado. Por lo
      * tanto, no se copia.
      */
-    public Usuario(Usuario user, String NIF, String codUser) {
+    public Usuario(Usuario user, String NIF, String codUser) throws RCException {
         this.setClienteNIF(NIF);
         this.setNombre(user.getNombre());
         this.setApellido1(user.getApellido1());
@@ -77,7 +73,6 @@ public class Usuario implements Consultas_BBDD {
         this.setCodUsuario(codUser);
     }
 
-    // Getters Y setters
     public String getClienteNIF() {
         return clienteNIF;
     }
@@ -114,8 +109,13 @@ public class Usuario implements Consultas_BBDD {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    //TODO controlar que no contenga letras
+    public void setTelefono(String telefono) throws RCException {  
+        if(telefono.length() < 9){
+            throw new RCException("Por favor, indica un número de teléfono válido.");
+        }else{
+            this.telefono = telefono;
+        }
     }
 
     public String getEmail() {
@@ -202,10 +202,12 @@ public class Usuario implements Consultas_BBDD {
         Connection con = null;
         try {
             con = obtenerConexion();
-            if (!revisarCampos()) {
-                resultado.setForeground(Color.RED);
-                resultado.setText("Faltan datos por cumplimentar.");
-            } else {
+            if(!revisarCampos()){
+                throw new RCException("Faltan datos por cumplimentar.");
+            }
+            if (!comprobarEmail()){
+                throw new RCException("El email indicado no es válido.");
+            }else {
                 con.setAutoCommit(false);
                 //sql insert statement para tabla clientes
                 String queryClientes = insertClientes();
@@ -239,8 +241,6 @@ public class Usuario implements Consultas_BBDD {
                     resultado.setText("Ya existe un usuario con estos datos.");
                 } else {
                     resultado.setText(ex.getSQLState() + ex.getMessage());
-                    System.out.println(ex.getSQLState());
-                    System.out.println(ex.getMessage());
                 }
             } catch (SQLException ex1) {
                 resultado.setForeground(Color.RED);
@@ -325,6 +325,19 @@ public class Usuario implements Consultas_BBDD {
     }
     
     /**
+     * Método para comprobar que el email especificado es válido
+     * @param email recibe el email
+     * @return devuelve true si es correcto
+     */
+    public boolean comprobarEmail(){
+        if (this.getEmail().contains("@")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    /**
      * Este metodo se encarga de listar los clientes registrados en una JTable
      * 
      * @see javax.swing.JTable
@@ -336,7 +349,7 @@ public class Usuario implements Consultas_BBDD {
         ResultSet rs = null;
         ModeloTabla modelo = null;
         JTable tabla = null; 
-        JFrame ventana = crearVentana();
+        JFrame ventana = crearVentana(false);
         JPanel buscar = new JPanel();
         JButton buscarCliente = new JButton("BUSCAR CLIENTE");
         ventana.setTitle("LISTADO DE CLIENTES");
@@ -363,10 +376,10 @@ public class Usuario implements Consultas_BBDD {
                     if (Interfaz_Main.comprobarObj(nif,query)){
                         Interfaz_Main.mostrarObj(nif,query,"CLIENTE");
                     }else if (!Interfaz_Main.comprobarObj(nif,query)){
-                        JOptionPane.showMessageDialog(null, "El NIF indicado no existe.","ERROR", JOptionPane.ERROR_MESSAGE);
+                        throw new RCException("El NIF indicado no existe.");
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "No has indicado ningun NIF.","ERROR", JOptionPane.ERROR_MESSAGE);
+                    throw new RCException("No has indicado ningun NIF.");
                 }
                 ventana.dispose();
             } catch (Exception ex) {
@@ -417,7 +430,7 @@ public class Usuario implements Consultas_BBDD {
         ResultSet rs = null;
         ModeloTabla modelo = null;
         JTable tabla = null;
-        JFrame ventana = crearVentana();
+        JFrame ventana = crearVentana(false);
         try (Connection con = obtenerConexion()){            
             ventana.setTitle("DATOS DE CLIENTE");
             pst = con.prepareStatement(buscarCliente(),ResultSet.TYPE_SCROLL_INSENSITIVE,

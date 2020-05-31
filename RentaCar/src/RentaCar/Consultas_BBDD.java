@@ -113,18 +113,30 @@ public interface Consultas_BBDD {
         return "select tipoVehiculoMatricula(?)";
     }
     
+    /**
+     * Query para obtener todos los datos de un coche
+     * @return la select
+     */
     public static String datosCoche(){
         return "select e.matricula, v.marca, v.modelo, v.clase, e.numeropuertas,"
                 + "e.potenciamotor, v.preciodia from vehiculos v, especificaciones_coches e"
                 + " where e.matricula = v.matricula and e.matricula ilike ?";
     }
     
+    /**
+     * Query para obtener todos los datos de una caravana
+     * @return la select
+     */
     public static String datosCaravana(){
         return "select e.matricula, v.marca, v.modelo, v.clase, e.wc,"
                 + "e.potenciamotor, v.preciodia from vehiculos v, especificaciones_caravanas e"
                 + " where e.matricula = v.matricula and e.matricula ilike ?";
     }
     
+    /**
+     * Query para obtener todos los datos de una moto
+     * @return la select
+     */
     public static String datosMoto(){
         return "select e.matricula, v.marca, v.modelo, v.clase,"
                 + "e.cilindrada, v.preciodia from vehiculos v, especificaciones_motos e"
@@ -219,17 +231,32 @@ public interface Consultas_BBDD {
     
     //---------------------QUERIES RESERVAS--------------------------------
     
+    /**
+     * Query para eleminar reservas
+     * @return la query
+     */
     public static String deleteReserva(){
         return "delete from reservas where numreserva = ? and fecharecogida>now()";
     }
     
+    /**
+     * Query para listar reservas + detalles de la reserva
+     * @return la query
+     */
     public static String selectReservas(){
         return "select r.*, d.matriculavehiculo, d.preciodia, d.descuento " +
                 "from reservas r inner join detalles_reserva d " +
                 "on r.numreserva = d.numreserva";
     }
     
+    /**
+     * Query para recuperar una reserva por numero de reserva
+     * @return la query
+     */
     public static String recuperarReserva(){
-        return "select * from reservas where numreserva ilike ?";
+        return "select r.*, d.matriculavehiculo, d.preciodia, d.descuento"
+                + " from reservas r, detalles_reserva d "
+                + "where r.numreserva = d.numreserva and r.numreserva ilike ?";
     }
+
 }

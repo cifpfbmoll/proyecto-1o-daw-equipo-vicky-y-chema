@@ -5,14 +5,10 @@
  */
 package RentaCar;
 
-import static RentaCar.Consultas_BBDD.insertarMoto;
-import static RentaCar.Consultas_BBDD.insertarVehiculo;
-import static RentaCar.Consultas_BBDD.obtenerConexion;
-import java.awt.Color;
+import static RentaCar.Consultas_BBDD.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.swing.JLabel;
 
 /**
  * @version 1.0

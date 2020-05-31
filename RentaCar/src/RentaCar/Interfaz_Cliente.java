@@ -27,8 +27,6 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
         initComponents();
         ImageIcon img = new ImageIcon("src/image/customer_64px.png");
         setIconImage(img.getImage());
-        
-
     }
 
     /**

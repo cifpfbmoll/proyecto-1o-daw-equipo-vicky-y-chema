@@ -6,31 +6,21 @@
 package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
-import static RentaCar.Interfaz_Administrador.crearVentana;
+import static RentaCar.Interfaz_Main.crearVentana;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 
 /**
  * Clase abstracta Vehiculo
  * 
  * @version 2.0
- * @author Chema
+ * @author victoriapenas & josemariahernandez
  */
 public abstract class Vehiculo implements Consultas_BBDD {
     
@@ -128,7 +118,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
         ResultSet rs = null;
         ModeloTabla modelo = null;
         JTable tabla = null;
-        JFrame ventana = crearVentana();
+        JFrame ventana = crearVentana(false);
         JPanel buscar = new JPanel();
         JButton buscarVehiculo = new JButton("BUSCAR VEHICULO");
         ventana.setTitle("LISTADO DE VEHICULOS");
@@ -183,20 +173,26 @@ public abstract class Vehiculo implements Consultas_BBDD {
                     if (rs.next()){
                         tipo = rs.getInt(1);
                     }
-                    if (tipo == 0){
-                        Interfaz_Main.mostrarObj(matricula,datosCoche(),"COCHE");
-                    } else if (tipo == 1){
-                        Interfaz_Main.mostrarObj(matricula,datosCaravana(),"CARAVANA");
-                    } else if (tipo == 2){
-                        Interfaz_Main.mostrarObj(matricula,datosMoto(),"MOTO");
+                    switch (tipo) {
+                        case 0:
+                            Interfaz_Main.mostrarObj(matricula,datosCoche(),"COCHE");
+                            break;
+                        case 1:
+                            Interfaz_Main.mostrarObj(matricula,datosCaravana(),"CARAVANA");
+                            break;
+                        case 2:
+                            Interfaz_Main.mostrarObj(matricula,datosMoto(),"MOTO");
+                            break;
+                        default:
+                            break;
                     }
                 }else if (!Interfaz_Main.comprobarObj(matricula,query)){
-                    JOptionPane.showMessageDialog(null, "La matricula indicada no existe o no está activa.","ERROR", JOptionPane.ERROR_MESSAGE);
+                    throw new RCException("La matricula indicada no existe o no está activa.");
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "No has indicado ninguna matricula.","ERROR", JOptionPane.ERROR_MESSAGE);
+                throw new RCException("No has indicado ninguna matricula.");
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -363,16 +359,13 @@ public abstract class Vehiculo implements Consultas_BBDD {
         ResultSet rs = null;
         ModeloTabla modelo = null;
         JTable tabla = null;
-        JFrame ventana = crearVentana();
+        JFrame ventana = crearVentana(false);
         try (Connection con = obtenerConexion()){            
             ventana.setTitle("VEHICULO");
             pst = con.prepareStatement(buscarVehiculo(),ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             pst.setString(1,matricula);
             rs = pst.executeQuery();
- 
-           } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
         modelo = new ModeloTabla(rs);
         tabla = new JTable(modelo);

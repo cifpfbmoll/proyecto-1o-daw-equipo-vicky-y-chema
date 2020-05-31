@@ -6,15 +6,15 @@
 package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.swing.JLabel;
 
 /**
  *
- * @author victoriapenas
+ * @author victoriapenas & josemariahernandez
+ * @since 2020-05-20
+ * @version 1.0
  */
 public class Coche extends Vehiculo{
     

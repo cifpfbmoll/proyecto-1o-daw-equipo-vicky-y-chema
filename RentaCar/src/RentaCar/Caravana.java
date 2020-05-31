@@ -8,16 +8,14 @@ package RentaCar;
 import static RentaCar.Consultas_BBDD.insertarCaravana;
 import static RentaCar.Consultas_BBDD.insertarVehiculo;
 import static RentaCar.Consultas_BBDD.obtenerConexion;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.swing.JLabel;
 
 /**
  * @version 1.0
  * @since 2020-05-23
- * @author victoriapenas
+ * @author victoriapenas & josemariahernandez
  */
 public class Caravana extends Vehiculo{
     /**

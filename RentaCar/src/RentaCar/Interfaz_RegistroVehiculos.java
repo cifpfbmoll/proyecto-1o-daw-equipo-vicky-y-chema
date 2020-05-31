@@ -412,10 +412,9 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                         operacioRealizada(true);
                     } else{
                         operacioRealizada(false);
-                        jLabel_result.setText("Hay datos del coche sin rellenar.");
+                        throw new RCException("Hay datos del coche sin rellenar.");
                     }
-                    
-                } catch (SQLException ex) {
+                } catch (Exception ex) {
                     operacioRealizada(false);
                     jLabel_result.setText(ex.getMessage());
                 }
@@ -434,9 +433,9 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                         operacioRealizada(true);
                     } else{
                         operacioRealizada(false);
-                        jLabel_result.setText("Hay datos de la moto sin rellenar.");
+                        throw new RCException("Hay datos de la moto sin rellenar.");
                     }
-                } catch (SQLException ex) {
+                } catch (Exception ex) {
                     operacioRealizada(false);
                     jLabel_result.setText(ex.getMessage());
                 }
@@ -456,10 +455,11 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                         operacioRealizada(true);
                     }else{
                         operacioRealizada(false);
-                        jLabel_result.setText("Hay datos de la caravana sin rellenar.");
+                        throw new RCException("Hay datos de la caravana sin rellenar.");
                     }
-                } catch (SQLException ex) {
+                } catch (Exception ex) {
                     operacioRealizada(false);
+                    jLabel_result.setText(ex.getMessage());
                 }
                 break;
             default:

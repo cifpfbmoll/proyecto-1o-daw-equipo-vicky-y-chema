@@ -4,6 +4,10 @@
  */
 package RentaCar;
 
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author victoriapenas & josemariahernandez
  * @version 1.0
@@ -138,7 +142,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel_resultado.setFont(new java.awt.Font("Heiti TC", 1, 12)); // NOI18N
+        jLabel_resultado.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
         jLabel_resultado.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_resultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -242,8 +246,10 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   // Método para limpiar los jTextField
-
+   
+    /**
+     * Método para limpiar los jTextField
+     */
     public void limpiar() {
         jTextField_clienteNIF.setText("");
         jTextField_nombre.setText("");
@@ -276,8 +282,15 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
 
         // Rol fijado manualmente
         int rol = 1;
-        Usuario nuevoCliente = new Usuario(nif, nom, ape1, ape2, tel, mail, rol, pass, codUser);
-        nuevoCliente.insertRegistro(jLabel_resultado);
+        try {
+            Usuario nuevoCliente = new Usuario(nif, nom, ape1, ape2, tel, mail, rol, pass, codUser);
+            nuevoCliente.insertRegistro(jLabel_resultado);
+            limpiar();
+        } catch (RCException ex) {
+            jLabel_resultado.setForeground(Color.RED);
+            jLabel_resultado.setText(ex.getMessage());
+        }
+        
     }//GEN-LAST:event_jButton_EnviarActionPerformed
 
     private void jTextField_apellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_apellido2ActionPerformed

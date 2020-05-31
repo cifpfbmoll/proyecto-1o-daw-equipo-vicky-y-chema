@@ -5,51 +5,25 @@
  */
 package RentaCar;
 
-import static RentaCar.Consultas_BBDD.buscarVehiculo;
 import static RentaCar.Consultas_BBDD.obtenerConexion;
-import static RentaCar.Consultas_BBDD.recuperarReserva;
-import static RentaCar.Interfaz_Administrador.crearVentana;
-import static RentaCar.Usuario.comprobarRol;
-import static RentaCar.Usuario.comprobarUsuario;
+import static RentaCar.Reserva.setearColumnasReservas;
+import static RentaCar.Usuario.*;
 import static RentaCar.Vehiculo.listarVehiculos;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.LayoutManager;
-import java.awt.Panel;
-import java.awt.Toolkit;
-import static java.awt.Toolkit.getDefaultToolkit;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 
 /**
  *
- * @author victoriapenas
+ * @author victoriapenas & josemariahernandez
+ * @version 1.0
+ * @since 2020-05-17
  */
 public class Interfaz_Main extends javax.swing.JFrame {
 
@@ -350,13 +324,13 @@ public class Interfaz_Main extends javax.swing.JFrame {
                     this.dispose();
                 }
             } else {
-                jLabel_verificacionUsuario.setText("Credenciales incorrectas."
-                        + " Inténtalo de nuevo");
+                throw new RCException("Credenciales incorrectas. Inténtalo de nuevo");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Interfaz_Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            jLabel_verificacionUsuario.setText(ex.getMessage());
         }
     }//GEN-LAST:event_jButton_EntrarActionPerformed
+    
     /**
      * Permite iniciar cualquier internal frame centrado
      *
@@ -417,16 +391,24 @@ public class Interfaz_Main extends javax.swing.JFrame {
      * Método para crear un JFrame centrados en la pantalla en función de la resolución
      * @return devuelve el JFrame
      */
-    public static JFrame crearVentana(){
+    public static JFrame crearVentana(boolean tablaGrande){
         JFrame ventana = new JFrame();
-        Toolkit miPantalla = getDefaultToolkit();
-        Dimension medidaPantalla = miPantalla.getScreenSize();
-        int alturaPantalla = medidaPantalla.height;
-        int anchoPantalla = medidaPantalla.width;        
         ventana.setResizable(false);
-        ventana.setSize(anchoPantalla/2,alturaPantalla/2);
-        ventana.setLocation(anchoPantalla/4,alturaPantalla/4);
-     
+        Dimension medidaPantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        if (tablaGrande){
+            ventana.setSize(1100,400);
+            int x = (int) ((medidaPantalla.getWidth() - ventana.getWidth()) / 2);
+            int y = (int) ((medidaPantalla.getHeight() - ventana.getHeight()) / 2);
+            ventana.setLocation(x, y);
+            ventana.setVisible(true);
+        }else{
+            int alturaPantalla = medidaPantalla.height;
+            int anchoPantalla = medidaPantalla.width;
+            ventana.setSize(anchoPantalla/2,alturaPantalla/2);
+            ventana.setLocation(anchoPantalla/4,alturaPantalla/4);
+        }
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
         return ventana;
     }
     
@@ -469,9 +451,13 @@ public class Interfaz_Main extends javax.swing.JFrame {
         ResultSet rs = null;
         ModeloTabla modelo = null;
         JTable tabla = null;
-        JFrame ventana = crearVentana();      
+        JFrame ventana = null;
+        if (titulo.equals("RESERVA")){
+            ventana = crearVentana(true);
+        }else{
+            ventana = crearVentana(false);
+        }
         try (Connection con = obtenerConexion()){            
-            ventana.setTitle(titulo);
             pst = con.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             pst.setString(1,info);
@@ -481,6 +467,10 @@ public class Interfaz_Main extends javax.swing.JFrame {
         }
         modelo = new ModeloTabla(rs);
         tabla = new JTable(modelo);
+        if (titulo.equals("RESERVA")){
+            setearColumnasReservas(tabla);
+        }
+        ventana.setTitle(titulo);
         ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

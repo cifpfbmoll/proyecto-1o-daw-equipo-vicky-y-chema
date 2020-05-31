@@ -22,6 +22,10 @@ public class ModeloTabla extends AbstractTableModel{
     private ResultSet rsRegistros;
     private ResultSetMetaData rsmd;
 
+    /**
+     * Contructor que recibe el cursor con el que rellenará la JTable
+     * @param rs 
+     */
     public ModeloTabla(ResultSet rs) {
         rsRegistros = rs;
         try {
@@ -31,17 +35,26 @@ public class ModeloTabla extends AbstractTableModel{
         }
     }
 
+    /**
+     * Método para obtener el número total de filas.
+     * Movemos el cursor al final y de esa forma obtenemos el total de filas que hay
+     * @return devolvemos la posición de la ultima fila
+     */
     @Override
     public int getRowCount() {
         try {
-            rsRegistros.last(); //movemos el cursor al final y de esa forma obtenemos el total de filas que hay
-            return rsRegistros.getRow(); //devolvemos la posición de la ultima fila
+            rsRegistros.last();
+            return rsRegistros.getRow();
         } catch (SQLException ex) {
             ex.printStackTrace();
             return 0;
         }
     }
 
+    /**
+     * Método para obtener el número total de columnas
+     * @return devuelve el número total de columnas obtenidas
+     */
     @Override
     public int getColumnCount() {
         try {
@@ -52,6 +65,12 @@ public class ModeloTabla extends AbstractTableModel{
         }        
     }
 
+    /**
+     * Método mediante el cual el cursor rellena la tabla con todos los datos
+     * @param rowIndex
+     * @param columnIndex
+     * @return 
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
@@ -63,6 +82,11 @@ public class ModeloTabla extends AbstractTableModel{
         }
     }
 
+    /**
+     * Método para obtener el nombre de las columnas de la base de datos y seteralo en la JTable
+     * @param c indice
+     * @return 
+     */
     @Override
     public String getColumnName(int c){
         try {

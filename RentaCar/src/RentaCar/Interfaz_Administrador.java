@@ -4,30 +4,16 @@
  */
 package RentaCar;
 
-import static RentaCar.Consultas_BBDD.recuperarReserva;
-import static RentaCar.Consultas_BBDD.recuperarVehiculo;
+import static RentaCar.Consultas_BBDD.*;
 import static RentaCar.Interfaz_Main.centrarFrame;
-import static RentaCar.Reserva.cancelarReserva;
-import static RentaCar.Reserva.comprobarFechaReserva;
-import static RentaCar.Reserva.listarReservas;
-import static RentaCar.Usuario.listarClientesTabla;
-import java.awt.Graphics;
-import java.awt.Image;
+import static RentaCar.Reserva.*;
+import static RentaCar.Usuario.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import static RentaCar.Vehiculo.bajaVehiculo;
-import static RentaCar.Vehiculo.comprobarVehiculo;
-import static RentaCar.Vehiculo.listarVehiculos;
-import static RentaCar.Vehiculo.modificarPrecio;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import static java.awt.Toolkit.getDefaultToolkit;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import static RentaCar.Vehiculo.*;
+import javax.swing.*;
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -45,22 +31,6 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         setIconImage(img.getImage());
     }
 
-    //TODO este método es general, ¿donde lo metemos?
-    /**
-     * Método para crear un JFrame centrados en la pantalla en función de la resolución
-     * @return devuelve el JFrame
-     */
-    public static JFrame crearVentana(){
-        JFrame ventana = new JFrame();
-        Toolkit miPantalla = getDefaultToolkit();
-        Dimension medidaPantalla = miPantalla.getScreenSize();
-        int alturaPantalla = medidaPantalla.height;
-        int anchoPantalla = medidaPantalla.width;
-        ventana.setSize(anchoPantalla/2,alturaPantalla/2);
-        ventana.setLocation(anchoPantalla/4,alturaPantalla/4);
-        
-        return ventana;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -415,7 +385,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + dato + " eliminado.","VEHICULO ELIMINADO", JOptionPane.DEFAULT_OPTION);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "La matrícula indicada no existe o no está activa","ERROR", JOptionPane.ERROR_MESSAGE);
+                    throw new RCException("La matrícula indicada no existe o no está activa.");
                 }
             }
             ventana.dispose();
@@ -434,7 +404,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                     String precio = JOptionPane.showInputDialog(null, "Introduce el nuevo precio", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
                     if ((precio != null) && (precio.trim().length() > 0)){
                         if(Double.parseDouble(precio)<0){
-                            JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0","ERROR", JOptionPane.ERROR_MESSAGE);
+                            throw new RCException("El precio debe ser mayor a 0€.");
                         }
                         else{
                             reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
@@ -445,13 +415,12 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                         }
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "La matrícula indicada no existe o no está activa.","ERROR", JOptionPane.ERROR_MESSAGE);
+                    throw new RCException("La matrícula indicada no existe o no está activa.");
                 }
             }
             ventana.dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton_modificarPrecioActionPerformed
 
@@ -464,11 +433,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         try {
             if ((reserva != null) && (reserva.trim().length() > 0)){
                 if (Interfaz_Main.comprobarObj(reserva,recuperarReserva())){
-                        if(!comprobarFechaReserva(reserva)){
-                            JOptionPane.showMessageDialog(null, "Las reservas pasadas no se"
-                                    + "pueden cancelar.","ERROR", JOptionPane.ERROR_MESSAGE);
-                        }
-                        else{
+                        if(comprobarFechaReserva(reserva)){
                             reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
                             if (reply == JOptionPane.YES_OPTION) {
                                 cancelarReserva(reserva);
@@ -476,16 +441,13 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
                                             , JOptionPane.DEFAULT_OPTION);
                             }
                         }
-                    
                 }else{
-                    JOptionPane.showMessageDialog(null, "El número de reserva indicado no es "
-                            + "correcto.","ERROR", JOptionPane.ERROR_MESSAGE);
+                    throw new RCException("El número de reserva indicado no es correcto.");
                 }
             }
             ventana.dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton_cancelrReservasActionPerformed
 
