@@ -14,8 +14,12 @@ import static RentaCar.Usuario.comprobarUsuario;
 import static RentaCar.Vehiculo.listarVehiculos;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.Panel;
 import java.awt.Toolkit;
 import static java.awt.Toolkit.getDefaultToolkit;
@@ -418,7 +422,8 @@ public class Interfaz_Main extends javax.swing.JFrame {
         Toolkit miPantalla = getDefaultToolkit();
         Dimension medidaPantalla = miPantalla.getScreenSize();
         int alturaPantalla = medidaPantalla.height;
-        int anchoPantalla = medidaPantalla.width;
+        int anchoPantalla = medidaPantalla.width;        
+        ventana.setResizable(false);
         ventana.setSize(anchoPantalla/2,alturaPantalla/2);
         ventana.setLocation(anchoPantalla/4,alturaPantalla/4);
      
@@ -464,12 +469,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
         ResultSet rs = null;
         ModeloTabla modelo = null;
         JTable tabla = null;
-        JFrame ventana = crearVentana();
-
-        //chema, --> help, no se como reducir el tamaño de la tabla ubicada en el north
-        LaminaConImagen2 test = new LaminaConImagen2();
-        ventana.add(test,BorderLayout.CENTER);
-        
+        JFrame ventana = crearVentana();      
         try (Connection con = obtenerConexion()){            
             ventana.setTitle(titulo);
             pst = con.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -481,7 +481,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
         }
         modelo = new ModeloTabla(rs);
         tabla = new JTable(modelo);
-        ventana.add(new JScrollPane(tabla), BorderLayout.NORTH);
+        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
