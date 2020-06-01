@@ -269,7 +269,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jButton_cancelrReservas.setBackground(new java.awt.Color(55, 59, 62));
         jButton_cancelrReservas.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jButton_cancelrReservas.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_cancelrReservas.setText("CANCELAR RESERVAS (SOON)");
+        jButton_cancelrReservas.setText("CANCELAR RESERVAS");
         jButton_cancelrReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_cancelrReservasActionPerformed(evt);
@@ -383,9 +383,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
 
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
-
         listarReservas();
-
     }//GEN-LAST:event_jButton_listarReservasActionPerformed
 
     private void jButton_realizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_realizarReservaActionPerformed

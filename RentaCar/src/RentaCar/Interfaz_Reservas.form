@@ -39,27 +39,32 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane" max="32767" attributes="0"/>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel_Observaciones" min="-2" pref="436" max="-2" attributes="0"/>
-                      <Component id="jPanel_datosVehiculo" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="Observaciones" min="-2" pref="416" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jScrollPane" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel_Observaciones" min="-2" pref="436" max="-2" attributes="0"/>
+                              <Component id="jPanel_datosVehiculo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="Observaciones" min="-2" pref="416" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jPanel_datosCliente" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jPanel_datosReserva" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jPanel_botonera" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jPanel_datosCliente" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel_datosReserva" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jPanel_botonera" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -190,7 +195,7 @@
                       <EmptySpace pref="36" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jTextField_NIF" alignment="1" min="-2" pref="133" max="-2" attributes="0"/>
-                          <Component id="jTextField_nombrecliente" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                          <Component id="jTextField_nombreCliente" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
                           <Component id="jTextField_apellido1" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                               <Component id="jTextField_telefono" max="32767" attributes="0"/>
@@ -215,7 +220,7 @@
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_nombreCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_nombrecliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_nombreCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -265,7 +270,7 @@
                 <Property name="text" type="java.lang.String" value="Nombre"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_nombrecliente">
+            <Component class="javax.swing.JTextField" name="jTextField_nombreCliente">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
@@ -343,28 +348,24 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel_potenciaMotor" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_cilindrada" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_clase" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
+                              <Component id="jTextField_clase" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel_numPuertas" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField_numPuertas" min="-2" pref="30" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel_clase" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextField_clase" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jTextField_numPuertas" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel_potenciaMotor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_cilindrada" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCheckBox_wc" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField_potenciaMotor" min="-2" pref="130" max="-2" attributes="0"/>
-                                  <Component id="jTextField_cilindrada" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jCheckBox_wc" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_potenciaMotor" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="jTextField_cilindrada" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -379,8 +380,10 @@
                           <Component id="jLabel_matricula" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel_clase" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField_clase" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel_numPuertas" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_numPuertas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Component id="jLabel_numPuertas" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextField_numPuertas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -530,9 +533,9 @@
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_numPuertas">
+            <Component class="javax.swing.JCheckBox" name="jCheckBox_wc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xba; Puertas"/>
+                <Property name="text" type="java.lang.String" value="Dispone WC"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField_numPuertas">
@@ -547,9 +550,9 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_numPuertasActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox_wc">
+            <Component class="javax.swing.JLabel" name="jLabel_numPuertas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Dispone WC"/>
+                <Property name="text" type="java.lang.String" value="N&#xba; Puertas"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -563,28 +566,45 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel_numReserva" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel_fechaSolicitud" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel_fechaRecogida" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel_horaRecogida" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel_fechaDevolucion" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel_horaDevolucion" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jTextField_numReserva" alignment="1" pref="133" max="32767" attributes="0"/>
-                                  <Component id="jTextField_fechaSolicitud" alignment="1" pref="133" max="32767" attributes="0"/>
-                                  <Component id="jComboBox_horaRecogida" max="32767" attributes="0"/>
-                                  <Component id="jComboBox_horaDevolucion" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jDateChooser_recogida" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel_fechaSolicitud" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel_horaDevolucion" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                                      <Component id="jTextField_fechaSolicitud" min="-2" pref="125" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Component id="jComboBox_horaDevolucion" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Component id="jDateChooser_devolucion" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel_fechaRecogida" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel_horaRecogida" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jLabel_fechaDevolucion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jDateChooser_devolucion" pref="125" max="32767" attributes="0"/>
+                                  <Component id="jDateChooser_recogida" max="32767" attributes="0"/>
+                                  <Component id="jComboBox_horaRecogida" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -594,34 +614,32 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel_infoReserva" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jTextField_fechaSolicitud" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel_fechaSolicitud" max="32767" attributes="0"/>
+                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jDateChooser_recogida" max="32767" attributes="0"/>
+                          <Component id="jLabel_fechaRecogida" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField_numReserva" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel_numReserva" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBox_horaRecogida" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_horaRecogida" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_fechaSolicitud" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_fechaSolicitud" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jDateChooser_devolucion" max="32767" attributes="0"/>
+                          <Component id="jLabel_fechaDevolucion" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel_fechaRecogida" min="-2" max="-2" attributes="0"/>
-                          <Component id="jDateChooser_recogida" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_horaRecogida" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox_horaRecogida" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel_fechaDevolucion" min="-2" max="-2" attributes="0"/>
-                          <Component id="jDateChooser_devolucion" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_horaDevolucion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox_horaDevolucion" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jComboBox_horaDevolucion" max="32767" attributes="0"/>
+                          <Component id="jLabel_horaDevolucion" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
@@ -640,20 +658,6 @@
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Datos Reserva"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_numReserva">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xba; Reserva"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_numReserva">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_numReservaActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel_fechaSolicitud">
               <Properties>

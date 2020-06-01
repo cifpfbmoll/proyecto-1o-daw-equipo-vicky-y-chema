@@ -5,10 +5,7 @@
  */
 package RentaCar;
 
-import static RentaCar.Consultas_BBDD.buscarVehiculo;
 import static RentaCar.Consultas_BBDD.obtenerConexion;
-import static RentaCar.Consultas_BBDD.recuperarReserva;
-import static RentaCar.Interfaz_Administrador.crearVentana;
 import static RentaCar.Usuario.comprobarRol;
 import static RentaCar.Usuario.comprobarUsuario;
 import static RentaCar.Vehiculo.listarVehiculos;
@@ -16,12 +13,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Panel;
 import java.awt.Toolkit;
 import static java.awt.Toolkit.getDefaultToolkit;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,15 +24,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -57,6 +47,13 @@ public class Interfaz_Main extends javax.swing.JFrame {
         jPanel_Login.setVisible(false);
         ImageIcon img = new ImageIcon("src/image/home_icon_64px.png");
         setIconImage(img.getImage());
+        /////// TEMPORAL
+        Interfaz_Reservas cRes = new Interfaz_Reservas();
+        centrarFrame(jDesktopPane, cRes);
+        jDesktopPane.add(cRes);
+        cRes.setVisible(rootPaneCheckingEnabled);
+        /////////////////
+        
     }
 
     /**

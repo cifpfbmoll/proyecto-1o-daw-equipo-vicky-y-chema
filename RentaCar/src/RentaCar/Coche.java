@@ -79,10 +79,7 @@ public class Coche extends Vehiculo {
 
     public boolean revisarDatosVehiculo() {
         boolean datosVehiculo = super.revisarDatosVehiculo();
-        if (!datosVehiculo || this.getNumeroPuertas() == null || this.getPotenciaMotor() == null) {
-            return false;
-        }
-        return true;
+        return !(!datosVehiculo || this.getNumeroPuertas() == null || this.getPotenciaMotor() == null);
     }
 
     public void registrarVehiculo(JLabel resultado) throws SQLException {
@@ -121,6 +118,7 @@ public class Coche extends Vehiculo {
             pst.close();
         }
     }
+
     @Override
     public void registrarVehiculo() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
