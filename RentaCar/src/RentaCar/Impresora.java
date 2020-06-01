@@ -36,7 +36,7 @@ public class Impresora implements Printable {
     public static void imprimir(Component comp) {
         PrinterJob pjob = PrinterJob.getPrinterJob();
         PageFormat preformat = pjob.defaultPage();
-        preformat.setOrientation(PageFormat.LANDSCAPE);
+        preformat.setOrientation(PageFormat.PORTRAIT);
         PageFormat postformat = pjob.pageDialog(preformat);
         // Si el usuario no pulsa cancelar, entonces imprimirá.
         if (preformat != postformat) {

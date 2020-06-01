@@ -5,6 +5,7 @@
 package RentaCar;
 
 import static RentaCar.Interfaz_Main.centrarFrame;
+import static RentaCar.Reserva.listarReservas;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -123,7 +124,6 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel Cliente");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        setPreferredSize(new java.awt.Dimension(1050, 590));
         setResizable(false);
 
         jDesktopPane.setBackground(new java.awt.Color(204, 204, 255));
@@ -160,7 +160,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
         jButton_listarReservas.setBackground(new java.awt.Color(55, 59, 62));
         jButton_listarReservas.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jButton_listarReservas.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_listarReservas.setText("LISTAR RESERVAS (SOON)");
+        jButton_listarReservas.setText("LISTAR RESERVAS");
         jButton_listarReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_listarReservasActionPerformed(evt);
@@ -206,14 +206,12 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
                     .addGroup(jDesktopPaneLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPaneLayout.createSequentialGroup()
-                                .addComponent(jButton_cancelarReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jButton_cancelarReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton_listarReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton_realizarReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton_listarVehiculos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(702, 702, 702))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jDesktopPaneLayout.createSequentialGroup()
                         .addGap(235, 235, 235)
                         .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,10 +257,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
 
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
-        /**
-         * TODO pendiente de listar reservas
-         */
-
+        listarReservas();
     }//GEN-LAST:event_jButton_listarReservasActionPerformed
 
     private void jButton_realizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_realizarReservaActionPerformed

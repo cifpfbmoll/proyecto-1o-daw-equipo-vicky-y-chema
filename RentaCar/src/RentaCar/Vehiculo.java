@@ -373,4 +373,8 @@ public abstract class Vehiculo implements Consultas_BBDD {
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+
+    boolean revisarDatosVehiculo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
