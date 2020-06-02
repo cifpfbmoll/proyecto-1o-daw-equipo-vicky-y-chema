@@ -315,6 +315,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
 
     private void jButton_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EntrarActionPerformed
         int rol;
+        String nif;
         try {
             String passText = new String(jPasswordField_Contraseña.getPassword());
             String pass = passText;
@@ -322,7 +323,8 @@ public class Interfaz_Main extends javax.swing.JFrame {
             if (encontrado) {
                 rol = comprobarRol(jTextField_Usuario.getText());
                 if (rol == 1) {
-                    Interfaz_Cliente cliente = new Interfaz_Cliente();
+                    nif = recuperarNIF(jTextField_Usuario.getText());
+                    Interfaz_Cliente cliente = new Interfaz_Cliente(nif);
                     cliente.setVisible(rootPaneCheckingEnabled);
                     this.dispose();
                 } else if (rol == 2) {
@@ -482,6 +484,34 @@ public class Interfaz_Main extends javax.swing.JFrame {
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+    
+    /**
+     * Método para comprobar si una cadena contiene solo números
+     * @param strNum recibe una string
+     * @return devulve true si es numérica
+     */
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null || strNum.contains("-")) {
+            return false;
+        }
+        try {
+            int d = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Metodo para verificar si un texto contiene números.
+     * @param str la cadena a analizar
+     * @return true si solo contiene letras
+     */ 
+    public static boolean isStringOnlyAlphabet(String str){ 
+        return ((str != null)
+                && (!str.equals(""))
+                && (str.matches("^[a-zA-Z]*$"))); 
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Acceder;
@@ -500,22 +530,4 @@ public class Interfaz_Main extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField_Contraseña;
     private javax.swing.JTextField jTextField_Usuario;
     // End of variables declaration//GEN-END:variables
-}
-
-//TODO panel para pintar la imagen chema ??
-class LaminaConImagen2 extends JPanel{
-    
-    @Override
-    public void paintComponent(Graphics g){
-        Image imagen = null;
-        super.paintComponent(g);
-        
-        try {
-            imagen = ImageIO.read(new File("src/image/fondo-registroVehiculos.jpg"));
-        } catch (IOException ex) {
-            System.out.println("La imagen no se encuentra");
-        }
-                
-        g.drawImage(imagen, 80, 0, null);
-    }
 }

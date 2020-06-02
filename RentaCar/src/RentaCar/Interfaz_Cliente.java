@@ -5,6 +5,7 @@
 package RentaCar;
 
 import static RentaCar.Interfaz_Main.centrarFrame;
+import static RentaCar.Reserva.cancelarReserva;
 import static RentaCar.Reserva.listarReservas;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -12,7 +13,11 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import static RentaCar.Vehiculo.listarVehiculos;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -20,16 +25,31 @@ import javax.swing.ImageIcon;
  * @since 2020-18-05
  */
 public class Interfaz_Cliente extends javax.swing.JFrame {
-
+    
+    /**
+     * usuario logueado en el sistema
+     */
+    private String nif;
+    
     /**
      * Creates new form Interfaz_Cliente
      */
-    public Interfaz_Cliente() {
+    public Interfaz_Cliente(String nifUsuario) {
         initComponents();
         ImageIcon img = new ImageIcon("src/image/customer_64px.png");
         setIconImage(img.getImage());
+        this.setNif(nifUsuario);
     }
 
+    public String getNif() {
+        return nif;
+    }
+
+    public void setNif(String nif) {
+        this.nif = nif;
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -183,7 +203,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
         jButton_cancelarReservas.setBackground(new java.awt.Color(55, 59, 62));
         jButton_cancelarReservas.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jButton_cancelarReservas.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_cancelarReservas.setText("CANCELAR RESERVAS (SOON)");
+        jButton_cancelarReservas.setText("CANCELAR RESERVA");
         jButton_cancelarReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_cancelarReservasActionPerformed(evt);
@@ -211,7 +231,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
                                 .addComponent(jButton_listarReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton_realizarReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton_listarVehiculos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(702, 718, Short.MAX_VALUE))
                     .addGroup(jDesktopPaneLayout.createSequentialGroup()
                         .addGap(235, 235, 235)
                         .addComponent(jLabel_Bienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,7 +277,11 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
 
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
-        listarReservas();
+        try {
+            listarReservas(this.getNif());
+        } catch (RCException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_listarReservasActionPerformed
 
     private void jButton_realizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_realizarReservaActionPerformed
@@ -274,7 +298,11 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_cerrarSesionActionPerformed
 
     private void jButton_cancelarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelarReservasActionPerformed
-        // TODO add your handling code here:
+        try {
+            cancelarReserva(this.getNif());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_cancelarReservasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

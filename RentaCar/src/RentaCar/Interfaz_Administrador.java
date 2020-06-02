@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import static RentaCar.Vehiculo.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -239,7 +242,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         jButton_cancelrReservas.setBackground(new java.awt.Color(55, 59, 62));
         jButton_cancelrReservas.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
         jButton_cancelrReservas.setForeground(new java.awt.Color(254, 255, 249));
-        jButton_cancelrReservas.setText("CANCELAR RESERVAS");
+        jButton_cancelrReservas.setText("CANCELAR RESERVA");
         jButton_cancelrReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_cancelrReservasActionPerformed(evt);
@@ -353,7 +356,11 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_listarVehiculosActionPerformed
 
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
-        listarReservas();
+        try {
+            listarReservas("%");
+        } catch (RCException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_listarReservasActionPerformed
 
     private void jButton_realizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_realizarReservaActionPerformed
@@ -424,26 +431,8 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
 
     
     private void jButton_cancelrReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelrReservasActionPerformed
-        int reply = 0;
-        JFrame ventana = listarReservas();
-        String reserva = JOptionPane.showInputDialog(null, "Introduce el número de la reserva que quieres cancelar",
-                "CANCELAR RESERVA", JOptionPane.QUESTION_MESSAGE);
         try {
-            if ((reserva != null) && (reserva.trim().length() > 0)){
-                if (Interfaz_Main.comprobarObj(reserva,recuperarReserva())){
-                        if(comprobarFechaReserva(reserva)){
-                            reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
-                            if (reply == JOptionPane.YES_OPTION) {
-                                cancelarReserva(reserva);
-                                    JOptionPane.showMessageDialog(null, "Reserva " + reserva + " cancelada.","RESERVA CANCELADA"
-                                            , JOptionPane.DEFAULT_OPTION);
-                            }
-                        }
-                }else{
-                    throw new RCException("El número de reserva indicado no es correcto.");
-                }
-            }
-            ventana.dispose();
+            cancelarReserva("%");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }

@@ -6,6 +6,8 @@ package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
 import static RentaCar.Interfaz_Main.crearVentana;
+import static RentaCar.Interfaz_Main.isNumeric;
+import static RentaCar.Interfaz_Main.isStringOnlyAlphabet;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -14,7 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.regex.Pattern;
+
 import javax.swing.*;
 
 /**
@@ -85,33 +87,48 @@ public class Usuario implements Consultas_BBDD {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String nombre) throws RCException {
+        boolean valido = isStringOnlyAlphabet(nombre);
+        if (valido){
+            this.nombre = nombre;
+        } else{
+            throw new RCException("Por favor, indica un nombre válido.");
+        }
     }
 
     public String getApellido1() {
         return apellido1;
     }
 
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
+    public void setApellido1(String apellido1) throws RCException {
+        boolean valido = isStringOnlyAlphabet(apellido1);
+        if (valido){
+            this.apellido1 = apellido1;
+        } else{
+            throw new RCException("El primer apellido es incorrecto.");
+        }
     }
 
     public String getApellido2() {
         return apellido2;
     }
 
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
+    public void setApellido2(String apellido2) throws RCException {
+        boolean valido = isStringOnlyAlphabet(apellido2);
+        if (valido){
+            this.apellido2 = apellido2;
+        } else{
+            throw new RCException("El segundo apellido es incorrecto.");
+        }
     }
 
     public String getTelefono() {
         return telefono;
     }
 
-    //TODO controlar que no contenga letras
-    public void setTelefono(String telefono) throws RCException {  
-        if(telefono.length() < 9){
+    public void setTelefono(String telefono) throws RCException {
+        boolean valido = isNumeric(telefono);
+        if(telefono.length() < 9 || !valido){
             throw new RCException("Por favor, indica un número de teléfono válido.");
         }else{
             this.telefono = telefono;
@@ -389,6 +406,27 @@ public class Usuario implements Consultas_BBDD {
         });
         buscar.add(buscarCliente);
         ventana.add(buscar,BorderLayout.SOUTH);
+    }
+    
+    /**
+     * Método para recuperar el nif de un cliente a partir de su usuario de login
+     * @param usuario usuario es el usuario de login
+     * @return devuelve el nif asociado al usuario
+     * @throws SQLException 
+     */
+    public static String recuperarNIF(String usuario) throws SQLException{
+        String nif = "";
+        ResultSet rs = null;
+        try (Connection con = obtenerConexion(); PreparedStatement pst = con.prepareStatement(listarClienteNIF())){
+            pst.setString(1, usuario);
+            rs = pst.executeQuery();
+            if (rs.next()){
+                nif = rs.getString(1);
+            }
+        } finally {
+            rs.close();
+        }
+        return nif;
     }
     
     /**

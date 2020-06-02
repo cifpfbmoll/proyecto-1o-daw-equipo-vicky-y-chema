@@ -142,7 +142,12 @@ public class Reserva {
         this.descuento = descuento;
     }
     
-    public static JFrame listarReservas(){
+    /**
+     * Método para listar las reservas del sistema
+     * @param nif es el nif del cliente por el que se podrá filtrar los resultados
+     * @return devuelve una tabla con el listado de reservas
+     */
+    public static JFrame listarReservas(String nif) throws RCException{
         PreparedStatement pst = null;
         ResultSet rs = null;
         ModeloTabla modelo = null;
@@ -154,14 +159,20 @@ public class Reserva {
         try (Connection con = obtenerConexion()){                      
             pst = con.prepareStatement(selectReservas(),ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
+            pst.setString(1, nif);
             rs = pst.executeQuery();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
         modelo = new ModeloTabla(rs);
         tabla = new JTable(modelo);
-        setearColumnasReservas(tabla);
-        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        if (tabla.getRowCount()>0){
+            setearColumnasReservas(tabla);
+            ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        }else{
+            ventana.dispose();
+            throw new RCException("No se ha encontrado ninguna reserva activa.");
+        }
         
         buscarReserva.addActionListener(new ActionListener(){
         @Override
@@ -176,6 +187,7 @@ public class Reserva {
                         throw new RCException("El número de reserva indicado no existe.");
                     }
                 }else{
+                    
                     throw new RCException("No has indicado ningun numero de reserva.");
                 }
                 ventana.dispose();
@@ -195,6 +207,7 @@ public class Reserva {
         tabla.getColumnModel().getColumn(8).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(4).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(5).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(100);
     }
     
     /**
@@ -219,8 +232,8 @@ public class Reserva {
                 int year = Integer.parseInt(fecha[0]);
                 int month = Integer.parseInt(fecha[1]);
                 int day = Integer.parseInt(fecha[2]);
-                if (year>calendario.get(Calendar.YEAR)){
-                    if (month > calendario.get(Calendar.MONTH)){
+                if (year >= calendario.get(Calendar.YEAR)){
+                    if (month >= calendario.get(Calendar.MONTH)){
                         if (day > calendario.get(Calendar.DAY_OF_MONTH)){
                             cancelable = true;
                         }
@@ -242,19 +255,39 @@ public class Reserva {
      * @param numReserva numero de la reserva
      * @throws SQLException 
      */
-    public static void cancelarReserva(String numReserva) throws SQLException{
+    public static void cancelarReserva(String nif) throws SQLException, RCException{
         String query = deleteReserva();
         PreparedStatement pst = null;
         Connection con = null;
-        try {
-            con = obtenerConexion();
-            pst = con.prepareStatement(query);
-            pst.setString(1, numReserva);
-            pst.executeUpdate();
-        }finally{
-            con.close();
-            pst.close();
-        }        
+        int reply = 0;
+        JFrame ventana = null;
+        ventana = listarReservas(nif);
+        String reserva = JOptionPane.showInputDialog(null, "Introduce el número de la reserva que quieres cancelar",
+                "CANCELAR RESERVA", JOptionPane.QUESTION_MESSAGE);
+        if ((reserva != null) && (reserva.trim().length() > 0)){
+            if (Interfaz_Main.comprobarObj(reserva,recuperarReserva())){
+                    if(comprobarFechaReserva(reserva)){
+                        reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
+                        if (reply == JOptionPane.YES_OPTION) {
+                            try {
+                                con = obtenerConexion();
+                                pst = con.prepareStatement(query);
+                                pst.setString(1, reserva);
+                                pst.setString(2, nif);
+                                pst.executeUpdate();
+                            }finally{
+                                con.close();
+                                pst.close();
+                            }  
+                        JOptionPane.showMessageDialog(null, "Reserva " + reserva + " cancelada.","RESERVA CANCELADA"
+                                , JOptionPane.DEFAULT_OPTION);
+                        }
+                    }
+            }else{
+                throw new RCException("El número de reserva indicado no es correcto.");
+            }
+        }
+        ventana.dispose();
     }
 
 }

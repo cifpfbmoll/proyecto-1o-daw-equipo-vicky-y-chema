@@ -249,6 +249,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
    
     /**
      * Método para limpiar los jTextField
+     * El JLabel no lo limpiamos porque ahi mostramos el resultado final
      */
     public void limpiar() {
         jTextField_clienteNIF.setText("");
@@ -259,7 +260,6 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
         jTextField_email.setText("");
         jTextField_codUser.setText("");
         jPasswordField.setText("");
-        jLabel_resultado.setText(" ");
     }
 
     private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
@@ -311,6 +311,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
 
     private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
         limpiar();
+        jLabel_resultado.setText(" ");
     }//GEN-LAST:event_jButton_LimpiarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

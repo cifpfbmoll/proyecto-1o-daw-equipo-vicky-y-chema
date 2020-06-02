@@ -80,6 +80,9 @@ public interface Consultas_BBDD {
         return "select * from clientes";
     }
     
+    public static String listarClienteNIF(){
+        return "select clientenif from usuarios where usuario = ?";
+    }
     //---------------------QUERIES VEHICULOS--------------------------------
     
     
@@ -236,7 +239,8 @@ public interface Consultas_BBDD {
      * @return la query
      */
     public static String deleteReserva(){
-        return "delete from reservas where numreserva = ? and fecharecogida>now()";
+        return "delete from reservas where numreserva ilike ? and"
+                + " clientenif ilike ? and fecharecogida>now()";
     }
     
     /**
@@ -246,7 +250,7 @@ public interface Consultas_BBDD {
     public static String selectReservas(){
         return "select r.*, d.matriculavehiculo, d.preciodia, d.descuento " +
                 "from reservas r inner join detalles_reserva d " +
-                "on r.numreserva = d.numreserva";
+                "on r.numreserva = d.numreserva and r.clientenif ilike ?";
     }
     
     /**
