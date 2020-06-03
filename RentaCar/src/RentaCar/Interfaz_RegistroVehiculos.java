@@ -7,6 +7,8 @@ package RentaCar;
 import static RentaCar.Vehiculo.*;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -277,12 +279,14 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel_TipoVehículo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel_Matricula)
-                        .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jComboBox_Marca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel_Marca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_Matricula)
+                            .addComponent(jTextField_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel_Marca, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addComponent(jComboBox_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -300,7 +304,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox_Clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel_Clase))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel_precioDia)
                             .addComponent(jTextField_precioDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -312,7 +316,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                         .addComponent(jCheckBox_wc)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_result, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_Limpiar)
                     .addComponent(jButton_Enviar))
@@ -375,15 +379,15 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBox_SelectorActionPerformed
 
     private void jTextField_MatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_MatriculaActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jTextField_MatriculaActionPerformed
 
     private void jComboBox_MarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_MarcaActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jComboBox_MarcaActionPerformed
 
     private void jTextField_ModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ModeloActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jTextField_ModeloActionPerformed
 
     private void jComboBox_ClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_ClaseActionPerformed
@@ -417,6 +421,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                 } catch (Exception ex) {
                     operacioRealizada(false);
                     jLabel_result.setText(ex.getMessage());
+                    ex.printStackTrace();
                 }
                 break;
             case "MOTO":
@@ -457,6 +462,9 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                         operacioRealizada(false);
                         throw new RCException("Hay datos de la caravana sin rellenar.");
                     }
+                } catch (NumberFormatException ex) {
+                    operacioRealizada(false);
+                    jLabel_result.setText("Por favor, verifica que todos los campos tengan un formato válido.");
                 } catch (Exception ex) {
                     operacioRealizada(false);
                     jLabel_result.setText(ex.getMessage());
@@ -469,23 +477,23 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton_EnviarActionPerformed
     private void jTextField_potenciaMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_potenciaMotorActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jTextField_potenciaMotorActionPerformed
 
     private void jTextField_numPuertasCocheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_numPuertasCocheActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jTextField_numPuertasCocheActionPerformed
 
     private void jCheckBox_wcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_wcActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jCheckBox_wcActionPerformed
 
     private void jTextField_precioDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_precioDiaActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jTextField_precioDiaActionPerformed
 
     /**
-     * Método para comprobar si hay datos vaciós que son obligatorios 
+     * Método para comprobar si hay datos vacíos que son obligatorios 
      * para el registro del vehiculo
      * @return devuelve true/false en función del chequeo
      */
@@ -520,6 +528,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         jComboBox_Clase.setSelectedItem(" ");
         // Seteando a uncheck los checkbox
         jCheckBox_wc.setSelected(false);
+        jLabel_result.setText("");
     }
 
     /**

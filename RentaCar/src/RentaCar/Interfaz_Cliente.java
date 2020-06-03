@@ -4,7 +4,7 @@
  */
 package RentaCar;
 
-import static RentaCar.Interfaz_Main.centrarFrame;
+import static RentaCar.General.centrarFrame;
 import static RentaCar.Reserva.cancelarReserva;
 import static RentaCar.Reserva.listarReservas;
 import java.awt.Graphics;
@@ -13,10 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import static RentaCar.Vehiculo.listarVehiculos;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**

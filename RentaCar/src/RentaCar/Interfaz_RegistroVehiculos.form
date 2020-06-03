@@ -140,13 +140,16 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_Matricula" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_Matricula" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jLabel_Matricula" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextField_Matricula" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel_Marca" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jComboBox_Marca" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jLabel_Marca" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jComboBox_Marca" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -171,7 +174,7 @@
                               <Component id="jComboBox_Clase" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel_Clase" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel_precioDia" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextField_precioDia" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -187,7 +190,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel_result" min="-2" pref="20" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton_Limpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton_Enviar" alignment="3" min="-2" max="-2" attributes="0"/>

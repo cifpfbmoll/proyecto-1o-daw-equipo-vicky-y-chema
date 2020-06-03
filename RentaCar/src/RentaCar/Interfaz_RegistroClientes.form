@@ -75,22 +75,27 @@
                                       <Component id="jTextField_apellido2" min="-2" pref="180" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel_email" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel_telefono" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel_codUser" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel_password" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="jTextField_email" min="-2" pref="215" max="-2" attributes="0"/>
-                                              <Component id="jTextField_telefono" min="-2" pref="215" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel_email" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel_telefono" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel_codUser" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel_password" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jPasswordField" alignment="1" min="-2" pref="215" max="-2" attributes="0"/>
+                                          <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                      <Component id="jTextField_email" min="-2" pref="215" max="-2" attributes="0"/>
+                                                      <Component id="jTextField_telefono" min="-2" pref="215" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="jPasswordField" alignment="1" min="-2" pref="215" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jTextField_codUser" alignment="1" min="-2" pref="215" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <Component id="jTextField_codUser" alignment="1" min="-2" pref="215" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" min="-2" pref="321" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
@@ -144,7 +149,9 @@
                       <Component id="jLabel_password" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel1" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton_Limpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton_Enviar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -261,7 +268,7 @@
               <Font name="Heiti TC" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Enviar Formulario"/>
           </Properties>
@@ -307,7 +314,7 @@
               <Font name="Heiti TC" size="14" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
           </Properties>
@@ -324,6 +331,17 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Heiti SC" size="11" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="99" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="La contrase&#xf1;a debe contener, como m&#xed;nimo 6 car&#xe1;cteres."/>
           </Properties>
         </Component>
       </SubComponents>

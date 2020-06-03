@@ -6,7 +6,7 @@
 package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
-import static RentaCar.Interfaz_Main.crearVentana;
+import static RentaCar.General.crearVentana;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -165,7 +165,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
         ResultSet rs = null;
         try (Connection con = obtenerConexion()){
             if ((matricula != null) && (matricula.trim().length() > 0)){
-                if (Interfaz_Main.comprobarObj(matricula,query)){
+                if (General.comprobarObj(matricula,query)){
                     pst = con.prepareStatement(selectTipoVehiculo(),ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
                     pst.setString(1, matricula);
@@ -175,18 +175,18 @@ public abstract class Vehiculo implements Consultas_BBDD {
                     }
                     switch (tipo) {
                         case 0:
-                            Interfaz_Main.mostrarObj(matricula,datosCoche(),"COCHE");
+                            General.mostrarObj(matricula,datosCoche(),"COCHE");
                             break;
                         case 1:
-                            Interfaz_Main.mostrarObj(matricula,datosCaravana(),"CARAVANA");
+                            General.mostrarObj(matricula,datosCaravana(),"CARAVANA");
                             break;
                         case 2:
-                            Interfaz_Main.mostrarObj(matricula,datosMoto(),"MOTO");
+                            General.mostrarObj(matricula,datosMoto(),"MOTO");
                             break;
                         default:
                             break;
                     }
-                }else if (!Interfaz_Main.comprobarObj(matricula,query)){
+                }else if (!General.comprobarObj(matricula,query)){
                     throw new RCException("La matricula indicada no existe o no está activa.");
                 }
             }else{
@@ -282,18 +282,32 @@ public abstract class Vehiculo implements Consultas_BBDD {
      * @param matricula matricula para filtrar el vehiculo en la BBDD
      * @throws SQLException 
      */
-    public static void bajaVehiculo(String matricula) throws SQLException{
+    public static void bajaVehiculo() throws SQLException, RCException{
+        int reply = 0;
+        JFrame ventana = listarVehiculos();
         String query = eliminarVehiculo();
         PreparedStatement pst = null;
         Connection con = null;
-        try {
-            con = obtenerConexion();
-            pst = con.prepareStatement(query);
-            pst.setString(1, matricula);
-            pst.executeUpdate();
-        }finally{
-            con.close();
-            pst.close();
+        String matricula = JOptionPane.showInputDialog(null, "Introduce la matrícula", "BAJA VEHICULO", JOptionPane.QUESTION_MESSAGE);
+        if ((matricula != null) && (matricula.trim().length() > 0)){
+            if (General.comprobarObj(matricula,recuperarVehiculo())){
+                reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
+                if (reply == JOptionPane.YES_OPTION) {
+                    try {
+                        con = obtenerConexion();
+                        pst = con.prepareStatement(query);
+                        pst.setString(1, matricula);
+                        pst.executeUpdate();
+                    }finally{
+                        con.close();
+                        pst.close();
+                    }
+                    JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + matricula + " eliminado.","VEHICULO ELIMINADO", JOptionPane.DEFAULT_OPTION);
+                }
+            }else{
+                throw new RCException("La matrícula indicada no existe o no está activa.");
+            }
+        ventana.dispose();
         }
     }
     
@@ -303,20 +317,45 @@ public abstract class Vehiculo implements Consultas_BBDD {
      * @param matricula matricula corresponde a la matricula del vehiculo que se tiene que actualizar
      * @throws SQLException 
      */
-    public static void modificarPrecio(Double precio, String matricula) throws SQLException{
+    public static void modificarPrecio() throws SQLException, RCException{
+        int reply = 0;
+        JFrame ventana = listarVehiculos();
         String query = modificarPrecioSQL();
         PreparedStatement pst = null;
         Connection con = null;
-        try {
-            con = obtenerConexion();
-            pst = con.prepareStatement(query);
-            pst.setDouble(1, precio);
-            pst.setString(2, matricula);
-            pst.executeUpdate();
-        }finally{
-            con.close();
-            pst.close();
+        String matricula = JOptionPane.showInputDialog(null, "Introduce la matrícula",
+                "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
+        if ((matricula != null) && (matricula.trim().length() > 0)){
+            if (General.comprobarObj(matricula,recuperarVehiculo())){
+                String precio = JOptionPane.showInputDialog(null, "Introduce el nuevo precio",
+                        "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
+                if ((precio != null) && (precio.trim().length() > 0)){
+                    if(Double.parseDouble(precio)<0){
+                        throw new RCException("El precio debe ser mayor a 0€.");
+                    }
+                    else{
+                        reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
+                        if (reply == JOptionPane.YES_OPTION) {
+                            try {
+                                con = obtenerConexion();
+                                pst = con.prepareStatement(query);
+                                pst.setDouble(1, Double.parseDouble(precio));
+                                pst.setString(2, matricula);
+                                pst.executeUpdate();
+                            }finally{
+                                con.close();
+                                pst.close();
+                            }
+                            JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " +
+                            matricula + " actualizado.","VEHICULO ACTUALIZADO", JOptionPane.DEFAULT_OPTION);
+                        }
+                    }
+                }
+            }else{
+                throw new RCException("La matrícula indicada no existe o no está activa.");
+            }
         }
+        ventana.dispose();
     }
     
     /**
@@ -374,7 +413,4 @@ public abstract class Vehiculo implements Consultas_BBDD {
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    boolean revisarDatosVehiculo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

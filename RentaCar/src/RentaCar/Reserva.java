@@ -5,15 +5,9 @@
  */
 package RentaCar;
 
-import static RentaCar.Consultas_BBDD.deleteReserva;
-import static RentaCar.Consultas_BBDD.modificarPrecioSQL;
-import static RentaCar.Consultas_BBDD.obtenerConexion;
-import static RentaCar.Consultas_BBDD.recuperarReserva;
-import static RentaCar.Consultas_BBDD.selectReservas;
-import static RentaCar.Interfaz_Main.crearVentana;
+import static RentaCar.Consultas_BBDD.*;
+import static RentaCar.General.*;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -22,14 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 
 /**
  *
@@ -71,10 +58,10 @@ public class Reserva {
         this.setDescuento(descuento);
     }
 
-    //TODO ¿Tiene sentido este constructor?¿petaria al haber dos instancias con el mismo numero de reserva?
-    //la fecha de solicitud no puede ser la misma ya que la debe coger automáticamente del sistema
     /**
      * Constructor copia.
+     * La fecha de solicitud no puede ser la misma ya que la debe coger automáticamente del sistema.
+     * Si se intenta insertar en BBDD una reserva con el mismo numReserva habrá un error por violación de la constraint definida 
      * @param r1 r1 es un objeto de tipo Reserva.
      */
     public Reserva(Reserva r1) {
@@ -181,9 +168,9 @@ public class Reserva {
             String reserva = JOptionPane.showInputDialog(null, "Introduce el numero de la reserva:", "BUSCAR RESERVA", JOptionPane.QUESTION_MESSAGE);
             try {
                 if ((reserva != null) && (reserva.trim().length() > 0)){
-                    if (Interfaz_Main.comprobarObj(reserva,query)){
-                        Interfaz_Main.mostrarObj(reserva,query,"RESERVA");
-                    }else if (!Interfaz_Main.comprobarObj(reserva,query)){
+                    if (General.comprobarObj(reserva,query)){
+                        General.mostrarObj(reserva,query,"RESERVA");
+                    }else if (!General.comprobarObj(reserva,query)){
                         throw new RCException("El número de reserva indicado no existe.");
                     }
                 }else{
@@ -202,7 +189,10 @@ public class Reserva {
         return ventana;
     }
     
-    
+    /**
+     * Método para modificar el ancho de las columnas de la JTable de Reservas
+     * @param tabla tabla que se debe setear.
+     */
     public static void setearColumnasReservas(JTable tabla){
         tabla.getColumnModel().getColumn(8).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(4).setPreferredWidth(100);
@@ -265,7 +255,7 @@ public class Reserva {
         String reserva = JOptionPane.showInputDialog(null, "Introduce el número de la reserva que quieres cancelar",
                 "CANCELAR RESERVA", JOptionPane.QUESTION_MESSAGE);
         if ((reserva != null) && (reserva.trim().length() > 0)){
-            if (Interfaz_Main.comprobarObj(reserva,recuperarReserva())){
+            if (General.comprobarObj(reserva,recuperarReserva())){
                     if(comprobarFechaReserva(reserva)){
                         reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
                         if (reply == JOptionPane.YES_OPTION) {

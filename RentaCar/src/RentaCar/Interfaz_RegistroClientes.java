@@ -5,8 +5,6 @@
 package RentaCar;
 
 import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -53,6 +51,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
         jTextField_codUser = new javax.swing.JTextField();
         jButton_Limpiar = new javax.swing.JButton();
         jLabel_resultado = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 51, 51));
         setClosable(true);
@@ -105,7 +104,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
         jLabel_email.setText("E-mail");
 
         jButton_Enviar.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
-        jButton_Enviar.setForeground(new java.awt.Color(0, 0, 0));
+        jButton_Enviar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Enviar.setText("Enviar Formulario");
         jButton_Enviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +133,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
         });
 
         jButton_Limpiar.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
-        jButton_Limpiar.setForeground(new java.awt.Color(0, 0, 0));
+        jButton_Limpiar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Limpiar.setText("Limpiar");
         jButton_Limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +144,10 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
         jLabel_resultado.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
         jLabel_resultado.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_resultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel1.setFont(new java.awt.Font("Heiti SC", 1, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel1.setText("La contraseña debe contener, como mínimo 6 carácteres.");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,19 +174,22 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
                                     .addComponent(jTextField_apellido1)
                                     .addComponent(jTextField_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel_email)
-                                    .addComponent(jLabel_telefono)
-                                    .addComponent(jLabel_codUser)
-                                    .addComponent(jLabel_password))
-                                .addGap(29, 29, 29)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jTextField_email, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jPasswordField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField_codUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel_email, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel_telefono, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel_codUser, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel_password))
+                                        .addGap(29, 29, 29)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jTextField_email, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jTextField_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jPasswordField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jTextField_codUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(57, 57, 57)
                                 .addComponent(jLabel_clienteNIF)
@@ -224,7 +230,9 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
                     .addComponent(jTextField_clienteNIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_password)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_Limpiar)
                     .addComponent(jButton_Enviar))
@@ -294,19 +302,19 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton_EnviarActionPerformed
 
     private void jTextField_apellido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_apellido2ActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jTextField_apellido2ActionPerformed
 
     private void jTextField_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_telefonoActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jTextField_telefonoActionPerformed
 
     private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jPasswordFieldActionPerformed
 
     private void jTextField_codUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_codUserActionPerformed
-        // TODO add your handling code here:
+        // NO ACTION
     }//GEN-LAST:event_jTextField_codUserActionPerformed
 
     private void jButton_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LimpiarActionPerformed
@@ -317,6 +325,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Enviar;
     private javax.swing.JButton jButton_Limpiar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Bienvenida;
     private javax.swing.JLabel jLabel_apellido1;
     private javax.swing.JLabel jLabel_apellido2;

@@ -5,9 +5,7 @@
 package RentaCar;
 
 import static RentaCar.Consultas_BBDD.*;
-import static RentaCar.Interfaz_Main.crearVentana;
-import static RentaCar.Interfaz_Main.isNumeric;
-import static RentaCar.Interfaz_Main.isStringOnlyAlphabet;
+import static RentaCar.General.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -155,8 +153,13 @@ public class Usuario implements Consultas_BBDD {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) throws RCException {
+        if(password.length() < 6 ){
+            throw new RCException("La contraseña debe contener al menos 6 caracteres.");
+        }else{
+            this.password = password;
+        }
+        
     }
 
     public String getCodUsuario() {
@@ -390,9 +393,9 @@ public class Usuario implements Consultas_BBDD {
             String nif = JOptionPane.showInputDialog(null, "Introduce el NIF del cliente", "BUSCAR CLIENTE", JOptionPane.QUESTION_MESSAGE);
             try {
                 if ((nif != null) && (nif.trim().length() > 0)){
-                    if (Interfaz_Main.comprobarObj(nif,query)){
-                        Interfaz_Main.mostrarObj(nif,query,"CLIENTE");
-                    }else if (!Interfaz_Main.comprobarObj(nif,query)){
+                    if (General.comprobarObj(nif,query)){
+                        General.mostrarObj(nif,query,"CLIENTE");
+                    }else if (!General.comprobarObj(nif,query)){
                         throw new RCException("El NIF indicado no existe.");
                     }
                 }else{

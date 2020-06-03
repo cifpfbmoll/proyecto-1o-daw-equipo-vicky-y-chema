@@ -4,8 +4,7 @@
  */
 package RentaCar;
 
-import static RentaCar.Consultas_BBDD.*;
-import static RentaCar.Interfaz_Main.centrarFrame;
+import static RentaCar.General.centrarFrame;
 import static RentaCar.Reserva.*;
 import static RentaCar.Usuario.*;
 import java.awt.*;
@@ -13,9 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import static RentaCar.Vehiculo.*;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -377,53 +373,16 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton_retirarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_retirarVehiculoActionPerformed
-        int reply = 0;
-        JFrame ventana = listarVehiculos();
-        String dato = JOptionPane.showInputDialog(null, "Introduce la matrícula", "BAJA VEHICULO", JOptionPane.QUESTION_MESSAGE);
-        // Solicita confirmación
         try {
-            if ((dato != null) && (dato.trim().length() > 0)){
-                if (Interfaz_Main.comprobarObj(dato,recuperarVehiculo())){
-                    reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
-                    if (reply == JOptionPane.YES_OPTION) {
-                        bajaVehiculo(dato);
-                        JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + dato + " eliminado.","VEHICULO ELIMINADO", JOptionPane.DEFAULT_OPTION);
-                    }
-                }else{
-                    throw new RCException("La matrícula indicada no existe o no está activa.");
-                }
-            }
-            ventana.dispose();
+            bajaVehiculo();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_retirarVehiculoActionPerformed
 
     private void jButton_modificarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificarPrecioActionPerformed
-        int reply = 0;
-        JFrame ventana = listarVehiculos();
-        String matricula = JOptionPane.showInputDialog(null, "Introduce la matrícula", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
         try {
-            if ((matricula != null) && (matricula.trim().length() > 0)){
-                if (Interfaz_Main.comprobarObj(matricula,recuperarVehiculo())){
-                    String precio = JOptionPane.showInputDialog(null, "Introduce el nuevo precio", "MODIFICAR PRECIO", JOptionPane.QUESTION_MESSAGE);
-                    if ((precio != null) && (precio.trim().length() > 0)){
-                        if(Double.parseDouble(precio)<0){
-                            throw new RCException("El precio debe ser mayor a 0€.");
-                        }
-                        else{
-                            reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
-                            if (reply == JOptionPane.YES_OPTION) {
-                                modificarPrecio(Double.parseDouble(precio),matricula);
-                                JOptionPane.showMessageDialog(null, "Vehiculo con matrícula " + matricula + " actualizado.","VEHICULO ACTUALIZADO", JOptionPane.DEFAULT_OPTION);
-                            }
-                        }
-                    }
-                }else{
-                    throw new RCException("La matrícula indicada no existe o no está activa.");
-                }
-            }
-            ventana.dispose();
+            modificarPrecio();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }

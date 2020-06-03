@@ -80,8 +80,12 @@ public interface Consultas_BBDD {
         return "select * from clientes";
     }
     
+    /**
+     * consulta para obtener el nif de un cliente a partir de su usuario
+     * @return la query
+     */
     public static String listarClienteNIF(){
-        return "select clientenif from usuarios where usuario = ?";
+        return "select clientenif from usuarios where usuario ilike ?";
     }
     //---------------------QUERIES VEHICULOS--------------------------------
     
