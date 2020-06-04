@@ -143,20 +143,20 @@ public interface Consultas_BBDD {
      * @return 
      */
     public static String unionVehiculos() {
-        return "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia,"
-                + "e.numeropuertas, e.potenciamotor, null as wc, null as cilindrada, 'coche' as type"
-                + "from vehiculos v, especificaciones_coches e"
-                + "where e.matricula = v.matricula"
-                + "UNION ALL"
-                + "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia,"
-                + "null as numeropuertas, e.potenciamotor, e.wc, 0 as cilindrada, 'caravana' as type"
-                + "from vehiculos v, especificaciones_caravanas e"
-                + "where e.matricula = v.matricula"
-                + "UNION ALL"
-                + "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia,"
-                + "null as numeropuertas, null as potenciamotor, null as wc, e.cilindrada, 'moto' as type"
-                + "from vehiculos v, especificaciones_motos e"
-                + "where e.matricula = v.matricula;";
+        return "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia, "
+                + "e.numeropuertas, e.potenciamotor, null as wc, null as cilindrada, 'coche' as type "
+                + "from vehiculos v, especificaciones_coches e "
+                + "where e.matricula = v.matricula and v.retirado = false "
+                + "UNION ALL "
+                + "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia, "
+                + "null as numeropuertas, e.potenciamotor, e.wc, 0 as cilindrada, 'caravana' as type "
+                + "from vehiculos v, especificaciones_caravanas e "
+                + "where e.matricula = v.matricula and v.retirado = false "
+                + "UNION ALL "
+                + "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia, "
+                + "null as numeropuertas, null as potenciamotor, null as wc, e.cilindrada, 'moto' as type "
+                + "from vehiculos v, especificaciones_motos e "
+                + "where e.matricula = v.matricula and v.retirado = false ";
     }
 
     /**
@@ -268,5 +268,16 @@ public interface Consultas_BBDD {
 
     public static String recuperarReserva() {
         return "select * from reservas where numreserva ilike ?";
+    }
+    
+    public static String insertReservas() {
+        return "insert into reservas values (?,?::date,?::date,?::time,?::date,?::time,?,?)";
+    }
+    
+    public static String insertDetallesReservas() {
+        return "insert into detalles_reserva values (default,?,?,?,?)";
+    }
+    public static String contarReservas(){
+        return "select count (*) from reservas";
     }
 }

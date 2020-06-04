@@ -489,7 +489,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
      * para el registro del vehiculo
      * @return devuelve true/false en función del chequeo
      */
-    public boolean revisarCamposObligatorios(){
+    private boolean revisarCamposObligatorios(){
         boolean todosRellenados = true;
         if (jTextField_Matricula.getText().isEmpty() || jTextField_Matricula.getText().isEmpty()
                 || jComboBox_Marca.getSelectedItem().equals("") || jTextField_Modelo.getText().isEmpty()

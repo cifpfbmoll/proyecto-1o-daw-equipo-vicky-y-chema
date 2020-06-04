@@ -41,9 +41,8 @@ public class Coche extends Vehiculo {
      * @param modelo
      * @param precioDia
      * @param clase
-     * @param disponible
      */
-    public Coche(Integer numeroPuertas, Integer potenciaMotor, String matricula, String marca, String modelo, double precioDia, char clase, boolean disponible) {
+    public Coche(Integer numeroPuertas, Integer potenciaMotor, String matricula, String marca, String modelo, double precioDia, char clase) {
         super(matricula, marca, modelo, precioDia, clase);
         this.setNumeroPuertas(numeroPuertas);
         this.setPotenciaMotor(potenciaMotor);
