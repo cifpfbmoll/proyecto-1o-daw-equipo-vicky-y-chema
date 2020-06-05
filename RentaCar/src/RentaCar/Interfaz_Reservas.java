@@ -4,13 +4,18 @@
  */
 package RentaCar;
 
+import static RentaCar.Consultas_BBDD.insertDetallesReservas;
+import static RentaCar.Consultas_BBDD.insertReservas;
 import static RentaCar.Consultas_BBDD.obtenerConexion;
-import static RentaCar.Impresora.imprimir;
+import static RentaCar.Consultas_BBDD.unionVehiculos;
+import static RentaCar.Reserva.crearFecha;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -22,9 +27,7 @@ import javax.swing.table.TableModel;
  */
 public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
-    ArrayList<Moto> listaMotos = new ArrayList<>();
-    ArrayList<Coche> listaCoches = new ArrayList<>();
-    ArrayList<Caravana> listaCaravanas = new ArrayList<>();
+    ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
 
     /**
      * Creates new form Interfaz_contratos
@@ -32,7 +35,7 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     public Interfaz_Reservas() {
         initComponents();
         showDataVehiculos();
-        actualizarFechas();
+        // actualizarFechas();
         /**
          * Listener para rellenar campos del vehículo seleccionado
          */
@@ -44,10 +47,11 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                 jTextField_matricula.setText(model.getValueAt(fila, 0).toString());
                 jTextField_marca.setText(model.getValueAt(fila, 1).toString());
                 jTextField_modelo.setText(model.getValueAt(fila, 2).toString());
-                jTextField_precioDia.setText(model.getValueAt(fila, 3).toString());
-                jTextField_clase.setText(model.getValueAt(fila, 4).toString());
+                jTextField_clase.setText(model.getValueAt(fila, 3).toString());
+                jTextField_precioDia.setText(model.getValueAt(fila, 4).toString());
                 jTextField_numPuertas.setText(model.getValueAt(fila, 5).toString());
                 jTextField_potenciaMotor.setText(model.getValueAt(fila, 6).toString());
+
                 jTextField_cilindrada.setText(model.getValueAt(fila, 8).toString());
             }
         });
@@ -113,23 +117,24 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         Observaciones = new java.awt.TextField();
         jLabel_Observaciones = new javax.swing.JLabel();
         jPanel_botonera = new javax.swing.JPanel();
-        jButton_guardar = new javax.swing.JButton();
+        jButton_crearReserva = new javax.swing.JButton();
         jButton_limpiar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Registro de vehículos");
+        setTitle("Registro de Reservas");
 
         jTable_Vehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Matrícula", "Marca", "Modelo", "Precio", "Clase", "Nº Puertas", "Motor", "WC", "Cilindrada"
+                "Matrícula", "Marca", "Modelo", "Clase", "Precio", "Nº Puertas", "Motor", "WC", "Cilindrada", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -148,13 +153,14 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
             jTable_Vehiculos.getColumnModel().getColumn(1).setResizable(false);
             jTable_Vehiculos.getColumnModel().getColumn(2).setResizable(false);
             jTable_Vehiculos.getColumnModel().getColumn(3).setResizable(false);
+            jTable_Vehiculos.getColumnModel().getColumn(3).setPreferredWidth(45);
             jTable_Vehiculos.getColumnModel().getColumn(4).setResizable(false);
-            jTable_Vehiculos.getColumnModel().getColumn(4).setPreferredWidth(45);
             jTable_Vehiculos.getColumnModel().getColumn(5).setResizable(false);
             jTable_Vehiculos.getColumnModel().getColumn(6).setResizable(false);
             jTable_Vehiculos.getColumnModel().getColumn(7).setResizable(false);
             jTable_Vehiculos.getColumnModel().getColumn(7).setPreferredWidth(35);
             jTable_Vehiculos.getColumnModel().getColumn(8).setResizable(false);
+            jTable_Vehiculos.getColumnModel().getColumn(9).setResizable(false);
         }
 
         jLabel_infoCliente.setFont(new java.awt.Font("Heiti TC", 1, 18)); // NOI18N
@@ -355,14 +361,15 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel_infoVehiculo)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_matricula)
-                    .addComponent(jLabel_clase)
-                    .addComponent(jTextField_clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel_numPuertas)
-                        .addComponent(jTextField_numPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField_numPuertas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField_matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_matricula)
+                        .addComponent(jLabel_clase)
+                        .addComponent(jTextField_clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_datosVehiculoLayout.createSequentialGroup()
@@ -461,7 +468,6 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel_datosReservaLayout.createSequentialGroup()
                         .addComponent(jLabel_fechaSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(2, 2, 2)))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jDateChooser_recogida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_fechaRecogida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -491,10 +497,10 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jLabel_Observaciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Observaciones.setText("Observaciones");
 
-        jButton_guardar.setText("Guardar");
-        jButton_guardar.addActionListener(new java.awt.event.ActionListener() {
+        jButton_crearReserva.setText("Crear Reserva");
+        jButton_crearReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_guardarActionPerformed(evt);
+                jButton_crearReservaActionPerformed(evt);
             }
         });
 
@@ -510,18 +516,23 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jPanel_botoneraLayout.setHorizontalGroup(
             jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_botoneraLayout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton_limpiar)
                 .addGap(29, 29, 29)
-                .addComponent(jButton_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton_crearReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel_botoneraLayout.setVerticalGroup(
             jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_botoneraLayout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addGroup(jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton_crearReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel_botoneraLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5))
         );
 
@@ -530,24 +541,20 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel_datosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addComponent(Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel_datosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                                .addComponent(Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                                .addComponent(jPanel_datosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel_datosReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                                .addComponent(jPanel_botonera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                        .addComponent(jPanel_datosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel_datosReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel_botonera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane)
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -582,13 +589,13 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void actualizarFechas() {
-        Date fecha = new Date();
-        String hoy = fecha.getDate() + "/"
-                + (fecha.getMonth() + 1) + "/"
-                + (fecha.getYear() + 1900);
-        jTextField_fechaSolicitud.setText(hoy);
-    }
+    /*    private void actualizarFechas() {
+    Date fecha = new Date();
+    String hoy = fecha.getDate() + "/"
+    + (fecha.getMonth() + 1) + "/"
+    + (fecha.getYear() + 1900);
+    jTextField_fechaSolicitud.setText(hoy);
+    }*/
 
     /**
      * Método para limpiar los campos
@@ -618,160 +625,113 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
     /**
      * Creación ArrayList Motos recogiendo datos de BBDD
-     * @return 
+     *
+     * @return
      */
-    private ArrayList<Moto> listaMotos() {
+    private ArrayList<Vehiculo> listarVehiculos() {
         PreparedStatement pst;
         ResultSet rs;
-        String queryMotos = "select e.matricula, v.marca, v.modelo, v.clase,"
-                + "e.cilindrada, v.preciodia from vehiculos v, especificaciones_motos e";
         try (Connection con = obtenerConexion()) {
-            pst = con.prepareStatement(queryMotos, ResultSet.TYPE_SCROLL_INSENSITIVE,
+            pst = con.prepareStatement(unionVehiculos(), ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             rs = pst.executeQuery();
             Moto m1;
-            while (rs.next()) {
-                m1 = new Moto(rs.getInt("cilindrada"), rs.getString("matricula"),
-                        rs.getString("marca"), rs.getString("modelo"),
-                        rs.getDouble("precioDia"), rs.getString("clase").charAt(0));
-                listaMotos.add(m1);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return listaMotos;
-    }
-    /**
-     * Creación ArrayList Coches recogiendo datos de BBDD
-     * @return 
-     */
-    private ArrayList<Coche> listaCoches() {
-        PreparedStatement pst;
-        ResultSet rs;
-        String queryCoches = "select e.matricula, v.marca, v.modelo, v.clase, v.retirado, e.numeropuertas,"
-                + "e.potenciamotor, v.preciodia from vehiculos v, especificaciones_coches e";
-        try (Connection con = obtenerConexion()) {
-            pst = con.prepareStatement(queryCoches, ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
-            rs = pst.executeQuery();
             Coche c1;
-            while (rs.next()) {
-                c1 = new Coche(rs.getInt("numeropuertas"), rs.getInt("potenciamotor"),
-                        rs.getString("matricula"), rs.getString("marca"), rs.getString("modelo"),
-                        rs.getDouble("precioDia"), rs.getString("clase").charAt(0), rs.getBoolean("retirado"));
-                listaCoches.add(c1);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return listaCoches;
-    }
-    /**
-     * Creación ArrayList Caravanas recogiendo datos de BBDD
-     * @return 
-     */
-    private ArrayList<Caravana> listaCaravanas() {
-        PreparedStatement pst;
-        ResultSet rs;
-        String queryCaravanas = "select e.matricula, v.marca, v.modelo, v.clase, e.wc,"
-                + "e.potenciamotor, v.preciodia from vehiculos v, especificaciones_caravanas e";
-        try (Connection con = obtenerConexion()) {
-            pst = con.prepareStatement(queryCaravanas, ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
-            rs = pst.executeQuery();
             Caravana ca1;
             while (rs.next()) {
-                ca1 = new Caravana(rs.getInt("potenciamotor"), rs.getBoolean("wc"),
-                        rs.getString("matricula"), rs.getString("marca"), rs.getString("modelo"),
-                        rs.getDouble("precioDia"), rs.getString("clase").charAt(0));
-                listaCaravanas.add(ca1);
+                if (rs.getString("type").equalsIgnoreCase("coche")) {
+                    c1 = new Coche(rs.getInt("numeropuertas"), rs.getInt("potenciamotor"),
+                            rs.getString("matricula"), rs.getString("marca"), rs.getString("modelo"),
+                            rs.getDouble("precioDia"), rs.getString("clase").charAt(0));
+                    listaVehiculos.add(c1);
+                } else if (rs.getString("type").equalsIgnoreCase("moto")) {
+                    m1 = new Moto(rs.getInt("cilindrada"), rs.getString("matricula"),
+                            rs.getString("marca"), rs.getString("modelo"),
+                            rs.getDouble("precioDia"), rs.getString("clase").charAt(0));
+                    listaVehiculos.add(m1);
+                } else if (rs.getString("type").equalsIgnoreCase("caravana")) {
+                    ca1 = new Caravana(rs.getInt("potenciamotor"), rs.getBoolean("wc"),
+                            rs.getString("matricula"), rs.getString("marca"), rs.getString("modelo"),
+                            rs.getDouble("precioDia"), rs.getString("clase").charAt(0));
+                    listaVehiculos.add(ca1);
+                }
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        return listaCaravanas;
+        return listaVehiculos;
     }
-    /**
-     * Muestra en la tabla toda la información de los vehículos
-     */
-    private void showDataVehiculos() {
-        showDataCoches();
-        showDataMotos();
-        showDataCaravanas();
-    }
+
     /**
      * Pinta línea a línea los coches con sus parámetros en la tabla
      */
-    private void showDataCoches() {
-        ArrayList<Coche> listaCoches = listaCoches();
+    private void showDataVehiculos() {
+        ArrayList<Vehiculo> lista = listarVehiculos();
         DefaultTableModel model = (DefaultTableModel) jTable_Vehiculos.getModel();
-        Object[] filaCoches = new Object[9];
-        for (int i = 0; i < listaCoches.size(); i++) {
-            filaCoches[0] = listaCoches.get(i).getMatricula();
-            filaCoches[1] = listaCoches.get(i).getMarca();
-            filaCoches[2] = listaCoches.get(i).getModelo();
-            filaCoches[3] = listaCoches.get(i).getPrecioDia();
-            filaCoches[4] = listaCoches.get(i).getClase();
-            filaCoches[5] = listaCoches.get(i).getPotenciaMotor();
-            filaCoches[6] = "";
-            filaCoches[7] = "";
-            filaCoches[8] = "";
-            model.addRow(filaCoches);
-        }
-    }
-    /**
-     * Pinta línea a línea las caravanas con sus parámetros en la tabla
-     */
-    private void showDataCaravanas() {
-        ArrayList<Caravana> listaCaravanas = listaCaravanas();
-        DefaultTableModel model = (DefaultTableModel) jTable_Vehiculos.getModel();
-        Object[] filaCaravanas = new Object[9];
-        for (int i = 0; i < listaCaravanas.size(); i++) {
-            filaCaravanas[0] = listaCaravanas.get(i).getMatricula();
-            filaCaravanas[1] = listaCaravanas.get(i).getMarca();
-            filaCaravanas[2] = listaCaravanas.get(i).getModelo();
-            filaCaravanas[3] = listaCaravanas.get(i).getPrecioDia();
-            filaCaravanas[4] = listaCaravanas.get(i).getClase();
-            filaCaravanas[5] = "";
-            filaCaravanas[6] = listaCaravanas.get(i).getPotenciaMotor();
-            if (listaCaravanas.get(i).isWc()) {
-                filaCaravanas[7] = "Si";
-            } else{
-                filaCaravanas[7] = "No";
+        Object[] fila = new Object[10];
+        for (int i = 0; i < lista.size(); i++) {
+            fila[0] = lista.get(i).getMatricula();
+            fila[1] = lista.get(i).getMarca();
+            fila[2] = lista.get(i).getModelo();
+            fila[3] = lista.get(i).getClase();
+            fila[4] = lista.get(i).getPrecioDia();
+            if (lista.get(i) instanceof Coche) {
+                fila[5] = "a";  //((Coche) lista.get(i)).getNumeroPuertas();
+                fila[6] = "a";
+                fila[7] = "";
+                fila[8] = "";
+                fila[9] = "Coche";
+            } else if (lista.get(i) instanceof Moto) {
+                fila[5] = "a";
+                fila[6] = "a";
+                fila[7] = "b";
+                fila[8] = "b";
+                fila[9] = "Moto";
+            } else if (lista.get(i) instanceof Caravana) {
+                fila[5] = "a";
+                fila[6] = "a";
+                fila[7] = "c";
+                fila[8] = "c";
+                fila[9] = "Caravana";
             }
-            filaCaravanas[8] = "";
-            model.addRow(filaCaravanas);
-        }
-    }
-    /**
-     * Pinta línea a línea las motos con sus parámetros en la tabla
-     */
-    private void showDataMotos() {
-        ArrayList<Moto> listaMotos = listaMotos();
-        DefaultTableModel model = (DefaultTableModel) jTable_Vehiculos.getModel();
-        Object[] filaMotos = new Object[9];
-        for (int i = 0; i < listaMotos.size(); i++) {
-            filaMotos[0] = listaMotos.get(i).getMatricula();
-            filaMotos[1] = listaMotos.get(i).getMarca();
-            filaMotos[2] = listaMotos.get(i).getModelo();
-            filaMotos[3] = listaMotos.get(i).getPrecioDia();
-            filaMotos[4] = listaMotos.get(i).getClase();
-            filaMotos[5] = "";
-            filaMotos[6] = "";
-            filaMotos[7] = "";
-            filaMotos[8] = listaMotos.get(i).getCilindrada();
-            model.addRow(filaMotos);
+            model.addRow(fila);
         }
     }
 
+    private Double calcularPrecio() {
+        int dias = jDateChooser_devolucion.getCalendar().get(Calendar.DAY_OF_MONTH) - jDateChooser_recogida.getCalendar().get(Calendar.DAY_OF_MONTH);
+        return dias * Double.parseDouble(jTextField_precioDia.getText());
+    }
     private void jButton_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_limpiarActionPerformed
         limpiar();
     }//GEN-LAST:event_jButton_limpiarActionPerformed
 
-    private void jButton_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guardarActionPerformed
+    private void jButton_crearReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_crearReservaActionPerformed
+        Calendar fechaRecogida = jDateChooser_recogida.getCalendar();
+        Calendar fechaDevolucion = jDateChooser_devolucion.getCalendar();
+
+        jComboBox_horaRecogida.getSelectedItem().toString();
+        jComboBox_horaDevolucion.getSelectedItem().toString();
+
+        Reserva r1 = new Reserva(jTextField_matricula.getText(), fechaRecogida, fechaDevolucion, Observaciones.getText(), 0.00);
+        jTextField_fechaSolicitud.setText(crearFecha(r1.getFECHASOLICITUD()));
+
         // TODO: Guardar en Reservas BBDD
-        imprimir(this);
-    }//GEN-LAST:event_jButton_guardarActionPerformed
+        try {
+            if (jTextField_matricula.getText().equalsIgnoreCase("") || jTextField_matricula.getText().equalsIgnoreCase(null)) {
+                jLabel1.setForeground(Color.RED);
+                jLabel1.setText("Por favor seleccione un vehículo.");
+            } else {
+                r1.registrarReserva(jComboBox_horaRecogida.getSelectedItem().toString(),
+                        jComboBox_horaDevolucion.getSelectedItem().toString(), jTextField_NIF.getText(), calcularPrecio());
+                jLabel1.setForeground(Color.GREEN);
+                jLabel1.setText("Reserva realizada con éxito.");
+            }
+        } catch (Exception ex) {
+            jLabel1.setForeground(Color.RED);
+            jLabel1.setText(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton_crearReservaActionPerformed
 
     private void jTextField_NIFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NIFActionPerformed
     }//GEN-LAST:event_jTextField_NIFActionPerformed
@@ -791,13 +751,14 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextField Observaciones;
-    private javax.swing.JButton jButton_guardar;
+    private javax.swing.JButton jButton_crearReserva;
     private javax.swing.JButton jButton_limpiar;
     private javax.swing.JCheckBox jCheckBox_wc;
     private javax.swing.JComboBox<String> jComboBox_horaDevolucion;
     private javax.swing.JComboBox<String> jComboBox_horaRecogida;
     private com.toedter.calendar.JDateChooser jDateChooser_devolucion;
     private com.toedter.calendar.JDateChooser jDateChooser_recogida;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_NIF;
     private javax.swing.JLabel jLabel_Observaciones;
     private javax.swing.JLabel jLabel_apellido1;

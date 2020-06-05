@@ -9,74 +9,80 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Interfaz con métodos para recuperar todas las consultas que
- * se lanzan a BBDD en la aplicación
- * 
+ * Interfaz con métodos para recuperar todas las consultas que se lanzan a BBDD
+ * en la aplicación
+ *
  * @author victoriapenas & josemariahernandez
  * @version 1.0
  * @since 2020-19-05
  */
-
 public interface Consultas_BBDD {
-    
+
     /**
      * Método para recuperar la conexión a la BBDD
+     *
      * @return devuelve la conexión a la BBDD
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static Connection obtenerConexion() throws SQLException {
         String url = "jdbc:postgresql://81.203.19.183:5432/rentacar";
-        return DriverManager.getConnection (url, "Admin", "Admin123");
+        return DriverManager.getConnection(url, "Admin", "Admin123");
     }
-    
+
     //---------------QUERIES CLIENTES/USUARIOS---------------------------
-    
     /**
      * Query para buscar un cliente por NIF
+     *
      * @return devuelve la query
      */
-    public static String buscarCliente(){
+    public static String buscarCliente() {
         return "select * from clientes where nif ilike ?";
     }
+
     /**
      * Query para insertar nuevos clientes a la BBDD
+     *
      * @return devuelve el insert
      */
-    public static String insertClientes(){
+    public static String insertClientes() {
         return "insert into clientes (nif,nombre,apellido1,apellido2,telefono,email)"
-                      + " values (?, ?, ?, ?, ?, ?)";
+                + " values (?, ?, ?, ?, ?, ?)";
     }
-    
+
     /**
      * Query para insertar nuevos usuarios a la BBDD
-     * @return devuelve el insert 
+     *
+     * @return devuelve el insert
      */
-    public static String insertUsuarios(){
-        return "insert into usuarios (usuario,password,clientenif,rolid)" + 
-                "values (?, crypt(?, gen_salt('bf')), ?, ?)";
+    public static String insertUsuarios() {
+        return "insert into usuarios (usuario,password,clientenif,rolid)"
+                + "values (?, crypt(?, gen_salt('bf')), ?, ?)";
     }
-    
+
     /**
      * query para validar contraseñas
+     *
      * @return devuelve la query de validación
      */
-    public static String comprobarPw(){
+    public static String comprobarPw() {
         return "SELECT (password = crypt(?, password)) AS pswmatch FROM USUARIOS where usuario = ?";
     }
-    
+
     /**
      * query para validar contraseñas
+     *
      * @return devuelve la query de validación
      */
-    public static String recuperarUsuario(String user){
+    public static String recuperarUsuario(String user) {
         return "SELECT rolid from usuarios where usuario = '" + user + "'";
     }
-    
+
     /**
      * query para recuperar todos los clientes existentes
+     *
      * @return query de clientes
      */
-    public static String listarClientes(){
+    public static String listarClientes() {
         return "select * from clientes";
     }
     
@@ -88,35 +94,36 @@ public interface Consultas_BBDD {
         return "select clientenif from usuarios where usuario ilike ?";
     }
     //---------------------QUERIES VEHICULOS--------------------------------
-    
-    
     /**
      * Query para buscar un vehiculo por matricula
+     *
      * @return devuelve la query
      */
-    public static String buscarVehiculo(){
+    public static String buscarVehiculo() {
         return "select * from vehiculos where matricula ilike ?";
     }
-    
+
     /**
-     * query para recuperar todos los vehiculos 
+     * query para recuperar todos los vehiculos
+     *
      * @return devuelve la query para recuperar los vehiculos
      */
-    public static String selectVehiculos(){
+    public static String selectVehiculos() {
         return "SELECT *, CASE WHEN EXISTS (SELECT matricula FROM especificaciones_coches c"
-                + " WHERE c.matricula = v.matricula) THEN 'coche'" +
-                "WHEN EXISTS (SELECT matricula FROM especificaciones_caravanas c"
-                + " WHERE c.matricula = v.matricula) THEN 'caravana'" +
-                "WHEN EXISTS (SELECT matricula FROM especificaciones_motos c WHERE"
-                + " c.matricula = v.matricula) THEN 'moto'" +
-                "end as tipo FROM vehiculos v where retirado = 'false'";
+                + " WHERE c.matricula = v.matricula) THEN 'coche'"
+                + "WHEN EXISTS (SELECT matricula FROM especificaciones_caravanas c"
+                + " WHERE c.matricula = v.matricula) THEN 'caravana'"
+                + "WHEN EXISTS (SELECT matricula FROM especificaciones_motos c WHERE"
+                + " c.matricula = v.matricula) THEN 'moto'"
+                + "end as tipo FROM vehiculos v where retirado = 'false'";
     }
-    
+
     /**
      * Método para recuperar el tipo de vehiculo
+     *
      * @return devuleve 0,1,2 siendo 0 coches, 1 caravanas, 2 motos
      */
-    public static String selectTipoVehiculo(){
+    public static String selectTipoVehiculo() {
         return "select tipoVehiculoMatricula(?)";
     }
     
@@ -149,33 +156,58 @@ public interface Consultas_BBDD {
                 + "e.cilindrada, v.preciodia from vehiculos v, especificaciones_motos e"
                 + " where e.matricula = v.matricula and e.matricula ilike ?";
     }
-    
+
+    /**
+     * Union para los vehiculos usado en JTable del internalframe Reservas
+     * @return 
+     */
+    public static String unionVehiculos() {
+        return "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia, "
+                + "e.numeropuertas, e.potenciamotor, null as wc, null as cilindrada, 'coche' as type "
+                + "from vehiculos v, especificaciones_coches e "
+                + "where e.matricula = v.matricula and v.retirado = false "
+                + "UNION ALL "
+                + "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia, "
+                + "null as numeropuertas, e.potenciamotor, e.wc, 0 as cilindrada, 'caravana' as type "
+                + "from vehiculos v, especificaciones_caravanas e "
+                + "where e.matricula = v.matricula and v.retirado = false "
+                + "UNION ALL "
+                + "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia, "
+                + "null as numeropuertas, null as potenciamotor, null as wc, e.cilindrada, 'moto' as type "
+                + "from vehiculos v, especificaciones_motos e "
+                + "where e.matricula = v.matricula and v.retirado = false ";
+    }
+
     /**
      * query para recuperar las marcas de los vehiculos existentes
+     *
      * @return devuelve la query
      */
-    public static String listarMarcas(){
+    public static String listarMarcas() {
         return "select distinct marca from vehiculos";
     }
-    
+
     /**
      * query para recuperar las marcas de las clases existentes
+     *
      * @return devuelve la query
      */
-    public static String listarClases(){
+    public static String listarClases() {
         return "select distinct nombre from clases_vehiculos";
     }
-    
+
     /**
      * query para recuperar el codigo de una clase de vehiculo según su nombre
+     *
      * @return la query
      */
-    public static String recuperarPKClase(){
+    public static String recuperarPKClase() {
         return "select cod from clases_vehiculos where nombre ilike ?";
     }
-    
+
     /**
      * Query para insertar en la tabla vehiculos
+     *
      * @param matricula
      * @param marca
      * @param modelo
@@ -183,59 +215,65 @@ public interface Consultas_BBDD {
      * @param precioDia
      * @return devuelve la query
      */
-    public static String insertarVehiculo(String matricula, String marca, String modelo, char clase, Double precioDia){
-        return "insert into vehiculos values ('" + matricula + "','" + marca + "','" + 
-                modelo + "','" + clase + "'," + precioDia + ")";
+    public static String insertarVehiculo(String matricula, String marca, String modelo, char clase, Double precioDia) {
+        return "insert into vehiculos values ('" + matricula + "','" + marca + "','"
+                + modelo + "','" + clase + "'," + precioDia + ")";
     }
-    
+
     /**
      * query para insertar especificaciones de un coche
+     *
      * @return devuelve la query
      */
-    public static String insertarCoche(){
+    public static String insertarCoche() {
         return "insert into especificaciones_coches values (?,?,?)";
     }
-    
+
     /**
      * query para insertar especificaciones de una caravana
+     *
      * @return devuelve la query
      */
-    public static String insertarCaravana(){
+    public static String insertarCaravana() {
         return "insert into especificaciones_caravanas values (?,?,?)";
     }
-    
+
     /**
      * query para insertar especificaciones de una caravana
+     *
      * @return devuelve la query
      */
-    public static String insertarMoto(){
+    public static String insertarMoto() {
         return "insert into especificaciones_motos values (?,?)";
     }
-    
+
     /**
      * Método para dar de baja vehiculos
+     *
      * @return devuelve la query
      */
-    public static String eliminarVehiculo(){
+    public static String eliminarVehiculo() {
         return "update vehiculos set retirado = true where matricula ilike ?";
     }
-    
+
     /**
      * Método para obtener un solo vehiculo por num de matricula
+     *
      * @return devuelve la query
      */
-    public static String recuperarVehiculo(){
+    public static String recuperarVehiculo() {
         return "select * from vehiculos where matricula ilike ? and retirado=false";
     }
-    
+
     /**
      * Método para modificar el precio de un vehiculo
+     *
      * @return devuelve la query
      */
-    public static String modificarPrecioSQL(){
+    public static String modificarPrecioSQL() {
         return "update vehiculos set preciodia = ? where matricula ilike ?";
     }
-    
+
     //---------------------QUERIES RESERVAS--------------------------------
     
     /**
@@ -265,6 +303,15 @@ public interface Consultas_BBDD {
         return "select r.*, d.matriculavehiculo, d.preciodia, d.descuento"
                 + " from reservas r, detalles_reserva d "
                 + "where r.numreserva = d.numreserva and r.numreserva ilike ?";
+    public static String insertReservas() {
+        return "insert into reservas values (?,?::date,?::date,?::time,?::date,?::time,?,?)";
+    }
+    
+    public static String insertDetallesReservas() {
+        return "insert into detalles_reserva values (default,?,?,?,?)";
+    }
+    public static String contarReservas(){
+        return "select count (*) from reservas";
     }
 
 }

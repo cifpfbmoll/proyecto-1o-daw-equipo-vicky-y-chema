@@ -25,7 +25,8 @@ import javax.swing.*;
  * @since 2020-05-30
  */
 public class Reserva {
-    private static final AtomicInteger RESERVA = new AtomicInteger(99);
+
+    private static AtomicInteger RESERVA = new AtomicInteger(99);
     private String numReserva;
     private String matricula;
     private static final Calendar FECHASOLICITUD = Calendar.getInstance();
@@ -37,20 +38,24 @@ public class Reserva {
     /**
      * Constructor vacío con un autoincremental
      */
-    public Reserva() {
-        this.setNumReserva("RES-" + getRESERVA().incrementAndGet());
+    public Reserva() throws SQLException {
+        this.setNumReserva("RES-" + getRESERVA().intValue());
     }
 
     /**
      * Constructor con parámetros
+     *
      * @param matricula matricula del vehiculo reservado
-     * @param fechaHoraRecogida fecha y hora de la recogida del vehiculo reservado
-     * @param fechaHoraDevolucion fecha y hora de la devolución del vehiculo reservado
-     * @param observaciones información facilitada por el cliente en relacion a la reserva
+     * @param fechaHoraRecogida fecha y hora de la recogida del vehiculo
+     * reservado
+     * @param fechaHoraDevolucion fecha y hora de la devolución del vehiculo
+     * reservado
+     * @param observaciones información facilitada por el cliente en relacion a
+     * la reserva
      * @param descuento decuento aplicado en la reserva
      */
-    public Reserva(String matricula, Calendar fechaHoraRecogida, Calendar fechaHoraDevolucion, String observaciones,Double descuento) {
-        this.setNumReserva("RES-" + getRESERVA().incrementAndGet());
+    public Reserva(String matricula, Calendar fechaHoraRecogida, Calendar fechaHoraDevolucion, String observaciones, Double descuento) throws SQLException {
+        this.setNumReserva("RES-" + getRESERVA().intValue());
         this.setMatricula(matricula);
         this.setFechaHoraRecogida(fechaHoraRecogida);
         this.setFechaHoraDevolucion(fechaHoraDevolucion);
@@ -72,8 +77,13 @@ public class Reserva {
         this.setObservaciones(r1.getObservaciones());
         this.setDescuento(r1.getDescuento());
     }
-    
-    public static AtomicInteger getRESERVA() {
+
+    public static AtomicInteger getRESERVA() throws SQLException {
+        try(Connection con = obtenerConexion(); PreparedStatement pst = con.prepareStatement(contarReservas()); ResultSet rs = pst.executeQuery()) {
+            while(rs.next()){
+                RESERVA.addAndGet(rs.getInt(1));
+            }
+        }
         return RESERVA;
     }
 
@@ -120,7 +130,7 @@ public class Reserva {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    
+
     public Double getDescuento() {
         return descuento;
     }
@@ -143,13 +153,13 @@ public class Reserva {
         ventana.setTitle("LISTADO DE RESERVAS");
         JPanel buscar = new JPanel();
         JButton buscarReserva = new JButton("BUSCAR RESERVA");
-        try (Connection con = obtenerConexion()){                      
-            pst = con.prepareStatement(selectReservas(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Connection con = obtenerConexion()) {
+            pst = con.prepareStatement(selectReservas(), ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             pst.setString(1, nif);
             rs = pst.executeQuery();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         modelo = new ModeloTabla(rs);
         tabla = new JTable(modelo);
@@ -177,15 +187,11 @@ public class Reserva {
                     
                     throw new RCException("No has indicado ningun numero de reserva.");
                 }
-                ventana.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
             }
-        }
         });
         buscar.add(buscarReserva);
-        ventana.add(buscar,BorderLayout.SOUTH);
-        
+        ventana.add(buscar, BorderLayout.SOUTH);
+
         return ventana;
     }
     
@@ -199,9 +205,10 @@ public class Reserva {
         tabla.getColumnModel().getColumn(5).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(6).setPreferredWidth(100);
     }
-    
+
     /**
      * Método para comprobar si una reserva está pasada
+     *
      * @param numReserva numero de reserva a verificar
      * @return true si la fecha de recogida no está pasada
      */
@@ -215,10 +222,10 @@ public class Reserva {
         try {
             con = obtenerConexion();
             pst = con.prepareStatement(query);
-            pst.setString(1,numReserva);
+            pst.setString(1, numReserva);
             rs = pst.executeQuery();
-            if (rs.next ()) {
-                String [] fecha = rs.getString("fecharecogida").split("-");
+            if (rs.next()) {
+                String[] fecha = rs.getString("fecharecogida").split("-");
                 int year = Integer.parseInt(fecha[0]);
                 int month = Integer.parseInt(fecha[1]);
                 int day = Integer.parseInt(fecha[2]);
@@ -232,18 +239,19 @@ public class Reserva {
                     throw new RCException("Las reservas pasadas no se pueden cancelar.");
                 }
             }
-        } finally{
+        } finally {
             rs.close();
             pst.close();
             con.close();
         }
         return cancelable;
     }
-        
+
     /**
      * Método para cancelar una eliminar/cancelar una reserva
+     *
      * @param numReserva numero de la reserva
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static void cancelarReserva(String nif) throws SQLException, RCException{
         String query = deleteReserva();
@@ -280,4 +288,50 @@ public class Reserva {
         ventana.dispose();
     }
 
+    public void registrarReserva(String horaRecogida, String horaDevolucion, String NIF, Double precio) throws SQLException {
+        PreparedStatement pst = null;
+        Connection con = null;
+        String queryReserva = insertReservas();
+        String queryDetalles = insertDetallesReservas();
+
+        try {
+            con = obtenerConexion();
+            con.setAutoCommit(false);
+            //INSERT tabla reservas
+            pst = con.prepareStatement(queryReserva);
+            pst.setString(1, this.getNumReserva());
+            pst.setString(2, crearFecha(this.getFECHASOLICITUD()));
+            pst.setString(3, crearFecha(this.getFechaHoraRecogida()));
+            pst.setString(4, horaRecogida);
+            pst.setString(5, crearFecha(this.getFechaHoraDevolucion()));
+            pst.setString(6, horaDevolucion);
+            pst.setString(7, this.getObservaciones());
+            pst.setString(8, NIF);
+            pst.executeUpdate();
+            //INSERT tabla detalles_reserva
+            pst = con.prepareStatement(queryDetalles);
+            pst.setString(1, this.getNumReserva());
+            pst.setString(2, this.getMatricula());
+            pst.setDouble(3, precio);
+            pst.setDouble(4, this.getDescuento());
+            pst.executeUpdate();
+
+            con.commit();
+        } catch (Exception ex) {
+            con.rollback();
+        } finally {
+            con.setAutoCommit(true);
+            con.close();
+            pst.close();
+        }
+    }
+
+    public static String crearFecha(Calendar cal) {
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        String fechaSolicitud = year + "-" + (month + 1) + "-" + (day + 1);
+        return fechaSolicitud;
+    }
 }
