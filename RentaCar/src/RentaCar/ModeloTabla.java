@@ -11,20 +11,22 @@ import java.sql.SQLException;
 import javax.swing.table.AbstractTableModel;
 
 /**
- * Esta clase es el modelo que se utiliza para construir todas las JTable de la aplicación.
- * 
+ * Esta clase es el modelo que se utiliza para construir todas las JTable de la
+ * aplicación.
+ *
  * @author victoriapenas
  * @version 1.0
  * @since 2020-05-27
  */
-public class ModeloTabla extends AbstractTableModel{
+public class ModeloTabla extends AbstractTableModel {
 
     private ResultSet rsRegistros;
     private ResultSetMetaData rsmd;
 
     /**
      * Contructor que recibe el cursor con el que rellenará la JTable
-     * @param rs 
+     *
+     * @param rs
      */
     public ModeloTabla(ResultSet rs) {
         rsRegistros = rs;
@@ -36,8 +38,9 @@ public class ModeloTabla extends AbstractTableModel{
     }
 
     /**
-     * Método para obtener el número total de filas.
-     * Movemos el cursor al final y de esa forma obtenemos el total de filas que hay
+     * Método para obtener el número total de filas. Movemos el cursor al final
+     * y de esa forma obtenemos el total de filas que hay
+     *
      * @return devolvemos la posición de la ultima fila
      */
     @Override
@@ -53,6 +56,7 @@ public class ModeloTabla extends AbstractTableModel{
 
     /**
      * Método para obtener el número total de columnas
+     *
      * @return devuelve el número total de columnas obtenidas
      */
     @Override
@@ -62,20 +66,21 @@ public class ModeloTabla extends AbstractTableModel{
         } catch (SQLException ex) {
             ex.printStackTrace();
             return 0;
-        }        
+        }
     }
 
     /**
      * Método mediante el cual el cursor rellena la tabla con todos los datos
+     *
      * @param rowIndex
      * @param columnIndex
-     * @return 
+     * @return
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
-            rsRegistros.absolute(rowIndex+1);
-            return rsRegistros.getObject(columnIndex+1);
+            rsRegistros.absolute(rowIndex + 1);
+            return rsRegistros.getObject(columnIndex + 1);
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
@@ -83,17 +88,19 @@ public class ModeloTabla extends AbstractTableModel{
     }
 
     /**
-     * Método para obtener el nombre de las columnas de la base de datos y seteralo en la JTable
+     * Método para obtener el nombre de las columnas de la base de datos y
+     * seteralo en la JTable
+     *
      * @param c indice
-     * @return 
+     * @return
      */
     @Override
-    public String getColumnName(int c){
+    public String getColumnName(int c) {
         try {
-            return rsmd.getColumnName(c+1);
+            return rsmd.getColumnName(c + 1);
         } catch (SQLException ex) {
             return null;
         }
     }
-    
+
 }

@@ -356,7 +356,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         try {
             listarReservas("%");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_listarReservasActionPerformed
 
@@ -382,7 +382,7 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         try {
             bajaVehiculo();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_retirarVehiculoActionPerformed
 
@@ -390,16 +390,16 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
         try {
             modificarPrecio();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_modificarPrecioActionPerformed
 
-    
+
     private void jButton_cancelrReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelrReservasActionPerformed
         try {
             cancelarReserva("%");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_cancelrReservasActionPerformed
 

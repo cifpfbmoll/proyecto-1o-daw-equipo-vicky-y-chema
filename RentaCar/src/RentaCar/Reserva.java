@@ -263,8 +263,7 @@ public class Reserva {
     /**
      * Método para cancelar una eliminar/cancelar una reserva
      *
-     * @param numReserva numero de la reserva
-     * @throws SQLException
+     * @param nif numero de la reserva
      */
     public static void cancelarReserva(String nif) {
         String query = deleteReserva();
@@ -305,7 +304,14 @@ public class Reserva {
             ventana.dispose();
         }
     }
-
+    /**
+     * Registramos la reserva, con los parámetros:
+     * @param horaRecogida Hora recogida del vehículo.
+     * @param horaDevolucion Hora devolución del vehículo.
+     * @param NIF NIF del cliente.
+     * @param precio Precio por día del vehículo.
+     * @throws SQLException 
+     */
     public void registrarReserva(String horaRecogida, String horaDevolucion, String NIF, Double precio) throws SQLException {
         PreparedStatement pst = null;
         Connection con = null;
@@ -345,7 +351,12 @@ public class Reserva {
             pst.close();
         }
     }
-
+    
+    /**
+     * Formata la fecha a String desde un tipo Calendar
+     * @param cal tipo Calendar 
+     * @return Fecha nueva con nuevo tipo de dato String
+     */
     public static String crearFecha(Calendar cal) {
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);

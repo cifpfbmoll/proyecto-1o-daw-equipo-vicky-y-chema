@@ -39,7 +39,7 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         initComponents();
         showDataVehiculos();
         cargarDatosCliente();
-        // actualizarFechas();
+
         /**
          * Listener para rellenar campos del vehículo seleccionado
          */
@@ -65,6 +65,12 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         });
     }
 
+    /**
+     * Método para autocompletas los datos del cliente en función del tipo de
+     * usuario con el que ha conectado.
+     *
+     * @throws SQLException
+     */
     private void cargarDatosCliente() throws SQLException {
         String query = buscarCliente();
         PreparedStatement pst = null;
@@ -744,6 +750,12 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
         }
     }
 
+    /**
+     * Calcula el precio de la reserva teniendo en cuenta la diferencia de días
+     * y el precio.
+     *
+     * @return Precio final reserva.
+     */
     private Double calcularPrecio() {
         int dias = jDateChooser_devolucion.getCalendar().get(Calendar.DAY_OF_MONTH) - jDateChooser_recogida.getCalendar().get(Calendar.DAY_OF_MONTH);
         return dias * Double.parseDouble(jTextField_precioDia.getText());
@@ -751,7 +763,12 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     private void jButton_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_limpiarActionPerformed
         limpiar();
     }//GEN-LAST:event_jButton_limpiarActionPerformed
-
+    
+    /**
+     * Se creará una nueva reserva mediante insert en la base de datos
+     * con la información que esté en los campos del formulario.
+     * @param evt
+     */
     private void jButton_crearReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_crearReservaActionPerformed
         int reply = 0;
         Calendar fechaRecogida = jDateChooser_recogida.getCalendar();

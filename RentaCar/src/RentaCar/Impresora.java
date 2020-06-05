@@ -27,13 +27,20 @@ public class Impresora implements Printable {
 
     final Component comp;
 
+    /**
+     * Contructor con parámetros
+     *
+     * @param comp componente a imprimir
+     */
     public Impresora(Component comp) {
         this.comp = comp;
 
     }
+
     /**
      * Método que permitirá imprimir los componentes.
-     * @param comp 
+     *
+     * @param comp
      */
     public static void imprimir(Component comp) {
         PrinterJob pjob = PrinterJob.getPrinterJob();
@@ -54,6 +61,15 @@ public class Impresora implements Printable {
         }
     }
 
+    /**
+     * Dibuja el componente seleccionado para plasmarlo en un archivo pdf
+     *
+     * @param g componente a retocar
+     * @param format formato de página a usar, PORTRAIT o LANDSCAPE
+     * @param page_index índice de página
+     * @return devuelve el componente dibujado
+     * @throws PrinterException
+     */
     @Override
     public int print(Graphics g, PageFormat format, int page_index)
             throws PrinterException {

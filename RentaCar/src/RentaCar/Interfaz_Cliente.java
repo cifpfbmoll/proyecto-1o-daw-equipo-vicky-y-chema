@@ -23,12 +23,12 @@ import javax.swing.JOptionPane;
  * @since 2020-18-05
  */
 public class Interfaz_Cliente extends javax.swing.JFrame {
-    
+
     /**
      * usuario logueado en el sistema
      */
     private String nif;
-    
+
     /**
      * Creates new form Interfaz_Cliente
      */
@@ -47,7 +47,6 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
         this.nif = nif;
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -278,7 +277,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
         try {
             listarReservas(this.getNif());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_listarReservasActionPerformed
 

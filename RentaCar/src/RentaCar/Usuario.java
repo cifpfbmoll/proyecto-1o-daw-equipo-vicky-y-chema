@@ -87,9 +87,9 @@ public class Usuario implements Consultas_BBDD {
 
     public void setNombre(String nombre) throws RCException {
         boolean valido = isStringOnlyAlphabet(nombre);
-        if (valido){
+        if (valido) {
             this.nombre = nombre;
-        } else{
+        } else {
             throw new RCException("Por favor, indica un nombre válido.");
         }
     }
@@ -100,9 +100,9 @@ public class Usuario implements Consultas_BBDD {
 
     public void setApellido1(String apellido1) throws RCException {
         boolean valido = isStringOnlyAlphabet(apellido1);
-        if (valido){
+        if (valido) {
             this.apellido1 = apellido1;
-        } else{
+        } else {
             throw new RCException("El primer apellido es incorrecto.");
         }
     }
@@ -113,9 +113,9 @@ public class Usuario implements Consultas_BBDD {
 
     public void setApellido2(String apellido2) throws RCException {
         boolean valido = isStringOnlyAlphabet(apellido2);
-        if (valido){
+        if (valido) {
             this.apellido2 = apellido2;
-        } else{
+        } else {
             throw new RCException("El segundo apellido es incorrecto.");
         }
     }
@@ -126,9 +126,9 @@ public class Usuario implements Consultas_BBDD {
 
     public void setTelefono(String telefono) throws RCException {
         boolean valido = isNumeric(telefono);
-        if(telefono.length() < 9 || !valido){
+        if (telefono.length() < 9 || !valido) {
             throw new RCException("Por favor, indica un número de teléfono válido.");
-        }else{
+        } else {
             this.telefono = telefono;
         }
     }
@@ -154,12 +154,12 @@ public class Usuario implements Consultas_BBDD {
     }
 
     public void setPassword(String password) throws RCException {
-        if(password.length() < 6 ){
+        if (password.length() < 6) {
             throw new RCException("La contraseña debe contener al menos 6 caracteres.");
-        }else{
+        } else {
             this.password = password;
         }
-        
+
     }
 
     public String getCodUsuario() {
@@ -183,18 +183,19 @@ public class Usuario implements Consultas_BBDD {
         }
         return rolId;
     }
-    
+
     /**
      * Método para obtener el rol de un usuario
+     *
      * @param user recibe el codigo de usuario
      * @return devuelve el codigo del rol
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static int comprobarRol(String user) throws SQLException{
+    public static int comprobarRol(String user) throws SQLException {
         int rol = 1;
-        try (Connection con = obtenerConexion();PreparedStatement ps = con.prepareStatement(recuperarUsuario(user));
-                ResultSet rs = ps.executeQuery()){
-            while (rs.next ()) {
+        try (Connection con = obtenerConexion(); PreparedStatement ps = con.prepareStatement(recuperarUsuario(user));
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
                 rol = rs.getInt(1);
             }
         }
@@ -202,32 +203,22 @@ public class Usuario implements Consultas_BBDD {
     }
 
     /**
-     * Método para crear nuevos usuarios.
+     * Metodo para insertar nuevos usuarios en la BBDD
      *
-     * @param nif del cliente
-     * @param nombre del cliente
-     * @param apellido1 del cliente
-     * @param apellido2 del cliente
-     * @param telefono del cliente
-     * @param email correo electronico del cliente
-     * @param rol tipo de perfil en la aplicación del cliente
-     * @param user usuario de login del cliente
-     * @param pw contraseña del cliente
      * @param resultado etiqueta para informar si se ha realizado con éxito la
      * creación del usuario
-     * @throws SQLException TODO ELEVAR EXCEPTION!!-------------------------VICKY
      */
     public void insertRegistro(JLabel resultado) {
         PreparedStatement pst = null;
         Connection con = null;
         try {
             con = obtenerConexion();
-            if(!revisarCampos()){
+            if (!revisarCampos()) {
                 throw new RCException("Faltan datos por cumplimentar.");
             }
-            if (!comprobarEmail()){
+            if (!comprobarEmail()) {
                 throw new RCException("El email indicado no es válido.");
-            }else {
+            } else {
                 con.setAutoCommit(false);
                 //sql insert statement para tabla clientes
                 String queryClientes = insertClientes();
@@ -266,7 +257,7 @@ public class Usuario implements Consultas_BBDD {
                 resultado.setForeground(Color.RED);
                 resultado.setText("Se ha producido en un error inesperado.");
             }
-        } catch (Exception ex){
+        } catch (Exception ex) {
             try {
                 con.rollback();
             } catch (SQLException ex1) {
@@ -313,17 +304,18 @@ public class Usuario implements Consultas_BBDD {
         }
         return camposCompletos;
     }
-    
+
     /**
      * Método para validar el acceso de un usuario
+     *
      * @param user codigo de usuario que se ha introducido
      * @param pw contraseña que se ha introducido
      * @return devuelve true si el usuario existe en ls BBDD
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static boolean comprobarUsuario(String user, String pw) throws SQLException{
+    public static boolean comprobarUsuario(String user, String pw) throws SQLException {
         boolean encontrado = false;
-        Connection con = obtenerConexion();   
+        Connection con = obtenerConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -331,50 +323,50 @@ public class Usuario implements Consultas_BBDD {
             ps.setString(1, pw);
             ps.setString(2, user);
             rs = ps.executeQuery();
-            while (rs.next ()) {
-                if (rs.getBoolean(1)){
+            while (rs.next()) {
+                if (rs.getBoolean(1)) {
                     encontrado = true;
                 }
-            }       
-        }finally{
+            }
+        } finally {
             con.close();
             ps.close();
             rs.close();
         }
         return encontrado;
     }
-    
+
     /**
      * Método para comprobar que el email especificado es válido
-     * @param email recibe el email
+     *
      * @return devuelve true si es correcto
      */
-    public boolean comprobarEmail(){
-        if (this.getEmail().contains("@")){
+    public boolean comprobarEmail() {
+        if (this.getEmail().contains("@")) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
     /**
      * Este metodo se encarga de listar los clientes registrados en una JTable
-     * 
+     *
      * @see javax.swing.JTable
      * @see javax.swing.table.AbstractTableModel
-     */    
-    public static void listarClientesTabla(){
+     */
+    public static void listarClientesTabla() {
         String query = buscarCliente();
         PreparedStatement pst = null;
         ResultSet rs = null;
         ModeloTabla modelo = null;
-        JTable tabla = null; 
+        JTable tabla = null;
         JFrame ventana = crearVentana(false);
         JPanel buscar = new JPanel();
         JButton buscarCliente = new JButton("BUSCAR CLIENTE");
         ventana.setTitle("LISTADO DE CLIENTES");
-        try (Connection con = obtenerConexion()){
-            pst = con.prepareStatement(listarClientes(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Connection con = obtenerConexion()) {
+            pst = con.prepareStatement(listarClientes(), ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             rs = pst.executeQuery();
         } catch (SQLException ex) {
@@ -382,48 +374,50 @@ public class Usuario implements Consultas_BBDD {
         }
         modelo = new ModeloTabla(rs);
         tabla = new JTable(modelo);
-        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        ventana.add(new JScrollPane(tabla), BorderLayout.CENTER);
         ventana.validate();
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        buscarCliente.addActionListener(new ActionListener(){
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String nif = JOptionPane.showInputDialog(null, "Introduce el NIF del cliente", "BUSCAR CLIENTE", JOptionPane.QUESTION_MESSAGE);
-            try {
-                if ((nif != null) && (nif.trim().length() > 0)){
-                    if (General.comprobarObj(nif,query)){
-                        General.mostrarObj(nif,query,"CLIENTE");
-                    }else if (!General.comprobarObj(nif,query)){
-                        throw new RCException("El NIF indicado no existe.");
+        buscarCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nif = JOptionPane.showInputDialog(null, "Introduce el NIF del cliente", "BUSCAR CLIENTE", JOptionPane.QUESTION_MESSAGE);
+                try {
+                    if ((nif != null) && (nif.trim().length() > 0)) {
+                        if (General.comprobarObj(nif, query)) {
+                            General.mostrarObj(nif, query, "CLIENTE");
+                        } else if (!General.comprobarObj(nif, query)) {
+                            throw new RCException("El NIF indicado no existe.");
+                        }
+                    } else {
+                        throw new RCException("No has indicado ningun NIF.");
                     }
-                }else{
-                    throw new RCException("No has indicado ningun NIF.");
+                    ventana.dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-                ventana.dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
             }
-        }
         });
         buscar.add(buscarCliente);
-        ventana.add(buscar,BorderLayout.SOUTH);
+        ventana.add(buscar, BorderLayout.SOUTH);
     }
-    
+
     /**
-     * Método para recuperar el nif de un cliente a partir de su usuario de login
+     * Método para recuperar el nif de un cliente a partir de su usuario de
+     * login
+     *
      * @param usuario usuario es el usuario de login
      * @return devuelve el nif asociado al usuario
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static String recuperarNIF(String usuario) throws SQLException{
+    public static String recuperarNIF(String usuario) throws SQLException {
         String nif = "";
         ResultSet rs = null;
-        try (Connection con = obtenerConexion(); PreparedStatement pst = con.prepareStatement(listarClienteNIF())){
+        try (Connection con = obtenerConexion(); PreparedStatement pst = con.prepareStatement(listarClienteNIF())) {
             pst.setString(1, usuario);
             rs = pst.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 nif = rs.getString(1);
             }
         } finally {
@@ -431,14 +425,14 @@ public class Usuario implements Consultas_BBDD {
         }
         return nif;
     }
-    
+
     /**
      * @deprecated sustituido por comprobarObj(String info, String query)
      * @param nif
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static boolean comprobarCliente(String nif) throws SQLException{
+    public static boolean comprobarCliente(String nif) throws SQLException {
         boolean existe = false;
         String query = buscarCliente();
         PreparedStatement pst = null;
@@ -447,43 +441,43 @@ public class Usuario implements Consultas_BBDD {
         try {
             con = obtenerConexion();
             pst = con.prepareStatement(query);
-            pst.setString(1,nif);
+            pst.setString(1, nif);
             rs = pst.executeQuery();
-            if (rs.next ()) {
+            if (rs.next()) {
                 existe = true;
             }
-        }finally{
+        } finally {
             rs.close();
             pst.close();
             con.close();
         }
         return existe;
     }
-    
+
     /**
-     * @deprecated sustituido por mostrarObj(String info, String query, String titulo)
-     * Método para listar los datos de un cliente en función del nif
+     * @deprecated sustituido por mostrarObj(String info, String query, String
+     * titulo) Método para listar los datos de un cliente en función del nif
      * @param nif nif del cliente
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static void mostrarCliente(String nif) throws SQLException{
+    public static void mostrarCliente(String nif) throws SQLException {
         PreparedStatement pst = null;
         ResultSet rs = null;
         ModeloTabla modelo = null;
         JTable tabla = null;
         JFrame ventana = crearVentana(false);
-        try (Connection con = obtenerConexion()){            
+        try (Connection con = obtenerConexion()) {
             ventana.setTitle("DATOS DE CLIENTE");
-            pst = con.prepareStatement(buscarCliente(),ResultSet.TYPE_SCROLL_INSENSITIVE,
+            pst = con.prepareStatement(buscarCliente(), ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            pst.setString(1,nif);
+            pst.setString(1, nif);
             rs = pst.executeQuery();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         modelo = new ModeloTabla(rs);
         tabla = new JTable(modelo);
-        ventana.add(new JScrollPane(tabla),BorderLayout.CENTER);
+        ventana.add(new JScrollPane(tabla), BorderLayout.CENTER);
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }

@@ -85,14 +85,16 @@ public interface Consultas_BBDD {
     public static String listarClientes() {
         return "select * from clientes";
     }
-    
+
     /**
      * consulta para obtener el nif de un cliente a partir de su usuario
+     *
      * @return la query
      */
-    public static String listarClienteNIF(){
+    public static String listarClienteNIF() {
         return "select clientenif from usuarios where usuario ilike ?";
     }
+
     //---------------------QUERIES VEHICULOS--------------------------------
     /**
      * Query para buscar un vehiculo por matricula
@@ -126,32 +128,35 @@ public interface Consultas_BBDD {
     public static String selectTipoVehiculo() {
         return "select tipoVehiculoMatricula(?)";
     }
-    
+
     /**
      * Query para obtener todos los datos de un coche
+     *
      * @return la select
      */
-    public static String datosCoche(){
+    public static String datosCoche() {
         return "select e.matricula, v.marca, v.modelo, v.clase, e.numeropuertas,"
                 + "e.potenciamotor, v.preciodia from vehiculos v, especificaciones_coches e"
                 + " where e.matricula = v.matricula and e.matricula ilike ?";
     }
-    
+
     /**
      * Query para obtener todos los datos de una caravana
+     *
      * @return la select
      */
-    public static String datosCaravana(){
+    public static String datosCaravana() {
         return "select e.matricula, v.marca, v.modelo, v.clase, e.wc,"
                 + "e.potenciamotor, v.preciodia from vehiculos v, especificaciones_caravanas e"
                 + " where e.matricula = v.matricula and e.matricula ilike ?";
     }
-    
+
     /**
      * Query para obtener todos los datos de una moto
+     *
      * @return la select
      */
-    public static String datosMoto(){
+    public static String datosMoto() {
         return "select e.matricula, v.marca, v.modelo, v.clase,"
                 + "e.cilindrada, v.preciodia from vehiculos v, especificaciones_motos e"
                 + " where e.matricula = v.matricula and e.matricula ilike ?";
@@ -159,7 +164,8 @@ public interface Consultas_BBDD {
 
     /**
      * Union para los vehiculos usado en JTable del internalframe Reservas
-     * @return 
+     *
+     * @return
      */
     public static String unionVehiculos() {
         return "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia, "
@@ -275,44 +281,63 @@ public interface Consultas_BBDD {
     }
 
     //---------------------QUERIES RESERVAS--------------------------------
-    
     /**
      * Query para eleminar reservas
+     *
      * @return la query
      */
-    public static String deleteReserva(){
+    public static String deleteReserva() {
         return "delete from reservas where numreserva ilike ? and"
                 + " clientenif ilike ? and fecharecogida>now()";
     }
-    
+
     /**
      * Query para listar reservas + detalles de la reserva
+     *
      * @return la query
      */
-    public static String selectReservas(){
-        return "select r.*, d.matriculavehiculo, d.preciodia, d.descuento " +
-                "from reservas r inner join detalles_reserva d " +
-                "on r.numreserva = d.numreserva and r.clientenif ilike ?";
+    public static String selectReservas() {
+        return "select r.*, d.matriculavehiculo, d.preciodia, d.descuento "
+                + "from reservas r inner join detalles_reserva d "
+                + "on r.numreserva = d.numreserva and r.clientenif ilike ?";
     }
-    
+
     /**
      * Query para recuperar una reserva por numero de reserva
+     *
      * @return la query
      */
-    public static String recuperarReserva(){
+    public static String recuperarReserva() {
         return "select r.*, d.matriculavehiculo, d.preciodia, d.descuento"
                 + " from reservas r, detalles_reserva d "
                 + "where r.numreserva = d.numreserva and r.numreserva ilike ?";
     }
-        
+
+    /**
+     * Query para insertar nuevas reservas
+     *
+     * @return devuelve el insert
+     */
     public static String insertReservas() {
         return "insert into reservas values (?,?::date,?::date,?::time,?::date,?::time,?,?)";
     }
-    
+
+    /**
+     * Query para insertar los detalles de la reserva en detalles_reserva
+     *
+     * @return devuelve el insert
+     */
     public static String insertDetallesReservas() {
         return "insert into detalles_reserva values (default,?,?,?,?)";
     }
-    public static String contarReservas(){
+
+    /**
+     * Query para hacer un recuento del número total de reservas, que se utiliza
+     * para generar el número de reserva de forma automática.
+     *
+     * @return devuelve la select
+     */
+    public static String contarReservas() {
         return "select count (*) from reservas";
     }
 

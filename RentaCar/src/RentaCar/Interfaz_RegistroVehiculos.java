@@ -7,8 +7,6 @@ package RentaCar;
 import static RentaCar.Vehiculo.*;
 import java.awt.Color;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author victoriapenas & josemariahernandez
@@ -396,14 +394,20 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         limpiarCampos();
     }//GEN-LAST:event_jButton_LimpiarActionPerformed
 
+    /**
+     * En función del tipo de vehiculo seleccionado, se instanciará una clase u otra.
+     * Con el objetivo de realizar un insert en la tabla vehiculos
+     * y en su correspondiente tabla de especificaciones.
+     * @param evt evento que se ejecuta al pinchar en el JButton Enviar Formulario.
+     */
     private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
         String tipoVehiculo = (String) jComboBox_Selector.getSelectedItem();
         switch (tipoVehiculo) {
             case "COCHE":
                 try {
                     Coche coche = new Coche();
-                    if (revisarCamposObligatorios() && !jTextField_potenciaMotor.getText().isEmpty() &&
-                            !jTextField_numPuertasCoche.getText().isEmpty()){
+                    if (revisarCamposObligatorios() && !jTextField_potenciaMotor.getText().isEmpty()
+                            && !jTextField_numPuertasCoche.getText().isEmpty()) {
                         coche.setMatricula(jTextField_Matricula.getText());
                         coche.setMarca((String) jComboBox_Marca.getSelectedItem());
                         coche.setModelo(jTextField_Modelo.getText());
@@ -413,7 +417,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                         coche.setNumeroPuertas(Integer.parseInt(jTextField_numPuertasCoche.getText()));
                         coche.registrarVehiculo();
                         operacioRealizada(true);
-                    } else{
+                    } else {
                         operacioRealizada(false);
                         throw new RCException("Hay datos del coche sin rellenar.");
                     }
@@ -426,7 +430,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
             case "MOTO":
                 try {
                     Moto moto = new Moto();
-                    if (revisarCamposObligatorios() && !jTextField_Cilindrada.getText().isEmpty()){
+                    if (revisarCamposObligatorios() && !jTextField_Cilindrada.getText().isEmpty()) {
                         moto.setMatricula(jTextField_Matricula.getText());
                         moto.setMarca((String) jComboBox_Marca.getSelectedItem());
                         moto.setModelo(jTextField_Modelo.getText());
@@ -435,7 +439,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                         moto.setCilindrada(Integer.parseInt(jTextField_Cilindrada.getText()));
                         moto.registrarVehiculo();
                         operacioRealizada(true);
-                    } else{
+                    } else {
                         operacioRealizada(false);
                         throw new RCException("Hay datos de la moto sin rellenar.");
                     }
@@ -447,7 +451,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
             case "CARAVANA":
                 try {
                     Caravana caravana = new Caravana();
-                    if (revisarCamposObligatorios() && !jTextField_potenciaMotor.getText().isEmpty()){
+                    if (revisarCamposObligatorios() && !jTextField_potenciaMotor.getText().isEmpty()) {
                         caravana.setMatricula(jTextField_Matricula.getText());
                         caravana.setMarca((String) jComboBox_Marca.getSelectedItem());
                         caravana.setModelo(jTextField_Modelo.getText());
@@ -457,7 +461,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
                         caravana.setWc(estaDisponible(jCheckBox_wc));
                         caravana.registrarVehiculo();
                         operacioRealizada(true);
-                    }else{
+                    } else {
                         operacioRealizada(false);
                         throw new RCException("Hay datos de la caravana sin rellenar.");
                     }
@@ -492,23 +496,24 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField_precioDiaActionPerformed
 
     /**
-     * Método para comprobar si hay datos vacíos que son obligatorios 
-     * para el registro del vehiculo
+     * Método para comprobar si hay datos vacíos que son obligatorios para el
+     * registro del vehiculo
+     *
      * @return devuelve true/false en función del chequeo
      */
-    private boolean revisarCamposObligatorios(){
+    private boolean revisarCamposObligatorios() {
         boolean todosRellenados = true;
         if (jTextField_Matricula.getText().isEmpty() || jTextField_Matricula.getText().isEmpty()
                 || jComboBox_Marca.getSelectedItem().equals("") || jTextField_Modelo.getText().isEmpty()
-                || jComboBox_Clase.getSelectedItem().equals("") || jTextField_precioDia.getText().isEmpty()){
+                || jComboBox_Clase.getSelectedItem().equals("") || jTextField_precioDia.getText().isEmpty()) {
             todosRellenados = false;
-        }else{
+        } else {
             todosRellenados = true;
         }
 
         return todosRellenados;
     }
-    
+
     /**
      * Limpia los datos de la ventana Interfaz_Vehículos
      */
@@ -527,7 +532,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         jComboBox_Clase.setSelectedItem(" ");
         // Seteando a uncheck los checkbox
         jCheckBox_wc.setSelected(false);
-        
+
     }
 
     /**

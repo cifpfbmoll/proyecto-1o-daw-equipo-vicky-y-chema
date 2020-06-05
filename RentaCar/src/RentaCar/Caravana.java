@@ -17,7 +17,8 @@ import java.sql.SQLException;
  * @since 2020-05-23
  * @author victoriapenas & josemariahernandez
  */
-public class Caravana extends Vehiculo{
+public class Caravana extends Vehiculo {
+
     /**
      * Atributos
      */
@@ -33,6 +34,7 @@ public class Caravana extends Vehiculo{
 
     /**
      * Constructor con parámetros
+     *
      * @param potenciaMotor
      * @param wc baño
      * @param matricula
@@ -49,6 +51,7 @@ public class Caravana extends Vehiculo{
 
     /**
      * Constructor copia
+     *
      * @param c1 objeto de tipo Caravana
      * @param v1 objeto de tipo Vehiculo
      */
@@ -73,11 +76,13 @@ public class Caravana extends Vehiculo{
     public void setWc(boolean wc) {
         this.wc = wc;
     }
-    
+
     /**
      * Método para insertar caravanas en la BBDD
-     * @param resultado resultado es el warning para informar si se ha registrado correctamente o no
-     * @throws SQLException 
+     *
+     * @param resultado resultado es el warning para informar si se ha
+     * registrado correctamente o no
+     * @throws SQLException
      */
     @Override
     public void registrarVehiculo() throws SQLException {
@@ -103,13 +108,13 @@ public class Caravana extends Vehiculo{
             pst.setBoolean(3, this.isWc());
             pst.executeUpdate();
             con.commit();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             con.rollback();
-        }finally {
+        } finally {
             con.setAutoCommit(true);
             con.close();
             pst.close();
         }
     }
-    
+
 }

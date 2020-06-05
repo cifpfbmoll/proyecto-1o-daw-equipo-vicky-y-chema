@@ -6,13 +6,15 @@
 package RentaCar;
 
 /**
- * Excepcion personalizada para mostrar diferentes mensajes de error en la aplicación
- * 
+ * Excepcion personalizada para mostrar diferentes mensajes de error en la
+ * aplicación
+ *
  * @author victoriapenas & josemariahernandez
  * @version 1.0
  * @since 2020-05-31
  */
-public class RCException extends Exception{
+public class RCException extends Exception {
+
     private String message;
 
     /**
@@ -23,7 +25,8 @@ public class RCException extends Exception{
 
     /**
      * Constructor con parámetros
-     * @param errorMessage 
+     *
+     * @param errorMessage
      */
     public RCException(String errorMessage) {
         this.setMessage(errorMessage);
@@ -37,5 +40,5 @@ public class RCException extends Exception{
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
 }

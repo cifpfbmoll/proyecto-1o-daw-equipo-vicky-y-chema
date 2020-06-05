@@ -15,10 +15,11 @@ import java.sql.SQLException;
  * @since 2020-05-23
  * @author victoriapenas
  */
-public class Moto extends Vehiculo{
+public class Moto extends Vehiculo {
+
     /**
-    * Atributos
-    */
+     * Atributos
+     */
     private Integer cilindrada;
 
     /**
@@ -30,6 +31,7 @@ public class Moto extends Vehiculo{
 
     /**
      * Construtor con parámetros
+     *
      * @param cilindrada
      * @param matricula
      * @param marca
@@ -44,6 +46,7 @@ public class Moto extends Vehiculo{
 
     /**
      * Constructor copia
+     *
      * @param m1 recibe un objeto de tipo Moto
      * @param v1 recibe un objeto de tipo Vehiculo
      */
@@ -59,10 +62,9 @@ public class Moto extends Vehiculo{
     public void setCilindrada(Integer cilindrada) {
         this.cilindrada = cilindrada;
     }
-    
+
     /**
      * Método para insertar motos en la BBDD
-     * @param resultado resultado es el warning para informar si se ha registrado correctamente o no
      * @throws SQLException 
      */
     @Override
@@ -78,7 +80,7 @@ public class Moto extends Vehiculo{
             queryVehiculos = insertarVehiculo(this.getMatricula(), this.getMarca(),
                     this.getModelo(), this.getClase(), this.getPrecioDia());
             pst = con.prepareStatement(queryVehiculos);
-            pst.executeUpdate();              
+            pst.executeUpdate();
             //INSERT tabla especificaciones moto
             queryMoto = insertarMoto();
             pst = con.prepareStatement(queryMoto);
@@ -86,13 +88,13 @@ public class Moto extends Vehiculo{
             pst.setInt(2, this.getCilindrada());
             pst.executeUpdate();
             con.commit();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             con.rollback();
-        }finally {
+        } finally {
             con.setAutoCommit(true);
             con.close();
             pst.close();
         }
     }
-    
+
 }
