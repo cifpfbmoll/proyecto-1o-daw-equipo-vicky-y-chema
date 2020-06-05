@@ -104,7 +104,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
         jLabel_email.setText("E-mail");
 
         jButton_Enviar.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
-        jButton_Enviar.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_Enviar.setForeground(new java.awt.Color(0, 0, 0));
         jButton_Enviar.setText("Enviar Formulario");
         jButton_Enviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +133,7 @@ public class Interfaz_RegistroClientes extends javax.swing.JInternalFrame {
         });
 
         jButton_Limpiar.setFont(new java.awt.Font("Heiti TC", 1, 14)); // NOI18N
-        jButton_Limpiar.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_Limpiar.setForeground(new java.awt.Color(0, 0, 0));
         jButton_Limpiar.setText("Limpiar");
         jButton_Limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

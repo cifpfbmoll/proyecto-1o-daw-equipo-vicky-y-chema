@@ -55,21 +55,25 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                 jTextField_precioDia.setText(model.getValueAt(fila, 4).toString());
                 jTextField_numPuertas.setText(model.getValueAt(fila, 5).toString());
                 jTextField_potenciaMotor.setText(model.getValueAt(fila, 6).toString());
-
+                if (model.getValueAt(fila, 7).toString().equalsIgnoreCase("true")) {
+                    jCheckBox_wc.setSelected(true);
+                } else {
+                    jCheckBox_wc.setSelected(false);
+                }
                 jTextField_cilindrada.setText(model.getValueAt(fila, 8).toString());
             }
         });
     }
-    
-    private void cargarDatosCliente() throws SQLException{
+
+    private void cargarDatosCliente() throws SQLException {
         String query = buscarCliente();
         PreparedStatement pst = null;
         ResultSet rs = null;
-        try (Connection con = obtenerConexion()){
+        try (Connection con = obtenerConexion()) {
             pst = con.prepareStatement(query);
             pst.setString(1, this.getNif());
             rs = pst.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 jTextField_NIF.setText(rs.getString(1));
                 jTextField_nombreCliente.setText(rs.getString(2));
                 jTextField_apellido1.setText(rs.getString(3));
@@ -77,10 +81,10 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                 jTextField_telefono.setText(rs.getString(5));
                 jTextField_email.setText(rs.getString(6));
             }
-        } finally{
+        } finally {
             pst.close();
             rs.close();
-        }   
+        }
     }
 
     public ArrayList<Vehiculo> getListaVehiculos() {
@@ -446,10 +450,15 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
         jTextField_fechaSolicitud.setEditable(false);
         jTextField_fechaSolicitud.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_fechaSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_fechaSolicitudActionPerformed(evt);
+            }
+        });
 
         jLabel_fechaRecogida.setText("Fecha Recogida");
 
-        jDateChooser_recogida.setDateFormatString("dd-MM-yyyy");
+        jDateChooser_recogida.setDateFormatString("yyyy-MM-dd");
 
         jLabel_horaRecogida.setText("Hora Recogida");
 
@@ -457,7 +466,7 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
         jLabel_fechaDevolucion.setText("Fecha Devolución");
 
-        jDateChooser_devolucion.setDateFormatString("dd-MM-yyyy");
+        jDateChooser_devolucion.setDateFormatString("yyyy-MM-dd");
 
         jLabel_horaDevolucion.setText("Hora Devolución");
 
@@ -504,12 +513,13 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
             .addGroup(jPanel_datosReservaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel_infoReserva)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField_fechaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_datosReservaLayout.createSequentialGroup()
-                        .addComponent(jLabel_fechaSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_fechaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jDateChooser_recogida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_fechaRecogida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -632,14 +642,6 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    /*    private void actualizarFechas() {
-    Date fecha = new Date();
-    String hoy = fecha.getDate() + "/"
-    + (fecha.getMonth() + 1) + "/"
-    + (fecha.getYear() + 1900);
-    jTextField_fechaSolicitud.setText(hoy);
-    }*/
-
     /**
      * Método para limpiar los campos
      */
@@ -667,8 +669,8 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     }
 
     /**
-     * Creación ArrayList Motos recogiendo datos de BBDD.
-     * Es una JTable interna de este JFrame
+     * Creación ArrayList Motos recogiendo datos de BBDD. Es una JTable interna
+     * de este JFrame
      *
      * @return arrayList vehiculos
      */
@@ -720,22 +722,22 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
             fila[3] = lista.get(i).getClase();
             fila[4] = lista.get(i).getPrecioDia();
             if (lista.get(i) instanceof Coche) {
-                fila[5] = "a";  //((Coche) lista.get(i)).getNumeroPuertas();
-                fila[6] = "a";
+                fila[5] = ((Coche) lista.get(i)).getNumeroPuertas();
+                fila[6] = ((Coche) lista.get(i)).getPotenciaMotor();
                 fila[7] = "";
                 fila[8] = "";
                 fila[9] = "Coche";
             } else if (lista.get(i) instanceof Moto) {
-                fila[5] = "a";
-                fila[6] = "a";
-                fila[7] = "b";
-                fila[8] = "b";
+                fila[5] = "";
+                fila[6] = "";
+                fila[7] = "";
+                fila[8] = ((Moto) lista.get(i)).getCilindrada();;
                 fila[9] = "Moto";
             } else if (lista.get(i) instanceof Caravana) {
-                fila[5] = "a";
-                fila[6] = "a";
-                fila[7] = "c";
-                fila[8] = "c";
+                fila[5] = "";
+                fila[6] = ((Caravana) lista.get(i)).getPotenciaMotor();
+                fila[7] = ((Caravana) lista.get(i)).isWc();
+                fila[8] = "";
                 fila[9] = "Caravana";
             }
             model.addRow(fila);
@@ -766,11 +768,11 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                 jLabel1.setText("Por favor seleccione un vehículo.");
             } else {
                 r1.registrarReserva(jComboBox_horaRecogida.getSelectedItem().toString(),
-                jComboBox_horaDevolucion.getSelectedItem().toString(), jTextField_NIF.getText(), calcularPrecio());
+                        jComboBox_horaDevolucion.getSelectedItem().toString(), jTextField_NIF.getText(), calcularPrecio());
                 reply = JOptionPane.showConfirmDialog(null, "¿Desea imprimir una copia de la reserva?");
                 if (reply == JOptionPane.YES_OPTION) {
                     imprimir(this);
-                }else {
+                } else {
                     this.dispose();
                 }
             }
@@ -793,8 +795,11 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField_numPuertasActionPerformed
 
     private void jTable_VehiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_VehiculosMouseClicked
-        // TODO add your handling code here:       
+
     }//GEN-LAST:event_jTable_VehiculosMouseClicked
+
+    private void jTextField_fechaSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_fechaSolicitudActionPerformed
+    }//GEN-LAST:event_jTextField_fechaSolicitudActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextField Observaciones;

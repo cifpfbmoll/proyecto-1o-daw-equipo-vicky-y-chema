@@ -614,14 +614,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel_infoReserva" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jTextField_fechaSolicitud" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel_fechaSolicitud" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel_fechaSolicitud" min="-2" pref="17" max="-2" attributes="0"/>
                               <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jDateChooser_recogida" max="32767" attributes="0"/>
                           <Component id="jLabel_fechaRecogida" max="32767" attributes="0"/>
@@ -669,6 +670,9 @@
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_fechaSolicitudActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel_fechaRecogida">
               <Properties>
@@ -677,7 +681,7 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser_recogida">
               <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel_horaRecogida">
@@ -720,7 +724,7 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser_devolucion">
               <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel_horaDevolucion">
