@@ -347,7 +347,6 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         if (resultado) {
             jLabel_result.setForeground(Color.GREEN);
             jLabel_result.setText("Vehiculo registrado con éxito.");
-            limpiarCampos();
         } else {
             jLabel_result.setForeground(Color.RED);
         }
@@ -528,7 +527,7 @@ public class Interfaz_RegistroVehiculos extends javax.swing.JInternalFrame {
         jComboBox_Clase.setSelectedItem(" ");
         // Seteando a uncheck los checkbox
         jCheckBox_wc.setSelected(false);
-        jLabel_result.setText("");
+        
     }
 
     /**

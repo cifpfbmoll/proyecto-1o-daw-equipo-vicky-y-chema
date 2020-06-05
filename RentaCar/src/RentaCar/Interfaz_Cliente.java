@@ -301,11 +301,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_cerrarSesionActionPerformed
 
     private void jButton_cancelarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelarReservasActionPerformed
-        try {
-            cancelarReserva(this.getNif());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+        cancelarReserva(this.getNif());
     }//GEN-LAST:event_jButton_cancelarReservasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

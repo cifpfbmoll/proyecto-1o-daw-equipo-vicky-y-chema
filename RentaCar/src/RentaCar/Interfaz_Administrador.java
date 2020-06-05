@@ -13,8 +13,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import static RentaCar.Vehiculo.*;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**

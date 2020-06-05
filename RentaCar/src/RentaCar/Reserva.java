@@ -10,15 +10,12 @@ import static RentaCar.General.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -84,7 +81,9 @@ public class Reserva {
     }
 
     public static AtomicInteger getRESERVA() throws SQLException {
-        try (Connection con = obtenerConexion(); PreparedStatement pst = con.prepareStatement(contarReservas()); ResultSet rs = pst.executeQuery()) {
+        try (Connection con = obtenerConexion();
+                PreparedStatement pst = con.prepareStatement(contarReservas());
+                ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
                 RESERVA.addAndGet(rs.getInt(1));
             }
@@ -194,7 +193,7 @@ public class Reserva {
                     }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-                }                
+                }
             }
         });
         buscar.add(buscarReserva);
@@ -243,10 +242,14 @@ public class Reserva {
                     if (month >= calendario.get(Calendar.MONTH)) {
                         if (day > calendario.get(Calendar.DAY_OF_MONTH)) {
                             cancelable = true;
+                        } else {
+                            throw new RCException("No se pueden cancelar reservas de días anteriores.");
                         }
+                    } else {
+                        throw new RCException("No se pueden cancelar reservas de meses anteriores.");
                     }
                 } else {
-                    throw new RCException("Las reservas pasadas no se pueden cancelar.");
+                    throw new RCException("No se pueden cancelar reservas de años anteriores.");
                 }
             }
         } finally {
@@ -263,39 +266,44 @@ public class Reserva {
      * @param numReserva numero de la reserva
      * @throws SQLException
      */
-    public static void cancelarReserva(String nif) throws SQLException, RCException {
+    public static void cancelarReserva(String nif) {
         String query = deleteReserva();
         PreparedStatement pst = null;
         Connection con = null;
         int reply = 0;
         JFrame ventana = null;
-        ventana = listarReservas(nif);
-        String reserva = JOptionPane.showInputDialog(null, "Introduce el número de la reserva que quieres cancelar",
-                "CANCELAR RESERVA", JOptionPane.QUESTION_MESSAGE);
-        if ((reserva != null) && (reserva.trim().length() > 0)) {
-            if (General.comprobarObj(reserva, recuperarReserva())) {
-                if (comprobarFechaReserva(reserva)) {
-                    reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
-                    if (reply == JOptionPane.YES_OPTION) {
-                        try {
-                            con = obtenerConexion();
-                            pst = con.prepareStatement(query);
-                            pst.setString(1, reserva);
-                            pst.setString(2, nif);
-                            pst.executeUpdate();
-                        } finally {
-                            con.close();
-                            pst.close();
+        try {
+            ventana = listarReservas(nif);
+            String reserva = JOptionPane.showInputDialog(null, "Introduce el número de la reserva que quieres cancelar",
+                    "CANCELAR RESERVA", JOptionPane.QUESTION_MESSAGE);
+            if ((reserva != null) && (reserva.trim().length() > 0)) {
+                if (General.comprobarObj(reserva, recuperarReserva())) {
+                    if (comprobarFechaReserva(reserva)) {
+                        reply = JOptionPane.showConfirmDialog(null, "¿estás seguro?");
+                        if (reply == JOptionPane.YES_OPTION) {
+                            try {
+                                con = obtenerConexion();
+                                pst = con.prepareStatement(query);
+                                pst.setString(1, reserva);
+                                pst.setString(2, nif);
+                                pst.executeUpdate();
+                            } finally {
+                                con.close();
+                                pst.close();
+                            }
+                            JOptionPane.showMessageDialog(null, "Reserva " + reserva + " cancelada.", "RESERVA CANCELADA",
+                                    JOptionPane.DEFAULT_OPTION);
                         }
-                        JOptionPane.showMessageDialog(null, "Reserva " + reserva + " cancelada.", "RESERVA CANCELADA",
-                                 JOptionPane.DEFAULT_OPTION);
                     }
+                } else {
+                    throw new RCException("El número de reserva indicado no es correcto.");
                 }
-            } else {
-                throw new RCException("El número de reserva indicado no es correcto.");
             }
+            ventana.dispose();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            ventana.dispose();
         }
-        ventana.dispose();
     }
 
     public void registrarReserva(String horaRecogida, String horaDevolucion, String NIF, Double precio) throws SQLException {

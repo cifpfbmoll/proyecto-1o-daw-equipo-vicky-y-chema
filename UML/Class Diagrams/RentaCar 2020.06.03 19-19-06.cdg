@@ -2,7 +2,7 @@
 
 <ClassDiagram name="RentaCar">
   <ClassDiagramComponents>
-    <Class name="Vehiculo" package="RentaCar" visibility="public" isAbstract="true" xPosition="20.0" yPosition="20.0">
+    <Class name="Vehiculo" package="RentaCar" visibility="public" isAbstract="true" xPosition="865.0" yPosition="742.0">
       <Fields>
         <Field name="matricula" type="String" visibility="private"/>
         <Field name="marca" type="String" visibility="private"/>
@@ -72,7 +72,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Caravana" package="RentaCar" visibility="public" xPosition="320.0" yPosition="20.0">
+    <Class name="Caravana" package="RentaCar" visibility="public" xPosition="852.0" yPosition="67.0">
       <Fields>
         <Field name="potenciaMotor" type="Integer" visibility="private"/>
         <Field name="wc" type="boolean" visibility="private"/>
@@ -105,7 +105,7 @@
         <Method name="registrarVehiculo" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="RCException" package="RentaCar" visibility="public" xPosition="620.0" yPosition="20.0">
+    <Class name="RCException" package="RentaCar" visibility="public" xPosition="3996.0" yPosition="1081.0">
       <Fields>
         <Field name="message" type="String" visibility="private"/>
       </Fields>
@@ -122,7 +122,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Interfaz_RegistroVehiculos" package="RentaCar" visibility="public" xPosition="920.0" yPosition="20.0">
+    <Class name="Interfaz_RegistroVehiculos" package="RentaCar" visibility="public" xPosition="37.0" yPosition="1565.0">
       <Fields>
         <Field name="jButton_Enviar" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton_Limpiar" type="javax.swing.JButton" visibility="private"/>
@@ -153,8 +153,7 @@
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="operacioRealizada" returnType="void" visibility="public">
           <Argument type="boolean" name="resultado"/>
         </Method>
@@ -196,7 +195,7 @@ void" visibility="private"/>
         <Method name="ocultarCampos" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Interfaz_Reservas" package="RentaCar" visibility="public" xPosition="1220.0" yPosition="20.0">
+    <Class name="Interfaz_Reservas" package="RentaCar" visibility="public" xPosition="2729.0" yPosition="86.0">
       <Fields>
         <Field name="listaMotos" type="ArrayList&lt;Moto&gt;" visibility="package"/>
         <Field name="listaCoches" type="ArrayList&lt;Coche&gt;" visibility="package"/>
@@ -259,8 +258,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="actualizarFechas" returnType="void" visibility="private"/>
         <Method name="limpiar" returnType="void" visibility="public"/>
         <Method name="listaMotos" returnType="ArrayList&lt;Moto&gt;" visibility="private"/>
@@ -293,7 +291,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="ModeloTabla" package="RentaCar" visibility="public" xPosition="1520.0" yPosition="20.0">
+    <Class name="ModeloTabla" package="RentaCar" visibility="public" xPosition="3961.0" yPosition="820.0">
       <Fields>
         <Field name="rsRegistros" type="ResultSet" visibility="private"/>
         <Field name="rsmd" type="ResultSetMetaData" visibility="private"/>
@@ -315,7 +313,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Reserva" package="RentaCar" visibility="public" xPosition="1820.0" yPosition="20.0">
+    <Class name="Reserva" package="RentaCar" visibility="public" xPosition="3484.0" yPosition="86.0">
       <Fields>
         <Field name="RESERVA" type="AtomicInteger" visibility="private" isStatic="true" isFinal="true"/>
         <Field name="numReserva" type="String" visibility="private"/>
@@ -380,7 +378,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Interfaz_Cliente" package="RentaCar" visibility="public" xPosition="2120.0" yPosition="20.0">
+    <Class name="Interfaz_Cliente" package="RentaCar" visibility="public" xPosition="3549.0" yPosition="1393.0">
       <Fields>
         <Field name="nif" type="String" visibility="private"/>
         <Field name="jButton_cancelarReservas" type="javax.swing.JButton" visibility="private"/>
@@ -406,8 +404,7 @@ void" visibility="private"/>
         <Method name="setNif" returnType="void" visibility="public">
           <Argument type="String" name="nif"/>
         </Method>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton_listarVehiculosActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -425,7 +422,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Interfaz_Administrador" package="RentaCar" visibility="public" xPosition="20.0" yPosition="420.0">
+    <Class name="Interfaz_Administrador" package="RentaCar" visibility="public" xPosition="65.0" yPosition="108.0">
       <Fields>
         <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton_cancelrReservas" type="javax.swing.JButton" visibility="private"/>
@@ -449,8 +446,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton_listarClientesActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -483,7 +479,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Usuario" package="RentaCar" visibility="public" xPosition="320.0" yPosition="420.0">
+    <Class name="Usuario" package="RentaCar" visibility="public" xPosition="1706.0" yPosition="1474.0">
       <Fields>
         <Field name="clienteNIF" type="String" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -578,7 +574,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Moto" package="RentaCar" visibility="public" xPosition="620.0" yPosition="420.0">
+    <Class name="Moto" package="RentaCar" visibility="public" xPosition="1385.0" yPosition="438.0">
       <Fields>
         <Field name="cilindrada" type="Integer" visibility="private"/>
       </Fields>
@@ -605,7 +601,7 @@ void" visibility="private"/>
         <Method name="registrarVehiculo" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Interfaz_RegistroClientes" package="RentaCar" visibility="public" xPosition="920.0" yPosition="420.0">
+    <Class name="Interfaz_RegistroClientes" package="RentaCar" visibility="public" xPosition="37.0" yPosition="820.0">
       <Fields>
         <Field name="jButton_Enviar" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton_Limpiar" type="javax.swing.JButton" visibility="private"/>
@@ -634,8 +630,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="limpiar" returnType="void" visibility="public"/>
         <Method name="jButton_EnviarActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
@@ -657,7 +652,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Interfaz_Main" package="RentaCar" visibility="public" xPosition="1220.0" yPosition="420.0">
+    <Class name="Interfaz_Main" package="RentaCar" visibility="public" xPosition="2712.0" yPosition="1678.0">
       <Fields>
         <Field name="jButton_Acceder" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton_ConsultarVeh" type="javax.swing.JButton" visibility="private"/>
@@ -679,8 +674,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton_AccederActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -704,7 +698,89 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Interface name="Consultas_BBDD" package="RentaCar" visibility="public" xPosition="1520.0" yPosition="420.0">
+    <Class name="Impresora" package="RentaCar" visibility="public" xPosition="3519.0" yPosition="1091.0">
+      <Fields>
+        <Field name="comp" type="Component" visibility="package" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Component" name="comp"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="imprimir" returnType="void" visibility="public" isStatic="true">
+          <Argument type="Component" name="comp"/>
+        </Method>
+        <Method name="print" returnType="int" visibility="public">
+          <Argument type="Graphics" name="g"/>
+          <Argument type="PageFormat" name="format"/>
+          <Argument type="int" name="page_index"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="General" package="RentaCar" visibility="public" isFinal="true" xPosition="3496.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="crearVentana" returnType="JFrame" visibility="public" isStatic="true">
+          <Argument type="boolean" name="tablaGrande"/>
+        </Method>
+        <Method name="centrarFrame" returnType="void" visibility="public" isStatic="true">
+          <Argument type="JDesktopPane" name="pane"/>
+          <Argument type="JInternalFrame" name="frame"/>
+        </Method>
+        <Method name="comprobarObj" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="info"/>
+          <Argument type="String" name="query"/>
+        </Method>
+        <Method name="mostrarObj" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="info"/>
+          <Argument type="String" name="query"/>
+          <Argument type="String" name="titulo"/>
+        </Method>
+        <Method name="isNumeric" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="strNum"/>
+        </Method>
+        <Method name="isStringOnlyAlphabet" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="str"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Coche" package="RentaCar" visibility="public" xPosition="1618.0" yPosition="808.0">
+      <Fields>
+        <Field name="numeroPuertas" type="Integer" visibility="private"/>
+        <Field name="potenciaMotor" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Integer" name="numeroPuertas"/>
+          <Argument type="Integer" name="potenciaMotor"/>
+          <Argument type="String" name="matricula"/>
+          <Argument type="String" name="marca"/>
+          <Argument type="String" name="modelo"/>
+          <Argument type="double" name="precioDia"/>
+          <Argument type="char" name="clase"/>
+          <Argument type="boolean" name="disponible"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Coche" name="c1"/>
+          <Argument type="Vehiculo" name="v1"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNumeroPuertas" returnType="Integer" visibility="public"/>
+        <Method name="setNumeroPuertas" returnType="void" visibility="public">
+          <Argument type="Integer" name="numeroPuertas"/>
+        </Method>
+        <Method name="getPotenciaMotor" returnType="Integer" visibility="public"/>
+        <Method name="setPotenciaMotor" returnType="void" visibility="public">
+          <Argument type="Integer" name="potenciaMotor"/>
+        </Method>
+        <Method name="registrarVehiculo" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Interface name="Consultas_BBDD" package="RentaCar" visibility="public" xPosition="809.0" yPosition="1615.0">
       <Methods>
         <Method name="obtenerConexion" returnType="Connection" visibility="public" isStatic="true"/>
         <Method name="buscarCliente" returnType="String" visibility="public" isStatic="true"/>
@@ -743,100 +819,18 @@ void" visibility="private"/>
         <Method name="recuperarReserva" returnType="String" visibility="public" isStatic="true"/>
       </Methods>
     </Interface>
-    <Class name="Impresora" package="RentaCar" visibility="public" xPosition="1820.0" yPosition="420.0">
-      <Fields>
-        <Field name="comp" type="Component" visibility="package" isFinal="true"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public">
-          <Argument type="Component" name="comp"/>
-        </Constructor>
-      </Constructors>
-      <Methods>
-        <Method name="imprimir" returnType="void" visibility="public" isStatic="true">
-          <Argument type="Component" name="comp"/>
-        </Method>
-        <Method name="print" returnType="int" visibility="public">
-          <Argument type="Graphics" name="g"/>
-          <Argument type="PageFormat" name="format"/>
-          <Argument type="int" name="page_index"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="General" package="RentaCar" visibility="public" isFinal="true" xPosition="2120.0" yPosition="420.0">
-      <Fields/>
-      <Constructors/>
-      <Methods>
-        <Method name="crearVentana" returnType="JFrame" visibility="public" isStatic="true">
-          <Argument type="boolean" name="tablaGrande"/>
-        </Method>
-        <Method name="centrarFrame" returnType="void" visibility="public" isStatic="true">
-          <Argument type="JDesktopPane" name="pane"/>
-          <Argument type="JInternalFrame" name="frame"/>
-        </Method>
-        <Method name="comprobarObj" returnType="boolean" visibility="public" isStatic="true">
-          <Argument type="String" name="info"/>
-          <Argument type="String" name="query"/>
-        </Method>
-        <Method name="mostrarObj" returnType="void" visibility="public" isStatic="true">
-          <Argument type="String" name="info"/>
-          <Argument type="String" name="query"/>
-          <Argument type="String" name="titulo"/>
-        </Method>
-        <Method name="isNumeric" returnType="boolean" visibility="public" isStatic="true">
-          <Argument type="String" name="strNum"/>
-        </Method>
-        <Method name="isStringOnlyAlphabet" returnType="boolean" visibility="public" isStatic="true">
-          <Argument type="String" name="str"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="Coche" package="RentaCar" visibility="public" xPosition="20.0" yPosition="820.0">
-      <Fields>
-        <Field name="numeroPuertas" type="Integer" visibility="private"/>
-        <Field name="potenciaMotor" type="Integer" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public"/>
-        <Constructor visibility="public">
-          <Argument type="Integer" name="numeroPuertas"/>
-          <Argument type="Integer" name="potenciaMotor"/>
-          <Argument type="String" name="matricula"/>
-          <Argument type="String" name="marca"/>
-          <Argument type="String" name="modelo"/>
-          <Argument type="double" name="precioDia"/>
-          <Argument type="char" name="clase"/>
-          <Argument type="boolean" name="disponible"/>
-        </Constructor>
-        <Constructor visibility="public">
-          <Argument type="Coche" name="c1"/>
-          <Argument type="Vehiculo" name="v1"/>
-        </Constructor>
-      </Constructors>
-      <Methods>
-        <Method name="getNumeroPuertas" returnType="Integer" visibility="public"/>
-        <Method name="setNumeroPuertas" returnType="void" visibility="public">
-          <Argument type="Integer" name="numeroPuertas"/>
-        </Method>
-        <Method name="getPotenciaMotor" returnType="Integer" visibility="public"/>
-        <Method name="setPotenciaMotor" returnType="void" visibility="public">
-          <Argument type="Integer" name="potenciaMotor"/>
-        </Method>
-        <Method name="registrarVehiculo" returnType="void" visibility="public"/>
-      </Methods>
-    </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <IsRelation name="is" source="RentaCar.Caravana" target="RentaCar.Vehiculo"/>
     <UseRelation source="RentaCar.Interfaz_Reservas" target="RentaCar.Coche" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="RentaCar.Vehiculo" target="RentaCar.Consultas_BBDD"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="RentaCar.Usuario" target="RentaCar.Consultas_BBDD"/>
-    <HasRelation name="listaCoches" source="RentaCar.Interfaz_Reservas" target="RentaCar.Coche" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Coche&gt;"/>
-    <IsRelation name="is" source="RentaCar.Moto" target="RentaCar.Vehiculo"/>
-    <HasRelation name="listaCaravanas" source="RentaCar.Interfaz_Reservas" target="RentaCar.Caravana" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Caravana&gt;"/>
-    <IsRelation name="is" source="RentaCar.Coche" target="RentaCar.Vehiculo"/>
-    <HasRelation name="listaMotos" source="RentaCar.Interfaz_Reservas" target="RentaCar.Moto" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Moto&gt;"/>
     <UseRelation source="RentaCar.Interfaz_Reservas" target="RentaCar.Moto" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="RentaCar.Coche" target="RentaCar.Vehiculo"/>
+    <HasRelation name="listaCaravanas" source="RentaCar.Interfaz_Reservas" target="RentaCar.Caravana" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Caravana&gt;"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="RentaCar.Vehiculo" target="RentaCar.Consultas_BBDD"/>
+    <IsRelation name="is" source="RentaCar.Caravana" target="RentaCar.Vehiculo"/>
     <UseRelation source="RentaCar.Interfaz_Reservas" target="RentaCar.Caravana" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="RentaCar.Moto" target="RentaCar.Vehiculo"/>
+    <HasRelation name="listaCoches" source="RentaCar.Interfaz_Reservas" target="RentaCar.Coche" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Coche&gt;"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="RentaCar.Usuario" target="RentaCar.Consultas_BBDD"/>
+    <HasRelation name="listaMotos" source="RentaCar.Interfaz_Reservas" target="RentaCar.Moto" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Moto&gt;"/>
   </ClassDiagramRelations>
 </ClassDiagram>
