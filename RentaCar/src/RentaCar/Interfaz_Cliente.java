@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import static RentaCar.Vehiculo.listarVehiculos;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -276,13 +277,18 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
         try {
             listarReservas(this.getNif());
-        } catch (RCException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_listarReservasActionPerformed
 
     private void jButton_realizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_realizarReservaActionPerformed
-        Interfaz_Reservas cRes = new Interfaz_Reservas();
+        Interfaz_Reservas cRes = null;
+        try {
+            cRes = new Interfaz_Reservas(this.getNif());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
         centrarFrame(jDesktopPane, cRes);
         jDesktopPane.add(cRes);
         cRes.setVisible(rootPaneCheckingEnabled);

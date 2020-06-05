@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 /**
  *
  * @author Chema
+ * @version 1.0
+ * @since 2020-06-02
  *
  */
 public class Impresora implements Printable {

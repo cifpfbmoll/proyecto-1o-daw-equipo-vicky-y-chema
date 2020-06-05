@@ -4,10 +4,8 @@
  */
 package RentaCar;
 
-import static RentaCar.Consultas_BBDD.insertDetallesReservas;
-import static RentaCar.Consultas_BBDD.insertReservas;
-import static RentaCar.Consultas_BBDD.obtenerConexion;
-import static RentaCar.Consultas_BBDD.unionVehiculos;
+import static RentaCar.Consultas_BBDD.*;
+import static RentaCar.Impresora.imprimir;
 import static RentaCar.Reserva.crearFecha;
 import java.awt.Color;
 import java.sql.Connection;
@@ -16,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -23,18 +22,23 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author Chema
+ * @author Chema & victoriapeñas
+ * @version 1.0
+ * @since 2020-06-01
  */
 public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
-    ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
+    private ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
+    private String nif;
 
     /**
      * Creates new form Interfaz_contratos
      */
-    public Interfaz_Reservas() {
+    public Interfaz_Reservas(String nif) throws SQLException {
+        this.setNif(nif);
         initComponents();
         showDataVehiculos();
+        cargarDatosCliente();
         // actualizarFechas();
         /**
          * Listener para rellenar campos del vehículo seleccionado
@@ -55,6 +59,44 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
                 jTextField_cilindrada.setText(model.getValueAt(fila, 8).toString());
             }
         });
+    }
+    
+    private void cargarDatosCliente() throws SQLException{
+        String query = buscarCliente();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try (Connection con = obtenerConexion()){
+            pst = con.prepareStatement(query);
+            pst.setString(1, this.getNif());
+            rs = pst.executeQuery();
+            if (rs.next()){
+                jTextField_NIF.setText(rs.getString(1));
+                jTextField_nombreCliente.setText(rs.getString(2));
+                jTextField_apellido1.setText(rs.getString(3));
+                jTextField_apellido2.setText(rs.getString(4));
+                jTextField_telefono.setText(rs.getString(5));
+                jTextField_email.setText(rs.getString(6));
+            }
+        } finally{
+            pst.close();
+            rs.close();
+        }   
+    }
+
+    public ArrayList<Vehiculo> getListaVehiculos() {
+        return listaVehiculos;
+    }
+
+    public void setListaVehiculos(ArrayList<Vehiculo> listaVehiculos) {
+        this.listaVehiculos = listaVehiculos;
+    }
+
+    public String getNif() {
+        return nif;
+    }
+
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 
     /**
@@ -527,12 +569,13 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
             jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_botoneraLayout.createSequentialGroup()
                 .addGap(3, 3, 3)
-                .addGroup(jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_crearReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel_botoneraLayout.createSequentialGroup()
+                .addGroup(jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_botoneraLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_botoneraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton_crearReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(5, 5, 5))
         );
 
@@ -624,9 +667,10 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     }
 
     /**
-     * Creación ArrayList Motos recogiendo datos de BBDD
+     * Creación ArrayList Motos recogiendo datos de BBDD.
+     * Es una JTable interna de este JFrame
      *
-     * @return
+     * @return arrayList vehiculos
      */
     private ArrayList<Vehiculo> listarVehiculos() {
         PreparedStatement pst;
@@ -707,25 +751,28 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton_limpiarActionPerformed
 
     private void jButton_crearReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_crearReservaActionPerformed
+        int reply = 0;
         Calendar fechaRecogida = jDateChooser_recogida.getCalendar();
         Calendar fechaDevolucion = jDateChooser_devolucion.getCalendar();
 
         jComboBox_horaRecogida.getSelectedItem().toString();
         jComboBox_horaDevolucion.getSelectedItem().toString();
 
-        Reserva r1 = new Reserva(jTextField_matricula.getText(), fechaRecogida, fechaDevolucion, Observaciones.getText(), 0.00);
-        jTextField_fechaSolicitud.setText(crearFecha(r1.getFECHASOLICITUD()));
-
-        // TODO: Guardar en Reservas BBDD
         try {
+            Reserva r1 = new Reserva(jTextField_matricula.getText(), fechaRecogida, fechaDevolucion, Observaciones.getText(), 0.00);
+            jTextField_fechaSolicitud.setText(crearFecha(r1.getFECHASOLICITUD()));
             if (jTextField_matricula.getText().equalsIgnoreCase("") || jTextField_matricula.getText().equalsIgnoreCase(null)) {
                 jLabel1.setForeground(Color.RED);
                 jLabel1.setText("Por favor seleccione un vehículo.");
             } else {
                 r1.registrarReserva(jComboBox_horaRecogida.getSelectedItem().toString(),
-                        jComboBox_horaDevolucion.getSelectedItem().toString(), jTextField_NIF.getText(), calcularPrecio());
-                jLabel1.setForeground(Color.GREEN);
-                jLabel1.setText("Reserva realizada con éxito.");
+                jComboBox_horaDevolucion.getSelectedItem().toString(), jTextField_NIF.getText(), calcularPrecio());
+                reply = JOptionPane.showConfirmDialog(null, "¿Desea imprimir una copia de la reserva?");
+                if (reply == JOptionPane.YES_OPTION) {
+                    imprimir(this);
+                }else {
+                    this.dispose();
+                }
             }
         } catch (Exception ex) {
             jLabel1.setForeground(Color.RED);

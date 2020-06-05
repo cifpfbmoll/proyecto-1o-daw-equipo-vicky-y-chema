@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import static RentaCar.Vehiculo.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -354,13 +357,18 @@ public class Interfaz_Administrador extends javax.swing.JFrame {
     private void jButton_listarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_listarReservasActionPerformed
         try {
             listarReservas("%");
-        } catch (RCException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_listarReservasActionPerformed
 
     private void jButton_realizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_realizarReservaActionPerformed
-        Interfaz_Reservas cRes = new Interfaz_Reservas();
+        Interfaz_Reservas cRes = null;
+        try {
+            cRes = new Interfaz_Reservas(null);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
         centrarFrame(jDesktopPane, cRes);
         jDesktopPane.add(cRes);
         cRes.setVisible(rootPaneCheckingEnabled);

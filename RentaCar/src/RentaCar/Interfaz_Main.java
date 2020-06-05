@@ -29,14 +29,7 @@ public class Interfaz_Main extends javax.swing.JFrame {
         initComponents();
         jPanel_Login.setVisible(false);
         ImageIcon img = new ImageIcon("src/image/home_icon_64px.png");
-        setIconImage(img.getImage());
-        /////// TEMPORAL
-        Interfaz_Reservas cRes = new Interfaz_Reservas();
-        centrarFrame(jDesktopPane, cRes);
-        jDesktopPane.add(cRes);
-        cRes.setVisible(rootPaneCheckingEnabled);
-        /////////////////
-        
+        setIconImage(img.getImage());        
     }
 
     /**

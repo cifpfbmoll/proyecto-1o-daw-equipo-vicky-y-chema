@@ -303,6 +303,8 @@ public interface Consultas_BBDD {
         return "select r.*, d.matriculavehiculo, d.preciodia, d.descuento"
                 + " from reservas r, detalles_reserva d "
                 + "where r.numreserva = d.numreserva and r.numreserva ilike ?";
+    }
+        
     public static String insertReservas() {
         return "insert into reservas values (?,?::date,?::date,?::time,?::date,?::time,?,?)";
     }
