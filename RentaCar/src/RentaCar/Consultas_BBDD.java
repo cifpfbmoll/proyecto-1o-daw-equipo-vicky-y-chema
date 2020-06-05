@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * Interfaz con métodos para recuperar todas las consultas que se lanzan a BBDD
  * en la aplicación
  *
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas y josemariahernandez
  * @version 1.0
  * @since 2020-19-05
  */
@@ -22,7 +22,7 @@ public interface Consultas_BBDD {
      * Método para recuperar la conexión a la BBDD
      *
      * @return devuelve la conexión a la BBDD
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
      */
     public static Connection obtenerConexion() throws SQLException {
         String url = "jdbc:postgresql://81.203.19.183:5432/rentacar";
@@ -70,7 +70,7 @@ public interface Consultas_BBDD {
 
     /**
      * query para validar contraseñas
-     *
+     * @param user codigo de usuario para acceder a la aplciación
      * @return devuelve la query de validación
      */
     public static String recuperarUsuario(String user) {
@@ -165,7 +165,7 @@ public interface Consultas_BBDD {
     /**
      * Union para los vehiculos usado en JTable del internalframe Reservas
      *
-     * @return
+     * @return select union
      */
     public static String unionVehiculos() {
         return "select v.matricula, v.marca, v.modelo, v.clase, v.preciodia, "
@@ -214,11 +214,11 @@ public interface Consultas_BBDD {
     /**
      * Query para insertar en la tabla vehiculos
      *
-     * @param matricula
-     * @param marca
-     * @param modelo
-     * @param clase
-     * @param precioDia
+     * @param matricula matricula del vehiculo
+     * @param marca marca del vehiculo
+     * @param modelo modelo del vehiculo
+     * @param clase clase del vehiculo
+     * @param precioDia precio por dia de alquiler
      * @return devuelve la query
      */
     public static String insertarVehiculo(String matricula, String marca, String modelo, char clase, Double precioDia) {

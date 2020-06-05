@@ -16,7 +16,7 @@ import javax.swing.*;
 
 /**
  *
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas y josemariahernandez
  * @version 1.0
  * @since 2020-05-17
  */

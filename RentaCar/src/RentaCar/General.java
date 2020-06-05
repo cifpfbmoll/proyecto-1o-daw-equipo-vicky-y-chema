@@ -26,7 +26,7 @@ import javax.swing.JTable;
  * Esta clase, tiene métodos que se utilizan para el funcionamiento de la
  * aplicación a nivel general.
  *
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas y josemariahernandez
  * @version 1.0
  * @since 2020-06-03
  */
@@ -35,7 +35,7 @@ final public class General {
     /**
      * Método para crear un JFrame centrados en la pantalla en función de la
      * resolución
-     *
+     * @param tablaGrande booleano para indicar si el JTable a desplegar debe tener un tamaño grande o pequeño
      * @return devuelve el JFrame
      */
     public static JFrame crearVentana(boolean tablaGrande) {
@@ -62,8 +62,8 @@ final public class General {
     /**
      * Permite iniciar cualquier internal frame centrado
      *
-     * @param pane
-     * @param frame
+     * @param pane pane que contiene un JInternalFrame
+     * @param frame frame que se debe centrar
      */
     public static void centrarFrame(JDesktopPane pane, JInternalFrame frame) {
         Dimension desktopSize = pane.getSize();
@@ -77,7 +77,9 @@ final public class General {
      *
      * @param info primary key a chequear en la bbdd
      * @param query query a ejecutar
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
+     * 
+     * @return devuelve tru si el objeto existe en la BBDD
      */
     public static boolean comprobarObj(String info, String query) throws SQLException {
         boolean existe = false;
@@ -106,7 +108,8 @@ final public class General {
      * @param info primary key a chequear en la bbdd
      * @param query query a ejecutar
      * @param titulo titulo del JFrame
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
+     * @throws IOException este método lanza una excepcion IOExceptionn que se debe controlar
      */
     public static void mostrarObj(String info, String query, String titulo) throws SQLException, IOException {
         PreparedStatement pst = null;

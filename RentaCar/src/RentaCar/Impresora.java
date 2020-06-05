@@ -40,7 +40,7 @@ public class Impresora implements Printable {
     /**
      * Método que permitirá imprimir los componentes.
      *
-     * @param comp
+     * @param comp componente que se recogerá para imprimir
      */
     public static void imprimir(Component comp) {
         PrinterJob pjob = PrinterJob.getPrinterJob();
@@ -68,7 +68,7 @@ public class Impresora implements Printable {
      * @param format formato de página a usar, PORTRAIT o LANDSCAPE
      * @param page_index índice de página
      * @return devuelve el componente dibujado
-     * @throws PrinterException
+     * @throws PrinterException este método lanza una PrinterException que se debe controlar
      */
     @Override
     public int print(Graphics g, PageFormat format, int page_index)

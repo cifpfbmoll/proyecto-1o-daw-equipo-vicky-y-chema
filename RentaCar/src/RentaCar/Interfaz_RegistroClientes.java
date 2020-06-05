@@ -7,7 +7,7 @@ package RentaCar;
 import java.awt.Color;
 
 /**
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas y josemariahernandez
  * @version 1.0
  * @since 2020-18-05
  */

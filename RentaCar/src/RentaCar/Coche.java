@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas y josemariahernandez
  * @since 2020-05-20
  * @version 1.0
  */
@@ -34,13 +34,13 @@ public class Coche extends Vehiculo {
     /**
      * Constructor con parámetros
      *
-     * @param numeroPuertas
-     * @param potenciaMotor
-     * @param matricula
-     * @param marca
-     * @param modelo
-     * @param precioDia
-     * @param clase
+     * @param numeroPuertas numero de puertas del coche
+     * @param potenciaMotor potencia del motor del coche
+     * @param matricula matricula del coche
+     * @param marca marca del coche
+     * @param modelo modelo del coche
+     * @param precioDia precio por dia del coche
+     * @param clase clase del coche
      */
     public Coche(Integer numeroPuertas, Integer potenciaMotor, String matricula, String marca, String modelo, double precioDia, char clase) {
         super(matricula, marca, modelo, precioDia, clase);

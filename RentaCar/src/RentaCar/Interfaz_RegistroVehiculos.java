@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.sql.SQLException;
 
 /**
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas y josemariahernandez
  * @version 1.0
  * @since 2020-19-05
  */

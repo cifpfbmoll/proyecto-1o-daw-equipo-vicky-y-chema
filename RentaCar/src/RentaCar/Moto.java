@@ -32,12 +32,12 @@ public class Moto extends Vehiculo {
     /**
      * Construtor con parámetros
      *
-     * @param cilindrada
-     * @param matricula
-     * @param marca
-     * @param modelo
-     * @param precioDia
-     * @param clase
+     * @param cilindrada cilindrada de la moto
+     * @param matricula matricula de la moto
+     * @param marca marca de la moto
+     * @param modelo modelo de la moto
+     * @param precioDia precio del alquiler diario de la moto
+     * @param clase clase a la que pertenece la moto
      */
     public Moto(Integer cilindrada, String matricula, String marca, String modelo, double precioDia, char clase) {
         super(matricula, marca, modelo, precioDia, clase);
@@ -65,7 +65,7 @@ public class Moto extends Vehiculo {
 
     /**
      * Método para insertar motos en la BBDD
-     * @throws SQLException 
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     @Override
     public void registrarVehiculo() throws SQLException {

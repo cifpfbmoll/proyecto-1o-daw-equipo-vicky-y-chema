@@ -20,7 +20,7 @@ import javax.swing.*;
  * Clase abstracta Vehiculo
  *
  * @version 2.0
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas y josemariahernandez
  */
 public abstract class Vehiculo implements Consultas_BBDD {
 
@@ -41,9 +41,9 @@ public abstract class Vehiculo implements Consultas_BBDD {
     /**
      * Constructor con parametros
      *
-     * @param matricula
-     * @param marca
-     * @param modelo
+     * @param matricula matricula del vehiculo
+     * @param marca marca del vehiculo
+     * @param modelo modelo del vehiculo
      * @param precioDia coste por dia de alquiler
      * @param clase categoria del vehiculo
      */
@@ -113,6 +113,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
      *
      * @see javax.swing.JTable
      * @see javax.swing.table.AbstractTableModel
+     * @return devuelve el JFrame con el listado de vehiculos
      */
     public static JFrame listarVehiculos() {
         String query = recuperarVehiculo();
@@ -161,7 +162,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
      * @param matricula matricula del vehiculo
      * @param query query para comprobar si la matricula existe como activa en
      * la BBDD
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
      */
     public static void buscarTipoVehiculo(String matricula, String query) throws SQLException {
         int tipo = 0;
@@ -206,7 +207,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
      * con datos de las BBDD
      *
      * @param marcas marcas es el JCombobox a rellenar
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
      */
     public static void extraerMarcas(JComboBox marcas) throws SQLException {
         Connection con = obtenerConexion();
@@ -226,7 +227,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
      * con datos de las BBDD
      *
      * @param clases clases es el JCombobox a rellenar
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
      */
     public static void extraerClases(JComboBox clases) throws SQLException {
         Connection con = obtenerConexion();
@@ -243,6 +244,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
 
     /**
      * Método para recuperar la PK de la clase seleccionada
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
      */
     public abstract void registrarVehiculo() throws SQLException;
 
@@ -251,7 +253,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
      *
      * @param nombre nombre de la clase que se quiere recuperar
      * @return devuelve el codigo de la clase
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
      */
     public static char obtenerClasePK(String nombre) throws SQLException {
         char cod = 0;
@@ -292,7 +294,8 @@ public abstract class Vehiculo implements Consultas_BBDD {
     /**
      * Método para modificar un vehiculo de la BBDD a retirado = true
      *
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
+     * @throws RCException este método lanza una excepcion personalizada RCException que se debe controlar
      */
     public static void bajaVehiculo() throws SQLException, RCException {
         int reply = 0;
@@ -326,7 +329,8 @@ public abstract class Vehiculo implements Consultas_BBDD {
     /**
      * Método para modificar el precio de un vehiculo
      *
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
+     * @throws RCException este método lanza una excepcion RCException que se debe controlar
      */
     public static void modificarPrecio() throws SQLException, RCException {
         int reply = 0;
@@ -374,7 +378,7 @@ public abstract class Vehiculo implements Consultas_BBDD {
      * Método para comprobar si un vehiculo existe y está operativo
      * @param matricula matricula para localizar el vehiculo en la BBDD
      * @return booleano con el resultado
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
      */
     public static boolean comprobarVehiculo(String matricula) throws SQLException {
         boolean existe = false;
@@ -401,8 +405,8 @@ public abstract class Vehiculo implements Consultas_BBDD {
     /**
      * @deprecated sustituido por mostrarObj(String info, String query, String
      * titulo)
-     * @param matricula
-     * @throws SQLException
+     * @param matricula matricula del vehiculo
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
      */
     public static void mostrarVehiculo(String matricula) throws SQLException {
         PreparedStatement pst = null;

@@ -37,6 +37,7 @@ public class Reserva {
 
     /**
      * Constructor vacío con un autoincremental
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public Reserva() throws SQLException {
         this.setNumReserva("RES-" + getRESERVA().intValue());
@@ -53,6 +54,7 @@ public class Reserva {
      * @param observaciones información facilitada por el cliente en relacion a
      * la reserva
      * @param descuento decuento aplicado en la reserva
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public Reserva(String matricula, Calendar fechaHoraRecogida, Calendar fechaHoraDevolucion, String observaciones, Double descuento) throws SQLException {
         this.setNumReserva("RES-" + getRESERVA().intValue());
@@ -146,9 +148,10 @@ public class Reserva {
     /**
      * Método para listar las reservas del sistema
      *
-     * @param nif es el nif del cliente por el que se podrá filtrar los
-     * resultados
+     * @param nif es el nif del cliente por el que se podrá filtrar los resultados
      * @return devuelve una tabla con el listado de reservas
+     * @throws RCException este método lanza una RCException que se debe controlar
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public static JFrame listarReservas(String nif) throws RCException, SQLException {
         PreparedStatement pst = null;
@@ -220,6 +223,8 @@ public class Reserva {
      *
      * @param numReserva numero de reserva a verificar
      * @return true si la fecha de recogida no está pasada
+     * @throws RCException este método lanza una RCException que se debe controlar
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public static boolean comprobarFechaReserva(String numReserva) throws SQLException, RCException {
         boolean cancelable = false;
@@ -310,7 +315,7 @@ public class Reserva {
      * @param horaDevolucion Hora devolución del vehículo.
      * @param NIF NIF del cliente.
      * @param precio Precio por día del vehículo.
-     * @throws SQLException 
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public void registrarReserva(String horaRecogida, String horaDevolucion, String NIF, Double precio) throws SQLException {
         PreparedStatement pst = null;

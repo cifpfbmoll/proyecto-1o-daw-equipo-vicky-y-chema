@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas y josemariahernandez
  * @version 1.0
  * @since 2020-18-05
  */
@@ -31,6 +31,7 @@ public class Interfaz_Cliente extends javax.swing.JFrame {
 
     /**
      * Creates new form Interfaz_Cliente
+     * @param nifUsuario NIF del usuario que ha conectado a la aplicación
      */
     public Interfaz_Cliente(String nifUsuario) {
         initComponents();

@@ -22,7 +22,7 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author Chema & victoriapeñas
+ * @author Chema y victoriapeñas
  * @version 1.0
  * @since 2020-06-01
  */
@@ -33,6 +33,9 @@ public class Interfaz_Reservas extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Interfaz_contratos
+     * 
+     * @param nif nif del usuario que ha conectado a la aplicación
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public Interfaz_Reservas(String nif) throws SQLException {
         this.setNif(nif);

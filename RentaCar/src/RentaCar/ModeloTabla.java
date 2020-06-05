@@ -26,7 +26,7 @@ public class ModeloTabla extends AbstractTableModel {
     /**
      * Contructor que recibe el cursor con el que rellenará la JTable
      *
-     * @param rs
+     * @param rs cursor con datos obtenidos de la BBDD
      */
     public ModeloTabla(ResultSet rs) {
         rsRegistros = rs;
@@ -72,9 +72,9 @@ public class ModeloTabla extends AbstractTableModel {
     /**
      * Método mediante el cual el cursor rellena la tabla con todos los datos
      *
-     * @param rowIndex
-     * @param columnIndex
-     * @return
+     * @param rowIndex indice de filas
+     * @param columnIndex inidice de columnas
+     * @return devuelve la tabla rellenada con datos
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -92,7 +92,7 @@ public class ModeloTabla extends AbstractTableModel {
      * seteralo en la JTable
      *
      * @param c indice
-     * @return
+     * @return el nombre de las columnas obtenido directamente de la BBDD
      */
     @Override
     public String getColumnName(int c) {

@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 /**
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas
  * @version 2.0
  * @since 2020-05-25
  */
@@ -41,7 +41,17 @@ public class Usuario implements Consultas_BBDD {
     }
 
     /**
-     * Constructor con parámetros
+     * Contructor con parametros
+     * @param clienteNIF nif del cliente
+     * @param nombre nombre del usuario
+     * @param apellido1 primer apellido del usuario
+     * @param apellido2 segundo apellido del usuario
+     * @param telefono telefono del usuario
+     * @param email email del usuario
+     * @param rol rol asignado al usuario, este parámetro se asocia automáticamente
+     * @param password contraseña de acceso a la aplicación del usuario
+     * @param codUsuario login de acceso a la aplicación del usuario
+     * @throws RCException este método lanza una RCException que se debe controlar
      */
     public Usuario(String clienteNIF, String nombre, String apellido1,
             String apellido2, String telefono, String email, int rol,
@@ -60,6 +70,11 @@ public class Usuario implements Consultas_BBDD {
     /**
      * Contructor copia. El NIF y el codUsuario no puede estar duplicado. Por lo
      * tanto, no se copia.
+     * 
+     * @param user objeto Usuario a copiar
+     * @param NIF nif del usuario
+     * @param codUser codigo de login del usuario
+     * @throws RCException este método lanza una excepción del tipo RCException que se debe controlar.
      */
     public Usuario(Usuario user, String NIF, String codUser) throws RCException {
         this.setClienteNIF(NIF);
@@ -189,7 +204,7 @@ public class Usuario implements Consultas_BBDD {
      *
      * @param user recibe el codigo de usuario
      * @return devuelve el codigo del rol
-     * @throws SQLException
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public static int comprobarRol(String user) throws SQLException {
         int rol = 1;
@@ -311,7 +326,7 @@ public class Usuario implements Consultas_BBDD {
      * @param user codigo de usuario que se ha introducido
      * @param pw contraseña que se ha introducido
      * @return devuelve true si el usuario existe en ls BBDD
-     * @throws SQLException
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public static boolean comprobarUsuario(String user, String pw) throws SQLException {
         boolean encontrado = false;
@@ -409,7 +424,7 @@ public class Usuario implements Consultas_BBDD {
      *
      * @param usuario usuario es el usuario de login
      * @return devuelve el nif asociado al usuario
-     * @throws SQLException
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public static String recuperarNIF(String usuario) throws SQLException {
         String nif = "";
@@ -428,9 +443,9 @@ public class Usuario implements Consultas_BBDD {
 
     /**
      * @deprecated sustituido por comprobarObj(String info, String query)
-     * @param nif
-     * @return
-     * @throws SQLException
+     * @param nif nid del cliente
+     * @return devuelve true si el nif existe en la BBDD
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public static boolean comprobarCliente(String nif) throws SQLException {
         boolean existe = false;
@@ -458,7 +473,7 @@ public class Usuario implements Consultas_BBDD {
      * @deprecated sustituido por mostrarObj(String info, String query, String
      * titulo) Método para listar los datos de un cliente en función del nif
      * @param nif nif del cliente
-     * @throws SQLException
+     * @throws SQLException este método lanza una SQLException que se debe controlar
      */
     public static void mostrarCliente(String nif) throws SQLException {
         PreparedStatement pst = null;

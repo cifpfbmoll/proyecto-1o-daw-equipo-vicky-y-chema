@@ -15,7 +15,7 @@ import java.sql.SQLException;
 /**
  * @version 1.0
  * @since 2020-05-23
- * @author victoriapenas & josemariahernandez
+ * @author victoriapenas y josemariahernandez
  */
 public class Caravana extends Vehiculo {
 
@@ -35,13 +35,13 @@ public class Caravana extends Vehiculo {
     /**
      * Constructor con parámetros
      *
-     * @param potenciaMotor
+     * @param potenciaMotor potencia de la caravana
      * @param wc baño
-     * @param matricula
-     * @param marca
-     * @param modelo
-     * @param precioDia
-     * @param clase
+     * @param matricula matricula de la caravana
+     * @param marca marca de la caravana
+     * @param modelo modelo de la caravana
+     * @param precioDia precio por dia de la caravana
+     * @param clase clase de caravana
      */
     public Caravana(Integer potenciaMotor, boolean wc, String matricula, String marca, String modelo, double precioDia, char clase) {
         super(matricula, marca, modelo, precioDia, clase);
@@ -79,10 +79,7 @@ public class Caravana extends Vehiculo {
 
     /**
      * Método para insertar caravanas en la BBDD
-     *
-     * @param resultado resultado es el warning para informar si se ha
-     * registrado correctamente o no
-     * @throws SQLException
+     * @throws SQLException este método lanza una excepcion SQLexception que se debe controlar
      */
     @Override
     public void registrarVehiculo() throws SQLException {
