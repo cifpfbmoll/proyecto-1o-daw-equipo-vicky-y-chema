@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="RentaCar">
+  <ClassDiagramComponents>
+    <Class name="Vehiculo" package="RentaCar" visibility="public" isAbstract="true" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="matricula" type="String" visibility="private"/>
+        <Field name="marca" type="String" visibility="private"/>
+        <Field name="modelo" type="String" visibility="private"/>
+        <Field name="precioDia" type="Double" visibility="private"/>
+        <Field name="clase" type="char" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="matricula"/>
+          <Argument type="String" name="marca"/>
+          <Argument type="String" name="modelo"/>
+          <Argument type="double" name="precioDia"/>
+          <Argument type="char" name="clase"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Vehiculo" name="v1"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getMatricula" returnType="String" visibility="public"/>
+        <Method name="setMatricula" returnType="void" visibility="public">
+          <Argument type="String" name="matricula"/>
+        </Method>
+        <Method name="getMarca" returnType="String" visibility="public"/>
+        <Method name="setMarca" returnType="void" visibility="public">
+          <Argument type="String" name="marca"/>
+        </Method>
+        <Method name="getModelo" returnType="String" visibility="public"/>
+        <Method name="setModelo" returnType="void" visibility="public">
+          <Argument type="String" name="modelo"/>
+        </Method>
+        <Method name="getPrecioDia" returnType="Double" visibility="public"/>
+        <Method name="setPrecioDia" returnType="void" visibility="public">
+          <Argument type="Double" name="precioDia"/>
+        </Method>
+        <Method name="getClase" returnType="char" visibility="public"/>
+        <Method name="setClase" returnType="void" visibility="public">
+          <Argument type="char" name="clase"/>
+        </Method>
+        <Method name="listarVehiculos" returnType="JFrame" visibility="public" isStatic="true"/>
+        <Method name="buscarTipoVehiculo" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="matricula"/>
+          <Argument type="String" name="query"/>
+        </Method>
+        <Method name="extraerMarcas" returnType="void" visibility="public" isStatic="true">
+          <Argument type="JComboBox" name="marcas"/>
+        </Method>
+        <Method name="extraerClases" returnType="void" visibility="public" isStatic="true">
+          <Argument type="JComboBox" name="clases"/>
+        </Method>
+        <Method name="registrarVehiculo" returnType="void" visibility="public" isAbstract="true"/>
+        <Method name="obtenerClasePK" returnType="char" visibility="public" isStatic="true">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="estaDisponible" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="JCheckBox" name="disponible"/>
+        </Method>
+        <Method name="bajaVehiculo" returnType="void" visibility="public" isStatic="true"/>
+        <Method name="modificarPrecio" returnType="void" visibility="public" isStatic="true"/>
+        <Method name="comprobarVehiculo" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="matricula"/>
+        </Method>
+        <Method name="mostrarVehiculo" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="matricula"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Caravana" package="RentaCar" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="potenciaMotor" type="Integer" visibility="private"/>
+        <Field name="wc" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Integer" name="potenciaMotor"/>
+          <Argument type="boolean" name="wc"/>
+          <Argument type="String" name="matricula"/>
+          <Argument type="String" name="marca"/>
+          <Argument type="String" name="modelo"/>
+          <Argument type="double" name="precioDia"/>
+          <Argument type="char" name="clase"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Caravana" name="c1"/>
+          <Argument type="Vehiculo" name="v1"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPotenciaMotor" returnType="Integer" visibility="public"/>
+        <Method name="setPotenciaMotor" returnType="void" visibility="public">
+          <Argument type="Integer" name="potenciaMotor"/>
+        </Method>
+        <Method name="isWc" returnType="boolean" visibility="public"/>
+        <Method name="setWc" returnType="void" visibility="public">
+          <Argument type="boolean" name="wc"/>
+        </Method>
+        <Method name="registrarVehiculo" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="RCException" package="RentaCar" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="message" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="errorMessage"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getMessage" returnType="String" visibility="public"/>
+        <Method name="setMessage" returnType="void" visibility="public">
+          <Argument type="String" name="message"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Interfaz_RegistroVehiculos" package="RentaCar" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="jButton_Enviar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_Limpiar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jCheckBox_wc" type="javax.swing.JCheckBox" visibility="private"/>
+        <Field name="jComboBox_Clase" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jComboBox_Marca" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jComboBox_Selector" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jLabel_Bienvenida" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Cilindrada" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Clase" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Marca" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Matricula" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Modelo" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_TipoVehículo" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_numPuertasCoche" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_potenciaMotor" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_precioDia" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_result" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jTextField_Cilindrada" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_Matricula" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_Modelo" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_numPuertasCoche" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_potenciaMotor" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_precioDia" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="operacioRealizada" returnType="void" visibility="public">
+          <Argument type="boolean" name="resultado"/>
+        </Method>
+        <Method name="jComboBox_SelectorActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_MatriculaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jComboBox_MarcaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_ModeloActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jComboBox_ClaseActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_LimpiarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_EnviarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_potenciaMotorActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_numPuertasCocheActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jCheckBox_wcActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_precioDiaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="revisarCamposObligatorios" returnType="boolean" visibility="public"/>
+        <Method name="limpiarCampos" returnType="void" visibility="public"/>
+        <Method name="ocultarCampos" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Interfaz_Reservas" package="RentaCar" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="listaMotos" type="ArrayList&lt;Moto&gt;" visibility="package"/>
+        <Field name="listaCoches" type="ArrayList&lt;Coche&gt;" visibility="package"/>
+        <Field name="listaCaravanas" type="ArrayList&lt;Caravana&gt;" visibility="package"/>
+        <Field name="Observaciones" type="java.awt.TextField" visibility="private"/>
+        <Field name="jButton_guardar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_limpiar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jCheckBox_wc" type="javax.swing.JCheckBox" visibility="private"/>
+        <Field name="jComboBox_horaDevolucion" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jComboBox_horaRecogida" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jDateChooser_devolucion" type="com.toedter.calendar.JDateChooser" visibility="private"/>
+        <Field name="jDateChooser_recogida" type="com.toedter.calendar.JDateChooser" visibility="private"/>
+        <Field name="jLabel_NIF" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Observaciones" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_apellido1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_apellido2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_cilindrada" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_clase" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_email" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_fechaDevolucion" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_fechaRecogida" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_fechaSolicitud" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_horaDevolucion" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_horaRecogida" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_infoCliente" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_infoReserva" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_infoVehiculo" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_marca" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_matricula" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_modelo" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_nombreCliente" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_numPuertas" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_potenciaMotor" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_precioDia" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_telefono" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel_botonera" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel_datosCliente" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel_datosReserva" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel_datosVehiculo" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTable_Vehiculos" type="javax.swing.JTable" visibility="private"/>
+        <Field name="jTextField_NIF" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_apellido1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_apellido2" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_cilindrada" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_clase" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_email" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_fechaSolicitud" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_marca" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_matricula" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_modelo" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_nombreCliente" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_numPuertas" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_potenciaMotor" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_precioDia" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_telefono" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="actualizarFechas" returnType="void" visibility="private"/>
+        <Method name="limpiar" returnType="void" visibility="public"/>
+        <Method name="listaMotos" returnType="ArrayList&lt;Moto&gt;" visibility="private"/>
+        <Method name="listaCoches" returnType="ArrayList&lt;Coche&gt;" visibility="private"/>
+        <Method name="listaCaravanas" returnType="ArrayList&lt;Caravana&gt;" visibility="private"/>
+        <Method name="showDataVehiculos" returnType="void" visibility="private"/>
+        <Method name="showDataCoches" returnType="void" visibility="private"/>
+        <Method name="showDataCaravanas" returnType="void" visibility="private"/>
+        <Method name="showDataMotos" returnType="void" visibility="private"/>
+        <Method name="jButton_limpiarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_guardarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_NIFActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_matriculaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="ObservacionesActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_numPuertasActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTable_VehiculosMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ModeloTabla" package="RentaCar" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="rsRegistros" type="ResultSet" visibility="private"/>
+        <Field name="rsmd" type="ResultSetMetaData" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="ResultSet" name="rs"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getRowCount" returnType="int" visibility="public"/>
+        <Method name="getColumnCount" returnType="int" visibility="public"/>
+        <Method name="getValueAt" returnType="Object" visibility="public">
+          <Argument type="int" name="rowIndex"/>
+          <Argument type="int" name="columnIndex"/>
+        </Method>
+        <Method name="getColumnName" returnType="String" visibility="public">
+          <Argument type="int" name="c"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Reserva" package="RentaCar" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="RESERVA" type="AtomicInteger" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="numReserva" type="String" visibility="private"/>
+        <Field name="matricula" type="String" visibility="private"/>
+        <Field name="FECHASOLICITUD" type="Calendar" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="fechaHoraRecogida" type="Calendar" visibility="private"/>
+        <Field name="fechaHoraDevolucion" type="Calendar" visibility="private"/>
+        <Field name="observaciones" type="String" visibility="private"/>
+        <Field name="descuento" type="Double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="matricula"/>
+          <Argument type="Calendar" name="fechaHoraRecogida"/>
+          <Argument type="Calendar" name="fechaHoraDevolucion"/>
+          <Argument type="String" name="observaciones"/>
+          <Argument type="Double" name="descuento"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Reserva" name="r1"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getRESERVA" returnType="AtomicInteger" visibility="public" isStatic="true"/>
+        <Method name="getNumReserva" returnType="String" visibility="public"/>
+        <Method name="setNumReserva" returnType="void" visibility="public">
+          <Argument type="String" name="numReserva"/>
+        </Method>
+        <Method name="getFECHASOLICITUD" returnType="Calendar" visibility="public"/>
+        <Method name="getMatricula" returnType="String" visibility="public"/>
+        <Method name="setMatricula" returnType="void" visibility="public">
+          <Argument type="String" name="matricula"/>
+        </Method>
+        <Method name="getFechaHoraRecogida" returnType="Calendar" visibility="public"/>
+        <Method name="setFechaHoraRecogida" returnType="void" visibility="public">
+          <Argument type="Calendar" name="fechaHoraRecogida"/>
+        </Method>
+        <Method name="getFechaHoraDevolucion" returnType="Calendar" visibility="public"/>
+        <Method name="setFechaHoraDevolucion" returnType="void" visibility="public">
+          <Argument type="Calendar" name="fechaHoraDevolucion"/>
+        </Method>
+        <Method name="getObservaciones" returnType="String" visibility="public"/>
+        <Method name="setObservaciones" returnType="void" visibility="public">
+          <Argument type="String" name="observaciones"/>
+        </Method>
+        <Method name="getDescuento" returnType="Double" visibility="public"/>
+        <Method name="setDescuento" returnType="void" visibility="public">
+          <Argument type="Double" name="descuento"/>
+        </Method>
+        <Method name="listarReservas" returnType="JFrame" visibility="public" isStatic="true">
+          <Argument type="String" name="nif"/>
+        </Method>
+        <Method name="setearColumnasReservas" returnType="void" visibility="public" isStatic="true">
+          <Argument type="JTable" name="tabla"/>
+        </Method>
+        <Method name="comprobarFechaReserva" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="numReserva"/>
+        </Method>
+        <Method name="cancelarReserva" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="nif"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Interfaz_Cliente" package="RentaCar" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="nif" type="String" visibility="private"/>
+        <Field name="jButton_cancelarReservas" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_cerrarSesion" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_listarReservas" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_listarVehiculos" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_realizarReserva" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jDesktopPane" type="javax.swing.JDesktopPane" visibility="private"/>
+        <Field name="jFrame1" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jFrame2" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jFrame3" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jFrame4" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jFrame5" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jLabel_Bienvenida" type="javax.swing.JLabel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nifUsuario"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNif" returnType="String" visibility="public"/>
+        <Method name="setNif" returnType="void" visibility="public">
+          <Argument type="String" name="nif"/>
+        </Method>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="jButton_listarVehiculosActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_listarReservasActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_realizarReservaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_cerrarSesionActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_cancelarReservasActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Interfaz_Administrador" package="RentaCar" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_cancelrReservas" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_listarClientes" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_listarReservas" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_listarVehiculos" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_modificarPrecio" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_realizarReserva" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_registrarClientes" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_registrarVehiculo" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_retirarVehiculo" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jDesktopPane" type="javax.swing.JDesktopPane" visibility="private"/>
+        <Field name="jFrame1" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jFrame2" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jFrame3" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jFrame4" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jFrame5" type="javax.swing.JFrame" visibility="private"/>
+        <Field name="jLabel_Bienvenida" type="javax.swing.JLabel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="jButton_listarClientesActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_registrarClientesActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_registrarVehiculoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_listarVehiculosActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_listarReservasActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_realizarReservaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_retirarVehiculoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_modificarPrecioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_cancelrReservasActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Usuario" package="RentaCar" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="clienteNIF" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido1" type="String" visibility="private"/>
+        <Field name="apellido2" type="String" visibility="private"/>
+        <Field name="telefono" type="String" visibility="private"/>
+        <Field name="email" type="String" visibility="private"/>
+        <Field name="rol" type="int" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="codUsuario" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="clienteNIF"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido1"/>
+          <Argument type="String" name="apellido2"/>
+          <Argument type="String" name="telefono"/>
+          <Argument type="String" name="email"/>
+          <Argument type="int" name="rol"/>
+          <Argument type="String" name="password"/>
+          <Argument type="String" name="codUsuario"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Usuario" name="user"/>
+          <Argument type="String" name="NIF"/>
+          <Argument type="String" name="codUser"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getClienteNIF" returnType="String" visibility="public"/>
+        <Method name="setClienteNIF" returnType="void" visibility="public">
+          <Argument type="String" name="clienteNIF"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getApellido1" returnType="String" visibility="public"/>
+        <Method name="setApellido1" returnType="void" visibility="public">
+          <Argument type="String" name="apellido1"/>
+        </Method>
+        <Method name="getApellido2" returnType="String" visibility="public"/>
+        <Method name="setApellido2" returnType="void" visibility="public">
+          <Argument type="String" name="apellido2"/>
+        </Method>
+        <Method name="getTelefono" returnType="String" visibility="public"/>
+        <Method name="setTelefono" returnType="void" visibility="public">
+          <Argument type="String" name="telefono"/>
+        </Method>
+        <Method name="getEmail" returnType="String" visibility="public"/>
+        <Method name="setEmail" returnType="void" visibility="public">
+          <Argument type="String" name="email"/>
+        </Method>
+        <Method name="getRol" returnType="int" visibility="public"/>
+        <Method name="setRol" returnType="void" visibility="public">
+          <Argument type="int" name="rol"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getCodUsuario" returnType="String" visibility="public"/>
+        <Method name="setCodUsuario" returnType="void" visibility="public">
+          <Argument type="String" name="codUsuario"/>
+        </Method>
+        <Method name="obtenerRolId" returnType="int" visibility="public" isStatic="true">
+          <Argument type="String" name="rol"/>
+        </Method>
+        <Method name="comprobarRol" returnType="int" visibility="public" isStatic="true">
+          <Argument type="String" name="user"/>
+        </Method>
+        <Method name="insertRegistro" returnType="void" visibility="public">
+          <Argument type="JLabel" name="resultado"/>
+        </Method>
+        <Method name="revisarCampos" returnType="boolean" visibility="public"/>
+        <Method name="comprobarUsuario" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="user"/>
+          <Argument type="String" name="pw"/>
+        </Method>
+        <Method name="comprobarEmail" returnType="boolean" visibility="public"/>
+        <Method name="listarClientesTabla" returnType="void" visibility="public" isStatic="true"/>
+        <Method name="recuperarNIF" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="usuario"/>
+        </Method>
+        <Method name="comprobarCliente" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="nif"/>
+        </Method>
+        <Method name="mostrarCliente" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="nif"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Moto" package="RentaCar" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Fields>
+        <Field name="cilindrada" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Integer" name="cilindrada"/>
+          <Argument type="String" name="matricula"/>
+          <Argument type="String" name="marca"/>
+          <Argument type="String" name="modelo"/>
+          <Argument type="double" name="precioDia"/>
+          <Argument type="char" name="clase"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Moto" name="m1"/>
+          <Argument type="Vehiculo" name="v1"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCilindrada" returnType="Integer" visibility="public"/>
+        <Method name="setCilindrada" returnType="void" visibility="public">
+          <Argument type="Integer" name="cilindrada"/>
+        </Method>
+        <Method name="registrarVehiculo" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Interfaz_RegistroClientes" package="RentaCar" visibility="public" xPosition="920.0" yPosition="420.0">
+      <Fields>
+        <Field name="jButton_Enviar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_Limpiar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Bienvenida" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_apellido1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_apellido2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_clienteNIF" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_codUser" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_email" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_nombre" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_password" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_resultado" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_telefono" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPasswordField" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="jTextField_apellido1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_apellido2" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_clienteNIF" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_codUser" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_email" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_nombre" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField_telefono" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="limpiar" returnType="void" visibility="public"/>
+        <Method name="jButton_EnviarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_apellido2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_telefonoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jPasswordFieldActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_codUserActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_LimpiarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Interfaz_Main" package="RentaCar" visibility="public" xPosition="1220.0" yPosition="420.0">
+      <Fields>
+        <Field name="jButton_Acceder" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_ConsultarVeh" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_Entrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton_Registrarse" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jDesktopPane" type="javax.swing.JDesktopPane" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Contraseña" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Mensaje" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_Usuario" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel_verificacionUsuario" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel_Login" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPanel_Login1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jPasswordField_Contraseña" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="jTextField_Usuario" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="jButton_AccederActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_RegistrarseActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_ConsultarVehActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jPasswordField_ContraseñaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jTextField_UsuarioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton_EntrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Consultas_BBDD" package="RentaCar" visibility="public" xPosition="1520.0" yPosition="420.0">
+      <Methods>
+        <Method name="obtenerConexion" returnType="Connection" visibility="public" isStatic="true"/>
+        <Method name="buscarCliente" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="insertClientes" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="insertUsuarios" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="comprobarPw" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="recuperarUsuario" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="user"/>
+        </Method>
+        <Method name="listarClientes" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="listarClienteNIF" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="buscarVehiculo" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="selectVehiculos" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="selectTipoVehiculo" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="datosCoche" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="datosCaravana" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="datosMoto" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="listarMarcas" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="listarClases" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="recuperarPKClase" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="insertarVehiculo" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="matricula"/>
+          <Argument type="String" name="marca"/>
+          <Argument type="String" name="modelo"/>
+          <Argument type="char" name="clase"/>
+          <Argument type="Double" name="precioDia"/>
+        </Method>
+        <Method name="insertarCoche" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="insertarCaravana" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="insertarMoto" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="eliminarVehiculo" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="recuperarVehiculo" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="modificarPrecioSQL" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="deleteReserva" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="selectReservas" returnType="String" visibility="public" isStatic="true"/>
+        <Method name="recuperarReserva" returnType="String" visibility="public" isStatic="true"/>
+      </Methods>
+    </Interface>
+    <Class name="Impresora" package="RentaCar" visibility="public" xPosition="1820.0" yPosition="420.0">
+      <Fields>
+        <Field name="comp" type="Component" visibility="package" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Component" name="comp"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="imprimir" returnType="void" visibility="public" isStatic="true">
+          <Argument type="Component" name="comp"/>
+        </Method>
+        <Method name="print" returnType="int" visibility="public">
+          <Argument type="Graphics" name="g"/>
+          <Argument type="PageFormat" name="format"/>
+          <Argument type="int" name="page_index"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="General" package="RentaCar" visibility="public" isFinal="true" xPosition="2120.0" yPosition="420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="crearVentana" returnType="JFrame" visibility="public" isStatic="true">
+          <Argument type="boolean" name="tablaGrande"/>
+        </Method>
+        <Method name="centrarFrame" returnType="void" visibility="public" isStatic="true">
+          <Argument type="JDesktopPane" name="pane"/>
+          <Argument type="JInternalFrame" name="frame"/>
+        </Method>
+        <Method name="comprobarObj" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="info"/>
+          <Argument type="String" name="query"/>
+        </Method>
+        <Method name="mostrarObj" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="info"/>
+          <Argument type="String" name="query"/>
+          <Argument type="String" name="titulo"/>
+        </Method>
+        <Method name="isNumeric" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="strNum"/>
+        </Method>
+        <Method name="isStringOnlyAlphabet" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="String" name="str"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Coche" package="RentaCar" visibility="public" xPosition="20.0" yPosition="820.0">
+      <Fields>
+        <Field name="numeroPuertas" type="Integer" visibility="private"/>
+        <Field name="potenciaMotor" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Integer" name="numeroPuertas"/>
+          <Argument type="Integer" name="potenciaMotor"/>
+          <Argument type="String" name="matricula"/>
+          <Argument type="String" name="marca"/>
+          <Argument type="String" name="modelo"/>
+          <Argument type="double" name="precioDia"/>
+          <Argument type="char" name="clase"/>
+          <Argument type="boolean" name="disponible"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Coche" name="c1"/>
+          <Argument type="Vehiculo" name="v1"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNumeroPuertas" returnType="Integer" visibility="public"/>
+        <Method name="setNumeroPuertas" returnType="void" visibility="public">
+          <Argument type="Integer" name="numeroPuertas"/>
+        </Method>
+        <Method name="getPotenciaMotor" returnType="Integer" visibility="public"/>
+        <Method name="setPotenciaMotor" returnType="void" visibility="public">
+          <Argument type="Integer" name="potenciaMotor"/>
+        </Method>
+        <Method name="registrarVehiculo" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="RentaCar.Caravana" target="RentaCar.Vehiculo"/>
+    <UseRelation source="RentaCar.Interfaz_Reservas" target="RentaCar.Coche" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="RentaCar.Vehiculo" target="RentaCar.Consultas_BBDD"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="RentaCar.Usuario" target="RentaCar.Consultas_BBDD"/>
+    <HasRelation name="listaCoches" source="RentaCar.Interfaz_Reservas" target="RentaCar.Coche" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Coche&gt;"/>
+    <IsRelation name="is" source="RentaCar.Moto" target="RentaCar.Vehiculo"/>
+    <HasRelation name="listaCaravanas" source="RentaCar.Interfaz_Reservas" target="RentaCar.Caravana" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Caravana&gt;"/>
+    <IsRelation name="is" source="RentaCar.Coche" target="RentaCar.Vehiculo"/>
+    <HasRelation name="listaMotos" source="RentaCar.Interfaz_Reservas" target="RentaCar.Moto" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Moto&gt;"/>
+    <UseRelation source="RentaCar.Interfaz_Reservas" target="RentaCar.Moto" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="RentaCar.Interfaz_Reservas" target="RentaCar.Caravana" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
