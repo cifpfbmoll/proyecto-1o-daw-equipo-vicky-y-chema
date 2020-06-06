@@ -29,9 +29,10 @@ _Con mucho ❤️_
 * **María Victoria Peñas Miró** - *Vicky* - [victoriapenasmiro](https://github.com/victoriapenasmiro/)
 * **José María Hernández Bruno** - *Chema* - [chemabrunofbmoll](https://github.com/chemabrunofbmoll/)
 
-## Extras 📰
+## Extras 📌
 
-* [Vídeo explicativo](https://youtu.be/o_EjelfxWtA/) 🎞️
+* [Vídeo explicativo](https://youtu.be/o_EjelfxWtA/)  🎞️
+* [Memoria del proyecto](https://github.com/cifpfbmoll/proyecto-1o-daw-equipo-vicky-y-chema/blob/master/Rent%20a%20Car%20-%20MEMORIAS%20PROYECTO.pdf/) 📰
 
 ## Expresiones de Gratitud 🎁
 
