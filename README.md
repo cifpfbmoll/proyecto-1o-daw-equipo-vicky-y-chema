@@ -19,13 +19,19 @@ _Hemos utilizado las siguientes herramientas:_
 * [Raspberry Pi 4](https://www.raspberrypi.org/) - Usado para alojar en internet la base de datos.
 * [Umbrello](https://umbrello.kde.org/) - Para la creación de UML previo al proyecto.
 * [easyUML](http://plugins.netbeans.org/plugin/55435/easyuml/) - Para la creación de UML después del proyecto.
-
+* [LucidChart](https://www.lucidchart.com/) - Usado para el diagrama de la base de datos
+* [Visual Studio Code](https://code.visualstudio.com/) - Para la creación de scripts SQL
+ 
 ## Autores ✒️
 
 _Con mucho ❤️_
 
 * **María Victoria Peñas Miró** - *Vicky* - [victoriapenasmiro](https://github.com/victoriapenasmiro/)
 * **José María Hernández Bruno** - *Chema* - [chemabrunofbmoll](https://github.com/chemabrunofbmoll/)
+
+## Extras 📰
+
+* [Vídeo explicativo](https://youtu.be/o_EjelfxWtA/) 🎞️
 
 ## Expresiones de Gratitud 🎁
 
